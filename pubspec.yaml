@@ -1,0 +1,102 @@
+name: math_jax
+description: A new Flutter project.
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_inappbrowser: ^0.5.51
+
+
+  cupertino_icons: ^0.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+  - assets/MathJax/
+  - assets/MathJax/extensions/
+  - assets/MathJax/extensions/a11y/
+  - assets/MathJax/extensions/a11y/mathmaps/
+  - assets/MathJax/extensions/a11y/mathmaps/functions/
+  - assets/MathJax/extensions/a11y/mathmaps/units/
+  - assets/MathJax/extensions/a11y/mathmaps/en/
+  - assets/MathJax/extensions/a11y/mathmaps/en/functions/
+  - assets/MathJax/extensions/a11y/mathmaps/en/units/
+  - assets/MathJax/extensions/a11y/mathmaps/en/symbols/
+  - assets/MathJax/extensions/a11y/mathmaps/symbols/
+  - assets/MathJax/extensions/a11y/mathmaps/es/
+  - assets/MathJax/extensions/a11y/mathmaps/es/functions/
+  - assets/MathJax/extensions/a11y/mathmaps/es/units/
+  - assets/MathJax/extensions/a11y/mathmaps/es/symbols/
+  - assets/MathJax/extensions/TeX/
+  - assets/MathJax/extensions/TeX/mhchem3/
+  - assets/MathJax/jax/
+  - assets/MathJax/jax/element/
+  - assets/MathJax/jax/element/mml/
+  - assets/MathJax/jax/element/mml/optable/
+  - assets/MathJax/jax/output/
+  - assets/MathJax/jax/output/SVG/
+  - assets/MathJax/jax/output/SVG/fonts/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Latin/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Latin/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size1/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size1/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Symbols/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Symbols/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Operators/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Operators/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Misc/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Misc/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Fraktur/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Fraktur/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size6/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size6/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Marks/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Marks/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Normal/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Normal/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Main/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Main/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Script/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Script/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/NonUnicode/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/NonUnicode/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size3/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size3/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Variants/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Variants/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size5/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size5/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Alphabets/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Alphabets/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Monospace/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Monospace/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size2/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size2/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Shapes/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Shapes/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/DoubleStruck/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/DoubleStruck/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Arrows/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Arrows/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/SansSerif/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/SansSerif/Regular/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size4/
+  - assets/MathJax/jax/output/SVG/fonts/Gyre-Pagella/Size4/Regular/
+  - assets/MathJax/jax/output/SVG/autoload/
+  - assets/MathJax/jax/input/
+  - assets/MathJax/jax/input/TeX/
