@@ -16,24 +16,45 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String teX = Uri.encodeComponent("""
+
+  String texChem = Uri.encodeComponent("""
+  
   <p>
+  
+     \$\$\\ce{CO2 + C -> 2 CO}\$\$<br><br>
+   
+   
+   \$\$\\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}\$\$<br><br>
+   
+   
+   \$\$\\ce{x Na(NH4)HPO4 ->[\\Delta] (NaPO3)_x + x NH3 ^ + x H2O}\$\$ <br><br>
+      
+   
+   \$\$\\ce{\$\$K = \\frac{[\\ce{Hg^2+}][\\ce{Hg}]}{[\\ce{Hg2^2+}]}\$\$}\$\$ <br><br>
+  
+    </p>
+
+  
+  
+  """);
+
+  String teX = Uri.encodeComponent("""
+  <p>  
   A simple Example to render \\( \\rm\\TeX \\) in flutter<br>
   
   When \\(a \\ne 0 \\), there are two solutions to \\(ax^2 + bx + c = 0\\) and they are
-\$\$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\$\$<br>
-
-
-\$\$ \\oint_C {E \\cdot d\\ell  =  - \\frac{d}{{dt}}} \\int_S {B_n dA} \$\$<br>
   
+  \$\$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\$\$<br>
+  
+  \$\$ \\oint_C {E \\cdot d\\ell  =  - \\frac{d}{{dt}}} \\int_S {B_n dA} \$\$<br>
   
   Bohr Radius
-
-\\( a_0  = \\frac{{\\hbar ^2 }}{{m_e ke^2 }} \\)<br>
-
-Relationship between Energy and Principal Quantum Number
-
-\\( E_n  =  - R_H \\left( {\\frac{1}{{n^2 }}} \\right) = \\frac{{ - 2.178 \\times 10^{ - 18} }}{{n^2 }}joule \\)<br>
+  
+  \\( a_0  = \\frac{{\\hbar ^2 }}{{m_e ke^2 }} \\)<br>
+  
+  Relationship between Energy and Principal Quantum Number
+  
+  \\( E_n  =  - R_H \\left( {\\frac{1}{{n^2 }}} \\right) = \\frac{{ - 2.178 \\times 10^{ - 18} }}{{n^2 }}joule \\)<br>
   
 </p>
 
@@ -50,7 +71,7 @@ Relationship between Energy and Principal Quantum Number
         body: new Center(
           child: InAppWebView(
               initialUrl:
-                  "http://localhost:8080/assets/MathJax/index.html?data=$teX"),
+                  "http://localhost:8080/assets/MathJax/index.html?data=$texChem"),
         ),
       ),
     );
