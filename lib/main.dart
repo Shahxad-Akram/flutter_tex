@@ -29,9 +29,7 @@ class _MyAppState extends State<MyApp> {
    
    \$\$\\ce{x Na(NH4)HPO4 ->[\\Delta] (NaPO3)_x + x NH3 ^ + x H2O}\$\$ <br><br>
       
-   
-   \$\$\\ce{\$\$K = \\frac{[\\ce{Hg^2+}][\\ce{Hg}]}{[\\ce{Hg2^2+}]}\$\$}\$\$ <br><br>
-  
+    
     </p>
 
   
