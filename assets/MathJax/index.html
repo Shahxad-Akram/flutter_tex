@@ -3,7 +3,6 @@
 <head>
 
     <script id="MathJaxConfig" type="text/x-mathjax-config">
-
         MathJax.Hub.Config({
         showMathMenu:false,
         tex2jax: {
@@ -43,9 +42,14 @@
     <div style="font-size: 5vw;" id="data"></div>
 
     <script>
-        var url_string = window.location.href;
+
+
+        var url_string = String.raw`${window.location.href}`;
         var url = new URL(url_string);
-        var data = url.searchParams.get("data");
+        var data = String.raw`${url.searchParams.get("data")}`;
+        // var url_string = window.location.href;
+        // var url = new URL(url_string);
+        // var data = url.searchParams.get("data");
         document.getElementById('data').innerHTML = data;
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     </script>

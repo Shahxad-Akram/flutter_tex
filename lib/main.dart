@@ -1,14 +1,15 @@
 import 'dart:async';
-
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappbrowser/flutter_inappbrowser.dart';
+import 'server.dart';
 
-InAppLocalhostServer localhostServer = new InAppLocalhostServer();
+Server localServer = new Server();
 
-Future main() async {
-  await localhostServer.start();
-  runApp(new MyApp());
-}
+ Future main() async {
+   await localServer.start();
+   runApp(new MyApp());
+ }
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -16,60 +17,56 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String teX = Uri.encodeComponent(r"""
+  
 
-  String texChem = Uri.encodeComponent("""
+  <p>    
   
-  <p>
+  A simple Example to render \( \rm\\TeX \) in flutter<br>
   
-     \$\$\\ce{CO2 + C -> 2 CO}\$\$<br><br>
-   
-   
-   \$\$\\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}\$\$<br><br>
-   
-   
-   \$\$\\ce{x Na(NH4)HPO4 ->[\\Delta] (NaPO3)_x + x NH3 ^ + x H2O}\$\$ <br><br>
-      
-    
-    </p>
-
+  When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
   
+  $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>
   
-  """);
-
-  String teX = Uri.encodeComponent("""
-  <p>  
-  A simple Example to render \\( \\rm\\TeX \\) in flutter<br>
-  
-  When \\(a \\ne 0 \\), there are two solutions to \\(ax^2 + bx + c = 0\\) and they are
-  
-  \$\$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.\$\$<br>
-  
-  \$\$ \\oint_C {E \\cdot d\\ell  =  - \\frac{d}{{dt}}} \\int_S {B_n dA} \$\$<br>
+  $$ \oint_C {E \cdot d\ell  =  - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
   
   Bohr Radius
   
-  \\( a_0  = \\frac{{\\hbar ^2 }}{{m_e ke^2 }} \\)<br>
+  \( a_0  = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)<br>
   
   Relationship between Energy and Principal Quantum Number
   
-  \\( E_n  =  - R_H \\left( {\\frac{1}{{n^2 }}} \\right) = \\frac{{ - 2.178 \\times 10^{ - 18} }}{{n^2 }}joule \\)<br>
+  \( E_n  =  - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)<br><br>
+  
+  $$\ce{CO2 + C -> 2 CO}$$ <br><br>
+   
+   
+  $$\ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}$$ <br><br>
+   
+   
+  $$\ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}$$ <br><br>
+      
   
 </p>
 
-      
+
+
+
+
       """);
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: const Text('Flutter TeX'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Flutter TeX'),
         ),
-        body: new Center(
-          child: InAppWebView(
-              initialUrl:
-                  "http://localhost:8080/assets/MathJax/index.html?data=$texChem"),
+        body: Center(
+          child: WebView(
+            initialUrl: "http://localhost:8080/assets/MathJax/index.html?data=$teX",
+            javascriptMode: JavascriptMode.unrestricted,
+          ),
         ),
       ),
     );

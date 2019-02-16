@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_inappbrowser: ^0.5.51
+  webview_flutter: ^0.3.3+1
+  mime: ^0.9.6+2
+
+
 
 
   cupertino_icons: ^0.1.2
