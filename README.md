@@ -1,6 +1,8 @@
 # flutter_tex
 
-A Flutter Application  Example to render Tex, based on MathJax minified
+A Flutter Application demonstrates how to use the ![fluttex](https://github.com/shahzadakram67/fluttex)
+
+ plugin. to render Tex, based on MathJax minified.
 
 
 

@@ -1,22 +1,16 @@
-import 'dart:async';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
-import 'server.dart';
+import 'package:fluttex/fluttex.dart';
 
-Server localServer = new Server();
-
- Future main() async {
-   await localServer.start();
-   runApp(new MyApp());
- }
-
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => new _MyAppState();
+main() {
+  runApp(FluttexExample());
 }
 
-class _MyAppState extends State<MyApp> {
+class FluttexExample extends StatefulWidget {
+  @override
+  _FluttexExampleState createState() => _FluttexExampleState();
+}
+
+class _FluttexExampleState extends State<FluttexExample> {
   String teX = Uri.encodeComponent(r"""
   
   
@@ -27,19 +21,15 @@ class _MyAppState extends State<MyApp> {
   transition: 0.3s;
   width: 40%;
 }
-
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-
 .container {
   padding: 2px 16px;
 }
 </style>
-
 <div class="card">
   <div class="container">
-
   <p>
 \begin{align}
 \dot{x} & = \sigma(y-x) \\
@@ -47,7 +37,6 @@ class _MyAppState extends State<MyApp> {
 \dot{z} & = -\beta z + xy
 \end{align}
 </p>
-
   </div>
 </div>
   
@@ -82,25 +71,18 @@ class _MyAppState extends State<MyApp> {
       
   
 </p>
-
-
-
-
-
       """);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter TeX'),
-        ),
-        body: Center(
-          child: WebView(
-            initialUrl: "http://localhost:8080/assets/MathJax/index.html?data=$teX",
-            javascriptMode: JavascriptMode.unrestricted,
-          ),
+        appBar: AppBar(title: Text("fluttex Example"),),
+        body: TeXView(
+          teXHTML: teX,
+          onTeXViewCreated: () {
+            print("TeXView has been created");
+          },
         ),
       ),
     );

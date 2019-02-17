@@ -1,5 +1,5 @@
 name: math_jax
-description: A new Flutter project.
+description: Demonstrates how to use the fluttex plugin.
 
 
 version: 1.0.0+1
@@ -10,8 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^0.3.3+1
-  mime: ^0.9.6+2
+  fluttex: ^0.0.1
 
 
 
