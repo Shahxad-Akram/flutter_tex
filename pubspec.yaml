@@ -1,5 +1,5 @@
-name: math_jax
-description: Demonstrates how to use the fluttex plugin.
+name: flutter_tex
+description: Demonstrates how to render Latex - TeX in flutter.
 
 
 version: 1.0.0+1
@@ -10,9 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  fluttex: ^0.0.1
-
-
+  webview_flutter: ^0.3.3+1
+  mime: ^0.9.6+2
 
 
   cupertino_icons: ^0.1.2

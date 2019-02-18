@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:fluttex/fluttex.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'server.dart';
 
-main() {
-  runApp(FluttexExample());
+Server server = Server();
+
+
+
+main() async {
+  await server.start();
+  runApp(FlutterTeX());
 }
 
-class FluttexExample extends StatefulWidget {
+class FlutterTeX extends StatefulWidget {
   @override
-  _FluttexExampleState createState() => _FluttexExampleState();
+  _FlutterTeXState createState() => _FlutterTeXState();
 }
 
-class _FluttexExampleState extends State<FluttexExample> {
+class _FlutterTeXState extends State<FlutterTeX> {
+
   String teX = Uri.encodeComponent(r"""
-  
   
   
   <style>
@@ -77,14 +83,21 @@ class _FluttexExampleState extends State<FluttexExample> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("fluttex Example"),),
-        body: TeXView(
-          teXHTML: teX,
-          onTeXViewCreated: () {
-            print("TeXView has been created");
-          },
+        appBar: AppBar(
+          title: Text("Flutter TeX Example"),
+        ),
+        body: WebView(
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: "http://localhost:8080/assets/MathJax/index.html?data=$teX",
         ),
       ),
     );
   }
+
+  @override
+  void dispose() {
+    server.close();
+    super.dispose();
+  }
+
 }
