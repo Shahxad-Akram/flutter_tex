@@ -7,20 +7,18 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
 
-typedef void LaTeXViewCreatedCallback();
 
 class TeXView extends StatefulWidget {
   final String teXHTML;
   final Key key;
-  final LaTeXViewCreatedCallback onTeXViewCreated;
 
-  TeXView({this.key, this.teXHTML, this.onTeXViewCreated});
+  TeXView({this.key, this.teXHTML});
 
   @override
-  _LaTeXViewState createState() => _LaTeXViewState();
+  _TeXViewState createState() => _TeXViewState();
 }
 
-class _LaTeXViewState extends State<TeXView> {
+class _TeXViewState extends State<TeXView> {
   _Server server = _Server();
 
   @override
