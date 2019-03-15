@@ -1,6 +1,6 @@
 # Flutter TeX
 
-A Flutter Plugin helps to render **Mathematics, Physics** and **Chemistry Equations** based on **LaTeX** with full html support using [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin . This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
+A Flutter Package to render **Mathematics, Physics** and **Chemistry Equations** based on **LaTeX** with full **HTML** support using [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin . This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
 
 
 
@@ -9,7 +9,7 @@ A Flutter Plugin helps to render **Mathematics, Physics** and **Chemistry Equati
 **1:** Add this to your package's pubspec.yaml file:
 
     dependencies:
-        flutter_tex: ^0.0.13
+        flutter_tex: ^0.0.14
 
 
 
@@ -114,6 +114,10 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
     );
   }
 }
-
  
  ```
+
+# Screenshots
+
+![Screenshot1](https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_1.png)
+![Screenshot2](https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_2.png)
