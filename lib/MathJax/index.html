@@ -1,0 +1,61 @@
+<html>
+
+<head>
+
+    <script id="MathJaxConfig" type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        showMathMenu:false,
+        tex2jax: {
+          ignoreClass: "tex2jax_ignore",
+        },
+    
+          jax: ["input/TeX", "output/SVG"],
+          extensions: ["tex2jax.js", "MathEvents.js"],
+          TeX: {
+              extensions: ["mhchem.js","noErrors.js", "noUndefined.js", "autoload-all.js"],
+              noErrors: { disabled: true }
+    
+          },
+          MathMenu: {
+              showRenderer: false
+          },
+          messageStyle: "none",
+          SVG: {
+              blacker: 0,
+              font: "Gyre-Pagella",
+              linebreaks: {
+                  automatic: true,
+                  width: "container"
+              },
+              scale: 90
+          }
+      });
+    </script>
+
+    <script type="text/javascript" src="MathJax.js"></script>
+
+</head>
+
+
+<body>
+    
+    <div style="font-size: 5vw;" id="data"></div>
+
+    <script>
+
+
+        var url_string = String.raw`${window.location.href}`;
+        var url = new URL(url_string);
+        var data = String.raw`${url.searchParams.get("data")}`;
+        // var url_string = window.location.href;
+        // var url = new URL(url_string);
+        // var data = url.searchParams.get("data");
+        document.getElementById('data').innerHTML = data;
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    </script>
+
+
+</body>
+
+
+</html>
