@@ -23,7 +23,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ## Example
 
-```
+```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
@@ -38,9 +38,7 @@ _FlutterTeXState createState() => _FlutterTeXState();
 
 class _FlutterTeXState extends State<FlutterTeX> {
   String teX = Uri.encodeComponent(r"""
-
   <p>
-
     A simple Example to render \( \rm\\TeX \) in flutter<br>
 
     <style>
