@@ -4,7 +4,7 @@ A Flutter Package to render **Mathematics, Physics** and **Chemistry Equations**
 
 This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
 
-#### Use this package as a library
+## Use this package as a library
 
 **1:** Add this to your package's pubspec.yaml file:
 
@@ -21,7 +21,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
     import 'package:flutter_tex/flutter_tex.dart';
 
-# Example
+## Example
 
 ```
 import 'package:flutter/material.dart';
