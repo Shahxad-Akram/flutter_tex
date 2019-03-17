@@ -5,7 +5,7 @@ A Flutter Package to render **Mathematics, Physics** and **Chemistry Equations**
 This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
 
 
-Only Tested on Android not on iOS because I don't own a Mac. 
+**Only Tested on Android not on iOS because I don't own a Mac.**
 
 ## Use this package as a library
 
