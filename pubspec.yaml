@@ -1,6 +1,6 @@
 name: flutter_tex
 description: A Flutter package to render LaTeX with full HTML support.
-version: 0.0.16
+version: 0.0.17
 author: Shahzad Akram <shahzadakram67@gmail.com>
 homepage: https://github.com/shahzadakram67/flutter_tex
 
