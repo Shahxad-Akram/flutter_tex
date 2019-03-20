@@ -14,7 +14,7 @@ This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathja
 
 ```yaml
 dependencies:
-  flutter_tex: ^0.0.17
+  flutter_tex: ^0.0.18
 ```
 
 **2:** You can install packages from the command line:
