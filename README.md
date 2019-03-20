@@ -131,6 +131,6 @@ class _FlutterTeXState extends State<FlutterTeX> {
 
 # Screenshots
 
-<img height="800" src="screenshots/Screenshot_1.png" alt="FlutterTeXMaths">
+<img height="800" src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_1.png" alt="FlutterTeXMaths">
 
-<img height="800" src="screenshots/Screenshot_2.png" alt="FlutterTeXMaths">
+<img height="800" src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_2.png" alt="FlutterTeXMaths">
