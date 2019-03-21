@@ -1,12 +1,11 @@
 library flutter_tex;
+
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
-
-
 
 class TeXView extends StatefulWidget {
   final String teXHTML;
@@ -25,11 +24,10 @@ class _TeXViewState extends State<TeXView> {
   Widget build(BuildContext context) {
     server.start();
     return WebView(
-      key: widget.key,
-      initialUrl:
-      "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${widget.teXHTML}",
-      javascriptMode: JavascriptMode.unrestricted
-    );
+        key: widget.key,
+        initialUrl:
+            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${widget.teXHTML}",
+        javascriptMode: JavascriptMode.unrestricted);
   }
 
   @override
@@ -39,11 +37,8 @@ class _TeXViewState extends State<TeXView> {
   }
 }
 
-
 class _Server {
-
   // class from inAppBrowser
-
 
   HttpServer _server;
 
@@ -73,8 +68,7 @@ class _Server {
           path += (path.endsWith('/')) ? 'index.html' : '';
 
           try {
-            body = (await rootBundle.load(path))
-                .buffer.asUint8List();
+            body = (await rootBundle.load(path)).buffer.asUint8List();
           } catch (e) {
             print(e.toString());
             request.response.close();
@@ -84,15 +78,15 @@ class _Server {
           var contentType = ['text', 'html'];
           if (!request.requestedUri.path.endsWith('/') &&
               request.requestedUri.pathSegments.isNotEmpty) {
-            var mimeType = lookupMimeType(
-                request.requestedUri.path, headerBytes: body);
+            var mimeType =
+                lookupMimeType(request.requestedUri.path, headerBytes: body);
             if (mimeType != null) {
               contentType = mimeType.split('/');
             }
           }
 
           request.response.headers.contentType =
-          new ContentType(contentType[0], contentType[1], charset: 'utf-8');
+              new ContentType(contentType[0], contentType[1], charset: 'utf-8');
           request.response.add(body);
           request.response.close();
         });

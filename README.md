@@ -4,11 +4,9 @@ A Flutter Package to render **Mathematics, Physics** and **Chemistry Equations**
 
 This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
 
-
 **Only Tested on Android not on iOS because I don't own a Mac.**
 
 ## Use this package as a library
-
 
 **1:** Add this to your package's pubspec.yaml file:
 
@@ -29,14 +27,10 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ```dart
 import 'package:flutter_tex/flutter_tex.dart';
-```
-**4:** Make sure to add this line in your AndroidManifest.xml under `application` like this.
-
+```**4:** Make sure to add this line in your AndroidManifest.xml under `application` like this.
 ```xml
 <application
-       
        android:usesCleartextTraffic="true">
-       
 </application>
 ```
 
