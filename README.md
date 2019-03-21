@@ -128,3 +128,6 @@ class _FlutterTeXState extends State<FlutterTeX> {
 <img height="800" src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_1.png" alt="FlutterTeXMaths">
 
 <img height="800" src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_2.png" alt="FlutterTeXMaths">
+
+[![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
+
