@@ -27,7 +27,8 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ```dart
 import 'package:flutter_tex/flutter_tex.dart';
-```**4:** Make sure to add this line in your AndroidManifest.xml under `application` like this.
+```
+**4:** Make sure to add this line in your AndroidManifest.xml under `application` like this.
 ```xml
 <application
        android:usesCleartextTraffic="true">
