@@ -1,11 +1,12 @@
 library flutter_tex;
 
-import 'package:flutter/widgets.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mime/mime.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXView extends StatefulWidget {
   final String teXHTML;
@@ -17,26 +18,6 @@ class TeXView extends StatefulWidget {
   _TeXViewState createState() => _TeXViewState();
 }
 
-class _TeXViewState extends State<TeXView> {
-  _Server server = _Server();
-
-  @override
-  Widget build(BuildContext context) {
-    server.start();
-    return WebView(
-        key: widget.key,
-        initialUrl:
-            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${widget.teXHTML}",
-        javascriptMode: JavascriptMode.unrestricted);
-  }
-
-  @override
-  void dispose() {
-    server.close();
-    super.dispose();
-  }
-}
-
 class _Server {
   // class from inAppBrowser
 
@@ -46,6 +27,15 @@ class _Server {
 
   _Server({int port = 8080}) {
     this._port = port;
+  }
+
+  ///Closes the server.
+  Future<void> close() async {
+    if (this._server != null) {
+      await this._server.close(force: true);
+      print('Server running on http://localhost:$_port closed');
+      this._server = null;
+    }
   }
 
   Future<void> start() async {
@@ -97,13 +87,24 @@ class _Server {
 
     return completer.future;
   }
+}
 
-  ///Closes the server.
-  Future<void> close() async {
-    if (this._server != null) {
-      await this._server.close(force: true);
-      print('Server running on http://localhost:$_port closed');
-      this._server = null;
-    }
+class _TeXViewState extends State<TeXView> {
+  _Server server = _Server();
+
+  @override
+  Widget build(BuildContext context) {
+    server.start();
+    return WebView(
+        key: widget.key,
+        initialUrl:
+            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${widget.teXHTML}",
+        javascriptMode: JavascriptMode.unrestricted);
+  }
+
+  @override
+  void dispose() {
+    server.close();
+    super.dispose();
   }
 }

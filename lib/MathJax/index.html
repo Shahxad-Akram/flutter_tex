@@ -27,9 +27,14 @@
                   automatic: true,
                   width: "container"
               },
-              scale: 90
+              scale: 90,
+              useFontCache: true,
+              useGlobalCache: true,
+              matchFontHeight: true
+
           }
       });
+
 
     </script>
 
@@ -40,12 +45,13 @@
 
 <body>
 
-    <div style="font-size: 5vw;" id="data"></div>
+<div style="font-size: 5vw;" id="data"></div>
 
-    <script>
+<script>
         document.getElementById('data').innerHTML = decodeURIComponent(location.search.split('data=')[1]);
         MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-    </script>
+
+</script>
 
 
 </body>

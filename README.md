@@ -1,18 +1,33 @@
 # Flutter TeX
 
-A Flutter Package to render **Mathematics, Physics** and **Chemistry Equations** based on **LaTeX** with full **HTML** support using [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
+A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
 
-This is based on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
+**Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
+
+**Physics Equations**
+
+**Signal Processing Equations**
+
+**Chemistry Equations**
+
+**Statistics / Stats Equations**
+
+Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
+ 
+It also includes full **HTML Rendering** with **JavaScript** support.
+
+This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
+
 
 **Only Tested on Android not on iOS because I don't own a Mac.**
 
-## Use this package as a library
+## Use this package as a library in your flutter Application
 
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_tex: ^0.0.18
+  flutter_tex: ^0.0.19
 ```
 
 **2:** You can install packages from the command line:
@@ -28,11 +43,22 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 ```dart
 import 'package:flutter_tex/flutter_tex.dart';
 ```
-**4:** Make sure to add this line in your AndroidManifest.xml under `application` like this.
+**4:** Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
 ```xml
 <application
        android:usesCleartextTraffic="true">
 </application>
+```
+For iOS add following code in your `<project-directory>/ios/Runner/Info.plist`
+```plist
+
+<key>NSAppTransportSecurity</key>
+  
+  <dict>
+    <key>NSAllowsArbitraryLoads</key> <true/>
+  </dict>
+
+<key>io.flutter.embedded_views_preview</key> <true/> 
 ```
 
 ## Example
@@ -68,7 +94,8 @@ class _FlutterTeXState extends State<FlutterTeX> {
 
       .container {
         padding: 2px 16px;
-      }
+
+
     </style>
     <div class="card">
       <div class="container">
