@@ -1,9 +1,9 @@
 name: flutter_tex
-description: A Flutter Package to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support using webview_flutter plugin. This is based on mini-mathjax a simplified version of MathJax a JavaScript library.
+description: A Flutter Package to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 
-version: 0.0.19
-author: Shahzad Akram <shahzadakram67@gmail.com>
-homepage: https://github.com/shahzadakram67/flutter_tex
+version: 1.0.0
+author: Shahzad Akram <shahxadakram@gmail.com>
+homepage: https://github.com/shahxadakram/flutter_tex
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^0.3.5+2
+  webview_flutter: ^0.3.7+1
   mime: ^0.9.6+2
 
 

@@ -94,11 +94,12 @@ class _TeXViewState extends State<TeXView> {
 
   @override
   Widget build(BuildContext context) {
+    
     server.start();
     return WebView(
         key: widget.key,
         initialUrl:
-            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${widget.teXHTML}",
+            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${Uri.encodeComponent(widget.teXHTML)}",
         javascriptMode: JavascriptMode.unrestricted);
   }
 
