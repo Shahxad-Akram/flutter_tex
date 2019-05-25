@@ -2,19 +2,19 @@
 
 A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
 
-**Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
+- **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
 
-**Physics Equations**
+- **Physics Equations**
 
-**Signal Processing Equations**
+- **Signal Processing Equations**
 
-**Chemistry Equations**
+- **Chemistry Equations**
 
-**Statistics / Stats Equations**
+- **Statistics / Stats Equations**
+
+- It also includes full **HTML** with **JavaScript** support.
 
 Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
- 
-It also includes full **HTML Rendering** with **JavaScript** support.
 
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
