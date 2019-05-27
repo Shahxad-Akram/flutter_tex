@@ -9,10 +9,11 @@ import 'package:mime/mime.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXView extends StatefulWidget {
-  final String teXHTML;
   final Key key;
+  final String teXHTML;
+  final Function onPageFinished;
 
-  TeXView({this.key, this.teXHTML});
+  TeXView({this.key, this.teXHTML, this.onPageFinished});
 
   @override
   _TeXViewState createState() => _TeXViewState();
@@ -91,16 +92,18 @@ class _Server {
 
 class _TeXViewState extends State<TeXView> {
   _Server server = _Server();
+  final baseUrl =
+      "http://localhost:8080/packages/flutter_tex/MathJax/index.html";
 
   @override
   Widget build(BuildContext context) {
-    
     server.start();
     return WebView(
-        key: widget.key,
-        initialUrl:
-            "http://localhost:8080/packages/flutter_tex/MathJax/index.html?data=${Uri.encodeComponent(widget.teXHTML)}",
-        javascriptMode: JavascriptMode.unrestricted);
+      key: widget.key,
+      initialUrl: "${baseUrl}?data=${Uri.encodeComponent(widget.teXHTML)}",
+      onPageFinished: widget.onPageFinished,
+      javascriptMode: JavascriptMode.unrestricted,
+    );
   }
 
   @override
