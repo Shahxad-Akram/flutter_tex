@@ -100,7 +100,7 @@ class _TeXViewState extends State<TeXView> {
     server.start();
     return WebView(
       key: widget.key,
-      initialUrl: "${baseUrl}?data=${Uri.encodeComponent(widget.teXHTML)}",
+      initialUrl: "$baseUrl?data=${Uri.encodeComponent(widget.teXHTML)}",
       onPageFinished: widget.onPageFinished,
       javascriptMode: JavascriptMode.unrestricted,
     );
