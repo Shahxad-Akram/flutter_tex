@@ -1,5 +1,7 @@
 # Change Logs
 
+## [1.0.9]
+- Fonts size issue resolved.
 
 ## [1.0.8]
 - Now you can refresh TeXView with new data on setState().
