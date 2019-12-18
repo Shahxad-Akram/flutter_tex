@@ -1,5 +1,9 @@
 # Change Logs
 
+
+## [1.0.10]
+- TeXView Renders again and again issue resolved.
+
 ## [1.0.9]
 - Fonts size issue resolved.
 

@@ -11,8 +11,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 class TeXView extends StatefulWidget {
   final Key key;
   final String teXHTML;
-  final Function(double) onRenderFinished;
-  final Function(String) onPageFinished;
+  final Function(double height) onRenderFinished;
+  final Function(String message) onPageFinished;
 
   TeXView({this.key, this.teXHTML, this.onRenderFinished, this.onPageFinished});
 
@@ -20,24 +20,28 @@ class TeXView extends StatefulWidget {
   _TeXViewState createState() => _TeXViewState();
 }
 
-class _TeXViewState extends State<TeXView> {
+class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   WebViewController _webViewController;
-  _Server _server;
+  _Server _server = _Server();
   double _height = 1;
-  String baseUrl;
+  String baseUrl =
+      "http://localhost:8080/packages/flutter_tex/MathJax/index.html";
 
   @override
   void initState() {
-    _server = _Server();
-    baseUrl = "http://localhost:8080/packages/flutter_tex/MathJax/index.html";
-    super.initState();
     _server.start();
+    super.initState();
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+    //updateKeepAlive();
+
     if (_webViewController != null) {
-      print(widget.teXHTML);
       _webViewController
           .loadUrl("$baseUrl?data=${Uri.encodeComponent(widget.teXHTML)}");
     }
@@ -59,9 +63,11 @@ class _TeXViewState extends State<TeXView> {
           JavascriptChannel(
               name: 'RenderedWebViewHeight',
               onMessageReceived: (JavascriptMessage message) {
-                if (_height != double.parse(message.message) + 20) {
+                double viewHeight = double.parse(message.message) + 20;
+
+                if (_height != viewHeight) {
                   setState(() {
-                    _height = double.parse(message.message) + 20;
+                    _height = viewHeight;
                   });
                 }
                 if (widget.onRenderFinished != null) {
@@ -85,12 +91,7 @@ class _Server {
   // class from inAppBrowser
 
   HttpServer _server;
-
   int _port = 8080;
-
-  _Server({int port = 8080}) {
-    this._port = port;
-  }
 
   ///Closes the server.
   Future<void> close() async {
@@ -107,6 +108,7 @@ class _Server {
     }
 
     var completer = new Completer();
+
     runZoned(() {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
         print('Server running on http://localhost:' + _port.toString());
@@ -142,11 +144,9 @@ class _Server {
           request.response.add(body);
           request.response.close();
         });
-
         completer.complete();
       });
     }, onError: (e, stackTrace) => print('Error: $e $stackTrace'));
-
     return completer.future;
   }
 }
