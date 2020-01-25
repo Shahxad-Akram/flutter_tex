@@ -8,13 +8,30 @@ import 'package:flutter/widgets.dart';
 import 'package:mime/mime.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
+///
 class TeXView extends StatefulWidget {
   final Key key;
+
+  ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
+  @required
   final String teXHTML;
+
+  /// Callback when TEX rendering finishes
   final Function(double height) onRenderFinished;
+
+  /// Callback when TeXView loading finishes
   final Function(String message) onPageFinished;
 
-  TeXView({this.key, this.teXHTML, this.onRenderFinished, this.onPageFinished});
+  /// Keep widget Alive. (True by default)
+  final bool keepAlive;
+
+  TeXView(
+      {this.key,
+      this.teXHTML,
+      this.keepAlive,
+      this.onRenderFinished,
+      this.onPageFinished});
 
   @override
   _TeXViewState createState() => _TeXViewState();
@@ -34,12 +51,12 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => widget.keepAlive ?? true;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    //updateKeepAlive();
+    updateKeepAlive();
 
     if (_webViewController != null) {
       _webViewController
@@ -102,6 +119,7 @@ class _Server {
     }
   }
 
+  ///Starts the server
   Future<void> start() async {
     if (this._server != null) {
       throw Exception('Server already started on http://localhost:$_port');

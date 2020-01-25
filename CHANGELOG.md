@@ -1,6 +1,9 @@
 # Change Logs
 
 
+## [1.0.11]
+- Performance optimizations.
+
 ## [1.0.10]
 - TeXView Renders again and again issue resolved.
 
