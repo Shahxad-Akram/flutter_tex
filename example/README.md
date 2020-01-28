@@ -13,49 +13,64 @@ class FlutterTeX extends StatefulWidget {
 }
 
 class _FlutterTeXState extends State<FlutterTeX> {
-  String text = "Old Text (Press refresh)";
+  TextEditingController _teXHTMLEditingController =
+      new TextEditingController(text: teXHTML);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white70,
         appBar: AppBar(
           title: Text("Flutter TeX Example"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () {
-                  setState(() {
-                    text = "New Text (After refresh)";
-                  });
-                })
-          ],
         ),
         body: ListView(
+          shrinkWrap: true,
           children: <Widget>[
-            TeXView(
-              teXHTML: text,
-              onRenderFinished: (height) {
-                print("Height is : $height");
-              },
-              onPageFinished: (string) {
-                print("Page Loading finished");
-              },
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Material(
+                shape: RoundedRectangleBorder(side: BorderSide()),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration: InputDecoration(labelText: "TeX HTML input"),
+                    controller: _teXHTMLEditingController,
+                    maxLines: 15,
+                    onChanged: (string) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ),
             ),
-            TeXView(
-              teXHTML: teXHTML,
+            Divider(
+              height: 20,
             ),
-            TeXView(
-              teXHTML: teXHTML,
+            Text(
+              "Rendered TeX HTML",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
             ),
-            TeXView(
-              teXHTML: teXHTML,
-            ),
-            TeXView(
-              teXHTML: teXHTML,
-            ),
-            TeXView(
-              teXHTML: teXHTML,
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TeXView(
+                    teXHTML: _teXHTMLEditingController.text,
+                    loadingWidget: Center(
+                      child: Text("My Custom Loading Widget"),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -65,7 +80,7 @@ class _FlutterTeXState extends State<FlutterTeX> {
 }
 
 String teXHTML = r"""
-
+     
      <style>
        .card {
          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -141,6 +156,7 @@ String teXHTML = r"""
      </div>
 
    """;
+
 
 
 ```

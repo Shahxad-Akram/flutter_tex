@@ -18,6 +18,9 @@ class TeXView extends StatefulWidget {
   @required
   final String teXHTML;
 
+  /// Fixed Height for TeXView.
+  final double height;
+
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
@@ -33,6 +36,7 @@ class TeXView extends StatefulWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.height,
       this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
@@ -74,7 +78,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       index: _height == 1 ? 1 : 0,
       children: <Widget>[
         SizedBox(
-          height: _height,
+          height: widget.height ?? _height,
           child: WebView(
             key: widget.key,
             onPageFinished: (message) {

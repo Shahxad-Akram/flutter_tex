@@ -1,5 +1,10 @@
 # Change Logs
 
+
+## [1.0.13]
+- New Example added.
+- Now we you can set custom height of TeXView.
+
 ## [1.0.12]
 - Performance optimizations.
 - Rendering Flashes fixed.
