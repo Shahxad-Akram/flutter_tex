@@ -1,5 +1,9 @@
 # Change Logs
 
+## [1.0.12]
+- Performance optimizations.
+- Rendering Flashes fixed.
+- Rendering Indicator Widget added.
 
 ## [1.0.11]
 - Performance optimizations.

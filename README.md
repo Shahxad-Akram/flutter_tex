@@ -26,7 +26,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^1.0.11
+  flutter_tex: ^1.0.12
 ```
 
 **2:** You can install packages from the command line:
@@ -38,7 +38,7 @@ $ flutter packages get
 Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
 
 
-**3:** Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
+**3:** For **Android** Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
 ```xml
 <application
        android:usesCleartextTraffic="true">
@@ -51,7 +51,7 @@ and permissions
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 
-For iOS add following code in your `<project-directory>/ios/Runner/Info.plist`
+For **iOS** add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```plist
 
 <key>NSAppTransportSecurity</key>
@@ -87,7 +87,10 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 
 ## Known Issues:
-- [ ] A bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
+- A bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
+
+## Cautions:
+- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
 
 
 # Screenshots

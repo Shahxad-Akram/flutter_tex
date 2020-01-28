@@ -42,15 +42,9 @@ class _FlutterTeXState extends State<FlutterTeX> {
             ),
             TeXView(
               teXHTML: teXHTML,
-            ),
-            TeXView(
-              teXHTML: teXHTML,
-            ),
-            TeXView(
-              teXHTML: teXHTML,
-            ),
-            TeXView(
-              teXHTML: teXHTML,
+              loadingWidget: Center(
+                child: Text("My Custom Loading Widget"),
+              ),
             ),
             TeXView(
               teXHTML: teXHTML,

@@ -41,6 +41,7 @@
 
 
 
+
     </script>
 
     <script type="text/javascript" src="MathJax.js"></script>
@@ -50,17 +51,18 @@
 
 <body>
 
-<div id="data"></div>
+<div id="teXHTML"></div>
 
 
 </body>
 
 <script>
-        document.getElementById('data').innerHTML = decodeURIComponent(location.search.split('data=')[1]);
-        MathJax.Hub.Queue(function () {
-        var height = document.getElementById('data').clientHeight;
+        document.getElementById('teXHTML').innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,"teXHTML"],function () {
+        var height = document.getElementById('teXHTML').clientHeight;
         RenderedWebViewHeight.postMessage(height);
         });
+
 </script>
 
 

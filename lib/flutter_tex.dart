@@ -3,6 +3,7 @@ library flutter_tex;
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mime/mime.dart';
@@ -17,18 +18,22 @@ class TeXView extends StatefulWidget {
   @required
   final String teXHTML;
 
-  /// Callback when TEX rendering finishes
+  /// Show a loading widget before rendering completes.
+  final Widget loadingWidget;
+
+  /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
-  /// Callback when TeXView loading finishes
+  /// Callback when TeXView loading finishes.
   final Function(String message) onPageFinished;
 
-  /// Keep widget Alive. (True by default)
+  /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
   TeXView(
       {this.key,
       this.teXHTML,
+      this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished});
@@ -41,6 +46,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   WebViewController _webViewController;
   _Server _server = _Server();
   double _height = 1;
+  String oldTeXHTML;
   String baseUrl =
       "http://localhost:8080/packages/flutter_tex/MathJax/index.html";
 
@@ -58,42 +64,64 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.build(context);
     updateKeepAlive();
 
-    if (_webViewController != null) {
+    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
       _webViewController
-          .loadUrl("$baseUrl?data=${Uri.encodeComponent(widget.teXHTML)}");
+          .loadUrl("$baseUrl?teXHTML=${Uri.encodeComponent(widget.teXHTML)}");
+      this.oldTeXHTML = widget.teXHTML;
     }
-    return SizedBox(
-      height: _height,
-      child: WebView(
-        key: widget.key,
-        onPageFinished: (message) {
-          if (widget.onPageFinished != null) {
-            widget.onPageFinished(message);
-          }
-        },
-        onWebViewCreated: (controller) {
-          _webViewController = controller;
-          _webViewController
-              .loadUrl("$baseUrl?data=${Uri.encodeComponent(widget.teXHTML)}");
-        },
-        javascriptChannels: Set.from([
-          JavascriptChannel(
-              name: 'RenderedWebViewHeight',
-              onMessageReceived: (JavascriptMessage message) {
-                double viewHeight = double.parse(message.message) + 20;
 
-                if (_height != viewHeight) {
-                  setState(() {
-                    _height = viewHeight;
-                  });
-                }
-                if (widget.onRenderFinished != null) {
-                  widget.onRenderFinished(_height);
-                }
-              })
-        ]),
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+    return IndexedStack(
+      index: _height == 1 ? 1 : 0,
+      children: <Widget>[
+        SizedBox(
+          height: _height,
+          child: WebView(
+            key: widget.key,
+            onPageFinished: (message) {
+              if (widget.onPageFinished != null) {
+                widget.onPageFinished(message);
+              }
+            },
+            onWebViewCreated: (controller) {
+              _webViewController = controller;
+              _webViewController.loadUrl(
+                  "$baseUrl?teXHTML=${Uri.encodeComponent(widget.teXHTML)}");
+            },
+            javascriptChannels: Set.from([
+              JavascriptChannel(
+                  name: 'RenderedWebViewHeight',
+                  onMessageReceived: (JavascriptMessage message) {
+                    double viewHeight = double.parse(message.message) + 20;
+
+                    if (_height != viewHeight) {
+                      setState(() {
+                        _height = viewHeight;
+                      });
+                    }
+                    if (widget.onRenderFinished != null) {
+                      widget.onRenderFinished(_height);
+                    }
+                  })
+            ]),
+            javascriptMode: JavascriptMode.unrestricted,
+          ),
+        ),
+        widget.loadingWidget ??
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text("Rendering TeXView...!")
+                ],
+              ),
+            )
+      ],
     );
   }
 
