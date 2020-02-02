@@ -1,6 +1,9 @@
 # Change Logs
 
 
+## [1.0.14]
+- Rendered formula outline removed.
+
 ## [1.0.13]
 - New Example added.
 - Now we you can set custom height of TeXView.

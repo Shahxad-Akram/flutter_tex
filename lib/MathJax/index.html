@@ -1,6 +1,12 @@
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <head>
+
+    <style>
+        .MathJax_SVG:focus {
+            outline: none;
+        }
+    </style>
 
     <script id="MathJaxConfig" type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -33,18 +39,12 @@
               useGlobalCache: true,
               matchFontHeight: true
 
-          }
+          },
       });
-
-
-
-
-
-
 
     </script>
 
-    <script type="text/javascript" src="MathJax.js"></script>
+    <script src="MathJax.js" type="text/javascript"></script>
 
 </head>
 
@@ -53,15 +53,16 @@
 
 <div id="teXHTML"></div>
 
-
 </body>
 
+
 <script>
-        document.getElementById('teXHTML').innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub,"teXHTML"],function () {
+
+    document.getElementById('teXHTML').innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
         var height = document.getElementById('teXHTML').clientHeight;
         RenderedWebViewHeight.postMessage(height);
-        });
+    });
 
 </script>
 
