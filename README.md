@@ -97,6 +97,6 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 Screenshot# 01             |  Screenshot# 02
 :-------------------------:|:-------------------------:
-<img src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_1.png"/> | <img src="https://github.com/shahzadakram67/flutter_tex/blob/master/screenshots/Screenshot_2.png"/> 
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_2.png"/> 
 
 [![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
