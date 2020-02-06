@@ -1,5 +1,10 @@
 # Change Logs
 
+## [2.0.0]
+- Flutter Web Support added (Beta).
+
+## [1.0.15]
+- Broken Screenshots fixed.
 
 ## [1.0.14]
 - Rendered formula outline removed.

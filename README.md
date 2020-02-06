@@ -26,7 +26,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^1.0.14
+  flutter_tex: ^2.0.0
 ```
 
 **2:** You can install packages from the command line:
@@ -86,8 +86,9 @@ import 'package:flutter_tex/flutter_tex.dart';
 [Complete working application Example](https://github.com/shahxadakram/flutter_tex/tree/master/example)
 
 
-## Known Issues:
-- A bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
+## To Do:
+- Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
+- Beta support for Flutter Web, Automatically calculation of TeXView Height in Flutter Web and much more to do for Flutter Web.
 
 ## Cautions:
 - Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
