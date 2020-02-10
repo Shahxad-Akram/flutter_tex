@@ -19,10 +19,8 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
 
-**Katex for fast render.**
-
-**MathJax for quality render.**
-
+#####  **Katex for fast render.**
+#####  **MathJax for quality render.**
 ## Use this package as a library in your flutter Application
 
 **1:** Add this to your package's pubspec.yaml file:
