@@ -14,11 +14,14 @@ A Flutter Package to render so many types of equations based on **LaTeX**, most 
 
 - It also includes full **HTML** with **JavaScript** support.
 
-Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) a JavaScript library.
+Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) and [Katex](https://github.com/KaTeX/KaTeX) JavaScript libraries.
 
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
 
+**Katex for fast render.**
+
+**MathJax for quality render.**
 
 ## Use this package as a library in your flutter Application
 
@@ -26,7 +29,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^2.0.0
+  flutter_tex: ^3.0.0
 ```
 
 **2:** You can install packages from the command line:
@@ -73,11 +76,10 @@ import 'package:flutter_tex/flutter_tex.dart';
 ```dart
     TeXView(
           teXHTML: r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """,
-          
+          renderingEngine: RenderingEngine.Katex,  // Katex for fast render and MathJax for quality render.
           onRenderFinished: (height) {
                 print("Widget Height is : $height")
-                },
-                
+                },   
           onPageFinished: (string) {
                 print("Page Loading finished");
               },
@@ -87,7 +89,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 
 ## To Do:
-- Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.
+- ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
 - Beta support for Flutter Web, Automatically calculation of TeXView Height in Flutter Web and much more to do for Flutter Web.
 
 ## Cautions:

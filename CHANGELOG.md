@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.0.0]
+- Speed Optimizations by adding Katex support, much faster than MathJax.
+
 ## [2.0.0]
 - Flutter Web Support added (Beta).
 

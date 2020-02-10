@@ -17,6 +17,9 @@ class TeXView extends StatelessWidget {
   @required
   final String teXHTML;
 
+  /// Render Engine to render TeX.
+  final RenderingEngine renderingEngine;
+
   /// Fixed Height for TeXView.
   final double height;
 
@@ -35,6 +38,7 @@ class TeXView extends StatelessWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.renderingEngine,
       this.height,
       this.loadingWidget,
       this.keepAlive,
@@ -44,13 +48,16 @@ class TeXView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return multiPlatformTeXView.TeXView(
-      height: this.height,
-      loadingWidget: this.loadingWidget,
-      keepAlive: this.keepAlive,
-      key: this.key,
-      onPageFinished: this.onPageFinished,
-      onRenderFinished: this.onRenderFinished,
-      teXHTML: this.teXHTML,
-    );
+        height: this.height,
+        loadingWidget: this.loadingWidget,
+        keepAlive: this.keepAlive,
+        key: this.key,
+        onPageFinished: this.onPageFinished,
+        onRenderFinished: this.onRenderFinished,
+        teXHTML: this.teXHTML,
+        renderingEngine: this.renderingEngine);
   }
 }
+
+/// TeX Rendering Engine
+enum RenderingEngine { MathJax, Katex }

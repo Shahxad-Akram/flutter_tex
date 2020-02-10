@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:mime/mime.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -19,6 +20,9 @@ class TeXView extends StatefulWidget {
   ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
   @required
   final String teXHTML;
+
+  /// Render Engine to render TeX.
+  final RenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView.
   final double height;
@@ -42,7 +46,8 @@ class TeXView extends StatefulWidget {
       this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
-      this.onPageFinished});
+      this.onPageFinished,
+      this.renderingEngine});
 
   @override
   _TeXViewState createState() => _TeXViewState();
@@ -53,11 +58,15 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   _Server _server = _Server();
   double _height = 1;
   String oldTeXHTML;
-  String baseUrl =
-      "http://localhost:8080/packages/flutter_tex/MathJax/index.html";
+  String baseUrl;
 
   @override
   void initState() {
+    String renderEngine =
+        widget.renderingEngine == RenderingEngine.MathJax ? "MathJax" : "Katex";
+
+    baseUrl =
+        "http://localhost:8080/packages/flutter_tex/$renderEngine/index.html";
     _server.start();
     super.initState();
   }

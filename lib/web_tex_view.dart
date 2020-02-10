@@ -1,7 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:universal_html/prefer_sdk/html.dart' as html;
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:universal_html/html.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 ///
@@ -12,6 +13,9 @@ class TeXView extends StatefulWidget {
   ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
   @required
   final String teXHTML;
+
+  /// Render Engine to render TeX.
+  final RenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView.
   final double height;
@@ -35,7 +39,8 @@ class TeXView extends StatefulWidget {
       this.loadingWidget,
       this.keepAlive,
       this.onRenderFinished,
-      this.onPageFinished});
+      this.onPageFinished,
+      this.renderingEngine});
 
   @override
   _TeXViewState createState() => _TeXViewState();
@@ -46,14 +51,16 @@ class _TeXViewState extends State<TeXView> {
 
   @override
   void initState() {
+    String renderEngine =
+        widget.renderingEngine == RenderingEngine.MathJax ? "MathJax" : "Katex";
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         teXViewId,
-        (int viewId) => html.IFrameElement()
+        (int viewId) => IFrameElement()
           ..width = MediaQuery.of(context).size.width.toString() //'800'
           ..height = MediaQuery.of(context).size.height.toString() //'400'
           ..src =
-              "packages/flutter_tex/MathJax/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}"
+              "packages/flutter_tex/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}"
           ..style.border = 'none');
     super.initState();
   }

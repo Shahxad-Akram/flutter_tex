@@ -13,8 +13,11 @@ class FlutterTeX extends StatefulWidget {
 }
 
 class _FlutterTeXState extends State<FlutterTeX> {
-  TextEditingController _teXHTMLEditingController =
-      new TextEditingController(text: teXHTML);
+  TextEditingController _mathjaxTeXHTMLEditingController =
+      new TextEditingController(text: mathJaxTeXHTML);
+
+  TextEditingController _katexTeXHTMLEditingController =
+      new TextEditingController(text: katexTeXHTML);
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +38,9 @@ class _FlutterTeXState extends State<FlutterTeX> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
-                    decoration: InputDecoration(labelText: "TeX HTML input"),
-                    controller: _teXHTMLEditingController,
+                    decoration:
+                        InputDecoration(labelText: "Katex TeX HTML input"),
+                    controller: _katexTeXHTMLEditingController,
                     maxLines: 15,
                     onChanged: (string) {
                       setState(() {});
@@ -46,10 +50,10 @@ class _FlutterTeXState extends State<FlutterTeX> {
               ),
             ),
             Divider(
-              height: 20,
+              height: 10,
             ),
             Text(
-              "Rendered TeX HTML",
+              "Rendered TeX HTML with Katex",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -64,9 +68,60 @@ class _FlutterTeXState extends State<FlutterTeX> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TeXView(
-                    teXHTML: _teXHTMLEditingController.text,
+                    renderingEngine: RenderingEngine.Katex,
+                    teXHTML: _katexTeXHTMLEditingController.text,
                     loadingWidget: Center(
-                      child: Text("My Custom Loading Widget"),
+                      child: Text("Rendering with Katex"),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 30,
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Material(
+                shape: RoundedRectangleBorder(side: BorderSide()),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    decoration:
+                        InputDecoration(labelText: "MathJax TeX HTML input"),
+                    controller: _mathjaxTeXHTMLEditingController,
+                    maxLines: 15,
+                    onChanged: (string) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 10,
+            ),
+            Text(
+              "Rendered TeX HTML with MathJax",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TeXView(
+                    renderingEngine: RenderingEngine.MathJax,
+                    teXHTML: _mathjaxTeXHTMLEditingController.text,
+                    loadingWidget: Center(
+                      child: Text("Rendering with MathJax"),
                     ),
                   ),
                 ),
@@ -79,36 +134,15 @@ class _FlutterTeXState extends State<FlutterTeX> {
   }
 }
 
-String teXHTML = r"""
-     
-     <style>
-       .card {
-         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-         transition: 0.3s;
-         width: 100%;
-       }
- 
-       .card:hover {
-         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-       }
- 
-       .container {
-         padding: 2px 16px;
-       }
-     </style>
-
-
+String mathJaxTeXHTML = r"""
    <p>
      A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br>
- 
-
-
            \begin{align}
            \dot{x} & = \sigma(y-x) \\
            \dot{y} & = \rho x - y - xz \\
            \dot{z} & = -\beta z + xy
            \end{align}
-   
+ 
      <br>
  
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
@@ -135,14 +169,7 @@ String teXHTML = r"""
      <br><br>
    </p>
 
-
-
-
-    <B>Inline Chemistry Equations</B> <br>
-
-    <div class="card" style="font-size:4vw;">
-       <div class="container">
-
+    Inline Chemistry Equations <br>
          <p>    
      \( \ce{CO2 + C -> 2 CO} \) <br>
   
@@ -150,14 +177,41 @@ String teXHTML = r"""
  
      \( \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} \) <br>
   
-         </p>
-       
-       </div>
-     </div>
+    </p>
 
    """;
 
+String katexTeXHTML = r"""
+   <p>
+     A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br><br>
+ 
+     When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+ 
+     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>
+ 
+ 
+     Bohr Radius
+ 
+     \( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)<br>
+ 
+     Relationship between Energy and Principal Quantum Number
+ 
+     \( E_n = - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)<br><br>
+  
+     <br><br>
+   </p>
 
+    Inline Chemistry Equations <br>
+         <p>    
+     \({CO2 + C -> 2 CO}\) <br>
+  
+     \({Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}\) <br>
+ 
+     \({x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}\) <br>
+  
+    </p>
+
+   """;
 
 ```
 
