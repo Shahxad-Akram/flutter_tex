@@ -20,7 +20,7 @@ class TeXView extends StatelessWidget {
   /// Render Engine to render TeX.
   final RenderingEngine renderingEngine;
 
-  /// Fixed Height for TeXView.
+  /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
   final double height;
 
   /// Show a loading widget before rendering completes.

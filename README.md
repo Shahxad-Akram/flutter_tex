@@ -26,7 +26,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.1.0
+  flutter_tex: ^3.1.1
 ```
 
 **2:** You can install packages from the command line:
@@ -83,7 +83,7 @@ import 'package:flutter_tex/flutter_tex.dart';
         )
 ```
 
-####  Use **Katex** RenderingEngine for fast render and  **MathJax** RenderingEngine for quality render.
+Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** for quality render.
 
 
 

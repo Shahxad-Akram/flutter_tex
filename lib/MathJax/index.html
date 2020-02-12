@@ -57,9 +57,10 @@
 
 
 <script>
-    document.getElementById('teXHTML').innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
+    var teXHTMLDiv = document.getElementById('teXHTML');
+    teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
-        var height = document.getElementById('teXHTML').clientHeight;
+        var height = teXHTMLDiv.clientHeight;
         RenderedWebViewHeight.postMessage(height);
     });
 </script>

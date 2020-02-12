@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.1]
+- Katex Chemistry equations problem solved.
+
 ## [3.1.0]
 - Solved the issue of showing raw TeX before rendering
 

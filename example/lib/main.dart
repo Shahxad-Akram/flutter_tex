@@ -40,7 +40,7 @@ class MainPage extends StatelessWidget {
                               renderingEngine: RenderingEngine.Katex,
                             )));
               },
-              child: Text("Katex Example\nFast Rendering"),
+              child: Text("Katex RenderingEngine\nFast Rendering"),
             ),
             RaisedButton(
               onPressed: () {
@@ -54,7 +54,7 @@ class MainPage extends StatelessWidget {
                               renderingEngine: RenderingEngine.MathJax,
                             )));
               },
-              child: Text("MathJax Example\nQuality Rendering"),
+              child: Text("MathJax RenderingEngine\nQuality Rendering"),
             )
           ],
         ),
@@ -125,7 +125,15 @@ class _TeXViewPageState extends State<TeXViewPage> {
                   renderingEngine: widget.renderingEngine,
                   teXHTML: widget.textEditingController.text,
                   loadingWidget: Center(
-                    child: Text("Rendering with ${widget.label}"),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text("Rendering with ${widget.label}")
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -207,12 +215,12 @@ String katexTeXHTML = r"""
 
     Inline Chemistry Equations <br>
          <p>    
-     \({CO2 + C -> 2 CO}\) <br>
+     \( \ce{CO2 + C -> 2 CO} \) <br>
   
-     \({Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-}\) <br>
- 
-     \({x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O}\) <br>
-  
+     \( \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} \) <br><br><br>
+
+     Scroll long formulas $$ \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} $$ <br>
+     
     </p>
 
    """;
