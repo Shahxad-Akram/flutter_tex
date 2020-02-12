@@ -64,7 +64,6 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   void initState() {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "MathJax" : "Katex";
-
     baseUrl =
         "http://localhost:8080/packages/flutter_tex/$renderEngine/index.html";
     _server.start();
@@ -80,6 +79,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     updateKeepAlive();
 
     if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
+      _height = 1;
       _webViewController
           .loadUrl("$baseUrl?teXHTML=${Uri.encodeComponent(widget.teXHTML)}");
       this.oldTeXHTML = widget.teXHTML;

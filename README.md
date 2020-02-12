@@ -19,15 +19,14 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
 
-#####  **Katex for fast render.**
-#####  **MathJax for quality render.**
+
 ## Use this package as a library in your flutter Application
 
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.0.0
+  flutter_tex: ^3.1.0
 ```
 
 **2:** You can install packages from the command line:
@@ -83,6 +82,11 @@ import 'package:flutter_tex/flutter_tex.dart';
               },
         )
 ```
+
+####  Use **Katex** RenderingEngine for fast render and  **MathJax** RenderingEngine for quality render.
+
+
+
 [Complete working application Example](https://github.com/shahxadakram/flutter_tex/tree/master/example)
 
 

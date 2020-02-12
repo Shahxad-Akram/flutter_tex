@@ -2,131 +2,136 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 main() async {
-  runApp(FlutterTeX());
+  runApp(FlutterTeXExample());
 }
 
-class FlutterTeX extends StatefulWidget {
-  @override
-  _FlutterTeXState createState() => _FlutterTeXState();
-}
-
-class _FlutterTeXState extends State<FlutterTeX> {
-  TextEditingController _mathjaxTeXHTMLEditingController =
-      new TextEditingController(text: mathJaxTeXHTML);
-
-  TextEditingController _katexTeXHTMLEditingController =
-      new TextEditingController(text: katexTeXHTML);
-
+class FlutterTeXExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white70,
-        appBar: AppBar(
-          title: Text("Flutter TeX Example"),
-        ),
-        body: ListView(
-          shrinkWrap: true,
+      home: MainPage(),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Flutter TeX Example"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Material(
-                shape: RoundedRectangleBorder(side: BorderSide()),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration:
-                        InputDecoration(labelText: "Katex TeX HTML input"),
-                    controller: _katexTeXHTMLEditingController,
-                    maxLines: 15,
-                    onChanged: (string) {
-                      setState(() {});
-                    },
-                  ),
-                ),
-              ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TeXViewPage(
+                              label: "Katex",
+                              textEditingController:
+                                  new TextEditingController(text: katexTeXHTML),
+                              renderingEngine: RenderingEngine.Katex,
+                            )));
+              },
+              child: Text("Katex Example\nFast Rendering"),
             ),
-            Divider(
-              height: 10,
-            ),
-            Text(
-              "Rendered TeX HTML with Katex",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TeXView(
-                    renderingEngine: RenderingEngine.Katex,
-                    teXHTML: _katexTeXHTMLEditingController.text,
-                    loadingWidget: Center(
-                      child: Text("Rendering with Katex"),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Material(
-                shape: RoundedRectangleBorder(side: BorderSide()),
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    decoration:
-                        InputDecoration(labelText: "MathJax TeX HTML input"),
-                    controller: _mathjaxTeXHTMLEditingController,
-                    maxLines: 15,
-                    onChanged: (string) {
-                      setState(() {});
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              height: 10,
-            ),
-            Text(
-              "Rendered TeX HTML with MathJax",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.all(10),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TeXView(
-                    renderingEngine: RenderingEngine.MathJax,
-                    teXHTML: _mathjaxTeXHTMLEditingController.text,
-                    loadingWidget: Center(
-                      child: Text("Rendering with MathJax"),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TeXViewPage(
+                              label: "MathJax",
+                              textEditingController: new TextEditingController(
+                                  text: mathJaxTeXHTML),
+                              renderingEngine: RenderingEngine.MathJax,
+                            )));
+              },
+              child: Text("MathJax Example\nQuality Rendering"),
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TeXViewPage extends StatefulWidget {
+  final TextEditingController textEditingController;
+  final String label;
+  final RenderingEngine renderingEngine;
+
+  TeXViewPage({this.label, this.textEditingController, this.renderingEngine});
+
+  @override
+  _TeXViewPageState createState() => _TeXViewPageState();
+}
+
+class _TeXViewPageState extends State<TeXViewPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Rendering with ${widget.label} Example"),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Material(
+              shape: RoundedRectangleBorder(side: BorderSide()),
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      labelText: "${widget.label} TeX HTML input"),
+                  controller: widget.textEditingController,
+                  maxLines: 15,
+                  onChanged: (string) {
+                    setState(() {});
+                  },
+                ),
+              ),
+            ),
+          ),
+          Divider(
+            height: 10,
+          ),
+          Text(
+            "Rendered TeX HTML with ${widget.label}",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TeXView(
+                  renderingEngine: widget.renderingEngine,
+                  teXHTML: widget.textEditingController.text,
+                  loadingWidget: Center(
+                    child: Text("Rendering with ${widget.label}"),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -135,12 +140,13 @@ class _FlutterTeXState extends State<FlutterTeX> {
 String mathJaxTeXHTML = r"""
    <p>
      A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br>
+           $$
            \begin{align}
            \dot{x} & = \sigma(y-x) \\
            \dot{y} & = \rho x - y - xz \\
            \dot{z} & = -\beta z + xy
            \end{align}
- 
+           $$
      <br>
  
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are

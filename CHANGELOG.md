@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.0]
+- Solved the issue of showing raw TeX before rendering
+
 ## [3.0.0]
 - Speed Optimizations by adding Katex support, much faster than MathJax.
 
