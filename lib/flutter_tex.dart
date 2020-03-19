@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'mobile_tex_view.dart' if (dart.library.html) 'web_tex_view.dart'
-    as multiPlatformTeXView;
+    as teXView;
+
+/// TeX Rendering Engine
+enum RenderingEngine { MathJax, Katex }
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 ///
@@ -47,7 +50,7 @@ class TeXView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return multiPlatformTeXView.TeXView(
+    return teXView.TeXView(
         height: this.height,
         loadingWidget: this.loadingWidget,
         keepAlive: this.keepAlive,
@@ -58,6 +61,3 @@ class TeXView extends StatelessWidget {
         renderingEngine: this.renderingEngine);
   }
 }
-
-/// TeX Rendering Engine
-enum RenderingEngine { MathJax, Katex }

@@ -50,9 +50,19 @@ class _TeXViewState extends State<TeXView> {
   String teXViewId = 'tex_view';
 
   @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: widget.height ?? 300,
+      child: HtmlElementView(
+        viewType: teXViewId,
+      ),
+    );
+  }
+
+  @override
   void initState() {
     String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "MathJax" : "Katex";
+        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         teXViewId,
@@ -63,15 +73,5 @@ class _TeXViewState extends State<TeXView> {
               "packages/flutter_tex/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}"
           ..style.border = 'none');
     super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: widget.height ?? 300,
-      child: HtmlElementView(
-        viewType: teXViewId,
-      ),
-    );
   }
 }

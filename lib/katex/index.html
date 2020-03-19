@@ -3,9 +3,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 <head>
-    <link rel="stylesheet" href="katex.css" crossorigin="anonymous">
-    <script src="katex.js" crossorigin="anonymous"></script>
-    <script src="contrib/mhchem.js" crossorigin="anonymous"></script>
+    <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="katex.js"></script>
+    <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
     <style>
         .katex-display>.katex {
             display: inline-block;
@@ -21,6 +21,7 @@
             white-space: normal;
             text-indent: 0;
         }
+
     </style>
 
 </head>
@@ -28,11 +29,11 @@
 
 <div id="teXHTML"></div>
 
-<script defer src="contrib/auto-render.js" crossorigin="anonymous" onload="
+<script crossorigin="anonymous" defer onload="
         var teXHTMLDiv = document.getElementById('teXHTML');
         teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
         renderMathInElement(teXHTMLDiv);
         var height = teXHTMLDiv.clientHeight;
-        RenderedWebViewHeight.postMessage(height);"></script>
+        RenderedWebViewHeight.postMessage(height);" src="contrib/auto-render.js"></script>
 
 </html>

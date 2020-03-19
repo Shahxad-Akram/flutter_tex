@@ -1,5 +1,7 @@
 # Flutter TeX
 
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/flutter_tex_logo.png"/>
+
 A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
 
 - **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
@@ -102,6 +104,6 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 
 Screenshot# 01             |  Screenshot# 02
 :-------------------------:|:-------------------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/Screenshot_2.png"/> 
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/>
 
 [![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
