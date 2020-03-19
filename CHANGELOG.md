@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.2]
+- dependencies upgraded.
+
 ## [3.1.1]
 - Katex Chemistry equations problem solved.
 
