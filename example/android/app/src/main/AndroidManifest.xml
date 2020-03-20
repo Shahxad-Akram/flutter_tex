@@ -13,8 +13,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:icon="@mipmap/ic_launcher"
-        android:label="flutter_tex_example"
+        android:icon="@mipmap/launcher_icon"
+        android:label="Flutter TEX"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"

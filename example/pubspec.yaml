@@ -1,5 +1,5 @@
 name: flutter_tex_example
-description: A new Flutter project.
+description: A Flutter Package (Demo) to render LaTeX with full HTML and JavaScript support.
 
 version: 1.0.0+1
 
@@ -13,8 +13,23 @@ dependencies:
     path: ../
   cupertino_icons: ^0.1.2
 
+
 dev_dependencies:
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_icon.png"
+
+
 flutter:
+
   uses-material-design: true
+
+  assets:
+    - assets/flutter_tex_banner.png
+    - assets/katex.png
+    - assets/mathjax.png

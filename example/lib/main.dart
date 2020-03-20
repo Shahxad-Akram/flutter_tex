@@ -100,43 +100,74 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Flutter TeX Example"),
+        title: Text("Flutter TeX (Demo)"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TeXViewPage(
-                              label: "Katex",
-                              textEditingController:
-                                  new TextEditingController(text: katexTeXHTML),
-                              renderingEngine: RenderingEngine.Katex,
-                            )));
-              },
-              child: Text("Katex RenderingEngine\nFast Rendering"),
+      body: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Image.asset(
+              "assets/flutter_tex_banner.png",
+              fit: BoxFit.contain,
+              height: 200,
             ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TeXViewPage(
-                              label: "MathJax",
-                              textEditingController: new TextEditingController(
-                                  text: mathJaxTeXHTML),
-                              renderingEngine: RenderingEngine.MathJax,
-                            )));
-              },
-              child: Text("MathJax RenderingEngine\nQuality Rendering"),
-            )
-          ],
+          ),
+          Divider(
+            height: 30,
+            color: Colors.transparent,
+          ),
+          getRenderEngineButton(context, "Katex", 'assets/katex.png',
+              "RenderingEngine for Fast Rendering", RenderingEngine.Katex),
+          getRenderEngineButton(context, "MathJax", 'assets/mathjax.png',
+              "RenderingEngine for Quality Rendering", RenderingEngine.MathJax),
+        ],
+      ),
+    );
+  }
+
+  getRenderEngineButton(BuildContext context, String label, String asset,
+      String text, RenderingEngine renderingEngine) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: RaisedButton(
+          elevation: 7.5,
+          color: Colors.white,
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TeXViewPage(
+                          label: label,
+                          textEditingController:
+                              new TextEditingController(text: katexTeXHTML),
+                          renderingEngine: renderingEngine,
+                        )));
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Ink.image(
+                  image: AssetImage(asset),
+                  height: 75,
+                  fit: BoxFit.contain,
+                ),
+                Divider(
+                  height: 5,
+                  color: Colors.transparent,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

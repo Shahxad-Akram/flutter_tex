@@ -1,6 +1,8 @@
 # Flutter TeX
 
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/flutter_tex_logo.png"/>
+[![GitHub stars](https://img.shields.io/github/stars/shah-xad/flutter_tex?style=social)](https://github.com/shah-xad/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
+
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/flutter_tex_banner.png"/>
 
 A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
 
@@ -105,5 +107,9 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 Screenshot# 01             |  Screenshot# 02
 :-------------------------:|:-------------------------:
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/>
+
+Screenshot# 03             |  Screenshot# 04
+:-------------------------:|:-------------------------:
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/>
 
 [![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
