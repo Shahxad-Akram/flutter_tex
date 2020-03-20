@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/shah-xad/flutter_tex?style=social)](https://github.com/shah-xad/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/flutter_tex_banner.png"/>
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png"/>
 
 A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
 
