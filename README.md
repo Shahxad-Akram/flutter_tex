@@ -94,14 +94,6 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 [Complete working application Example](https://github.com/shahxadakram/flutter_tex/tree/master/example)
 
 
-## To Do:
-- ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
-- Beta support for Flutter Web, Automatically calculation of TeXView Height in Flutter Web and much more to do for Flutter Web.
-
-## Cautions:
-- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
-
-
 # Screenshots
 
 Screenshot# 01             |  Screenshot# 02
@@ -112,4 +104,9 @@ Screenshot# 03             |  Screenshot# 04
 :-------------------------:|:-------------------------:
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/>
 
-[![Tweet Flutter_TeX](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=A%20Flutter%20Package%20to%20render%20Mathematics%2C%20Physics%20and%20Chemistry%20Equations%20based%20on%20LaTeX%20with%20full%20HTML%20support.&url=https://github.com/shahzadakram67/flutter_tex&via=shahzadakram67&hashtags=flutter,flutter_tex,latex,equations)
+## To Do:
+- ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
+- Beta support for Flutter Web, Automatically calculation of TeXView Height in Flutter Web and much more to do for Flutter Web.
+
+## Cautions:
+- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
