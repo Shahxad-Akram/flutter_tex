@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.3]
+- Exampled updated.
+
 ## [3.1.2]
 - dependencies upgraded.
 
