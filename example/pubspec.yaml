@@ -1,5 +1,6 @@
 name: flutter_tex_example
 description: A Flutter Package (Demo) to render LaTeX with full HTML and JavaScript support.
+homepage: https://github.com/shahxadakram/flutter_tex
 
 version: 1.0.0+1
 
