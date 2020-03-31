@@ -24,6 +24,8 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 
 
+
+
 ## Use this package as a library in your flutter Application
 
 **1:** Add this to your package's pubspec.yaml file:
@@ -32,6 +34,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 dependencies:
   flutter_tex: ^3.1.3+1
 ```
+
 
 **2:** You can install packages from the command line:
 
@@ -91,8 +94,8 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 
 
 
-[Complete working application Example](https://github.com/shahxadakram/flutter_tex/tree/master/example)
-
+# Demo app is available on Google Play.
+<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
 # Screenshots
 

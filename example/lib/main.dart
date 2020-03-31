@@ -128,45 +128,43 @@ class MainPage extends StatelessWidget {
 
   getRenderEngineButton(BuildContext context, String label, String asset,
       String text, RenderingEngine renderingEngine) {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: RaisedButton(
-          elevation: 7.5,
-          color: Colors.white,
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TeXViewPage(
-                          label: label,
-                          textEditingController:
-                              new TextEditingController(text: katexTeXHTML),
-                          renderingEngine: renderingEngine,
-                        )));
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Ink.image(
-                  image: AssetImage(asset),
-                  height: 75,
-                  fit: BoxFit.contain,
-                ),
-                Divider(
-                  height: 5,
-                  color: Colors.transparent,
-                ),
-                Text(
-                  text,
-                  style: TextStyle(fontSize: 15),
-                ),
-              ],
-            ),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: RaisedButton(
+        elevation: 7.5,
+        color: Colors.white,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => TeXViewPage(
+                        label: label,
+                        textEditingController:
+                            new TextEditingController(text: katexTeXHTML),
+                        renderingEngine: renderingEngine,
+                      )));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Ink.image(
+                image: AssetImage(asset),
+                height: 75,
+                fit: BoxFit.contain,
+              ),
+              Divider(
+                height: 5,
+                color: Colors.transparent,
+              ),
+              Text(
+                text,
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
           ),
         ),
       ),
