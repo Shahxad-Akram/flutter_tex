@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.3+2]
+- Example updated.
+
 ## [3.1.3+1]
 - Size reduced.
 
