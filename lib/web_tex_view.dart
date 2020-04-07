@@ -1,3 +1,4 @@
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 import 'dart:ui' as ui;
 
@@ -32,46 +33,63 @@ class TeXView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  TeXView(
-      {this.key,
-      this.teXHTML,
-      this.height,
-      this.loadingWidget,
-      this.keepAlive,
-      this.onRenderFinished,
-      this.onPageFinished,
-      this.renderingEngine});
+  TeXView({this.key,
+    this.teXHTML,
+    this.height,
+    this.loadingWidget,
+    this.keepAlive,
+    this.onRenderFinished,
+    this.onPageFinished,
+    this.renderingEngine});
 
   @override
   _TeXViewState createState() => _TeXViewState();
 }
 
-class _TeXViewState extends State<TeXView> {
-  String teXViewId = 'tex_view';
+class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+  String oldTeXHTML;
+
+  @override
+  bool get wantKeepAlive => widget.keepAlive ?? true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+    updateKeepAlive();
+
+    UniqueKey teXViewId = UniqueKey();
+
+    if (widget.teXHTML != oldTeXHTML) {
+      String renderEngine = widget.renderingEngine == RenderingEngine.MathJax
+          ? "mathjax"
+          : "katex";
+      // ignore: undefined_prefixed_name
+      ui.platformViewRegistry.registerViewFactory(
+          teXViewId.toString(),
+              (int viewId) =>
+          IFrameElement()
+            ..width = MediaQuery
+                .of(context)
+                .size
+                .width
+                .toString()
+            ..height = MediaQuery
+                .of(context)
+                .size
+                .height
+                .toString()
+            ..src =
+                "packages/flutter_tex/$renderEngine/index.html?teXHTML=${Uri
+                .encodeComponent(widget.teXHTML)}"
+            ..style.border = 'none');
+      this.oldTeXHTML = widget.teXHTML;
+    }
+
     return Container(
       height: widget.height ?? 300,
       child: HtmlElementView(
-        viewType: teXViewId,
+        viewType: teXViewId.toString(),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-        teXViewId,
-        (int viewId) => IFrameElement()
-          ..width = MediaQuery.of(context).size.width.toString() //'800'
-          ..height = MediaQuery.of(context).size.height.toString() //'400'
-          ..src =
-              "packages/flutter_tex/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}"
-          ..style.border = 'none');
-    super.initState();
   }
 }

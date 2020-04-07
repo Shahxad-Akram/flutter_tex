@@ -1,4 +1,4 @@
-package com.example.flutter_tex_example;
+package com.shahxad.flutter_tex_example;
 
 import android.os.Bundle;
 
