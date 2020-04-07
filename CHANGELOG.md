@@ -1,5 +1,8 @@
 # Change Logs
 
+## [3.1.3+3]
+- Minor Fix.
+
 ## [3.1.3+2]
 - Example updated.
 
@@ -7,7 +10,7 @@
 - Size reduced.
 
 ## [3.1.3]
-- Exampled updated.
+- Example updated.
 
 ## [3.1.2]
 - dependencies upgraded.

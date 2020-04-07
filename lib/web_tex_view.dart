@@ -1,8 +1,8 @@
+import 'dart:html';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:universal_html/html.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 ///
