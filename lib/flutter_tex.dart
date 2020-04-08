@@ -3,11 +3,10 @@ library flutter_tex;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tex/src//mobile_tex_view.dart'
+if (dart.library.html) 'web_tex_view.dart' as teXView;
 
-import 'mobile_tex_view.dart' if (dart.library.html) 'web_tex_view.dart'
-    as teXView;
-
-/// TeX Rendering Engine
+/// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
 enum RenderingEngine { MathJax, Katex }
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.

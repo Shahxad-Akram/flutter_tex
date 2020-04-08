@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
-///
-///
 class TeXView extends StatefulWidget {
   final Key key;
 
@@ -79,7 +77,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                 .height
                 .toString()
             ..src =
-                "packages/flutter_tex/$renderEngine/index.html?teXHTML=${Uri
+                "packages/flutter_tex/src/$renderEngine/index.html?teXHTML=${Uri
                 .encodeComponent(widget.teXHTML)}"
             ..style.border = 'none');
       this.oldTeXHTML = widget.teXHTML;

@@ -10,8 +10,6 @@ import 'package:mime/mime.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
-///
-///
 class TeXView extends StatefulWidget {
   final Key key;
 
@@ -204,7 +202,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
     baseUrl =
-        "http://localhost:8080/packages/flutter_tex/$renderEngine/index.html";
+    "http://localhost:8080/packages/flutter_tex/src/$renderEngine/index.html";
     _server.start();
     super.initState();
   }
