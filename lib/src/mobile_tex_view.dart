@@ -122,14 +122,6 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
 
-  preBuild() {
-    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
-      _height = 1;
-      _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
-      this.oldTeXHTML = widget.teXHTML;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -195,16 +187,24 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.dispose();
   }
 
+  String getTeXUrl(RenderingEngine renderingEngine) {
+    String renderEngine =
+    renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
+        .encodeComponent(widget.teXHTML)}";
+  }
+
   @override
   void initState() {
     _server.start();
     super.initState();
   }
 
-  String getTeXUrl(RenderingEngine renderingEngine) {
-    String renderEngine =
-    renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
-        .encodeComponent(widget.teXHTML)}";
+  preBuild() {
+    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
+      _height = 1;
+      _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
+      this.oldTeXHTML = widget.teXHTML;
+    }
   }
 }
