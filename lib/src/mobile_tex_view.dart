@@ -51,7 +51,6 @@ class TeXView extends StatefulWidget {
 
 class _Server {
   // class from inAppBrowser
-
   HttpServer _server;
   int _port = 8080;
 
@@ -59,7 +58,7 @@ class _Server {
   Future<void> close() async {
     if (this._server != null) {
       await this._server.close(force: true);
-      print('Server running on http://localhost:$_port closed');
+      // print('Server running on http://localhost:$_port closed');
       this._server = null;
     }
   }
@@ -74,7 +73,7 @@ class _Server {
 
     runZoned(() {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
-        print('Server running on http://localhost:' + _port.toString());
+        // print('Server running on http://localhost:' + _port.toString());
 
         this._server = server;
 
@@ -87,7 +86,7 @@ class _Server {
           try {
             body = (await rootBundle.load(path)).buffer.asUint8List();
           } catch (e) {
-            print(e.toString());
+            //    print(e.toString());
             request.response.close();
             return;
           }
@@ -119,23 +118,23 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   _Server _server = _Server();
   double _height = 1;
   String oldTeXHTML;
-  String baseUrl;
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
+
+  preBuild() {
+    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
+      _height = 1;
+      _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
+      this.oldTeXHTML = widget.teXHTML;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
-
-    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
-      _height = 1;
-      _webViewController
-          .loadUrl("$baseUrl?teXHTML=${Uri.encodeComponent(widget.teXHTML)}");
-      this.oldTeXHTML = widget.teXHTML;
-    }
-
+    preBuild();
     return IndexedStack(
       index: _height == 1 ? 1 : 0,
       children: <Widget>[
@@ -150,8 +149,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             },
             onWebViewCreated: (controller) {
               _webViewController = controller;
-              _webViewController.loadUrl(
-                  "$baseUrl?teXHTML=${Uri.encodeComponent(widget.teXHTML)}");
+              _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
             },
             javascriptChannels: Set.from([
               JavascriptChannel(
@@ -199,11 +197,14 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    baseUrl =
-    "http://localhost:8080/packages/flutter_tex/src/$renderEngine/index.html";
     _server.start();
     super.initState();
+  }
+
+  String getTeXUrl(RenderingEngine renderingEngine) {
+    String renderEngine =
+    renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
+        .encodeComponent(widget.teXHTML)}";
   }
 }

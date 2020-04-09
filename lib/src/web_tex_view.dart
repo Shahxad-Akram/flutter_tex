@@ -77,7 +77,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                 .height
                 .toString()
             ..src =
-                "packages/flutter_tex/src/$renderEngine/index.html?teXHTML=${Uri
+                "packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
                 .encodeComponent(widget.teXHTML)}"
             ..style.border = 'none');
       this.oldTeXHTML = widget.teXHTML;
