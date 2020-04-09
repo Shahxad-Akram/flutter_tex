@@ -26,6 +26,11 @@ class TeXView extends StatefulWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
+/*
+  /// Background Color of TeXView
+  final Color backgroundColor;
+*/
+
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
@@ -40,6 +45,9 @@ class TeXView extends StatefulWidget {
       this.teXHTML,
       this.height,
       this.loadingWidget,
+/*
+      this.backgroundColor = Colors.white,
+*/
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
@@ -187,11 +195,15 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.dispose();
   }
 
+  String getHexColor(Color color) {
+    String colorString = '#${color.value.toRadixString(16)}';
+    return colorString;
+  }
+
   String getTeXUrl(RenderingEngine renderingEngine) {
     String renderEngine =
-    renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
-        .encodeComponent(widget.teXHTML)}";
+        renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?lbackgroundColor=${Uri.encodeComponent(getHexColor(Colors.green))}&teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
   }
 
   @override

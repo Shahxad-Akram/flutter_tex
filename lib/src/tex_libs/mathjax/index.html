@@ -44,6 +44,10 @@
           },
       });
 
+
+
+
+
     </script>
 
     <script src="MathJax.js" type="text/javascript"></script>
@@ -59,11 +63,10 @@
 
 
 <script>
-    var teXHTMLDiv = document.getElementById('teXHTML');
+    let teXHTMLDiv = document.getElementById('teXHTML');
     teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
-        var height = teXHTMLDiv.clientHeight;
-        RenderedWebViewHeight.postMessage(height);
+        RenderedWebViewHeight.postMessage(teXHTMLDiv.clientHeight);
     });
 </script>
 
