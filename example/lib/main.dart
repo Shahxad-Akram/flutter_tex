@@ -244,6 +244,9 @@ class _TeXViewPageState extends State<TeXViewPage> {
                       ],
                     ),
                   ),
+                  onTap: () {
+                    print("TeXView is tapped.");
+                  },
                 ),
               ),
             ),

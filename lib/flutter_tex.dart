@@ -3,8 +3,9 @@ library flutter_tex;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src//mobile_tex_view.dart'
-    if (dart.library.html) 'web_tex_view.dart' as teXView;
+import 'package:flutter_tex/src/mobile_tex_view.dart'
+    if (dart.library.html) 'package:flutter_tex/src/web_tex_view.dart'
+    as teXView;
 
 /// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
 enum RenderingEngine { MathJax, Katex }
@@ -28,6 +29,9 @@ class TeXView extends StatelessWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
+  /// On Tap Callback.
+  final Function onTap;
+
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
@@ -37,15 +41,15 @@ class TeXView extends StatelessWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  TeXView(
-      {this.key,
-      this.teXHTML,
-      this.renderingEngine,
-      this.height,
-      this.loadingWidget,
-      this.keepAlive,
-      this.onRenderFinished,
-      this.onPageFinished});
+  TeXView({this.key,
+    this.teXHTML,
+    this.height,
+    this.loadingWidget,
+    this.onTap,
+    this.keepAlive,
+    this.onRenderFinished,
+    this.onPageFinished,
+    this.renderingEngine});
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +58,7 @@ class TeXView extends StatelessWidget {
         loadingWidget: this.loadingWidget,
         keepAlive: this.keepAlive,
         key: this.key,
+        onTap: this.onTap,
         onPageFinished: this.onPageFinished,
         onRenderFinished: this.onRenderFinished,
         teXHTML: this.teXHTML,

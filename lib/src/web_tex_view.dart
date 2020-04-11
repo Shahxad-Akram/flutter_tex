@@ -22,6 +22,9 @@ class TeXView extends StatefulWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
+  /// On Tap Callback.
+  final Function onTap;
+
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
@@ -36,6 +39,7 @@ class TeXView extends StatefulWidget {
       this.teXHTML,
       this.height,
       this.loadingWidget,
+      this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
@@ -84,10 +88,21 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       this.oldTeXHTML = widget.teXHTML;
     }
 
-    return Container(
+    return SizedBox(
       height: widget.height ?? 300,
-      child: HtmlElementView(
-        viewType: teXViewId.toString(),
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+              child: HtmlElementView(
+                viewType: teXViewId.toString(),
+              )),
+          Positioned.fill(
+              child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: widget.onTap,
+                  ))),
+        ],
       ),
     );
   }

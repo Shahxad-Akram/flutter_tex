@@ -1,3 +1,7 @@
+## 3.1.4
+* `onTap` method added.
+* **Api Usage** added in `Reade.md`.
+
 ## 3.1.3+5
 * Minor Fix.
 

@@ -32,7 +32,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.1.3+5
+  flutter_tex: ^3.1.4
 ```
 
 
@@ -91,6 +91,49 @@ import 'package:flutter_tex/flutter_tex.dart';
 ```
 
 Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** for quality render.
+
+# Api Usage.
+- `teXHTML:` Raw String containing HTML and TEX Code e.g.<br>
+    ```
+ 
+    String textHTML = r"""
+    <style>
+     #myDiv 
+     {
+     background-color: red;
+     }
+    </style>
+    
+    <div id='myDiv'>
+        $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+    </div>
+    """
+    ```
+    You can also put javascript code in it.<br>
+    
+    If you load **Network Image** in your document you should go like this.
+    
+    ``` 
+    <img onload="RenderedWebViewHeight.postMessage(document.getElementById('teXHTML').clientHeight);"
+    src="https://img.wallpapersafari.com/desktop/1920/1080/84/27/nMWzIB.jpg" />
+    ```
+  Do put this<br>
+  ```onload="RenderedWebViewHeight.postMessage(document.getElementById('teXHTML').clientHeight);"```<br>
+  in your img tag, it'll recalculate the height of the page and rerender the page after the image loading completes.
+
+- `renderingEngine:` Render Engine to render TeX (Default is Katex Rendering Engine).
+  
+- `height:` Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
+  
+- `loadingWidget:` Show a loading widget before rendering completes.
+  
+- `onTap:` On Tap Callback.
+
+- `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
+  
+- `onPageFinished:` Callback when TeXView loading finishes.
+  
+- `keepAlive:` Keep widget Alive . (True by default).
 
 
 

@@ -26,10 +26,8 @@ class TeXView extends StatefulWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
-/*
-  /// Background Color of TeXView
-  final Color backgroundColor;
-*/
+  /// On Tap Callback.
+  final Function onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
@@ -45,9 +43,7 @@ class TeXView extends StatefulWidget {
       this.teXHTML,
       this.height,
       this.loadingWidget,
-/*
-      this.backgroundColor = Colors.white,
-*/
+      this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
@@ -140,34 +136,48 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         SizedBox(
           height: widget.height ?? _height,
-          child: WebView(
-            key: widget.key,
-            onPageFinished: (message) {
-              if (widget.onPageFinished != null) {
-                widget.onPageFinished(message);
-              }
-            },
-            onWebViewCreated: (controller) {
-              _webViewController = controller;
-              _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
-            },
-            javascriptChannels: Set.from([
-              JavascriptChannel(
-                  name: 'RenderedWebViewHeight',
-                  onMessageReceived: (JavascriptMessage message) {
-                    double viewHeight = double.parse(message.message) + 20;
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: WebView(
+                  key: widget.key,
+                  onPageFinished: (message) {
+                    if (widget.onPageFinished != null) {
+                      widget.onPageFinished(message);
+                    }
+                  },
+                  onWebViewCreated: (controller) {
+                    _webViewController = controller;
+                    _webViewController
+                        .loadUrl(getTeXUrl(widget.renderingEngine));
+                  },
+                  javascriptChannels: Set.from([
+                    JavascriptChannel(
+                        name: 'RenderedWebViewHeight',
+                        onMessageReceived: (JavascriptMessage message) {
+                          double viewHeight =
+                              double.parse(message.message) + 20;
 
-                    if (_height != viewHeight) {
-                      setState(() {
-                        _height = viewHeight;
-                      });
-                    }
-                    if (widget.onRenderFinished != null) {
-                      widget.onRenderFinished(_height);
-                    }
-                  })
-            ]),
-            javascriptMode: JavascriptMode.unrestricted,
+                          if (_height != viewHeight) {
+                            setState(() {
+                              _height = viewHeight;
+                            });
+                          }
+                          if (widget.onRenderFinished != null) {
+                            widget.onRenderFinished(_height);
+                          }
+                        })
+                  ]),
+                  javascriptMode: JavascriptMode.unrestricted,
+                ),
+              ),
+              Positioned.fill(
+                  child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: widget.onTap,
+                      ))),
+            ],
           ),
         ),
         widget.loadingWidget ??
