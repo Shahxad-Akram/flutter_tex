@@ -82,7 +82,7 @@ import 'package:flutter_tex/flutter_tex.dart';
           teXHTML: r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """,
           renderingEngine: RenderingEngine.Katex,  // Katex for fast render and MathJax for quality render.
           onRenderFinished: (height) {
-                print("Widget Height is : $height")
+                print("Widget Height is : $height");
                 },   
           onPageFinished: (string) {
                 print("Page Loading finished");
