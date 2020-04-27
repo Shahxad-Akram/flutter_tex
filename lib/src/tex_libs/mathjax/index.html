@@ -7,7 +7,6 @@
         .MathJax_SVG:focus {
             outline: none;
         }
-
     </style>
 
     <script id="MathJaxConfig" type="text/x-mathjax-config">
@@ -17,13 +16,13 @@
         tex2jax: {
           ignoreClass: "tex2jax_ignore",
         },
-    
+
           jax: ["input/TeX", "output/SVG"],
           extensions: ["tex2jax.js", "MathEvents.js"],
           TeX: {
               extensions: ["mhchem.js","noErrors.js", "noUndefined.js", "autoload-all.js"],
               noErrors: { disabled: true }
-    
+
           },
           MathMenu: {
               showRenderer: false
@@ -48,9 +47,6 @@
 
 
 
-
-
-
     </script>
 
     <script src="MathJax.js" type="text/javascript"></script>
@@ -60,14 +56,14 @@
 
 <body>
 
-<div id="teXHTML"></div>
+    <div id="teXHTML"></div>
 
 </body>
 
-
 <script>
     let teXHTMLDiv = document.getElementById('teXHTML');
-    teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
+    //teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
+    teXHTMLDiv.innerHTML = decodeURIComponent(new URLSearchParams(window.location.search).get('teXHTML'));
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
         RenderedWebViewHeight.postMessage(teXHTMLDiv.clientHeight);
     });

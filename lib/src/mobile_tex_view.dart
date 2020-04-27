@@ -56,13 +56,13 @@ class TeXView extends StatefulWidget {
 class _Server {
   // class from inAppBrowser
   HttpServer _server;
-  int _port = 8080;
+  int _port = 5353;
 
   ///Closes the server.
   Future<void> close() async {
     if (this._server != null) {
       await this._server.close(force: true);
-      // print('Server running on http://localhost:$_port closed');
+      print('Server running on http://localhost:$_port closed');
       this._server = null;
     }
   }
@@ -77,7 +77,7 @@ class _Server {
 
     runZoned(() {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
-        // print('Server running on http://localhost:' + _port.toString());
+        print('Server running on http://localhost:' + _port.toString());
 
         this._server = server;
 
@@ -213,7 +213,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String getTeXUrl(RenderingEngine renderingEngine) {
     String renderEngine =
         renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:8080/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?lbackgroundColor=${Uri.encodeComponent(getHexColor(Colors.green))}&teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
+    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?lbackgroundColor=${Uri.encodeComponent(getHexColor(Colors.green))}&teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
   }
 
   @override

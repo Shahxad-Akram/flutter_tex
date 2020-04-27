@@ -41,15 +41,16 @@ class TeXView extends StatelessWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  TeXView({this.key,
-    this.teXHTML,
-    this.height,
-    this.loadingWidget,
-    this.onTap,
-    this.keepAlive,
-    this.onRenderFinished,
-    this.onPageFinished,
-    this.renderingEngine});
+  TeXView(
+      {this.key,
+      this.teXHTML,
+      this.height,
+      this.loadingWidget,
+      this.onTap,
+      this.keepAlive,
+      this.onRenderFinished,
+      this.onPageFinished,
+      this.renderingEngine});
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,6 @@
+## 3.1.4+1
+* FlutterWeb rendering Bug fixed.
+
 ## 3.1.4
 * `onTap` method added.
 * **Api Usage** added in `Reade.md`.

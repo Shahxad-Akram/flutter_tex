@@ -231,23 +231,22 @@ class _TeXViewPageState extends State<TeXViewPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TeXView(
-                  renderingEngine: widget.renderingEngine,
-                  teXHTML: widget.textEditingController.text,
-                  loadingWidget: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text("Rendering with ${widget.label}")
-                      ],
+                    renderingEngine: widget.renderingEngine,
+                    teXHTML: widget.textEditingController.text,
+                    loadingWidget: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CircularProgressIndicator(),
+                          Text("Rendering with ${widget.label}")
+                        ],
+                      ),
                     ),
-                  ),
-                  onTap: () {
-                    print("TeXView is tapped.");
-                  },
-                ),
+                    onTap: () {
+                      print("TeXView is tapped.");
+                    }),
               ),
             ),
           ),

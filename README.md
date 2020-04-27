@@ -32,7 +32,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.1.4
+  flutter_tex: ^3.1.4+1
 ```
 
 
@@ -51,7 +51,9 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
        android:usesCleartextTraffic="true">
 </application>
 ```
+
 and permissions
+
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -87,6 +89,8 @@ import 'package:flutter_tex/flutter_tex.dart';
           onPageFinished: (string) {
                 print("Page Loading finished");
               },
+          webAppDomain: "https://flutter-tex.web.app", //Your Web Application Domain e.g. "https://flutter-tex.web.app" Keep it null while development put your domain only when you are deploying your application to a server.
+
         )
 ```
 
@@ -134,7 +138,6 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 - `onPageFinished:` Callback when TeXView loading finishes.
   
 - `keepAlive:` Keep widget Alive . (True by default).
-
 
 
 # Demo app is available on Google Play.

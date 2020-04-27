@@ -63,27 +63,13 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     UniqueKey teXViewId = UniqueKey();
 
     if (widget.teXHTML != oldTeXHTML) {
-      String renderEngine = widget.renderingEngine == RenderingEngine.MathJax
-          ? "mathjax"
-          : "katex";
       // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
           teXViewId.toString(),
-              (int viewId) =>
-          IFrameElement()
-            ..width = MediaQuery
-                .of(context)
-                .size
-                .width
-                .toString()
-            ..height = MediaQuery
-                .of(context)
-                .size
-                .height
-                .toString()
-            ..src =
-                "packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri
-                .encodeComponent(widget.teXHTML)}"
+          (int viewId) => IFrameElement()
+            ..width = MediaQuery.of(context).size.width.toString()
+            ..height = MediaQuery.of(context).size.height.toString()
+            ..src = getTeXUrl()
             ..style.border = 'none');
       this.oldTeXHTML = widget.teXHTML;
     }
@@ -94,8 +80,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
         children: <Widget>[
           Positioned.fill(
               child: HtmlElementView(
-                viewType: teXViewId.toString(),
-              )),
+            viewType: teXViewId.toString(),
+          )),
           Positioned.fill(
               child: Material(
                   color: Colors.transparent,
@@ -105,5 +91,19 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
         ],
       ),
     );
+  }
+
+  String getTeXUrl() {
+    String renderEngine =
+        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    String baseUri = Uri.base.toString();
+    String currentUrl = "";
+    if (baseUri.contains('http://localhost:')) {
+      currentUrl = "";
+    } else {
+      currentUrl = "${baseUri.replaceFirst("#/", "")}/assets/";
+      currentUrl = "${baseUri.replaceFirst("#", "")}/assets/";
+    }
+    return "${currentUrl}packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
   }
 }
