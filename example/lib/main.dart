@@ -233,6 +233,12 @@ class _TeXViewPageState extends State<TeXViewPage> {
                 child: TeXView(
                     renderingEngine: widget.renderingEngine,
                     teXHTML: widget.textEditingController.text,
+                    style: """
+                    color:red;
+                    background-color:blue;
+                    padding:10px;
+                    margin:10px;
+                    """,
                     loadingWidget: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

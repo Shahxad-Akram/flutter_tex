@@ -20,6 +20,9 @@ class TeXView extends StatelessWidget {
   @required
   final String teXHTML;
 
+  /// Style TeXView with CSS code.
+  final String style;
+
   /// Render Engine to render TeX.
   final RenderingEngine renderingEngine;
 
@@ -44,6 +47,7 @@ class TeXView extends StatelessWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.style,
       this.height,
       this.loadingWidget,
       this.onTap,
@@ -63,6 +67,7 @@ class TeXView extends StatelessWidget {
         onPageFinished: this.onPageFinished,
         onRenderFinished: this.onRenderFinished,
         teXHTML: this.teXHTML,
+        style: this.style,
         renderingEngine: this.renderingEngine);
   }
 }

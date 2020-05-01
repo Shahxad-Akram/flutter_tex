@@ -55,6 +55,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
 
+
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -98,11 +100,9 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
     String baseUri = Uri.base.toString();
     String currentUrl = "";
-    if (baseUri.contains('http://localhost:')) {
-      currentUrl = "";
-    } else {
-      currentUrl = "${baseUri.replaceFirst("#/", "")}/assets/";
-      currentUrl = "${baseUri.replaceFirst("#", "")}/assets/";
+    if (!baseUri.contains('http://localhost:')) {
+      currentUrl =
+          "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
     }
     return "${currentUrl}packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
   }

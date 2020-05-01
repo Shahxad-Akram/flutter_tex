@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -16,6 +17,9 @@ class TeXView extends StatefulWidget {
   ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
   @required
   final String teXHTML;
+
+  /// Style TeXView with CSS code.
+  final String style;
 
   /// Render Engine to render TeX.
   final RenderingEngine renderingEngine;
@@ -41,35 +45,50 @@ class TeXView extends StatefulWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.style,
       this.height,
       this.loadingWidget,
       this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine});
+      this.renderingEngine})
+      : super(key: key);
+
+/*
+  TeXView.multipleChoiceQuestion(
+      {this.key,
+      this.renderingEngine,
+      this.height,
+      this.loadingWidget,
+      this.onRenderFinished,
+      this.onPageFinished,
+      this.keepAlive})
+      : this.teXHTML = null,
+        this.onTap = null,
+        super(key: key);*/
 
   @override
   _TeXViewState createState() => _TeXViewState();
 }
 
-class _Server {
+class _TeXViewServer {
   // class from inAppBrowser
-  HttpServer _server;
+  HttpServer _teXViewServer;
   int _port = 5353;
 
   ///Closes the server.
   Future<void> close() async {
-    if (this._server != null) {
-      await this._server.close(force: true);
+    if (this._teXViewServer != null) {
+      await this._teXViewServer.close(force: true);
       print('Server running on http://localhost:$_port closed');
-      this._server = null;
+      this._teXViewServer = null;
     }
   }
 
   ///Starts the server
   Future<void> start() async {
-    if (this._server != null) {
+    if (this._teXViewServer != null) {
       throw Exception('Server already started on http://localhost:$_port');
     }
 
@@ -79,7 +98,7 @@ class _Server {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
         print('Server running on http://localhost:' + _port.toString());
 
-        this._server = server;
+        this._teXViewServer = server;
 
         server.listen((HttpRequest request) async {
           var body = List<int>();
@@ -118,10 +137,10 @@ class _Server {
 }
 
 class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  WebViewController _webViewController;
-  _Server _server = _Server();
-  double _height = 1;
-  String oldTeXHTML;
+  WebViewController _teXWebViewController;
+  _TeXViewServer _teXViewServer = _TeXViewServer();
+  double _teXViewHeight = 1;
+  String lastTeXHTML;
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
@@ -130,43 +149,25 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
-    preBuild();
+    _preBuild();
     return IndexedStack(
-      index: _height == 1 ? 1 : 0,
+      index: _teXViewHeight == 1 ? 1 : 0,
       children: <Widget>[
         SizedBox(
-          height: widget.height ?? _height,
+          height: widget.height ?? _teXViewHeight,
           child: Stack(
             children: <Widget>[
               Positioned.fill(
                 child: WebView(
-                  key: widget.key,
-                  onPageFinished: (message) {
-                    if (widget.onPageFinished != null) {
-                      widget.onPageFinished(message);
-                    }
-                  },
-                  onWebViewCreated: (controller) {
-                    _webViewController = controller;
-                    _webViewController
-                        .loadUrl(getTeXUrl(widget.renderingEngine));
-                  },
+                  onPageFinished: _onPageFinished,
+                  onWebViewCreated: _onWebViewCreated,
                   javascriptChannels: Set.from([
                     JavascriptChannel(
-                        name: 'RenderedWebViewHeight',
-                        onMessageReceived: (JavascriptMessage message) {
-                          double viewHeight =
-                              double.parse(message.message) + 20;
-
-                          if (_height != viewHeight) {
-                            setState(() {
-                              _height = viewHeight;
-                            });
-                          }
-                          if (widget.onRenderFinished != null) {
-                            widget.onRenderFinished(_height);
-                          }
-                        })
+                        name: 'RenderedTeXViewHeight',
+                        onMessageReceived: _renderedTeXViewHeightHandler),
+                    JavascriptChannel(
+                        name: 'TeXViewItemTapCallback',
+                        onMessageReceived: _renderedTeXViewHeightHandler),
                   ]),
                   javascriptMode: JavascriptMode.unrestricted,
                 ),
@@ -188,8 +189,9 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   CircularProgressIndicator(),
-                  SizedBox(
+                  Divider(
                     height: 5,
+                    color: Colors.transparent,
                   ),
                   Text("Rendering TeXView...!")
                 ],
@@ -201,32 +203,63 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _server.close();
+    _teXViewServer.close();
     super.dispose();
   }
 
-  String getHexColor(Color color) {
-    String colorString = '#${color.value.toRadixString(16)}';
-    return colorString;
-  }
-
-  String getTeXUrl(RenderingEngine renderingEngine) {
+  String _getTeXViewUrl() {
     String renderEngine =
-        renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?lbackgroundColor=${Uri.encodeComponent(getHexColor(Colors.green))}&teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
+        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    String _teXHTML = """
+       <style>
+       #tex-view {
+           ${widget.style}
+       }
+       </style>
+       <div id='tex-view'>
+       ${widget.teXHTML}
+       </div>
+    """;
+
+    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(jsonEncode({
+      "teXHTML": _teXHTML,
+    }))}";
   }
 
   @override
   void initState() {
-    _server.start();
+    _teXViewServer.start();
     super.initState();
   }
 
-  preBuild() {
-    if (_webViewController != null && widget.teXHTML != oldTeXHTML) {
-      _height = 1;
-      _webViewController.loadUrl(getTeXUrl(widget.renderingEngine));
-      this.oldTeXHTML = widget.teXHTML;
+  void _preBuild() {
+    if (_teXWebViewController != null && widget.teXHTML != lastTeXHTML) {
+      _teXViewHeight = 1;
+      _teXWebViewController.loadUrl(_getTeXViewUrl());
+      this.lastTeXHTML = widget.teXHTML;
+    }
+  }
+
+  void _onPageFinished(message) {
+    if (widget.onPageFinished != null) {
+      widget.onPageFinished(message);
+    }
+  }
+
+  void _onWebViewCreated(WebViewController controller) {
+    _teXWebViewController = controller;
+    _teXWebViewController.loadUrl(_getTeXViewUrl());
+  }
+
+  void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
+    double viewHeight = double.parse(javascriptMessage.message);
+    if (_teXViewHeight != viewHeight) {
+      setState(() {
+        _teXViewHeight = viewHeight;
+      });
+    }
+    if (widget.onRenderFinished != null) {
+      widget.onRenderFinished(_teXViewHeight);
     }
   }
 }

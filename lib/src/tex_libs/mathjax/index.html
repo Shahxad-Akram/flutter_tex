@@ -1,14 +1,15 @@
 <html>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
 <head>
-
     <style>
+        * {
+            margin:0;
+            padding:0;
+        }
         .MathJax_SVG:focus {
             outline: none;
         }
     </style>
-
     <script id="MathJaxConfig" type="text/x-mathjax-config">
         MathJax.Hub.Config({
         showMathMenu:false,
@@ -44,29 +45,42 @@
       });
 
 
-
-
-
     </script>
-
     <script src="MathJax.js" type="text/javascript"></script>
-
 </head>
 
 
 <body>
 
-    <div id="teXHTML"></div>
 
-</body>
+<div id="teXHTMLDiv"></div>
+
 
 <script>
-    let teXHTMLDiv = document.getElementById('teXHTML');
-    //teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
-    teXHTMLDiv.innerHTML = decodeURIComponent(new URLSearchParams(window.location.search).get('teXHTML'));
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
-        RenderedWebViewHeight.postMessage(teXHTMLDiv.clientHeight);
-    });
+
+    let teXHTMLDiv = document.getElementById('teXHTMLDiv');
+    let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
+
+    function initTeXViewMCQ() {
+
+    }
+
+    function initTeXView() {
+        if (rawTeXHTML['teXHTML'] != null) {
+            teXHTMLDiv.innerHTML = rawTeXHTML['teXHTML'];
+        } else {
+            initTeXViewMCQ();
+        }
+    }
+
+
 </script>
 
+<script>
+    initTeXView();
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "teXHTML"], function () {
+        RenderedTeXViewHeight.postMessage(teXHTMLDiv.clientHeight);
+    });
+</script>
+</body>
 </html>

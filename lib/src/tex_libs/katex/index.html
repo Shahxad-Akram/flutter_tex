@@ -3,10 +3,11 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 <head>
-    <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
-    <script crossorigin="anonymous" src="katex.js"></script>
-    <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
     <style>
+        * {
+            margin:0;
+            padding:0;
+        }
         .katex-display>.katex {
             display: inline-block;
             white-space: nowrap;
@@ -22,16 +23,42 @@
             text-indent: 0;
         }
     </style>
-
+    <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
+    <script crossorigin="anonymous" src="katex.js"></script>
+    <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
 </head>
 
-<div id="teXHTML"></div>
 
-<script crossorigin="anonymous" defer onload="
-        let teXHTMLDiv = document.getElementById('teXHTML');
-        //teXHTMLDiv.innerHTML = decodeURIComponent(location.search.split('teXHTML=')[1]);
-        teXHTMLDiv.innerHTML = decodeURIComponent(new URLSearchParams(window.location.search).get('teXHTML'));
-        renderMathInElement(teXHTMLDiv);
-        RenderedWebViewHeight.postMessage(teXHTMLDiv.clientHeight);" src="contrib/auto-render.js"></script>
+<body>
+
+    <div id="teXHTMLDiv"></div>
+
+    <script>
+
+        let teXHTMLDiv = document.getElementById('teXHTMLDiv');
+        let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
+
+        function initTeXViewMCQ() {
+
+        }
+
+        function initTeXView() {
+            if (rawTeXHTML['teXHTML'] != null) {
+                teXHTMLDiv.innerHTML = rawTeXHTML['teXHTML'];
+            } else {
+                initTeXViewMCQ();
+            }
+        }
+
+    </script>
+
+
+    <script crossorigin="anonymous" defer onload="
+        initTeXView();
+        renderMathInElement(document.body);
+        RenderedTeXViewHeight.postMessage(teXHTMLDiv.clientHeight);" src="contrib/auto-render.js">
+        </script>
+
+</body>
 
 </html>
