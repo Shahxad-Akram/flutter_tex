@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/mobile_tex_view.dart'
+import 'package:flutter_tex/src/views/mobile_tex_view.dart'
     if (dart.library.html) 'package:flutter_tex/src/web_tex_view.dart'
     as teXView;
-import 'package:flutter_tex/src/tex_view_child.dart';
-import 'package:flutter_tex/src/tex_view_style.dart';
+import 'package:flutter_tex/src/utils/tex_view_child.dart';
 
 /// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
 enum RenderingEngine { MathJax, Katex }
@@ -23,7 +22,7 @@ class TeXView extends StatelessWidget {
   @required
   final List<TeXViewChild> children;
 
-  /// Style TeXView with CSS code.
+  /// Style TeXView Widget with CSS code.
   final String style;
 
   /// Render Engine to render TeX.
@@ -36,7 +35,7 @@ class TeXView extends StatelessWidget {
   final Widget loadingWidget;
 
   /// On Tap Callback.
-  final Function(int viewIndex) onTap;
+  final Function(String childID) onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;

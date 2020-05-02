@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/flutter_tex_server.dart';
-import 'package:flutter_tex/src/tex_view_child.dart';
+import 'package:flutter_tex/src/utils/flutter_tex_server.dart';
+import 'package:flutter_tex/src/utils/tex_view_child.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
@@ -32,7 +32,7 @@ class TeXView extends StatefulWidget {
   final Widget loadingWidget;
 
   /// On Tap Callback.
-  final Function(int childIndex) onTap;
+  final Function(String childID) onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
@@ -178,9 +178,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _teXViewItemTapCallbackHandler(JavascriptMessage javascriptMessage) {
-    int childIndex = int.parse(javascriptMessage.message);
     if (widget.onTap != null) {
-      widget.onTap(childIndex);
+      widget.onTap(javascriptMessage.message);
     }
   }
 }

@@ -233,35 +233,29 @@ class _TeXViewPageState extends State<TeXViewPage> {
                 child: TeXView(
                     renderingEngine: widget.renderingEngine,
                     teXHTML: widget.textEditingController.text,
-            /*        style: """
-                    color:white;
-                    background-color:green;
-                    padding:10px;
-                    margin:10px;
-                    border-radius: 25px;
-                    """,*/
                     children: [
                       TeXViewChild(
-                          id: "id_0",
                           title: "dfdfdfdf",
                           body: widget.textEditingController.text,
                           style: TeXViewStyle(titleStyle: """
-                                     color:white;
-                    background-color:black;
-                          """, bodyStyle: """
-                                         color:white;
-                    background-color:green;
-                    padding:10px;
-                    margin:10px;
-                    border-radius: 25px;
-                          
-                          """)),
+                                  color:white;
+                                  background-color:
+                                  black;""", bodyStyle: """
+                                  color:white;
+                                  background-color:green;
+                                  padding:10px;
+                                  margin:10px;
+                                  border-radius:25px;""", style: """
+                                  box-shadow: 0 8px 8px 16 rgba(0,0,0,0.2);
+                                  transition: 0.3s;
+                                  margin:20px;
+                                  background-color:blue;""")),
                       TeXViewChild(
-                        id: "id_0",
+                        id: "id_1",
                         body: widget.textEditingController.text,
                       ),
                       TeXViewChild(
-                        id: "id_0",
+                        id: "id_2",
                         body: widget.textEditingController.text,
                       )
                     ],

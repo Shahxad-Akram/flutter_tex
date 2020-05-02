@@ -4,11 +4,6 @@
 
 <head>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
         .katex-display > .katex {
             display: inline-block;
             white-space: nowrap;
@@ -23,16 +18,23 @@
             white-space: normal;
             text-indent: 0;
         }
+    </style>
 
-        #TeXView {
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tex-view-child {
 
             overflow: hidden;
             position: relative;
         }
 
-        #TeXView .ripple {
+        .tex-view-child .ripple {
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: lightgrey;
             position: absolute;
             transform: scale(0);
             animation: ripple 0.6s linear;
@@ -45,6 +47,7 @@
             }
         }
     </style>
+
     <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
     <script crossorigin="anonymous" src="katex.js"></script>
     <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
@@ -57,15 +60,14 @@
 <div id="TeXView"></div>
 
 <script>
-
     let teXHTMLDiv = document.getElementById('TeXView');
     let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
     teXHTMLDiv.setAttribute("style", rawTeXHTML['style']);
-
-
     function initTeXView() {
         rawTeXHTML['children'].forEach((child) => {
             let teXViewChild = document.createElement('div');
+            teXViewChild.setAttribute("style", child['style']['style']);
+            teXViewChild.classList.add("tex-view-child");
             let teXViewChildTitle = document.createElement('div');
             teXViewChildTitle.setAttribute("style", child['style']['titleStyle']);
             teXViewChildTitle.innerHTML = child['title'];
@@ -74,27 +76,23 @@
             teXViewChildBody.setAttribute("style", child['style']['bodyStyle']);
             teXViewChildBody.innerHTML = child['body'];
             teXViewChild.appendChild(teXViewChildBody)
+            let childID = child['id'];
+            if (childID != null) {
+                teXViewChild.addEventListener('click', function (e) {
+                    TeXViewItemTapCallback.postMessage(childID);
+                    let ripple = document.createElement('div');
+                    this.appendChild(ripple);
+                    let d = Math.max(this.clientWidth, this.clientHeight);
+                    ripple.style.width = ripple.style.height = d + 'px';
+                    let rect = this.getBoundingClientRect();
+                    ripple.style.left = e.clientX - rect.left - d / 2 + 'px';
+                    ripple.style.top = e.clientY - rect.top - d / 2 + 'px';
+                    ripple.classList.add('ripple');
+                });
+            }
             teXHTMLDiv.appendChild(teXViewChild)
         });
     }
-
-
-    /*    //teXHTMLDiv.addEventListener('touchstart', createRipple);
-
-        teXHTMLDiv.addEventListener('click', createRipple);
-
-        function createRipple(event) {
-            TeXViewItemTapCallback.postMessage(0);
-            let circle = document.createElement('div');
-            this.appendChild(circle);
-            let d = Math.max(this.clientWidth, this.clientHeight);
-            circle.style.width = circle.style.height = d + 'px';
-            let rect = this.getBoundingClientRect();
-            circle.style.left = event.clientX - rect.left - d / 2 + 'px';
-            circle.style.top = event.clientY - rect.top - d / 2 + 'px';
-            circle.classList.add('ripple');
-        }*/
-
 
 </script>
 

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_tex/src/tex_view_style.dart';
+
+import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
 class TeXViewChild {
-  @required
+  /// A random ID as an identifier to listen Callback when tap on TeXViewChild.
   String id;
+
   String title;
   String body;
   TeXViewStyle style;

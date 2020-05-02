@@ -5,22 +5,22 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
 class FlutterTeXServer {
-  // class from inAppBrowser
-  HttpServer _teXViewServer;
+
+  HttpServer _flutterTeXServer;
   int _port = 5353;
 
   ///Closes the server.
   Future<void> close() async {
-    if (this._teXViewServer != null) {
-      await this._teXViewServer.close(force: true);
+    if (this._flutterTeXServer != null) {
+      await this._flutterTeXServer.close(force: true);
       print('Server running on http://localhost:$_port closed');
-      this._teXViewServer = null;
+      this._flutterTeXServer = null;
     }
   }
 
   ///Starts the server
   Future<void> start() async {
-    if (this._teXViewServer != null) {
+    if (this._flutterTeXServer != null) {
       throw Exception('Server already started on http://localhost:$_port');
     }
 
@@ -30,7 +30,7 @@ class FlutterTeXServer {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
         print('Server running on http://localhost:' + _port.toString());
 
-        this._teXViewServer = server;
+        this._flutterTeXServer = server;
 
         server.listen((HttpRequest request) async {
           var body = List<int>();
