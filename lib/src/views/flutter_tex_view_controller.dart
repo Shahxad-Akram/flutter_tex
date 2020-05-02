@@ -1,23 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/views/mobile_tex_view.dart'
-    if (dart.library.html) 'package:flutter_tex/src/web_tex_view.dart'
-    as teXView;
+import 'package:flutter_tex/src/utils/enums.dart';
 import 'package:flutter_tex/src/utils/tex_view_child.dart';
-
-/// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
-enum RenderingEngine { MathJax, Katex }
+import 'package:flutter_tex/src/views/mobile_tex_view.dart'
+    if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart'
+    as teXView;
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 ///
 ///
 class TeXView extends StatelessWidget {
   final Key key;
-
-  ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
-  @deprecated
-  final String teXHTML;
 
   @required
   final List<TeXViewChild> children;
@@ -34,7 +28,7 @@ class TeXView extends StatelessWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
-  /// On Tap Callback.
+  /// On Tap Callback. It's not implemented for Flutter Web.
   final Function(String childID) onTap;
 
   /// Callback when TEX rendering finishes.
@@ -48,7 +42,6 @@ class TeXView extends StatelessWidget {
 
   TeXView(
       {this.key,
-      this.teXHTML,
       this.children,
       this.style,
       this.height,

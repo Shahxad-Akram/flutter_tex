@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
 class FlutterTeXServer {
-
   HttpServer _flutterTeXServer;
   int _port = 5353;
 

@@ -80,24 +80,18 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         Container(
           height: widget.height ?? _teXViewHeight,
-          child: Stack(
-            children: <Widget>[
-              Positioned.fill(
-                child: WebView(
-                  onPageFinished: _onPageFinished,
-                  onWebViewCreated: _onWebViewCreated,
-                  javascriptChannels: Set.from([
-                    JavascriptChannel(
-                        name: 'RenderedTeXViewHeight',
-                        onMessageReceived: _renderedTeXViewHeightHandler),
-                    JavascriptChannel(
-                        name: 'TeXViewItemTapCallback',
-                        onMessageReceived: _teXViewItemTapCallbackHandler),
-                  ]),
-                  javascriptMode: JavascriptMode.unrestricted,
-                ),
-              ),
-            ],
+          child: WebView(
+            onPageFinished: _onPageFinished,
+            onWebViewCreated: _onWebViewCreated,
+            javascriptChannels: Set.from([
+              JavascriptChannel(
+                  name: 'RenderedTeXViewHeight',
+                  onMessageReceived: _renderedTeXViewHeightHandler),
+              JavascriptChannel(
+                  name: 'TeXViewItemTapCallback',
+                  onMessageReceived: _teXViewItemTapCallbackHandler),
+            ]),
+            javascriptMode: JavascriptMode.unrestricted,
           ),
         ),
         widget.loadingWidget ??
@@ -126,10 +120,11 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.dispose();
   }
 
-  String _getTeXViewUrl() {
-    String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+  String getJsonRawTeXHTML() {
+    return jsonEncode({
+      "children": widget.children.map((child) => child.toJson()).toList(),
+      "style": (widget.style ?? "").replaceAll("%", "%25")
+    });
   }
 
   @override
@@ -138,19 +133,10 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.initState();
   }
 
-  String getJsonRawTeXHTML() {
-    return jsonEncode({
-      "children": widget.children.map((child) => child.toJson()).toList(),
-      "style": (widget.style ?? "").replaceAll("%", "%25")
-    });
-  }
-
-  void _preBuild() {
-    if (_teXWebViewController != null && getJsonRawTeXHTML() != lastTeXHTML) {
-      _teXViewHeight = 1;
-      _teXWebViewController.loadUrl(_getTeXViewUrl());
-      this.lastTeXHTML = getJsonRawTeXHTML();
-    }
+  String _getTeXViewUrl() {
+    String renderEngine =
+        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
+    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
   }
 
   void _onPageFinished(message) {
@@ -162,6 +148,14 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   void _onWebViewCreated(WebViewController controller) {
     _teXWebViewController = controller;
     _teXWebViewController.loadUrl(_getTeXViewUrl());
+  }
+
+  void _preBuild() {
+    if (_teXWebViewController != null && getJsonRawTeXHTML() != lastTeXHTML) {
+      _teXViewHeight = 1;
+      _teXWebViewController.loadUrl(_getTeXViewUrl());
+      this.lastTeXHTML = getJsonRawTeXHTML();
+    }
   }
 
   void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {

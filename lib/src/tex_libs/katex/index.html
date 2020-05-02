@@ -63,17 +63,18 @@
     let teXHTMLDiv = document.getElementById('TeXView');
     let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
     teXHTMLDiv.setAttribute("style", rawTeXHTML['style']);
+
     function initTeXView() {
         rawTeXHTML['children'].forEach((child) => {
             let teXViewChild = document.createElement('div');
-            teXViewChild.setAttribute("style", child['style']['style']);
+            teXViewChild.setAttribute("style", child['teXViewDecoration']['childStyle']);
             teXViewChild.classList.add("tex-view-child");
             let teXViewChildTitle = document.createElement('div');
-            teXViewChildTitle.setAttribute("style", child['style']['titleStyle']);
+            teXViewChildTitle.setAttribute("style", child['teXViewDecoration']['titleStyle']);
             teXViewChildTitle.innerHTML = child['title'];
             teXViewChild.appendChild(teXViewChildTitle)
             let teXViewChildBody = document.createElement('div');
-            teXViewChildBody.setAttribute("style", child['style']['bodyStyle']);
+            teXViewChildBody.setAttribute("style", child['teXViewDecoration']['bodyStyle']);
             teXViewChildBody.innerHTML = child['body'];
             teXViewChild.appendChild(teXViewChildBody)
             let childID = child['id'];

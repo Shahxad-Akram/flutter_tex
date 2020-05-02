@@ -1,4 +1,5 @@
 // ignore: avoid_web_libraries_in_flutter
+import 'dart:convert';
 import 'dart:html';
 import 'dart:ui' as ui;
 
@@ -10,8 +11,14 @@ class TeXView extends StatefulWidget {
   final Key key;
 
   ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
-  @required
+  @deprecated
   final String teXHTML;
+
+  @required
+  final List<TeXViewChild> children;
+
+  /// Style TeXView with CSS code.
+  final String style;
 
   /// Render Engine to render TeX.
   final RenderingEngine renderingEngine;
@@ -23,7 +30,7 @@ class TeXView extends StatefulWidget {
   final Widget loadingWidget;
 
   /// On Tap Callback.
-  final Function onTap;
+  final Function(String childID) onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
@@ -37,25 +44,26 @@ class TeXView extends StatefulWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.children,
+      this.style,
       this.height,
       this.loadingWidget,
       this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine});
+      this.renderingEngine})
+      : super(key: key);
 
   @override
   _TeXViewState createState() => _TeXViewState();
 }
 
 class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  String oldTeXHTML;
+  String lastTeXHTML;
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +72,16 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
     UniqueKey teXViewId = UniqueKey();
 
-    if (widget.teXHTML != oldTeXHTML) {
+    if (getJsonRawTeXHTML() != lastTeXHTML) {
       // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
           teXViewId.toString(),
           (int viewId) => IFrameElement()
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
-            ..src = getTeXUrl()
+            ..src = _getTeXViewUrl()
             ..style.border = 'none');
-      this.oldTeXHTML = widget.teXHTML;
+      this.lastTeXHTML = getJsonRawTeXHTML();
     }
 
     return SizedBox(
@@ -88,14 +96,21 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
               child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: widget.onTap,
+                    onTap: () {},
                   ))),
         ],
       ),
     );
   }
 
-  String getTeXUrl() {
+  String getJsonRawTeXHTML() {
+    return jsonEncode({
+      "children": widget.children.map((child) => child.toJson()).toList(),
+      "style": (widget.style ?? "").replaceAll("%", "%25")
+    });
+  }
+
+  String _getTeXViewUrl() {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
     String baseUri = Uri.base.toString();
@@ -104,6 +119,12 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       currentUrl =
           "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
     }
-    return "${currentUrl}packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXHTML=${Uri.encodeComponent(widget.teXHTML)}";
+    return "${currentUrl}packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+  }
+
+  void _teXViewItemTapCallbackHandler() {
+    if (widget.onTap != null) {
+      widget.onTap("not implemented");
+    }
   }
 }

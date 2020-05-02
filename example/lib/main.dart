@@ -5,11 +5,32 @@ main() async {
   runApp(FlutterTeXExample());
 }
 
+List<TeXViewChild> katexList = [
+  TeXViewChild(
+      id: "child_0",
+      title: r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+      body: r"""
+      <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), most      commonly used are as followings:</p>      
+      <ul>
+      <li>Mathematics / Maths Equations (Algebra, Calculus, Geometry, Geometry etc...)</li>
+      <li>Physics Equations</li>
+      <li>Signal Processing Equations</li>
+      <li>Chemistry Equations</li>
+      <li>Statistics / Stats Equations</li>
+      <li>It also includes full HTML with JavaScript support.</li>
+      </ul>
+      """,
+      teXViewDecoration: TeXViewDecoration(
+          childStyle: TeXViewStyle(
+              borderRadius: 10,
+              padding: TeXViewPadding(top: 100),
+              contentColor: Colors.green)))
+];
+
 String katexTeXHTML = r"""
    <p>
    
      A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br><br>
- 
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
  
      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>
@@ -232,33 +253,24 @@ class _TeXViewPageState extends State<TeXViewPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TeXView(
                     renderingEngine: widget.renderingEngine,
-                    teXHTML: widget.textEditingController.text,
-                    children: [
+                    children:
+                        katexList /*[
+                      katexList...
                       TeXViewChild(
-                          title: "dfdfdfdf",
+                          title: r"""<h4>Quadratic Equation</h4>""",
                           body: widget.textEditingController.text,
-                          style: TeXViewStyle(titleStyle: """
-                                  color:white;
-                                  background-color:
-                                  black;""", bodyStyle: """
-                                  color:white;
-                                  background-color:green;
-                                  padding:10px;
-                                  margin:10px;
-                                  border-radius:25px;""", style: """
-                                  box-shadow: 0 8px 8px 16 rgba(0,0,0,0.2);
-                                  transition: 0.3s;
-                                  margin:20px;
-                                  background-color:blue;""")),
-                      TeXViewChild(
-                        id: "id_1",
-                        body: widget.textEditingController.text,
-                      ),
-                      TeXViewChild(
-                        id: "id_2",
-                        body: widget.textEditingController.text,
-                      )
-                    ],
+                          style: TeXViewStyle(
+                              titleStyle: TeXViewStyles.extended(),
+                              bodyStyle: TeXViewStyles.extended(
+                                margin: 0,
+                              ),
+                              style: TeXViewStyles.card(
+                                backgroundColor: Colors.green,
+                                padding: 20,
+                                margin: 10,
+                              ))),
+                    ]*/
+                    ,
                     loadingWidget: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -270,8 +282,8 @@ class _TeXViewPageState extends State<TeXViewPage> {
                         ],
                       ),
                     ),
-                    onTap: (viewIndex) {
-                      print("TeXView $viewIndex is tapped.");
+                    onTap: (childID) {
+                      print("TeXView $childID is tapped.");
                     }),
               ),
             ),
