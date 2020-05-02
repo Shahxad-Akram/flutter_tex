@@ -1,13 +1,11 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:mime/mime.dart';
+import 'package:flutter_tex/src/flutter_tex_server.dart';
+import 'package:flutter_tex/src/tex_view_child.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
@@ -15,8 +13,11 @@ class TeXView extends StatefulWidget {
   final Key key;
 
   ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
-  @required
+  @deprecated
   final String teXHTML;
+
+  @required
+  final List<TeXViewChild> children;
 
   /// Style TeXView with CSS code.
   final String style;
@@ -31,7 +32,7 @@ class TeXView extends StatefulWidget {
   final Widget loadingWidget;
 
   /// On Tap Callback.
-  final Function onTap;
+  final Function(int childIndex) onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
@@ -45,6 +46,7 @@ class TeXView extends StatefulWidget {
   TeXView(
       {this.key,
       this.teXHTML,
+      this.children,
       this.style,
       this.height,
       this.loadingWidget,
@@ -55,90 +57,13 @@ class TeXView extends StatefulWidget {
       this.renderingEngine})
       : super(key: key);
 
-/*
-  TeXView.multipleChoiceQuestion(
-      {this.key,
-      this.renderingEngine,
-      this.height,
-      this.loadingWidget,
-      this.onRenderFinished,
-      this.onPageFinished,
-      this.keepAlive})
-      : this.teXHTML = null,
-        this.onTap = null,
-        super(key: key);*/
-
   @override
   _TeXViewState createState() => _TeXViewState();
 }
 
-class _TeXViewServer {
-  // class from inAppBrowser
-  HttpServer _teXViewServer;
-  int _port = 5353;
-
-  ///Closes the server.
-  Future<void> close() async {
-    if (this._teXViewServer != null) {
-      await this._teXViewServer.close(force: true);
-      print('Server running on http://localhost:$_port closed');
-      this._teXViewServer = null;
-    }
-  }
-
-  ///Starts the server
-  Future<void> start() async {
-    if (this._teXViewServer != null) {
-      throw Exception('Server already started on http://localhost:$_port');
-    }
-
-    var completer = new Completer();
-
-    runZoned(() {
-      HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
-        print('Server running on http://localhost:' + _port.toString());
-
-        this._teXViewServer = server;
-
-        server.listen((HttpRequest request) async {
-          var body = List<int>();
-          var path = request.requestedUri.path;
-          path = (path.startsWith('/')) ? path.substring(1) : path;
-          path += (path.endsWith('/')) ? 'index.html' : '';
-
-          try {
-            body = (await rootBundle.load(path)).buffer.asUint8List();
-          } catch (e) {
-            //    print(e.toString());
-            request.response.close();
-            return;
-          }
-
-          var contentType = ['text', 'html'];
-          if (!request.requestedUri.path.endsWith('/') &&
-              request.requestedUri.pathSegments.isNotEmpty) {
-            var mimeType =
-                lookupMimeType(request.requestedUri.path, headerBytes: body);
-            if (mimeType != null) {
-              contentType = mimeType.split('/');
-            }
-          }
-
-          request.response.headers.contentType =
-              new ContentType(contentType[0], contentType[1], charset: 'utf-8');
-          request.response.add(body);
-          request.response.close();
-        });
-        completer.complete();
-      });
-    }, onError: (e, stackTrace) => print('Error: $e $stackTrace'));
-    return completer.future;
-  }
-}
-
 class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   WebViewController _teXWebViewController;
-  _TeXViewServer _teXViewServer = _TeXViewServer();
+  FlutterTeXServer _flutterTeXServer = FlutterTeXServer();
   double _teXViewHeight = 1;
   String lastTeXHTML;
 
@@ -153,7 +78,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     return IndexedStack(
       index: _teXViewHeight == 1 ? 1 : 0,
       children: <Widget>[
-        SizedBox(
+        Container(
           height: widget.height ?? _teXViewHeight,
           child: Stack(
             children: <Widget>[
@@ -167,17 +92,11 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                         onMessageReceived: _renderedTeXViewHeightHandler),
                     JavascriptChannel(
                         name: 'TeXViewItemTapCallback',
-                        onMessageReceived: _renderedTeXViewHeightHandler),
+                        onMessageReceived: _teXViewItemTapCallbackHandler),
                   ]),
                   javascriptMode: JavascriptMode.unrestricted,
                 ),
               ),
-              Positioned.fill(
-                  child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: widget.onTap,
-                      ))),
             ],
           ),
         ),
@@ -203,40 +122,34 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _teXViewServer.close();
+    _flutterTeXServer.close();
     super.dispose();
   }
 
   String _getTeXViewUrl() {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    String _teXHTML = """
-       <style>
-       #tex-view {
-           ${widget.style}
-       }
-       </style>
-       <div id='tex-view'>
-       ${widget.teXHTML}
-       </div>
-    """;
-
-    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(jsonEncode({
-      "teXHTML": _teXHTML,
-    }))}";
+    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
   }
 
   @override
   void initState() {
-    _teXViewServer.start();
+    _flutterTeXServer.start();
     super.initState();
   }
 
+  String getJsonRawTeXHTML() {
+    return jsonEncode({
+      "children": widget.children.map((child) => child.toJson()).toList(),
+      "style": (widget.style ?? "").replaceAll("%", "%25")
+    });
+  }
+
   void _preBuild() {
-    if (_teXWebViewController != null && widget.teXHTML != lastTeXHTML) {
+    if (_teXWebViewController != null && getJsonRawTeXHTML() != lastTeXHTML) {
       _teXViewHeight = 1;
       _teXWebViewController.loadUrl(_getTeXViewUrl());
-      this.lastTeXHTML = widget.teXHTML;
+      this.lastTeXHTML = getJsonRawTeXHTML();
     }
   }
 
@@ -252,7 +165,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
-    double viewHeight = double.parse(javascriptMessage.message);
+    double viewHeight = double.parse(javascriptMessage.message) +
+        (widget.renderingEngine == RenderingEngine.Katex ? 20 : 0);
     if (_teXViewHeight != viewHeight) {
       setState(() {
         _teXViewHeight = viewHeight;
@@ -260,6 +174,13 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     }
     if (widget.onRenderFinished != null) {
       widget.onRenderFinished(_teXViewHeight);
+    }
+  }
+
+  void _teXViewItemTapCallbackHandler(JavascriptMessage javascriptMessage) {
+    int childIndex = int.parse(javascriptMessage.message);
+    if (widget.onTap != null) {
+      widget.onTap(childIndex);
     }
   }
 }

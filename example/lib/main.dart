@@ -7,6 +7,7 @@ main() async {
 
 String katexTeXHTML = r"""
    <p>
+   
      A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br><br>
  
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
@@ -34,7 +35,6 @@ String katexTeXHTML = r"""
      Scroll long formulas $$ \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} $$ <br>
      
     </p>
-
    """;
 
 String mathJaxTeXHTML = r"""
@@ -233,12 +233,38 @@ class _TeXViewPageState extends State<TeXViewPage> {
                 child: TeXView(
                     renderingEngine: widget.renderingEngine,
                     teXHTML: widget.textEditingController.text,
-                    style: """
-                    color:red;
-                    background-color:blue;
+            /*        style: """
+                    color:white;
+                    background-color:green;
                     padding:10px;
                     margin:10px;
-                    """,
+                    border-radius: 25px;
+                    """,*/
+                    children: [
+                      TeXViewChild(
+                          id: "id_0",
+                          title: "dfdfdfdf",
+                          body: widget.textEditingController.text,
+                          style: TeXViewStyle(titleStyle: """
+                                     color:white;
+                    background-color:black;
+                          """, bodyStyle: """
+                                         color:white;
+                    background-color:green;
+                    padding:10px;
+                    margin:10px;
+                    border-radius: 25px;
+                          
+                          """)),
+                      TeXViewChild(
+                        id: "id_0",
+                        body: widget.textEditingController.text,
+                      ),
+                      TeXViewChild(
+                        id: "id_0",
+                        body: widget.textEditingController.text,
+                      )
+                    ],
                     loadingWidget: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -250,8 +276,8 @@ class _TeXViewPageState extends State<TeXViewPage> {
                         ],
                       ),
                     ),
-                    onTap: () {
-                      print("TeXView is tapped.");
+                    onTap: (viewIndex) {
+                      print("TeXView $viewIndex is tapped.");
                     }),
               ),
             ),

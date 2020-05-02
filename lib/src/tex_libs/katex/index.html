@@ -5,10 +5,11 @@
 <head>
     <style>
         * {
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
         }
-        .katex-display>.katex {
+
+        .katex-display > .katex {
             display: inline-block;
             white-space: nowrap;
             max-width: 100%;
@@ -22,6 +23,27 @@
             white-space: normal;
             text-indent: 0;
         }
+
+        #TeXView {
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        #TeXView .ripple {
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
     </style>
     <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
     <script crossorigin="anonymous" src="katex.js"></script>
@@ -31,33 +53,57 @@
 
 <body>
 
-    <div id="teXHTMLDiv"></div>
 
-    <script>
+<div id="TeXView"></div>
 
-        let teXHTMLDiv = document.getElementById('teXHTMLDiv');
-        let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
+<script>
 
-        function initTeXViewMCQ() {
-
-        }
-
-        function initTeXView() {
-            if (rawTeXHTML['teXHTML'] != null) {
-                teXHTMLDiv.innerHTML = rawTeXHTML['teXHTML'];
-            } else {
-                initTeXViewMCQ();
-            }
-        }
-
-    </script>
+    let teXHTMLDiv = document.getElementById('TeXView');
+    let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
+    teXHTMLDiv.setAttribute("style", rawTeXHTML['style']);
 
 
-    <script crossorigin="anonymous" defer onload="
+    function initTeXView() {
+        rawTeXHTML['children'].forEach((child) => {
+            let teXViewChild = document.createElement('div');
+            let teXViewChildTitle = document.createElement('div');
+            teXViewChildTitle.setAttribute("style", child['style']['titleStyle']);
+            teXViewChildTitle.innerHTML = child['title'];
+            teXViewChild.appendChild(teXViewChildTitle)
+            let teXViewChildBody = document.createElement('div');
+            teXViewChildBody.setAttribute("style", child['style']['bodyStyle']);
+            teXViewChildBody.innerHTML = child['body'];
+            teXViewChild.appendChild(teXViewChildBody)
+            teXHTMLDiv.appendChild(teXViewChild)
+        });
+    }
+
+
+    /*    //teXHTMLDiv.addEventListener('touchstart', createRipple);
+
+        teXHTMLDiv.addEventListener('click', createRipple);
+
+        function createRipple(event) {
+            TeXViewItemTapCallback.postMessage(0);
+            let circle = document.createElement('div');
+            this.appendChild(circle);
+            let d = Math.max(this.clientWidth, this.clientHeight);
+            circle.style.width = circle.style.height = d + 'px';
+            let rect = this.getBoundingClientRect();
+            circle.style.left = event.clientX - rect.left - d / 2 + 'px';
+            circle.style.top = event.clientY - rect.top - d / 2 + 'px';
+            circle.classList.add('ripple');
+        }*/
+
+
+</script>
+
+
+<script crossorigin="anonymous" defer onload="
         initTeXView();
-        renderMathInElement(document.body);
-        RenderedTeXViewHeight.postMessage(teXHTMLDiv.clientHeight);" src="contrib/auto-render.js">
-        </script>
+        renderMathInElement(teXHTMLDiv);
+        RenderedTeXViewHeight.postMessage(document.body.scrollHeight);" src="contrib/auto-render.js">
+</script>
 
 </body>
 
