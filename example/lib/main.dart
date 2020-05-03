@@ -61,11 +61,13 @@ class MainPage extends StatelessWidget {
           ),
           getRenderEngineButton(context, "Katex", 'assets/katex.png',
               "RenderingEngine for Fast Rendering", RenderingEngine.Katex, [
-                TeXExamples.introduction,
-                TeXExamples.quadraticEquation,
-                TeXExamples.bohrRadius,
-                TeXExamples.chemistryEquations,
-              ]),
+            TeXExamples.introduction,
+            TeXExamples.quadraticEquation,
+            TeXExamples.relationEnergyPrincipalQuantum,
+            TeXExamples.bohrRadius,
+            TeXExamples.chemistryEquations,
+            TeXExamples.matrix,
+          ]),
           getRenderEngineButton(
               context,
               "MathJax",
@@ -86,7 +88,8 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  getRenderEngineButton(BuildContext context,
+  getRenderEngineButton(
+      BuildContext context,
       String label,
       String asset,
       String text,
@@ -101,8 +104,7 @@ class MainPage extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      TeXViewPage(
+                  builder: (context) => TeXViewPage(
                         label: label,
                         teXViewChildren: teXViewChildren,
                         renderingEngine: renderingEngine,
@@ -157,7 +159,7 @@ class TeXExamples {
                       borderColor: Colors.green)))));
 
   static TeXViewChild quadraticEquation =
-  _customTeXViewChild("child_1", r"<h3>Quadratic Equation</h3>", r"""
+      _customTeXViewChild("child_1", r"<h3>Quadratic Equation</h3>", r"""
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
 
@@ -183,15 +185,14 @@ class TeXExamples {
     </p>""");
 
   static TeXViewChild matrix =
-  _customTeXViewChild("child_5", r"<h3>Matrix</h3>", r"""<p>    
-      \begin{bmatrix}
+      _customTeXViewChild("child_5", r"<h3>Matrix</h3>", r"""  <p>
+     $$ \begin{bmatrix}
          a & b \\
          c & d
-      \end{bmatrix}
-    </p>""");
+      \end{bmatrix}$$</p>""");
 
   static TeXViewChild alignTag =
-  _customTeXViewChild("child_6", r"<h3>Align Tag</h3>", r"""<p>    
+      _customTeXViewChild("child_6", r"<h3>Align Tag</h3>", r"""    
            $$
            \begin{align}
            \dot{x} & = \sigma(y-x) \\
@@ -202,7 +203,7 @@ class TeXExamples {
     </p>""");
 
   static TeXViewChild others =
-  _customTeXViewChild("child_7", r"<h3> Others </h3>", r"""<p>    
+      _customTeXViewChild("child_7", r"<h3> Others </h3>", r"""<p>    
  
     $$ \oint_C {E \cdot d\ell = - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
  
@@ -215,7 +216,7 @@ class TeXExamples {
 }
 
 class TeXViewPage extends StatefulWidget {
-  final List<TeXViewChild> teXViewChildren;
+  List<TeXViewChild> teXViewChildren;
   final String label;
   final RenderingEngine renderingEngine;
 
@@ -229,6 +230,11 @@ class _TeXViewPageState extends State<TeXViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+/*      floatingActionButton: FloatingActionButton(onPressed: () {
+        setState(() {
+          widget.teXViewChildren.removeAt(0);
+        });
+      }),*/
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Rendering with ${widget.label} Example"),
@@ -251,7 +257,8 @@ class _TeXViewPageState extends State<TeXViewPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TeXView(
-                    renderingEngine: RenderingEngine.MathJax,
+                    showLoadingWidget: false,
+                    renderingEngine: widget.renderingEngine,
                     children: widget.teXViewChildren,
                     style: TeXViewStyle(
                       transition: 0.5,

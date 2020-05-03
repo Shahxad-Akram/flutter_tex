@@ -75,7 +75,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
-    _preBuild();
+    _initTeXView();
     return IndexedStack(
       index: widget.showLoadingWidget ? _teXViewHeight == 1 ? 1 : 0 : 0,
       children: <Widget>[
@@ -152,18 +152,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html";
   }
 
-  void _onPageFinished(message) {
-    if (widget.onPageFinished != null) {
-      widget.onPageFinished(message);
-    }
-  }
-
-  void _onWebViewCreated(WebViewController controller) {
-    _teXWebViewController = controller;
-    _teXWebViewController.loadUrl(_getTeXViewUrl());
-  }
-
-  void _preBuild() {
+  void _initTeXView() {
     if (_teXWebViewController != null && getJsonRawTeXHTML() != lastTeXHTML) {
       if (widget.showLoadingWidget) {
         _teXViewHeight = 1;
@@ -173,16 +162,25 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     }
   }
 
-  void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
-    double viewHeight = double.parse(javascriptMessage.message) +
-        (widget.renderingEngine == RenderingEngine.Katex ? 20 : 0);
-    if (_teXViewHeight != viewHeight) {
-      _teXViewHeight = viewHeight;
+  void _onPageFinished(message) {
+    if (widget.onPageFinished != null) {
+      widget.onPageFinished(message);
+    }
+  }
 
+  void _onWebViewCreated(WebViewController controller) {
+    _teXWebViewController = controller;
+    _initTeXView();
+  }
+
+  void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
+    double viewHeight = double.parse(javascriptMessage.message) + 20;
+    if (_teXViewHeight != viewHeight) {
       setState(() {
         _teXViewHeight = viewHeight;
       });
     }
+
     if (widget.onRenderFinished != null) {
       widget.onRenderFinished(_teXViewHeight);
     }

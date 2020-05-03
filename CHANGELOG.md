@@ -1,10 +1,13 @@
+## 3.5.0+1
+* Katex page height issue fixed.
+* Minor fix in styling.
+
 ## 3.5.0
 *  Heavy API Changes.
 * `teXHTML` removed from API
 * `children` has been added, where you can pass List of `TeXViewChild`.
 * `TeXViewStyles` added where you can easily customise TeXView Widget.
 * `onTap` callback support for each individual child.
-
 
 ## 3.1.4+1
 * FlutterWeb rendering Bug fixed.
