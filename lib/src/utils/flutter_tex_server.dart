@@ -4,22 +4,22 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
-class FlutterTeXServer {
-  HttpServer _flutterTeXServer;
+class TeXViewServer {
+  HttpServer _teXViewServer;
   int _port = 5353;
 
   ///Closes the server.
   Future<void> close() async {
-    if (this._flutterTeXServer != null) {
-      await this._flutterTeXServer.close(force: true);
+    if (this._teXViewServer != null) {
+      await this._teXViewServer.close(force: true);
       print('Server running on http://localhost:$_port closed');
-      this._flutterTeXServer = null;
+      this._teXViewServer = null;
     }
   }
 
   ///Starts the server
-  Future<void> start() async {
-    if (this._flutterTeXServer != null) {
+  Future<void> start(Function(HttpRequest request) request) async {
+    if (this._teXViewServer != null) {
       throw Exception('Server already started on http://localhost:$_port');
     }
 
@@ -29,11 +29,12 @@ class FlutterTeXServer {
       HttpServer.bind('127.0.0.1', _port, shared: true).then((server) {
         print('Server running on http://localhost:' + _port.toString());
 
-        this._flutterTeXServer = server;
+        this._teXViewServer = server;
 
-        server.listen((HttpRequest request) async {
+        server.listen((HttpRequest httpRequest) async {
+          request(httpRequest);
           var body = List<int>();
-          var path = request.requestedUri.path;
+          var path = httpRequest.requestedUri.path;
           path = (path.startsWith('/')) ? path.substring(1) : path;
           path += (path.endsWith('/')) ? 'index.html' : '';
 
@@ -41,24 +42,24 @@ class FlutterTeXServer {
             body = (await rootBundle.load(path)).buffer.asUint8List();
           } catch (e) {
             //    print(e.toString());
-            request.response.close();
+            httpRequest.response.close();
             return;
           }
 
           var contentType = ['text', 'html'];
-          if (!request.requestedUri.path.endsWith('/') &&
-              request.requestedUri.pathSegments.isNotEmpty) {
-            var mimeType =
-                lookupMimeType(request.requestedUri.path, headerBytes: body);
+          if (!httpRequest.requestedUri.path.endsWith('/') &&
+              httpRequest.requestedUri.pathSegments.isNotEmpty) {
+            var mimeType = lookupMimeType(httpRequest.requestedUri.path,
+                headerBytes: body);
             if (mimeType != null) {
               contentType = mimeType.split('/');
             }
           }
 
-          request.response.headers.contentType =
+          httpRequest.response.headers.contentType =
               new ContentType(contentType[0], contentType[1], charset: 'utf-8');
-          request.response.add(body);
-          request.response.close();
+          httpRequest.response.add(body);
+          httpRequest.response.close();
         });
         completer.complete();
       });

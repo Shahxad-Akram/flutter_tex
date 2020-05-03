@@ -10,15 +10,12 @@ import 'package:flutter_tex/flutter_tex.dart';
 class TeXView extends StatefulWidget {
   final Key key;
 
-  ///Raw String containing HTML and TEX Code e.g. String textHTML = r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
-  @deprecated
-  final String teXHTML;
-
+  /// A list of TeXViewChild.
   @required
   final List<TeXViewChild> children;
 
-  /// Style TeXView with CSS code.
-  final String style;
+  /// Style TeXView Widget with [TeXViewStyle].
+  final TeXViewStyle style;
 
   /// Render Engine to render TeX.
   final RenderingEngine renderingEngine;
@@ -29,7 +26,10 @@ class TeXView extends StatefulWidget {
   /// Show a loading widget before rendering completes.
   final Widget loadingWidget;
 
-  /// On Tap Callback.
+  /// Show or hide loadingWidget.
+  final bool showLoadingWidget;
+
+  /// On Tap Callback when a TeXViewChild is tapped.
   final Function(String childID) onTap;
 
   /// Callback when TEX rendering finishes.
@@ -43,11 +43,11 @@ class TeXView extends StatefulWidget {
 
   TeXView(
       {this.key,
-      this.teXHTML,
       this.children,
       this.style,
       this.height,
       this.loadingWidget,
+      this.showLoadingWidget = false,
       this.onTap,
       this.keepAlive,
       this.onRenderFinished,
@@ -106,7 +106,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String getJsonRawTeXHTML() {
     return jsonEncode({
       "children": widget.children.map((child) => child.toJson()).toList(),
-      "style": (widget.style ?? "").replaceAll("%", "%25")
+      "style": widget.style?.initStyle()?.replaceAll("%", "%25")
     });
   }
 

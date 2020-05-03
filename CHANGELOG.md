@@ -1,5 +1,5 @@
 ## 3.5.0
-* API Changes.
+*  Heavy API Changes.
 * `teXHTML` removed from API
 * `children` has been added, where you can pass List of `TeXViewChild`.
 * `TeXViewStyles` added where you can easily customise TeXView Widget.

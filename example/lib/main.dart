@@ -5,106 +5,27 @@ main() async {
   runApp(FlutterTeXExample());
 }
 
-List<TeXViewChild> katexList = [
-  TeXViewChild(
-      id: "child_0",
-      title: r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-      body: r"""
-      <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), most      commonly used are as followings:</p>      
-      <ul>
-      <li>Mathematics / Maths Equations (Algebra, Calculus, Geometry, Geometry etc...)</li>
-      <li>Physics Equations</li>
-      <li>Signal Processing Equations</li>
-      <li>Chemistry Equations</li>
-      <li>Statistics / Stats Equations</li>
-      <li>It also includes full HTML with JavaScript support.</li>
-      </ul>
-      """,
-      teXViewDecoration: TeXViewDecoration(
-          childStyle: TeXViewStyle(
-              borderRadius: 10,
-              padding: TeXViewPadding(top: 100),
-              contentColor: Colors.green)))
-];
-
-String katexTeXHTML = r"""
-   <p>
-   
-     A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br><br>
-     When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
- 
-     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>
- 
- 
-     Bohr Radius
- 
-     \( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)<br>
- 
-     Relationship between Energy and Principal Quantum Number
- 
-     \( E_n = - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)<br><br>
-  
-     <br><br>
-   </p>
-
-    Inline Chemistry Equations <br>
-         <p>    
-     \( \ce{CO2 + C -> 2 CO} \) <br>
-  
-     \( \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} \) <br><br><br>
-
-     Scroll long formulas $$ \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} $$ <br>
-     
-    </p>
-   """;
-
-String mathJaxTeXHTML = r"""
-   <p>
-     A simple Example to render \( \rm\\TeX \) in flutter with full <B>HTML</B> support<br>
-           $$
-           \begin{align}
-           \dot{x} & = \sigma(y-x) \\
-           \dot{y} & = \rho x - y - xz \\
-           \dot{z} & = -\beta z + xy
-           \end{align}
-           $$
-     <br>
- 
-     When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
- 
-     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>
- 
- 
-     $$ \oint_C {E \cdot d\ell = - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
- 
- 
-     $$ y = \frac{{n!}}{{k!\left( {n - k} \right)!}}p^k q^{n - k}  = \left( {\begin{array}{*{20}c}
-   n  \\
-   k  \\
-\end{array}} \right)p^k q^{n - k} $$
- 
-     Bohr Radius
- 
-     \( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)<br>
- 
-     Relationship between Energy and Principal Quantum Number
- 
-     \( E_n = - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)<br><br>
-  
-     <br><br>
-   </p>
-
-    Inline Chemistry Equations <br>
-         <p>    
-     \( \ce{CO2 + C -> 2 CO} \) <br>
-  
-     \( \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} \) <br>
- 
-     \( \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} \) <br>
-  
-    </p>
-
-   """;
+TeXViewChild _customTeXViewChild(String id, String title, String body) {
+  return TeXViewChild(
+      id: id,
+      title: title,
+      body: body,
+      decoration: TeXViewDecoration(
+          style: TeXViewStyle(
+            margin: TeXViewMargin(all: 10),
+            borderRadius: TeXViewBorderRadius(all: 20),
+            backgroundColor: Colors.green,
+            contentColor: Colors.white,
+          ),
+          titleStyle: TeXViewStyle(
+            padding: TeXViewPadding(top: 5, bottom: 5),
+            textAlign: TeXViewTextAlign.Center,
+            backgroundColor: Colors.red,
+            contentColor: Colors.white,
+          ),
+          bodyStyle: TeXViewStyle.fromCSS(
+              "color:white;background-color:light-green;padding:10px")));
+}
 
 class FlutterTeXExample extends StatelessWidget {
   @override
@@ -139,16 +60,39 @@ class MainPage extends StatelessWidget {
             color: Colors.transparent,
           ),
           getRenderEngineButton(context, "Katex", 'assets/katex.png',
-              "RenderingEngine for Fast Rendering", RenderingEngine.Katex),
-          getRenderEngineButton(context, "MathJax", 'assets/mathjax.png',
-              "RenderingEngine for Quality Rendering", RenderingEngine.MathJax),
+              "RenderingEngine for Fast Rendering", RenderingEngine.Katex, [
+            TeXExamples.introduction,
+            TeXExamples.quadraticEquation,
+            TeXExamples.bohrRadius,
+            TeXExamples.chemistryEquations,
+          ]),
+          getRenderEngineButton(
+              context,
+              "MathJax",
+              'assets/mathjax.png',
+              "RenderingEngine for Quality Rendering",
+              RenderingEngine.MathJax, [
+            TeXExamples.introduction,
+            TeXExamples.quadraticEquation,
+            TeXExamples.relationEnergyPrincipalQuantum,
+            TeXExamples.alignTag,
+            TeXExamples.bohrRadius,
+            TeXExamples.chemistryEquations,
+            TeXExamples.matrix,
+            TeXExamples.others,
+          ]),
         ],
       ),
     );
   }
 
-  getRenderEngineButton(BuildContext context, String label, String asset,
-      String text, RenderingEngine renderingEngine) {
+  getRenderEngineButton(
+      BuildContext context,
+      String label,
+      String asset,
+      String text,
+      RenderingEngine renderingEngine,
+      List<TeXViewChild> teXViewChildren) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: RaisedButton(
@@ -160,8 +104,7 @@ class MainPage extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => TeXViewPage(
                         label: label,
-                        textEditingController:
-                            new TextEditingController(text: katexTeXHTML),
+                        teXViewChildren: teXViewChildren,
                         renderingEngine: renderingEngine,
                       )));
         },
@@ -193,12 +136,90 @@ class MainPage extends StatelessWidget {
   }
 }
 
+class TeXExamples {
+  static TeXViewChild introduction = TeXViewChild(
+      id: "child_0",
+      title: r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+      body: r"""
+      <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
+      support.</p>
+      """,
+      decoration: TeXViewDecoration(
+          titleStyle: TeXViewStyle(textAlign: TeXViewTextAlign.Center),
+          style: TeXViewStyle(
+              margin: TeXViewMargin(all: 10),
+              padding: TeXViewPadding(all: 10),
+              borderRadius: TeXViewBorderRadius(all: 10),
+              border: TeXViewBorder(
+                  all: TeXViewBorderDecoration(
+                      borderWidth: 10,
+                      borderStyle: TeXViewBorderStyle.Solid,
+                      borderColor: Colors.green)))));
+
+  static TeXViewChild quadraticEquation =
+      _customTeXViewChild("child_1", r"<h3>Quadratic Equation</h3>", r"""
+     When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
+
+  static TeXViewChild bohrRadius = _customTeXViewChild(
+      "child_2",
+      r"<h3>Bohr's Radius</h3>",
+      r"""\( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)""");
+
+  static TeXViewChild relationEnergyPrincipalQuantum = _customTeXViewChild(
+      "child_3",
+      r"<h3>Relationship between Energy and Principal Quantum Number</h3>",
+      r"""\( E_n = - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)""");
+
+  static TeXViewChild chemistryEquations = _customTeXViewChild(
+      "child_4", r"<h3>Chemistry Equations</h3>", r"""<p>    
+      
+     \( \ce{CO2 + C -> 2 CO} \) <br>
+     
+     \( \ce{Hg^2+ ->[I-] HgI2 ->[I-] [Hg^{II}I4]^2-} \) <br>
+     
+     Scroll long formulas in Katex $$ \ce{x Na(NH4)HPO4 ->[\Delta] (NaPO3)_x + x NH3 ^ + x H2O} $$ <br>
+     
+    </p>""");
+
+  static TeXViewChild matrix =
+      _customTeXViewChild("child_5", r"<h3>Matrix</h3>", r"""<p>    
+      \begin{bmatrix}
+         a & b \\
+         c & d
+      \end{bmatrix}
+    </p>""");
+
+  static TeXViewChild alignTag =
+      _customTeXViewChild("child_6", r"<h3>Align Tag</h3>", r"""<p>    
+           $$
+           \begin{align}
+           \dot{x} & = \sigma(y-x) \\
+           \dot{y} & = \rho x - y - xz \\
+           \dot{z} & = -\beta z + xy
+           \end{align}
+           $$
+    </p>""");
+
+  static TeXViewChild others =
+      _customTeXViewChild("child_7", r"<h3> Others </h3>", r"""<p>    
+ 
+    $$ \oint_C {E \cdot d\ell = - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
+ 
+     $$ y = \frac{{n!}}{{k!\left( {n - k} \right)!}}p^k q^{n - k}  = \left( {\begin{array}{*{20}c}
+              n  \\
+              k  \\
+            \end{array}} \right)p^k q^{n - k} $$
+ 
+    </p>""");
+}
+
 class TeXViewPage extends StatefulWidget {
-  final TextEditingController textEditingController;
+  final List<TeXViewChild> teXViewChildren;
   final String label;
   final RenderingEngine renderingEngine;
 
-  TeXViewPage({this.label, this.textEditingController, this.renderingEngine});
+  TeXViewPage({this.label, this.teXViewChildren, this.renderingEngine});
 
   @override
   _TeXViewPageState createState() => _TeXViewPageState();
@@ -214,28 +235,6 @@ class _TeXViewPageState extends State<TeXViewPage> {
       ),
       body: ListView(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Material(
-              shape: RoundedRectangleBorder(side: BorderSide()),
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  decoration: InputDecoration(
-                      labelText: "${widget.label} TeX HTML input"),
-                  controller: widget.textEditingController,
-                  maxLines: 15,
-                  onChanged: (string) {
-                    setState(() {});
-                  },
-                ),
-              ),
-            ),
-          ),
-          Divider(
-            height: 10,
-          ),
           Text(
             "Rendered TeX HTML with ${widget.label}",
             textAlign: TextAlign.center,
@@ -252,25 +251,20 @@ class _TeXViewPageState extends State<TeXViewPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TeXView(
-                    renderingEngine: widget.renderingEngine,
-                    children:
-                        katexList /*[
-                      katexList...
-                      TeXViewChild(
-                          title: r"""<h4>Quadratic Equation</h4>""",
-                          body: widget.textEditingController.text,
-                          style: TeXViewStyle(
-                              titleStyle: TeXViewStyles.extended(),
-                              bodyStyle: TeXViewStyles.extended(
-                                margin: 0,
-                              ),
-                              style: TeXViewStyles.card(
-                                backgroundColor: Colors.green,
-                                padding: 20,
-                                margin: 10,
-                              ))),
-                    ]*/
-                    ,
+                    renderingEngine: RenderingEngine.MathJax,
+                    children: widget.teXViewChildren,
+                    style: TeXViewStyle(
+                      transition: 0.5,
+                      margin: TeXViewMargin(all: 15),
+                      elevation: 10,
+                      borderRadius: TeXViewBorderRadius(all: 25),
+                      border: TeXViewBorder(
+                          all: TeXViewBorderDecoration(
+                              borderColor: Colors.blue,
+                              borderStyle: TeXViewBorderStyle.Solid,
+                              borderWidth: 5)),
+                      backgroundColor: Colors.white,
+                    ),
                     loadingWidget: Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

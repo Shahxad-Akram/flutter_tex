@@ -70,57 +70,70 @@
 
 
 
+
+
+
+
+
+
+
+
     </script>
     <script src="MathJax.js" type="text/javascript"></script>
 </head>
 
 <body>
 
+
 <div id="TeXView"></div>
-
 <script>
-    let teXHTMLDiv = document.getElementById('TeXView');
-    let rawTeXHTML = JSON.parse(decodeURIComponent(new URLSearchParams(window.location.search).get('rawTeXHTML')));
-    teXHTMLDiv.setAttribute("style", rawTeXHTML['style']);
-
     function initTeXView() {
-        rawTeXHTML['children'].forEach((child) => {
-            let teXViewChild = document.createElement('div');
-            teXViewChild.setAttribute("style", child['style']['style']);
-            teXViewChild.classList.add("tex-view-child");
-            let teXViewChildTitle = document.createElement('div');
-            teXViewChildTitle.setAttribute("style", child['style']['titleStyle']);
-            teXViewChildTitle.innerHTML = child['title'];
-            teXViewChild.appendChild(teXViewChildTitle)
-            let teXViewChildBody = document.createElement('div');
-            teXViewChildBody.setAttribute("style", child['style']['bodyStyle']);
-            teXViewChildBody.innerHTML = child['body'];
-            teXViewChild.appendChild(teXViewChildBody)
-            let childID = child['id'];
-            if (childID != null) {
-                teXViewChild.addEventListener('click', function (e) {
-                    TeXViewItemTapCallback.postMessage(childID);
-                    let ripple = document.createElement('div');
-                    this.appendChild(ripple);
-                    let d = Math.max(this.clientWidth, this.clientHeight);
-                    ripple.style.width = ripple.style.height = d + 'px';
-                    let rect = this.getBoundingClientRect();
-                    ripple.style.left = e.clientX - rect.left - d / 2 + 'px';
-                    ripple.style.top = e.clientY - rect.top - d / 2 + 'px';
-                    ripple.classList.add('ripple');
-                });
-            }
-            teXHTMLDiv.appendChild(teXViewChild)
-        });
+        const teXView = document.getElementById('TeXView');
+        const theUrl = "http://localhost:5353/getRawTeXHTML";
+        const http = new XMLHttpRequest()
+        http.open("GET", theUrl)
+        http.send()
+        http.onload = () => {
+            let rawTeXHTML = JSON.parse(http.responseText);
+            teXView.setAttribute("style", rawTeXHTML['style']);
+            rawTeXHTML['children'].forEach((child) => {
+                let teXViewChild = document.createElement('div');
+                teXViewChild.setAttribute("style", child['decoration']['style']);
+                teXViewChild.classList.add("tex-view-child");
+                let teXViewChildTitle = document.createElement('div');
+                teXViewChildTitle.setAttribute("style", child['decoration']['titleStyle']);
+                teXViewChildTitle.innerHTML = child['title'];
+                teXViewChild.appendChild(teXViewChildTitle)
+                let teXViewChildBody = document.createElement('div');
+                teXViewChildBody.setAttribute("style", child['decoration']['bodyStyle']);
+                teXViewChildBody.innerHTML = child['body'];
+                teXViewChild.appendChild(teXViewChildBody)
+                let childID = child['id'];
+                if (childID != null) {
+                    teXViewChild.addEventListener('click', function (e) {
+                        TeXViewItemTapCallback.postMessage(childID);
+                        let ripple = document.createElement('div');
+                        this.appendChild(ripple);
+                        let d = Math.max(this.clientWidth, this.clientHeight);
+                        ripple.style.width = ripple.style.height = d + 'px';
+                        let rect = this.getBoundingClientRect();
+                        ripple.style.left = e.clientX - rect.left - d / 2 + 'px';
+                        ripple.style.top = e.clientY - rect.top - d / 2 + 'px';
+                        ripple.classList.add('ripple');
+                    });
+                }
+                teXView.appendChild(teXViewChild)
+            });
+
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
+                RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
+            });
+        }
+
     }
 
+    initTeXView();
 </script>
 
-<script>
-    initTeXView();
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
-        RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
-    });
-</script>
 </body>
 </html>

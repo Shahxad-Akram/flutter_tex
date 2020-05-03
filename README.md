@@ -4,7 +4,7 @@
 
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png"/>
 
-A Flutter Package to render so many types of equations based on **LaTeX**, most commonly used are as followings:
+A Flutter Package to render so many types of equations based on **LaTeX** and **TeX**, most commonly used are as followings:
 
 - **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
 
@@ -24,15 +24,13 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 
 
-
-
 ## Use this package as a library in your flutter Application
 
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.1.4+1
+  flutter_tex: ^3.5.0
 ```
 
 
@@ -80,56 +78,86 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 **5:** Now you can use TeXHTML widget like this.
 ```dart
-    TeXView(
-          teXHTML: r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """,
-          renderingEngine: RenderingEngine.Katex,  // Katex for fast render and MathJax for quality render.
-          onRenderFinished: (height) {
-                print("Widget Height is : $height");
-                },   
-          onPageFinished: (string) {
-                print("Page Loading finished");
-              },
-          webAppDomain: "https://flutter-tex.web.app", //Your Web Application Domain e.g. "https://flutter-tex.web.app" Keep it null while development put your domain only when you are deploying your application to a server.
-
-        )
+                  TeXView(
+                    renderingEngine: RenderingEngine.MathJax,
+                    children: [
+                      TeXViewChild(
+                          id: "child_1",
+                          title: r"<h3>Quadratic Equation</h3>",
+                          body: r"""<p>
+                               When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                               $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+                          decoration: TeXViewDecoration(
+                              style: TeXViewStyle(
+                                borderRadius: TeXViewBorderRadius(all: 20),
+                                backgroundColor: Colors.green,
+                                contentColor: Colors.white,
+                              ),
+                              titleStyle: TeXViewStyle(
+                                padding: TeXViewPadding(top: 5, bottom: 5),
+                                textAlign: TeXViewTextAlign.Center,
+                                backgroundColor: Colors.red,
+                                contentColor: Colors.white,
+                              ),
+                              bodyStyle: TeXViewStyle.fromCSS("color:white;background-color:light-green")))
+                    ],
+                    style: TeXViewStyle(
+                      transition: 0.5,
+                      margin: TeXViewMargin(all: 15),
+                      elevation: 10,
+                      borderRadius: TeXViewBorderRadius(all: 25),
+                      border: TeXViewBorder(
+                          all: TeXViewBorderDecoration(
+                              borderColor: Colors.blue,
+                              borderStyle: TeXViewBorderStyle.Solid,
+                              borderWidth: 5)),
+                      backgroundColor: Colors.white,
+                    ),
+                    loadingWidget: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CircularProgressIndicator(),
+                          Text("Rendering with ${widget.label}")
+                        ],
+                      ),
+                    ),
+                    onTap: (childID) {
+                      print("TeXView $childID is tapped.");
+                    })
 ```
 
 Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** for quality render.
 
+
+# Api Changes since flutter_tex:^3.5.0
+- `teXHTML` has been removed from the API and replaced by the `children` which contains the list of `TeXViewChild` for more information please see the example. For any problem please report the issue.
+
 # Api Usage.
-- `teXHTML:` Raw String containing HTML and TEX Code e.g.<br>
-    ```
- 
-    String textHTML = r"""
-    <style>
-     #myDiv 
-     {
-     background-color: red;
-     }
-    </style>
-    
-    <div id='myDiv'>
-        $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
-    </div>
-    """
-    ```
-    You can also put javascript code in it.<br>
-    
+- `children:` A list of `TeXViewChild`
+
+- `TeXViewChild` holds TeX data  in `title` and `body` by using a raw string e.g.
+`r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put javascript code in it.<br>
     If you load **Network Image** in your document you should go like this.
-    
     ``` 
     <img onload="RenderedWebViewHeight.postMessage(document.getElementById('teXHTML').clientHeight);"
     src="https://img.wallpapersafari.com/desktop/1920/1080/84/27/nMWzIB.jpg" />
     ```
   Do put this<br>
-  ```onload="RenderedWebViewHeight.postMessage(document.getElementById('teXHTML').clientHeight);"```<br>
-  in your img tag, it'll recalculate the height of the page and rerender the page after the image loading completes.
+  ```onload="RenderedWebViewHeight.postMessage(document.getElementById('TeXView').document.body.scrollHeight);"```<br>
+   in your img tag, it'll recalculate the height of the page and rerender the page after the image loading completes.
 
+- `TeXViewStyle()` You can style each and everything using `TeXViewStyle()` or by using custom `CSS` code by `TeXViewStyle.fromCSS()` where you can pass hard coded String containing CSS code. For more information please check the example.
+    
 - `renderingEngine:` Render Engine to render TeX (Default is Katex Rendering Engine).
   
 - `height:` Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
   
 - `loadingWidget:` Show a loading widget before rendering completes.
+
+- `showLoadingWidget:` Show or hide loadingWidget.
   
 - `onTap:` On Tap Callback.
 
@@ -157,7 +185,7 @@ Screenshot# 03             |  Screenshot# 04
 
 ## To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
-- Beta support for Flutter Web, Automatically calculation of TeXView Height in Flutter Web and much more to do for Flutter Web.
+- Poor support for Flutter Web, Please don't use that for production.
 
 ## Cautions:
-- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause to slow down your app.
+- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app.

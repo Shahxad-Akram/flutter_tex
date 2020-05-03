@@ -1,4 +1,4 @@
-import 'package:flutter_tex/src/utils/tex_view_decoration.dart';
+import 'package:flutter_tex/src/models/tex_view_decoration.dart';
 
 class TeXViewChild {
   /// A random ID as an identifier to listen Callback when tap on TeXViewChild. If ID is null it won't trigger Callback event.
@@ -11,14 +11,14 @@ class TeXViewChild {
   String body;
 
   /// Styling for TeXViewChild Widget , title and body.
-  TeXViewDecoration teXViewDecoration;
+  TeXViewDecoration decoration;
 
-  TeXViewChild({this.id, this.title, this.body, this.teXViewDecoration});
+  TeXViewChild({this.id, this.title, this.body, this.decoration});
 
   Map<dynamic, dynamic> toJson() => {
-        'id': id != null ? id.replaceAll("%", "%25") : null,
-        'title': title != null ? title.replaceAll("%", "%25") : null,
-        'body': body != null ? body.replaceAll("%", "%25") : null,
-        'teXViewDecoration': teXViewDecoration != null ? teXViewDecoration.toJson() : ""
+        'id': id?.replaceAll("%", "%25"),
+        'title': title?.replaceAll("%", "%25"),
+        'body': body?.replaceAll("%", "%25"),
+        'decoration': decoration?.toJson()
       };
 }
