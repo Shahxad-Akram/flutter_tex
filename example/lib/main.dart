@@ -140,10 +140,7 @@ class TeXExamples {
   static TeXViewChild introduction = TeXViewChild(
       id: "child_0",
       title: r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-      body: r"""
-      
-      %%%%
-      
+      body: r"""      
       <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
       """,
