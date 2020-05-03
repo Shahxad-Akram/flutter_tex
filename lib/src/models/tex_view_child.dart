@@ -16,9 +16,9 @@ class TeXViewChild {
   TeXViewChild({this.id, this.title, this.body, this.decoration});
 
   Map<dynamic, dynamic> toJson() => {
-        'id': id?.replaceAll("%", "%25"),
-        'title': title?.replaceAll("%", "%25"),
-        'body': body?.replaceAll("%", "%25"),
+        'id': id,
+        'title': title,
+        'body': body,
         'decoration': decoration?.toJson()
       };
 }

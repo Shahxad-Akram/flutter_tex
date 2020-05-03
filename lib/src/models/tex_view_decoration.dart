@@ -13,8 +13,8 @@ class TeXViewDecoration {
   TeXViewDecoration({this.style, this.titleStyle, this.bodyStyle});
 
   Map<dynamic, dynamic> toJson() => {
-        'style': style?.initStyle()?.replaceAll("%", "%25") ?? "",
-        'titleStyle': titleStyle?.initStyle()?.replaceAll("%", "%25") ?? "",
-        'bodyStyle': bodyStyle?.initStyle()?.replaceAll("%", "%25") ?? "",
+        'style': style?.initStyle() ?? "",
+        'titleStyle': titleStyle?.initStyle() ?? "",
+        'bodyStyle': bodyStyle?.initStyle() ?? "",
       };
 }
