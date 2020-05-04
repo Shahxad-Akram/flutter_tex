@@ -261,7 +261,6 @@ class _TeXViewPageState extends State<TeXViewPage> {
                     renderingEngine: widget.renderingEngine,
                     children: widget.teXViewChildren,
                     style: TeXViewStyle(
-                      transition: 0.5,
                       margin: TeXViewMargin(all: 15),
                       elevation: 10,
                       borderRadius: TeXViewBorderRadius(all: 25),

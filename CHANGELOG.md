@@ -1,3 +1,6 @@
+## 3.5.0+2
+* Minor rendering fixes.
+
 ## 3.5.0+1
 * Katex page height issue fixed.
 * Minor fix in styling.

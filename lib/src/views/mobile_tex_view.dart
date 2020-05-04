@@ -129,10 +129,9 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void handleRequest(HttpRequest request) {
-    const theUrl = "http://localhost:5353/getRawTeXHTML";
     try {
       if (request.method == 'GET' &&
-          request.requestedUri.toString() == theUrl) {
+          request.uri.queryParameters['query'] == "getRawTeXHTML") {
         request.response.write(getJsonRawTeXHTML());
       } else {}
     } catch (e) {

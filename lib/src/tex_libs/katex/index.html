@@ -46,27 +46,26 @@
                 opacity: 0;
             }
         }
-
     </style>
 
     <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
     <script crossorigin="anonymous" src="katex.js"></script>
-    <script crossorigin="anonymous" defer src="contrib/auto-render.js"></script>
+    <script crossorigin="anonymous" src="contrib/auto-render.js"></script>
     <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
 
 </head>
 
 
 <body>
-
-
 <div id="TeXView"></div>
 <script>
+    initTeXView();
+    const teXView = document.getElementById('TeXView');
+
     function initTeXView() {
-        const teXView = document.getElementById('TeXView');
-        const theUrl = "http://localhost:5353/getRawTeXHTML";
+        const requestUrl = "http://localhost:5353/?query=getRawTeXHTML";
         const httpRequest = new XMLHttpRequest();
-        httpRequest.open('GET', theUrl);
+        httpRequest.open('GET', requestUrl);
         httpRequest.send();
         httpRequest.onload = () => {
             let rawTeXHTML = JSON.parse(httpRequest.responseText);
@@ -99,20 +98,17 @@
                 }
                 teXView.appendChild(teXViewChild)
             });
-            renderMathInElement(teXView);
             onRenderComplete();
-            setTimeout(onRenderComplete, 1000)
         }
     }
-
-    function onRenderComplete() {
-        RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
-    }
-
-    initTeXView();
-
 </script>
-
+<script>
+    function onRenderComplete() {
+        renderMathInElement(teXView);
+        setTimeout(() => {
+            RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
+        }, 0)
+    }
+</script>
 </body>
-
 </html>
