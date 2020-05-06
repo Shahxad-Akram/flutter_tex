@@ -45,6 +45,8 @@ class TeXView extends StatelessWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
+  final double heightCorrection;
+
   TeXView(
       {this.key,
       this.children,
@@ -56,7 +58,8 @@ class TeXView extends StatelessWidget {
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine});
+      this.renderingEngine,
+      this.heightCorrection = 0});
 
   @override
   Widget build(BuildContext context) {

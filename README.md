@@ -30,7 +30,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.5.0+2
+  flutter_tex: ^3.5.1
 ```
 
 
@@ -102,7 +102,6 @@ import 'package:flutter_tex/flutter_tex.dart';
                               bodyStyle: TeXViewStyle.fromCSS("color:white;background-color:light-green")))
                     ],
                     style: TeXViewStyle(
-                      transition: 0.5,
                       margin: TeXViewMargin(all: 15),
                       elevation: 10,
                       borderRadius: TeXViewBorderRadius(all: 25),

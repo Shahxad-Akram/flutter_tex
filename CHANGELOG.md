@@ -1,3 +1,8 @@
+## 3.5.1
+* Extra margin at bottom issue resolved.
+* Transition in styling has been removed as it was causing problems while calculating height.
+* Multiple TeXView at same page are possible.
+
 ## 3.5.0+2
 * Minor rendering fixes.
 

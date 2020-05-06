@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_child.dart';
-import 'package:flutter_tex/src/utils/flutter_tex_server.dart';
+import 'package:flutter_tex/src/utils/tex_view_server.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
@@ -44,6 +44,10 @@ class TeXView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
+  final double heightCorrection;
+
+  static int serverPortReference = 5353;
+
   TeXView(
       {this.key,
       this.children,
@@ -55,7 +59,8 @@ class TeXView extends StatefulWidget {
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine})
+      this.renderingEngine,
+      this.heightCorrection})
       : super(key: key);
 
   @override
@@ -64,9 +69,15 @@ class TeXView extends StatefulWidget {
 
 class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   WebViewController _teXWebViewController;
-  TeXViewServer _flutterTeXServer = TeXViewServer();
+  int _teXViewServerPort = TeXView.serverPortReference;
+  TeXViewServer _flutterTeXServer;
   double _teXViewHeight = 1;
   String lastTeXHTML;
+
+  _TeXViewState() {
+    _flutterTeXServer = TeXViewServer(_teXViewServerPort);
+    TeXView.serverPortReference += 1;
+  }
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
@@ -89,8 +100,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                   name: 'RenderedTeXViewHeight',
                   onMessageReceived: _renderedTeXViewHeightHandler),
               JavascriptChannel(
-                  name: 'TeXViewItemTapCallback',
-                  onMessageReceived: _teXViewItemTapCallbackHandler),
+                  name: 'TeXViewChildTapCallback',
+                  onMessageReceived: _teXViewChildTapCallbackHandler),
             ]),
             javascriptMode: JavascriptMode.unrestricted,
           ),
@@ -118,6 +129,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   void dispose() {
     _flutterTeXServer.close();
+    TeXView.serverPortReference -= 1;
     super.dispose();
   }
 
@@ -148,7 +160,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String _getTeXViewUrl() {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:5353/packages/flutter_tex/src/tex_libs/$renderEngine/index.html";
+    return "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXViewServerPort=$_teXViewServerPort";
   }
 
   void _initTeXView() {
@@ -173,19 +185,18 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
-    double viewHeight = double.parse(javascriptMessage.message) + 20;
+    double viewHeight = double.parse(javascriptMessage.message);
     if (_teXViewHeight != viewHeight) {
       setState(() {
         _teXViewHeight = viewHeight;
       });
     }
-
     if (widget.onRenderFinished != null) {
       widget.onRenderFinished(_teXViewHeight);
     }
   }
 
-  void _teXViewItemTapCallbackHandler(JavascriptMessage javascriptMessage) {
+  void _teXViewChildTapCallbackHandler(JavascriptMessage javascriptMessage) {
     if (widget.onTap != null) {
       widget.onTap(javascriptMessage.message);
     }

@@ -204,9 +204,6 @@ class TeXViewStyle {
   ///Managing radius of border by using [TeXViewBorderRadius] class.
   TeXViewBorderRadius borderRadius;
 
-  ///Transition.
-  double transition;
-
   /// Text alignment within TeXView.
   TeXViewTextAlign textAlign;
 
@@ -221,7 +218,6 @@ class TeXViewStyle {
       this.backgroundColor,
       this.border,
       this.borderRadius,
-      this.transition,
       this.textAlign});
 
   /// Styling TeXView with hard coded CSS e.g. "color:green;background-color:red".
@@ -239,7 +235,6 @@ class TeXViewStyle {
     box-shadow: ${_getElevation(elevation, lengthUnit)};
     color: ${_getColor(contentColor)};
     background-color: ${_getColor(backgroundColor)};
-    transition: ${transition}s;
     text-align: ${_TeXViewTextAlignHelper.getValue(textAlign)}
     """
         : cascadingStyleSheets;

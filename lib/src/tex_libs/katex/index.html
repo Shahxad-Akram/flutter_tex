@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <head>
     <style>
@@ -27,7 +27,6 @@
         }
 
         .tex-view-child {
-
             overflow: hidden;
             position: relative;
         }
@@ -59,11 +58,13 @@
 <body>
 <div id="TeXView"></div>
 <script>
-    initTeXView();
+    const teXViewServerPort = decodeURIComponent(new URLSearchParams(window.location.search).get('teXViewServerPort'));
     const teXView = document.getElementById('TeXView');
 
+    initTeXView();
+
     function initTeXView() {
-        const requestUrl = "http://localhost:5353/?query=getRawTeXHTML";
+        const requestUrl = `http://localhost:${teXViewServerPort}/?query=getRawTeXHTML`;
         const httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', requestUrl);
         httpRequest.send();
@@ -85,7 +86,7 @@
                 let childID = child['id'];
                 if (childID != null) {
                     teXViewChild.addEventListener('click', function (e) {
-                        TeXViewItemTapCallback.postMessage(childID);
+                        TeXViewChildTapCallback.postMessage(childID);
                         let ripple = document.createElement('div');
                         this.appendChild(ripple);
                         let d = Math.max(this.clientWidth, this.clientHeight);
@@ -98,6 +99,7 @@
                 }
                 teXView.appendChild(teXViewChild)
             });
+
             onRenderComplete();
         }
     }
