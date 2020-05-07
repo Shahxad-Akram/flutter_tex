@@ -9,7 +9,7 @@ String _getElevation(int elevation, LengthUnit lengthUnit) {
 }
 
 String _getLength(int value, LengthUnit lengthUnit) {
-  return "${value == 0 ? "auto" : value.toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
+  return "${value.toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
 }
 
 enum LengthUnit { Pixels, Percent, Em }
@@ -111,6 +111,8 @@ class TeXViewMargin {
   /// All sides margin and it'll override top, bottom,right and left margins.
   int all;
 
+  String zeroAuto;
+
   TeXViewMargin(
       {this.lengthUnit,
       this.top,
@@ -119,14 +121,23 @@ class TeXViewMargin {
       this.left,
       this.all});
 
+  TeXViewMargin.zeroAuto() {
+    this.zeroAuto = "0 auto";
+  }
+
   /// It'll provide CSS margin code.
   String getMargin() {
-    return """
+    return this.zeroAuto == null
+        ? """
       margin-top: ${_getLength(top, lengthUnit)};
       margin-bottom: ${_getLength(bottom, lengthUnit)};
       margin-right: ${_getLength(right, lengthUnit)};
       margin-left: ${_getLength(left, lengthUnit)};
       margin: ${_getLength(all, lengthUnit)};
+      
+    """
+        : """
+    margin: 0 auto;
     """;
   }
 }
@@ -226,15 +237,15 @@ class TeXViewStyle {
   String initStyle() {
     return cascadingStyleSheets == null
         ? """
-    ${padding?.getPadding()}
-    ${margin?.getMargin()}
-    ${border?.getBorder()};
-    ${borderRadius?.getRadius()};
-    height: ${_getLength(height, lengthUnit)};
-    width: ${_getLength(width, lengthUnit)};
-    box-shadow: ${_getElevation(elevation, lengthUnit)};
-    color: ${_getColor(contentColor)};
-    background-color: ${_getColor(backgroundColor)};
+    ${padding?.getPadding() ?? ""}
+    ${margin?.getMargin() ?? ""}
+    ${border?.getBorder() ?? ""};
+    ${borderRadius?.getRadius() ?? ""};
+    height: ${height != null ? _getLength(height, lengthUnit) : ""};
+    width: ${width != null ? _getLength(width, lengthUnit) : ""};
+    box-shadow: ${elevation != null ? _getElevation(elevation, lengthUnit) : ""};
+    color: ${contentColor != null ? _getColor(contentColor) : ""};
+    background-color: ${backgroundColor != null ? _getColor(backgroundColor) : ""};
     text-align: ${_TeXViewTextAlignHelper.getValue(textAlign)}
     """
         : cascadingStyleSheets;

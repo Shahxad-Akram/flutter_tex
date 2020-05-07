@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_container.dart';
 import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/utils/tex_view_server.dart';
+import 'package:flutter_tex/src/utils/tex_view_style.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.

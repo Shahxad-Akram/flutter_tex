@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_container.dart';
 import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
+import 'package:flutter_tex/src/utils/tex_view_style.dart';
 import 'package:flutter_tex/src/views/mobile_tex_view.dart'
     if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart'
     as teXView;

@@ -229,12 +229,16 @@ class TeXExamples {
                   borderColor: Colors.green))),
       children: [
         TeXViewTeX(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-            style: TeXViewStyle(textAlign: TeXViewTextAlign.Center),
-            id: "dfdf"),
+            style: TeXViewStyle(
+                textAlign: TeXViewTextAlign.Center,
+                width: 200,
+                margin: TeXViewMargin.zeroAuto(),
+                backgroundColor: Colors.green),
+            id: "title_0"),
         TeXViewTeX(r"""      
       <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
-      """, id: "ggg")
+      """, id: "body_0")
       ]);
 
   static TeXViewContainer quadraticEquation =

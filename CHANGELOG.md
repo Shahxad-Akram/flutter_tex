@@ -1,3 +1,6 @@
+## 3.6.0+1
+* `TeXViewMargin.zeroAuto()` added.
+
 ## 3.6.0
 * Major API Changes
 * `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
