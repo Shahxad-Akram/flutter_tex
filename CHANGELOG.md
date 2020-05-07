@@ -1,3 +1,8 @@
+## 3.6.0
+* Major API Changes
+* `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
+* `onTap` callback has been added for each view.
+
 ## 3.5.2
 * Minor API Changes
 * `RenderingEngine` has been replaced with `TeXViewRenderingEngine`

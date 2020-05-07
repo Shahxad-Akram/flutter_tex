@@ -1,7 +1,7 @@
 name: flutter_tex
 description: A Flutter Package to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 
-version: 3.5.2
+version: 3.6.0
 homepage: https://github.com/shah-xad/flutter_tex
 
 environment:
@@ -24,7 +24,9 @@ flutter:
 
   assets:
 
-    - packages/flutter_tex/src/flutter_tex_libs/main.js
+    #Flutter TeX
+    - packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js
+    - packages/flutter_tex/src/flutter_tex_libs/flutter_tex.css
 
     #MathJax
     - packages/flutter_tex/src/flutter_tex_libs/mathjax/extensions/Safe.js

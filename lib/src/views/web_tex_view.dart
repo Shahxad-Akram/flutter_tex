@@ -13,7 +13,7 @@ class TeXView extends StatefulWidget {
 
   /// A list of TeXViewChild.
   @required
-  final List<TeXViewChild> children;
+  final List<TeXViewContainer> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;

@@ -2,14 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/tex_view_child.dart';
+import 'package:flutter_tex/src/models/tex_view_container.dart';
 import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/views/mobile_tex_view.dart'
     if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart'
     as teXView;
-
-/*/// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
-enum RenderingEngine { MathJax, Katex }*/
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatelessWidget {
@@ -17,7 +14,7 @@ class TeXView extends StatelessWidget {
 
   /// A list of TeXViewChild.
   @required
-  final List<TeXViewChild> children;
+  final List<TeXViewContainer> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;

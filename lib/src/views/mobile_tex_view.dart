@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/tex_view_child.dart';
+import 'package:flutter_tex/src/models/tex_view_container.dart';
 import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/utils/tex_view_server.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -16,7 +16,7 @@ class TeXView extends StatefulWidget {
 
   /// A list of TeXViewChild.
   @required
-  final List<TeXViewChild> children;
+  final List<TeXViewContainer> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
@@ -160,7 +160,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   String _getTeXViewUrl() {
     return Uri.encodeFull(
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine.getConfigurations()}");
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}");
   }
 
   void _initTeXView() {
