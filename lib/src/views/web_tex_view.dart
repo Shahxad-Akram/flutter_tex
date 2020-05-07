@@ -119,7 +119,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       currentUrl =
           "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
     }
-    return "${currentUrl}packages/flutter_tex/src/tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
   }
 
   void _teXViewItemTapCallbackHandler() {

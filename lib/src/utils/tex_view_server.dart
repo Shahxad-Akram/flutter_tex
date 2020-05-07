@@ -43,7 +43,7 @@ class TeXViewServer {
           try {
             body = (await rootBundle.load(path)).buffer.asUint8List();
           } catch (e) {
-                print(e.toString());
+            print(e.toString());
             httpRequest.response.close();
             return;
           }

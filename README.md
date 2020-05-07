@@ -141,11 +141,11 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put javascript code in it.<br>
     If you load **Network Image** in your document you should go like this.
     ``` 
-    <img onload="RenderedWebViewHeight.postMessage(document.getElementById('teXHTML').clientHeight);"
+    <img onload="onTeXViewRenderComplete();"
     src="https://img.wallpapersafari.com/desktop/1920/1080/84/27/nMWzIB.jpg" />
     ```
   Do put this<br>
-  ```onload="RenderedWebViewHeight.postMessage(document.getElementById('TeXView').document.body.scrollHeight);"```<br>
+  ```onload="onTeXViewRenderComplete();"```<br>
    in your img tag, it'll recalculate the height of the page and rerender the page after the image loading completes.
 
 - `TeXViewStyle()` You can style each and everything using `TeXViewStyle()` or by using custom `CSS` code by `TeXViewStyle.fromCSS()` where you can pass hard coded String containing CSS code. For more information please check the example.

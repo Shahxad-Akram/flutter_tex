@@ -11,6 +11,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatefulWidget {
+  static int serverPortReference = 5353;
+
   final Key key;
 
   /// A list of TeXViewChild.
@@ -45,8 +47,6 @@ class TeXView extends StatefulWidget {
   final bool keepAlive;
 
   final double heightCorrection;
-
-  static int serverPortReference = 5353;
 
   TeXView(
       {this.key,
@@ -160,7 +160,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String _getTeXViewUrl() {
     String renderEngine =
         widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/tex_libs/$renderEngine/index.html?teXViewServerPort=$_teXViewServerPort";
+    return "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/$renderEngine/index.html?teXViewServerPort=$_teXViewServerPort";
   }
 
   void _initTeXView() {

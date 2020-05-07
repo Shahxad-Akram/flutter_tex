@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<head>
+
+    <script src="../main.js" type="text/javascript"></script>
+
+    <style>
+        .MathJax_SVG:focus {
+            outline: none;
+        }
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tex-view-child {
+
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tex-view-child .ripple {
+            border-radius: 50%;
+            background-color: lightgrey;
+            position: absolute;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+    </style>
+    <script>
+        const mathjaxConfigurations = {
+            showMathMenu: false,
+            delayStartupUntil: "configured",
+            tex2jax: {
+                ignoreClass: "tex2jax_ignore",
+            },
+
+            jax: ["input/TeX", "output/SVG"],
+            extensions: ["tex2jax.js", "MathEvents.js"],
+            TeX: {
+                extensions: ["mhchem.js", "noErrors.js", "noUndefined.js", "autoload-all.js"],
+                noErrors: {disabled: true}
+            },
+            MathMenu: {
+                showRenderer: false
+            },
+            messageStyle: "none",
+            SVG: {
+                blacker: 0,
+                font: "Gyre-Pagella",
+                linebreaks: {
+                    automatic: true,
+                    width: "container"
+                },
+                scale: 90,
+                useFontCache: true,
+                useGlobalCache: true,
+                matchFontHeight: true
+
+            },
+        };
+    </script>
+    <script id="MathJaxConfig" type="text/x-mathjax-config">MathJax.Hub.Config(mathjaxConfigurations);</script>
+    <script src="MathJax.js" type="text/javascript"></script>
+    <title>mathjax</title>
+
+</head>
+
+<body>
+<script>
+    function onTeXViewRenderComplete() {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
+            RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
+        });
+    }
+</script>
+<div id="TeXView"></div>
+<script>
+    const teXView = document.getElementById('TeXView');
+    initTeXView();
+</script>
+</body>
+</html>

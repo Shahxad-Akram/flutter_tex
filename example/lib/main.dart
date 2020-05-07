@@ -5,73 +5,6 @@ main() async {
   runApp(FlutterTeXExample());
 }
 
-class TestExample extends StatefulWidget {
-  @override
-  _TestExampleState createState() => _TestExampleState();
-}
-
-class _TestExampleState extends State<TestExample> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: ListView(
-          physics: ScrollPhysics(),
-          shrinkWrap: true,
-          children: <Widget>[
-            TeXView(
-                renderingEngine: RenderingEngine.Katex,
-                children: [
-                  TeXViewChild(
-                      id: "child_1",
-                      title: r"<h3>Quadratic Equation</h3>",
-                      body: r"""<p>
-                                   When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                                   $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                      decoration: TeXViewDecoration(
-                          style: TeXViewStyle(
-                            backgroundColor: Colors.green,
-                            contentColor: Colors.white,
-                          ),
-                          titleStyle: TeXViewStyle(
-                            textAlign: TeXViewTextAlign.Center,
-                            backgroundColor: Colors.red,
-                            contentColor: Colors.white,
-                          ),
-                          bodyStyle: TeXViewStyle.fromCSS(
-                              "color:white;background-color:light-green")))
-                ],
-                style: TeXViewStyle(
-                  elevation: 10,
-                  border: TeXViewBorder(
-                      all: TeXViewBorderDecoration(
-                          borderColor: Colors.blue,
-                          borderStyle: TeXViewBorderStyle.Solid,
-                          borderWidth: 5)),
-                  backgroundColor: Colors.white,
-                ),
-                loadingWidget: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CircularProgressIndicator(),
-                      Text("Rendering with ")
-                    ],
-                  ),
-                ),
-                onTap: (childID) {
-                  print("TeXView $childID is tapped.");
-                })
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 TeXViewChild _customTeXViewChild(String id, String title, String body) {
   return TeXViewChild(
       id: id,
@@ -205,6 +138,11 @@ class MainPage extends StatelessWidget {
   }
 }
 
+class TestExample extends StatefulWidget {
+  @override
+  _TestExampleState createState() => _TestExampleState();
+}
+
 class TeXExamples {
   static TeXViewChild introduction = TeXViewChild(
       id: "child_0",
@@ -291,6 +229,68 @@ class TeXViewPage extends StatefulWidget {
 
   @override
   _TeXViewPageState createState() => _TeXViewPageState();
+}
+
+class _TestExampleState extends State<TestExample> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: ListView(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
+          children: <Widget>[
+            TeXView(
+                renderingEngine: RenderingEngine.Katex,
+                children: [
+                  TeXViewChild(
+                      id: "child_1",
+                      title: r"<h3>Quadratic Equation</h3>",
+                      body: r"""<p>
+                                   When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                                   $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+                      decoration: TeXViewDecoration(
+                          style: TeXViewStyle(
+                            backgroundColor: Colors.green,
+                            contentColor: Colors.white,
+                          ),
+                          titleStyle: TeXViewStyle(
+                            textAlign: TeXViewTextAlign.Center,
+                            backgroundColor: Colors.red,
+                            contentColor: Colors.white,
+                          ),
+                          bodyStyle: TeXViewStyle.fromCSS(
+                              "color:white;background-color:light-green")))
+                ],
+                style: TeXViewStyle(
+                  elevation: 10,
+                  border: TeXViewBorder(
+                      all: TeXViewBorderDecoration(
+                          borderColor: Colors.blue,
+                          borderStyle: TeXViewBorderStyle.Solid,
+                          borderWidth: 5)),
+                  backgroundColor: Colors.white,
+                ),
+                loadingWidget: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      CircularProgressIndicator(),
+                      Text("Rendering with ")
+                    ],
+                  ),
+                ),
+                onTap: (childID) {
+                  print("TeXView $childID is tapped.");
+                })
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _TeXViewPageState extends State<TeXViewPage> {
