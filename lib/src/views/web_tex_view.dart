@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatefulWidget {
@@ -18,7 +19,7 @@ class TeXView extends StatefulWidget {
   final TeXViewStyle style;
 
   /// Render Engine to render TeX.
-  final RenderingEngine renderingEngine;
+  final TeXViewRenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
   final double height;
@@ -111,15 +112,13 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String _getTeXViewUrl() {
-    String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
     String baseUri = Uri.base.toString();
     String currentUrl = "";
     if (!baseUri.contains('http://localhost:')) {
       currentUrl =
           "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
     }
-    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/$renderEngine/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html?rawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
   }
 
   void _teXViewItemTapCallbackHandler() {

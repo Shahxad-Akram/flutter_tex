@@ -5,7 +5,6 @@
     <script src="../main.js" type="text/javascript"></script>
 
 
-
     <style>
         .katex-display > .katex {
             display: inline-block;
@@ -62,10 +61,11 @@
 <body>
 <script>
     function onTeXViewRenderComplete() {
-        renderMathInElement(teXView);
+        const viewInstanceCount = getUrlParam('viewInstanceCount');
+        renderMathInElement(teXView, configurations);
         setTimeout(() => {
             RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
-        }, 0)
+        }, 250 * viewInstanceCount)
     }
 </script>
 <div id="TeXView"></div>

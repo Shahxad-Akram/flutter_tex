@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/shah-xad/flutter_tex?style=social)](https://github.com/shah-xad/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png"/>
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
 
 A Flutter Package to render so many types of equations based on **LaTeX** and **TeX**, most commonly used are as followings:
 
@@ -30,7 +30,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.5.1
+  flutter_tex: ^3.5.2
 ```
 
 
@@ -78,58 +78,61 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 **5:** Now you can use TeXHTML widget like this.
 ```dart
-                  TeXView(
-                    renderingEngine: RenderingEngine.MathJax,
-                    children: [
-                      TeXViewChild(
-                          id: "child_1",
-                          title: r"<h3>Quadratic Equation</h3>",
-                          body: r"""<p>
-                               When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                               $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                          decoration: TeXViewDecoration(
-                              style: TeXViewStyle(
-                                borderRadius: TeXViewBorderRadius(all: 20),
-                                backgroundColor: Colors.green,
-                                contentColor: Colors.white,
-                              ),
-                              titleStyle: TeXViewStyle(
-                                padding: TeXViewPadding(top: 5, bottom: 5),
-                                textAlign: TeXViewTextAlign.Center,
-                                backgroundColor: Colors.red,
-                                contentColor: Colors.white,
-                              ),
-                              bodyStyle: TeXViewStyle.fromCSS("color:white;background-color:light-green")))
-                    ],
-                    style: TeXViewStyle(
-                      margin: TeXViewMargin(all: 15),
-                      elevation: 10,
-                      borderRadius: TeXViewBorderRadius(all: 25),
-                      border: TeXViewBorder(
-                          all: TeXViewBorderDecoration(
-                              borderColor: Colors.blue,
-                              borderStyle: TeXViewBorderStyle.Solid,
-                              borderWidth: 5)),
-                      backgroundColor: Colors.white,
-                    ),
-                    loadingWidget: Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          CircularProgressIndicator(),
-                          Text("Rendering with ${widget.label}")
-                        ],
-                      ),
-                    ),
-                    onTap: (childID) {
-                      print("TeXView $childID is tapped.");
-                    })
+TeXView(
+   renderingEngine:
+       TeXViewRenderingEngine.katex(),
+   children: [
+     TeXViewChild(
+         id: "child_1",
+         title: r"<h3>Quadratic Equation</h3>",
+         body: r"""<p>
+                      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+         decoration: TeXViewDecoration(
+             style: TeXViewStyle(
+               backgroundColor: Colors.green,
+               contentColor: Colors.white,
+             ),
+             titleStyle: TeXViewStyle(
+               textAlign: TeXViewTextAlign.Center,
+               backgroundColor: Colors.red,
+               contentColor: Colors.white,
+             ),
+             bodyStyle: TeXViewStyle.fromCSS(
+                 "color:white;background-color:light-green")))
+   ],
+   style: TeXViewStyle(
+     elevation: 10,
+     border: TeXViewBorder(
+         all: TeXViewBorderDecoration(
+             borderColor: Colors.blue,
+             borderStyle: TeXViewBorderStyle.Solid,
+             borderWidth: 5)),
+     backgroundColor: Colors.white,
+   ),
+   loadingWidget: Center(
+     child: Column(
+       crossAxisAlignment: CrossAxisAlignment.center,
+       mainAxisSize: MainAxisSize.min,
+       mainAxisAlignment: MainAxisAlignment.center,
+       children: <Widget>[
+         CircularProgressIndicator(),
+         Text("Rendering with ")
+       ],
+     ),
+   ),
+   onTap: (childID) {
+     print("TeXView $childID is tapped.");
+   })
 ```
 
 Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** for quality render.
 
+
+
+# Api Changes since flutter_tex:^3.5.2
+- `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
+- Katex Configurations added.
 
 # Api Changes since flutter_tex:^3.5.0
 - `teXHTML` has been removed from the API and replaced by the `children` which contains the list of `TeXViewChild` for more information please see the example. For any problem please report the issue.
@@ -170,7 +173,7 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 # Demo app is available on Google Play.
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-[Example Application Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
+[Example Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
 
 # Screenshots
 

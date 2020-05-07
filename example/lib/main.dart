@@ -59,8 +59,19 @@ class MainPage extends StatelessWidget {
             height: 30,
             color: Colors.transparent,
           ),
-          getRenderEngineButton(context, "Katex", 'assets/katex.png',
-              "RenderingEngine for Fast Rendering", RenderingEngine.Katex, [
+          getRenderEngineButton(
+              context,
+              "Katex",
+              'assets/katex.png',
+              "RenderingEngine for Fast Rendering",
+              TeXViewRenderingEngine.katex(configurations: r"""
+                  {
+                    displayMode: true,
+                    macros: {
+                      "\\RR": "\\mathbb{R}"
+                    }
+                  }
+                  """), [
             TeXExamples.introduction,
             TeXExamples.quadraticEquation,
             TeXExamples.relationEnergyPrincipalQuantum,
@@ -73,7 +84,7 @@ class MainPage extends StatelessWidget {
               "MathJax",
               'assets/mathjax.png',
               "RenderingEngine for Quality Rendering",
-              RenderingEngine.MathJax, [
+              TeXViewRenderingEngine.mathjax(), [
             TeXExamples.introduction,
             TeXExamples.quadraticEquation,
             TeXExamples.relationEnergyPrincipalQuantum,
@@ -93,7 +104,7 @@ class MainPage extends StatelessWidget {
       String label,
       String asset,
       String text,
-      RenderingEngine renderingEngine,
+      TeXViewRenderingEngine renderingEngine,
       List<TeXViewChild> teXViewChildren) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -223,7 +234,7 @@ class TeXExamples {
 class TeXViewPage extends StatefulWidget {
   final List<TeXViewChild> teXViewChildren;
   final String label;
-  final RenderingEngine renderingEngine;
+  final TeXViewRenderingEngine renderingEngine;
 
   TeXViewPage({this.label, this.teXViewChildren, this.renderingEngine});
 
@@ -242,7 +253,7 @@ class _TestExampleState extends State<TestExample> {
           shrinkWrap: true,
           children: <Widget>[
             TeXView(
-                renderingEngine: RenderingEngine.Katex,
+                renderingEngine: TeXViewRenderingEngine.katex(),
                 children: [
                   TeXViewChild(
                       id: "child_1",
@@ -350,7 +361,7 @@ class _TeXViewPageState extends State<TeXViewPage> {
                         ),
                         onTap: (childID) {
                           print("TeXView $childID is tapped.");
-                        })
+                        }),
                   ],
                 ),
               ),

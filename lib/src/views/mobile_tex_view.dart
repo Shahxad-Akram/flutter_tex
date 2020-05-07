@@ -6,13 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_child.dart';
+import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/utils/tex_view_server.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatefulWidget {
-  static int serverPortReference = 5353;
-
   final Key key;
 
   /// A list of TeXViewChild.
@@ -23,7 +22,7 @@ class TeXView extends StatefulWidget {
   final TeXViewStyle style;
 
   /// Render Engine to render TeX.
-  final RenderingEngine renderingEngine;
+  final TeXViewRenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
   final double height;
@@ -68,15 +67,17 @@ class TeXView extends StatefulWidget {
 }
 
 class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+  static int viewInstanceCount = 0;
+
   WebViewController _teXWebViewController;
-  int _teXViewServerPort = TeXView.serverPortReference;
+  int _teXViewServerPort = 5353 + viewInstanceCount;
   TeXViewServer _flutterTeXServer;
   double _teXViewHeight = 1;
   String lastTeXHTML;
 
   _TeXViewState() {
     _flutterTeXServer = TeXViewServer(_teXViewServerPort);
-    TeXView.serverPortReference += 1;
+    viewInstanceCount += 1;
   }
 
   @override
@@ -129,7 +130,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   void dispose() {
     _flutterTeXServer.close();
-    TeXView.serverPortReference -= 1;
+    viewInstanceCount -= 1;
     super.dispose();
   }
 
@@ -158,9 +159,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String _getTeXViewUrl() {
-    String renderEngine =
-        widget.renderingEngine == RenderingEngine.MathJax ? "mathjax" : "katex";
-    return "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/$renderEngine/index.html?teXViewServerPort=$_teXViewServerPort";
+    return Uri.encodeFull(
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine.getConfigurations()}");
   }
 
   void _initTeXView() {

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_child.dart';
+import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/views/mobile_tex_view.dart'
     if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart'
     as teXView;
 
-/// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
-enum RenderingEngine { MathJax, Katex }
+/*/// TeX Rendering Engine, Katex for fast rendering, Mathjax for quality render.
+enum RenderingEngine { MathJax, Katex }*/
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatelessWidget {
@@ -22,7 +23,8 @@ class TeXView extends StatelessWidget {
   final TeXViewStyle style;
 
   /// Render Engine to render TeX.
-  final RenderingEngine renderingEngine;
+  @required
+  final TeXViewRenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
   final double height;
@@ -45,8 +47,6 @@ class TeXView extends StatelessWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  final double heightCorrection;
-
   TeXView(
       {this.key,
       this.children,
@@ -58,8 +58,7 @@ class TeXView extends StatelessWidget {
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine,
-      this.heightCorrection = 0});
+      this.renderingEngine});
 
   @override
   Widget build(BuildContext context) {

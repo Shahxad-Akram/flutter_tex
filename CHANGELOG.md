@@ -1,3 +1,9 @@
+## 3.5.2
+* Minor API Changes
+* `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
+* Katex Configurations added.
+* Katex rendered height issue has been resolved.
+
 ## 3.5.1
 * Extra margin at bottom issue resolved.
 * Transition in styling has been removed as it was causing problems while calculating height.
