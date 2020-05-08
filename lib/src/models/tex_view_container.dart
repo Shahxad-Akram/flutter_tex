@@ -18,6 +18,6 @@ class TeXViewContainer {
   Map<dynamic, dynamic> toJson() => {
         'id': this.id,
         'children': this.children?.map((child) => child?.toJson())?.toList(),
-        'style': this.style.initStyle(),
+        'style': this.style?.initStyle(),
       };
 }

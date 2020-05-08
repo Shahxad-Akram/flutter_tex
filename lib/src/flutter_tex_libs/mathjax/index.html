@@ -51,17 +51,16 @@
 </head>
 
 <body>
-<script>
-    function onTeXViewRenderComplete() {
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
-            RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
-        });
-    }
-</script>
 <div id="TeXView"></div>
 <script>
     const teXView = document.getElementById('TeXView');
     initTeXView();
+
+    function onTeXViewRenderComplete() {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
+            RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
+        });
+    }
 </script>
 </body>
 </html>

@@ -4,7 +4,6 @@
 <head>
     <script src="../flutter_tex.js" type="text/javascript"></script>
     <link crossorigin="anonymous" href="../flutter_tex.css" rel="stylesheet">
-
     <style>
         .katex-display > .katex {
             display: inline-block;
@@ -33,19 +32,19 @@
 </head>
 
 <body>
-<script>
-    function onTeXViewRenderComplete() {
-        const viewInstanceCount = getUrlParam('viewInstanceCount');
-        renderMathInElement(teXView, configurations);
-        setTimeout(() => {
-            RenderedTeXViewHeight.postMessage(document.body.scrollHeight);
-        }, 250 * viewInstanceCount)
-    }
-</script>
+
 <div id="TeXView"></div>
 <script>
     const teXView = document.getElementById('TeXView');
     initTeXView();
+
+    function onTeXViewRenderComplete() {
+        const viewInstanceCount = getUrlParam('viewInstanceCount');
+        renderMathInElement(teXView, configurations);
+        setTimeout(() => {
+            RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
+        }, 250 * viewInstanceCount)
+    }
 </script>
 </body>
 </html>

@@ -1,3 +1,8 @@
+## 3.6.1
+* Minor API Changes for `TeXViewBorder` `TeXViewMargin` `TeXViewPadding` and `TeXViewBorderRadius`.
+* Height corrections.
+* Styling corrections
+
 ## 3.6.0+1
 * `TeXViewMargin.zeroAuto()` added.
 

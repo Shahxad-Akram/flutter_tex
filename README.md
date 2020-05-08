@@ -30,7 +30,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.0+1
+  flutter_tex: ^3.6.1
 ```
 
 
@@ -81,36 +81,34 @@ import 'package:flutter_tex/flutter_tex.dart';
 TeXView(
     renderingEngine: TeXViewRenderingEngine.katex(),
     children: [
-      TeXViewContainer(
+      TeXViewContainer(id: "container_0", children: [
+        TeXViewTeX(
+          r"<h3>Quadratic Equation</h3>",
           style: TeXViewStyle(
-            backgroundColor: Colors.green,
+            textAlign: TeXViewTextAlign.Center,
+            backgroundColor: Colors.red,
             contentColor: Colors.white,
           ),
-          children: [
-            TeXViewTeX(
-              r"<h3>Quadratic Equation</h3>",
-              style: TeXViewStyle(
-                textAlign: TeXViewTextAlign.Center,
-                backgroundColor: Colors.red,
-                contentColor: Colors.white,
-              ),
-              id: "tex_0",
-            ),
-            TeXViewTeX(r"""<p>
+          id: "tex_0",
+        ),
+        TeXViewTeX(r"""<p>
                        When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
                        $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                style: TeXViewStyle.fromCSS(
-                    "color:white;background-color:light-green"),
-                id: "tex_1"),
-          ])
+            style: TeXViewStyle.fromCSS(
+                "color:white;background-color:green;padding:20px"),
+            id: "tex_1"),
+      ])
     ],
     style: TeXViewStyle(
+      margin: TeXViewMargin.all(20),
       elevation: 10,
-      border: TeXViewBorder(
-          all: TeXViewBorderDecoration(
-              borderColor: Colors.blue,
-              borderStyle: TeXViewBorderStyle.Solid,
-              borderWidth: 5)),
+      borderRadius: TeXViewBorderRadius.all(20),
+      border: TeXViewBorder.all(
+        TeXViewBorderDecoration(
+            borderColor: Colors.blue,
+            borderStyle: TeXViewBorderStyle.Solid,
+            borderWidth: 5),
+      ),
       backgroundColor: Colors.white,
     ),
     loadingWidget: Center(
@@ -133,10 +131,11 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 
 
 
-# Api Changes since flutter_tex:^3.6.0
+# Api Changes since flutter_tex:^3.6.1
 * `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
-- `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
-- Katex Configurations added.
+* Minor API Changes for `TeXViewBorder` `TeXViewMargin` `TeXViewPadding` and `TeXViewBorderRadius`.
+* `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
+* Katex Configurations added.
 
 # Api Changes since flutter_tex:^3.5.0
 - `teXHTML` has been removed from the API and replaced by the `children` which contains the list of `TeXViewChild` for more information please see the example. For any problem please report the issue.

@@ -1,6 +1,13 @@
+
 * {
     margin: 0;
     padding: 0;
+}
+
+
+#TeXView {
+    overflow: hidden;
+    position: relative;
 }
 
 .tex-view-container {

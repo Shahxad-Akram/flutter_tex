@@ -9,7 +9,7 @@ String _getElevation(int elevation, LengthUnit lengthUnit) {
 }
 
 String _getLength(int value, LengthUnit lengthUnit) {
-  return "${value.toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
+  return "${(value ?? 0).toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
 }
 
 enum LengthUnit { Pixels, Percent, Em }
@@ -21,15 +21,20 @@ class TeXViewBorder {
   TeXViewBorderDecoration left;
   TeXViewBorderDecoration all;
 
-  TeXViewBorder({this.top, this.bottom, this.right, this.left, this.all});
+  TeXViewBorder.all(this.all);
+
+  TeXViewBorder.only({this.top, this.bottom, this.right, this.left});
 
   String getBorder() {
-    return """
+    return this.all == null
+        ? """
     border-top: ${top?.getBorderDecoration()};
     border-bottom: ${bottom?.getBorderDecoration()};
     border-right: ${right?.getBorderDecoration()};
     border-left: ${left?.getBorderDecoration()};
-    border: ${all?.getBorderDecoration()};
+    """
+        : """
+        border: ${all?.getBorderDecoration()};
     """;
   }
 }
@@ -55,18 +60,19 @@ class TeXViewBorderRadius {
   int bottomLeft;
   int all;
 
-  TeXViewBorderRadius(
+  TeXViewBorderRadius.all(this.all, {this.lengthUnit});
+
+  TeXViewBorderRadius.only(
       {this.lengthUnit,
       this.topLeft,
       this.topRight,
       this.bottomRight,
-      this.bottomLeft,
-      this.all});
+      this.bottomLeft});
 
   String getRadius() {
     return this.all != null
         ? """
-          border-radius:$all${_UnitHelper.getValue(lengthUnit)};
+          border-radius: $all${_UnitHelper.getValue(lengthUnit)};
         """
         : """
           border-radius: ${_getRadiusValue(topLeft)} ${_getRadiusValue(topRight)} ${_getRadiusValue(bottomRight)} ${_getRadiusValue(bottomLeft)};
@@ -74,7 +80,7 @@ class TeXViewBorderRadius {
   }
 
   String _getRadiusValue(int value) {
-    return "${value == null ? "0" : value.toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
+    return "${(value ?? 0).toString() + "${_UnitHelper.getValue(lengthUnit)}"}";
   }
 }
 
@@ -113,13 +119,10 @@ class TeXViewMargin {
 
   String zeroAuto;
 
-  TeXViewMargin(
-      {this.lengthUnit,
-      this.top,
-      this.bottom,
-      this.right,
-      this.left,
-      this.all});
+  TeXViewMargin.all(this.all, {this.lengthUnit});
+
+  TeXViewMargin.only(
+      {this.lengthUnit, this.top, this.bottom, this.right, this.left});
 
   TeXViewMargin.zeroAuto() {
     this.zeroAuto = "0 auto";
@@ -127,18 +130,15 @@ class TeXViewMargin {
 
   /// It'll provide CSS margin code.
   String getMargin() {
-    return this.zeroAuto == null
-        ? """
-      margin-top: ${_getLength(top, lengthUnit)};
-      margin-bottom: ${_getLength(bottom, lengthUnit)};
-      margin-right: ${_getLength(right, lengthUnit)};
-      margin-left: ${_getLength(left, lengthUnit)};
-      margin: ${_getLength(all, lengthUnit)};
-      
-    """
-        : """
-    margin: 0 auto;
-    """;
+    if (this.all != null) {
+      return "margin: ${_getLength(all, lengthUnit)};";
+    } else if (this.zeroAuto != null) {
+      return "margin: ${this.zeroAuto};";
+    } else {
+      return """
+      margin: ${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)} ;
+      """;
+    }
   }
 }
 
@@ -161,22 +161,20 @@ class TeXViewPadding {
   /// All sides padding and it'll override top, bottom,right and left padding.
   int all;
 
-  TeXViewPadding(
-      {this.lengthUnit,
-      this.top,
-      this.bottom,
-      this.right,
-      this.left,
-      this.all});
+  TeXViewPadding.all(this.all, {this.lengthUnit});
 
+  TeXViewPadding.only(
+      {this.lengthUnit, this.top, this.bottom, this.right, this.left});
+
+  /// It'll provide CSS margin code.
   String getPadding() {
-    return """
-      padding-top: ${_getLength(top, lengthUnit)};
-      padding-bottom: ${_getLength(bottom, lengthUnit)};
-      padding-right: ${_getLength(right, lengthUnit)};
-      padding-left: ${_getLength(left, lengthUnit)};
-      padding: ${_getLength(all, lengthUnit)};
-    """;
+    if (this.all != null) {
+      return "padding: ${_getLength(all, lengthUnit)};";
+    } else {
+      return """
+     padding: ${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)} ;
+      """;
+    }
   }
 }
 
@@ -239,8 +237,8 @@ class TeXViewStyle {
         ? """
     ${padding?.getPadding() ?? ""}
     ${margin?.getMargin() ?? ""}
-    ${border?.getBorder() ?? ""};
     ${borderRadius?.getRadius() ?? ""};
+    ${border?.getBorder() ?? ""};
     height: ${height != null ? _getLength(height, lengthUnit) : ""};
     width: ${width != null ? _getLength(width, lengthUnit) : ""};
     box-shadow: ${elevation != null ? _getElevation(elevation, lengthUnit) : ""};
