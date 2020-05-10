@@ -19,10 +19,7 @@
             white-space: normal;
             text-indent: 0;
         }
-
     </style>
-
-
     <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
     <script crossorigin="anonymous" src="katex.js"></script>
     <script crossorigin="anonymous" src="contrib/auto-render.js"></script>
@@ -41,7 +38,7 @@
     function onTeXViewRenderComplete() {
         const viewInstanceCount = getUrlParam('viewInstanceCount');
         renderMathInElement(teXView, configurations);
-        setTimeout(() => {
+        setTimeout(function () {
             RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
         }, 250 * viewInstanceCount)
     }

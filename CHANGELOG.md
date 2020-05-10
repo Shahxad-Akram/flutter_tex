@@ -1,3 +1,7 @@
+## 3.6.1+1
+* Rendering issue for lower android APIs solved.
+* Multiple TeXView on same page issue solved.
+
 ## 3.6.1
 * Minor API Changes for `TeXViewBorder` `TeXViewMargin` `TeXViewPadding` and `TeXViewBorderRadius`.
 * Height corrections.

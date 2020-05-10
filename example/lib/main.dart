@@ -169,9 +169,9 @@ class TestExample extends StatelessWidget {
                   ),
                   id: "tex_0",
                 ),
-                TeXViewTeX(r"""<p>
-                               When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                               $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+                TeXViewTeX(r"""<p>                                
+                           When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                           $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
                     style: TeXViewStyle.fromCSS(
                         "color:white;background-color:green;padding:20px"),
                     id: "tex_1"),
@@ -280,14 +280,11 @@ class TeXExamples {
 
   static TeXViewContainer others =
       _customTeXViewChild("child_7", r"<h3> Others </h3>", r"""<p>    
- 
     $$ \oint_C {E \cdot d\ell = - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
- 
      $$ y = \frac{{n!}}{{k!\left( {n - k} \right)!}}p^k q^{n - k}  = \left( {\begin{array}{*{20}c}
               n  \\
               k  \\
             \end{array}} \right)p^k q^{n - k} $$
- 
     </p>""");
 }
 
@@ -322,48 +319,34 @@ class _TeXViewPageState extends State<TeXViewPage> {
               decoration: TextDecoration.underline,
             ),
           ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
+          TeXView(
+              showLoadingWidget: false,
+              renderingEngine: widget.renderingEngine,
+              children: widget.teXViewChildren,
+              style: TeXViewStyle(
+                margin: TeXViewMargin.all(10),
+                elevation: 10,
+                borderRadius: TeXViewBorderRadius.all(25),
+                border: TeXViewBorder.all(TeXViewBorderDecoration(
+                    borderColor: Colors.blue,
+                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderWidth: 5)),
+                backgroundColor: Colors.white,
+              ),
+              loadingWidget: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    TeXView(
-                        showLoadingWidget: false,
-                        renderingEngine: widget.renderingEngine,
-                        children: widget.teXViewChildren,
-                        style: TeXViewStyle(
-                          margin: TeXViewMargin.all(10),
-                          elevation: 10,
-                          borderRadius: TeXViewBorderRadius.all(25),
-                          border: TeXViewBorder.all(TeXViewBorderDecoration(
-                              borderColor: Colors.blue,
-                              borderStyle: TeXViewBorderStyle.Solid,
-                              borderWidth: 5)),
-                          backgroundColor: Colors.white,
-                        ),
-                        loadingWidget: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              CircularProgressIndicator(),
-                              Text("Rendering with ${widget.label}")
-                            ],
-                          ),
-                        ),
-                        onTap: (childID) {
-                          print("TeXView $childID is tapped.");
-                        }),
+                    CircularProgressIndicator(),
+                    Text("Rendering with ${widget.label}")
                   ],
                 ),
               ),
-            ),
-          ),
+              onTap: (childID) {
+                print("TeXView $childID is tapped.");
+              }),
         ],
       ),
     );

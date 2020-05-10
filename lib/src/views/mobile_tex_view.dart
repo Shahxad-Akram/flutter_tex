@@ -45,8 +45,6 @@ class TeXView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  final double heightCorrection;
-
   TeXView(
       {this.key,
       this.children,
@@ -58,8 +56,7 @@ class TeXView extends StatefulWidget {
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine,
-      this.heightCorrection})
+      this.renderingEngine})
       : super(key: key);
 
   @override
@@ -73,11 +70,13 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   int _teXViewServerPort = 5353 + viewInstanceCount;
   TeXViewServer _flutterTeXServer;
   double _teXViewHeight = 1;
-  String lastTeXHTML;
+  String _lastTeXHTML;
+  String _lastRenderingEngine;
 
   _TeXViewState() {
     _flutterTeXServer = TeXViewServer(_teXViewServerPort);
     viewInstanceCount += 1;
+    _flutterTeXServer.start(handleRequest, handleWebSocket);
   }
 
   @override
@@ -152,24 +151,37 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     }
   }
 
-  @override
-  void initState() {
-    _flutterTeXServer.start(handleRequest);
-    super.initState();
+  handleWebSocket(WebSocket ws) {
+    /*   const oneSec = const Duration(seconds: 1);
+    new Timer.periodic(oneSec, (Timer t) => ws.add(getJsonRawTeXHTML()));
+
+    ws.listen(
+      (data) {
+        print(data.toString());
+      },
+      onDone: () => print('[+]Done :)'),
+      onError: (err) => print('[!]Error -- ${err.toString()}'),
+      cancelOnError: true,
+    );*/
   }
 
   String _getTeXViewUrl() {
     return Uri.encodeFull(
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}");
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}${getJsonRawTeXHTML().length < 2000 ? "&urlRawTeXHTML=" + getJsonRawTeXHTML() : ""}");
   }
 
   void _initTeXView() {
-    if (_teXWebViewController != null && getJsonRawTeXHTML() != lastTeXHTML) {
+    if (_teXWebViewController != null &&
+        (getJsonRawTeXHTML() != _lastTeXHTML ||
+            widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
       if (widget.showLoadingWidget) {
         _teXViewHeight = 1;
       }
+
       _teXWebViewController.loadUrl(_getTeXViewUrl());
-      this.lastTeXHTML = getJsonRawTeXHTML();
+      this._lastTeXHTML = getJsonRawTeXHTML();
+
+      this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }
   }
 
