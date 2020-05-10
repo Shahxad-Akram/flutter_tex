@@ -1,3 +1,6 @@
+## 3.6.1+2
+* Sockets removed.
+
 ## 3.6.1+1
 * Rendering issue for lower android APIs solved.
 * Multiple TeXView on same page issue solved.

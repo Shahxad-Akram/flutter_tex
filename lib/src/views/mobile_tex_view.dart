@@ -76,7 +76,7 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   _TeXViewState() {
     _flutterTeXServer = TeXViewServer(_teXViewServerPort);
     viewInstanceCount += 1;
-    _flutterTeXServer.start(handleRequest, handleWebSocket);
+    _flutterTeXServer.start(handleRequest /*, handleWebSocket*/);
   }
 
   @override
