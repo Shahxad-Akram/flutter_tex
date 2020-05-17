@@ -27,15 +27,8 @@ class TeXViewBorder {
 
   String getBorder() {
     return this.all == null
-        ? """
-    border-top: ${top?.getBorderDecoration()};
-    border-bottom: ${bottom?.getBorderDecoration()};
-    border-right: ${right?.getBorderDecoration()};
-    border-left: ${left?.getBorderDecoration()};
-    """
-        : """
-        border: ${all?.getBorderDecoration()};
-    """;
+        ? """border-top:${top?.getBorderDecoration()};border-bottom:${bottom?.getBorderDecoration()};border-right:${right?.getBorderDecoration()};border-left:${left?.getBorderDecoration()};"""
+        : """border:${all?.getBorderDecoration()};""";
   }
 }
 
@@ -71,12 +64,8 @@ class TeXViewBorderRadius {
 
   String getRadius() {
     return this.all != null
-        ? """
-          border-radius: $all${_UnitHelper.getValue(lengthUnit)};
-        """
-        : """
-          border-radius: ${_getRadiusValue(topLeft)} ${_getRadiusValue(topRight)} ${_getRadiusValue(bottomRight)} ${_getRadiusValue(bottomLeft)};
-        """;
+        ? """border-radius:$all${_UnitHelper.getValue(lengthUnit)};"""
+        : """border-radius:${_getRadiusValue(topLeft)} ${_getRadiusValue(topRight)} ${_getRadiusValue(bottomRight)} ${_getRadiusValue(bottomLeft)};""";
   }
 
   String _getRadiusValue(int value) {
@@ -131,13 +120,11 @@ class TeXViewMargin {
   /// It'll provide CSS margin code.
   String getMargin() {
     if (this.all != null) {
-      return "margin: ${_getLength(all, lengthUnit)};";
+      return "margin:${_getLength(all, lengthUnit)};";
     } else if (this.zeroAuto != null) {
-      return "margin: ${this.zeroAuto};";
+      return "margin:${this.zeroAuto};";
     } else {
-      return """
-      margin: ${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)} ;
-      """;
+      return """margin:${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)};""";
     }
   }
 }
@@ -171,9 +158,7 @@ class TeXViewPadding {
     if (this.all != null) {
       return "padding: ${_getLength(all, lengthUnit)};";
     } else {
-      return """
-     padding: ${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)} ;
-      """;
+      return """padding: ${_getLength(top, lengthUnit)} ${_getLength(right, lengthUnit)} ${_getLength(bottom, lengthUnit)} ${_getLength(left, lengthUnit)};""";
     }
   }
 }
@@ -234,18 +219,7 @@ class TeXViewStyle {
 
   String initStyle() {
     return cascadingStyleSheets == null
-        ? """
-    ${padding?.getPadding() ?? ""}
-    ${margin?.getMargin() ?? ""}
-    ${borderRadius?.getRadius() ?? ""};
-    ${border?.getBorder() ?? ""};
-    height: ${height != null ? _getLength(height, lengthUnit) : ""};
-    width: ${width != null ? _getLength(width, lengthUnit) : ""};
-    box-shadow: ${elevation != null ? _getElevation(elevation, lengthUnit) : ""};
-    color: ${contentColor != null ? _getColor(contentColor) : ""};
-    background-color: ${backgroundColor != null ? _getColor(backgroundColor) : ""};
-    text-align: ${_TeXViewTextAlignHelper.getValue(textAlign)}
-    """
+        ? """${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + _getLength(height, lengthUnit) + ";" : ""}${width != null ? "width: " + _getLength(width, lengthUnit) + ";" : ""}${elevation != null ? "box-shadow: " + _getElevation(elevation, lengthUnit) + ";" : ""}${contentColor != null ? "color: " + _getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + _getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + _TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}"""
         : cascadingStyleSheets;
   }
 }

@@ -1,3 +1,6 @@
+## 3.6.1+3
+* `&` sign encoding issue solved.
+
 ## 3.6.1+2
 * Sockets removed.
 

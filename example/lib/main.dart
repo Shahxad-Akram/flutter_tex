@@ -320,6 +320,22 @@ class _TeXViewPageState extends State<TeXViewPage> {
             ),
           ),
           TeXView(
+            renderingEngine: TeXViewRenderingEngine.katex(),
+            children: [
+              TeXViewContainer(id: "container_0", children: [
+                TeXViewTeX(
+                  '<span>There are 150 objective multiple choice questions in this paper. This Question Booklet is made up of the following five sections : Section-I, 11, 111, IV &amp; V of 30-30 questions each. The candidate has to attempt all sections. Each question is of one mark. There is no negative marking for wrong answer</span>',
+                  style: TeXViewStyle(
+                    textAlign: TeXViewTextAlign.Center,
+                    // backgroundColor: Colors.red,
+                    contentColor: Colors.black,
+                  ),
+                  id: "tex_0",
+                )
+              ])
+            ],
+          ),
+          TeXView(
               showLoadingWidget: false,
               renderingEngine: widget.renderingEngine,
               children: widget.teXViewChildren,

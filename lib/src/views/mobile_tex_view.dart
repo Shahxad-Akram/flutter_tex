@@ -165,9 +165,22 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     );*/
   }
 
+/*
   String _getTeXViewUrl() {
     return Uri.encodeFull(
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}${getJsonRawTeXHTML().length < 2000 ? "&urlRawTeXHTML=" + getJsonRawTeXHTML() : ""}");
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}${getJsonRawTeXHTML().length < 1500 ? "&urlRawTeXHTML=" + getJsonRawTeXHTML() : ""}");
+  }
+*/
+
+  String _getTeXViewUrl() {
+
+    String baseUri =
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}";
+
+    String rawTeXHTMLUri =
+        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}&urlRawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+
+    return rawTeXHTMLUri.length < 2048 ? rawTeXHTMLUri : baseUri;
   }
 
   void _initTeXView() {

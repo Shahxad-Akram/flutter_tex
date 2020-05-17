@@ -30,7 +30,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.1+2
+  flutter_tex: ^3.6.1+3
 ```
 
 
