@@ -79,6 +79,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getJsonRawTeXHTML() {
+   // print(widget.children.map((child) => child.toJson()).toList().toString());
     return jsonEncode({
       'meta': TeXViewWidgetMeta(tag: 'div', type: 'tex-view', node: Node.Root)
           .toJson(),

@@ -1,3 +1,6 @@
+## 3.6.2+1
+* Minor bug fixed.
+
 ## 3.6.2
 * Minor API Changes
 * `TeXViewTeX` replaced by `TeXViewDocument`
