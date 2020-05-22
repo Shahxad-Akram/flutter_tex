@@ -1,6 +1,5 @@
 # flutter_tex_example
 ```dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
@@ -8,9 +7,8 @@ main() async {
   runApp(FlutterTeXExample());
 }
 
-TeXViewContainer _customTeXViewChild(String id, String title, String body) {
-  return TeXViewContainer(
-      id: id,
+TeXViewWidget _customTeXViewChild(String title, String body) {
+  return TeXViewColumn(
       style: TeXViewStyle(
         margin: TeXViewMargin.all(10),
         borderRadius: TeXViewBorderRadius.all(25),
@@ -18,14 +16,14 @@ TeXViewContainer _customTeXViewChild(String id, String title, String body) {
         contentColor: Colors.white,
       ),
       children: [
-        TeXViewTeX(title,
+        TeXViewDocument(title,
             style: TeXViewStyle(
               padding: TeXViewPadding.only(top: 5, bottom: 5),
               textAlign: TeXViewTextAlign.Center,
               backgroundColor: Colors.red,
               contentColor: Colors.white,
             )),
-        TeXViewTeX(body,
+        TeXViewDocument(body,
             style: TeXViewStyle.fromCSS(
                 "color:white;background-color:light-green;padding:10px"))
       ]);
@@ -79,6 +77,7 @@ class MainPage extends StatelessWidget {
             TeXExamples.introduction,
             TeXExamples.quadraticEquation,
             TeXExamples.relationEnergyPrincipalQuantum,
+            TeXExamples.alignedTag,
             TeXExamples.bohrRadius,
             TeXExamples.chemistryEquations,
             TeXExamples.matrix,
@@ -92,7 +91,7 @@ class MainPage extends StatelessWidget {
             TeXExamples.introduction,
             TeXExamples.quadraticEquation,
             TeXExamples.relationEnergyPrincipalQuantum,
-            TeXExamples.alignTag,
+            TeXExamples.alignedTag,
             TeXExamples.bohrRadius,
             TeXExamples.chemistryEquations,
             TeXExamples.matrix,
@@ -109,7 +108,7 @@ class MainPage extends StatelessWidget {
       String asset,
       String text,
       TeXViewRenderingEngine renderingEngine,
-      List<TeXViewContainer> teXViewChildren) {
+      List<TeXViewWidget> teXViewChildren) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: RaisedButton(
@@ -162,22 +161,20 @@ class TestExample extends StatelessWidget {
         body: TeXView(
             renderingEngine: TeXViewRenderingEngine.katex(),
             children: [
-              TeXViewContainer(id: "container_0", children: [
-                TeXViewTeX(
+              TeXViewColumn(children: [
+                TeXViewDocument(
                   r"<h3>Quadratic Equation</h3>",
                   style: TeXViewStyle(
                     textAlign: TeXViewTextAlign.Center,
                     backgroundColor: Colors.red,
                     contentColor: Colors.white,
                   ),
-                  id: "tex_0",
                 ),
-                TeXViewTeX(r"""<p>                                
+                TeXViewDocument(r"""<p>                                
                            When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
                            $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
                     style: TeXViewStyle.fromCSS(
-                        "color:white;background-color:green;padding:20px"),
-                    id: "tex_1"),
+                        "color:white;background-color:green;padding:20px")),
               ])
             ],
             style: TeXViewStyle(
@@ -212,7 +209,7 @@ class TestExample extends StatelessWidget {
 }
 
 class TeXExamples {
-  static TeXViewContainer introduction = TeXViewContainer(
+  static TeXViewWidget introduction = TeXViewColumn(
       style: TeXViewStyle(
           margin: TeXViewMargin.all(10),
           padding: TeXViewPadding.all(10),
@@ -222,38 +219,35 @@ class TeXExamples {
               borderStyle: TeXViewBorderStyle.Solid,
               borderColor: Colors.green))),
       children: [
-        TeXViewTeX(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+        TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
             style: TeXViewStyle(
                 borderRadius: TeXViewBorderRadius.only(
                     bottomRight: 20, bottomLeft: 20, topLeft: 10, topRight: 10),
                 textAlign: TeXViewTextAlign.Center,
                 width: 200,
                 margin: TeXViewMargin.zeroAuto(),
-                backgroundColor: Colors.green),
-            id: "title_0"),
-        TeXViewTeX(r"""      
+                backgroundColor: Colors.green)),
+        TeXViewDocument(r"""   
       <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
-      """, id: "body_0")
+      """)
       ]);
 
-  static TeXViewContainer quadraticEquation =
-      _customTeXViewChild("child_1", r"<h3>Quadratic Equation</h3>", r"""
+  static TeXViewWidget quadraticEquation =
+      _customTeXViewChild(r"<h3>Quadratic Equation</h3>", r"""
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
 
-  static TeXViewContainer bohrRadius = _customTeXViewChild(
-      "child_2",
+  static TeXViewWidget bohrRadius = _customTeXViewChild(
       r"<h3>Bohr's Radius</h3>",
       r"""\( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)""");
 
-  static TeXViewContainer relationEnergyPrincipalQuantum = _customTeXViewChild(
-      "child_3",
+  static TeXViewWidget relationEnergyPrincipalQuantum = _customTeXViewChild(
       r"<h3>Relationship between Energy and Principal Quantum Number</h3>",
       r"""\( E_n = - R_H \left( {\frac{1}{{n^2 }}} \right) = \frac{{ - 2.178 \times 10^{ - 18} }}{{n^2 }}joule \)""");
 
-  static TeXViewContainer chemistryEquations = _customTeXViewChild(
-      "child_4", r"<h3>Chemistry Equations</h3>", r"""<p>    
+  static TeXViewWidget chemistryEquations =
+      _customTeXViewChild(r"<h3>Chemistry Equations</h3>", r"""<p>    
       
      \( \ce{CO2 + C -> 2 CO} \) <br>
      
@@ -263,36 +257,38 @@ class TeXExamples {
      
     </p>""");
 
-  static TeXViewContainer matrix =
-      _customTeXViewChild("child_5", r"<h3>Matrix</h3>", r"""  <p>
+  static TeXViewWidget matrix =
+      _customTeXViewChild(r"<h3>Matrix</h3>", r"""  <p>
      $$ \begin{bmatrix}
          a & b \\
          c & d
       \end{bmatrix}$$</p>""");
 
-  static TeXViewContainer alignTag =
-      _customTeXViewChild("child_6", r"<h3>Align Tag</h3>", r"""    
+  static TeXViewWidget alignedTag =
+      _customTeXViewChild(r"<h3>Aligned Tag</h3>", r"""    
            $$
-           \begin{align}
+           \begin{aligned}
            \dot{x} & = \sigma(y-x) \\
            \dot{y} & = \rho x - y - xz \\
            \dot{z} & = -\beta z + xy
-           \end{align}
-           $$
-    </p>""");
+           \end{aligned}
+           $$""");
 
-  static TeXViewContainer others =
-      _customTeXViewChild("child_7", r"<h3> Others </h3>", r"""<p>    
+  static TeXViewWidget others =
+      _customTeXViewChild(r"<h3> Others </h3>", r"""<p>    
     $$ \oint_C {E \cdot d\ell = - \frac{d}{{dt}}} \int_S {B_n dA} $$<br>
-     $$ y = \frac{{n!}}{{k!\left( {n - k} \right)!}}p^k q^{n - k}  = \left( {\begin{array}{*{20}c}
+    
+     $$
+     y = \frac{{n!}}{{k!\left( {n - k} \right)!}}p^k q^{n - k}  = \left( {\begin{array}{*{20}c}
               n  \\
               k  \\
-            \end{array}} \right)p^k q^{n - k} $$
+            \end{array}} \right)p^k q^{n - k} 
+     $$
     </p>""");
 }
 
 class TeXViewPage extends StatefulWidget {
-  final List<TeXViewContainer> teXViewChildren;
+  final List<TeXViewWidget> teXViewChildren;
   final String label;
   final TeXViewRenderingEngine renderingEngine;
 
@@ -311,6 +307,7 @@ class _TeXViewPageState extends State<TeXViewPage> {
         title: Text("Rendering with ${widget.label} Example"),
       ),
       body: ListView(
+        physics: ScrollPhysics(),
         children: <Widget>[
           Text(
             "Rendered TeX HTML with ${widget.label}",
@@ -322,18 +319,21 @@ class _TeXViewPageState extends State<TeXViewPage> {
               decoration: TextDecoration.underline,
             ),
           ),
+          teXView(),
           TeXView(
               showLoadingWidget: false,
               renderingEngine: widget.renderingEngine,
-              children: widget.teXViewChildren,
+              children: [...widget.teXViewChildren],
               style: TeXViewStyle(
                 margin: TeXViewMargin.all(10),
                 elevation: 10,
                 borderRadius: TeXViewBorderRadius.all(25),
-                border: TeXViewBorder.all(TeXViewBorderDecoration(
-                    borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.Solid,
-                    borderWidth: 5)),
+                border: TeXViewBorder.all(
+                  TeXViewBorderDecoration(
+                      borderColor: Colors.blue,
+                      borderStyle: TeXViewBorderStyle.Solid,
+                      borderWidth: 5),
+                ),
                 backgroundColor: Colors.white,
               ),
               loadingWidget: Center(
@@ -353,6 +353,57 @@ class _TeXViewPageState extends State<TeXViewPage> {
         ],
       ),
     );
+  }
+
+  TeXView teXView() {
+    return TeXView(
+        showLoadingWidget: false,
+        renderingEngine: widget.renderingEngine,
+        children: [
+          TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+              style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+          TeXViewInkWell(
+            id: "id_0",
+            child: TeXViewColumn(children: [
+              TeXViewContainer(
+                child: TeXViewImage.network(
+                    'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+                style: TeXViewStyle(
+                  margin: TeXViewMargin.all(10),
+                  borderRadius: TeXViewBorderRadius.all(20),
+                ),
+              ),
+              TeXViewDocument(r"""<p>                                
+                           When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                           $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+                  style: TeXViewStyle.fromCSS(
+                      'padding: 15px; color: white; background: green'))
+            ]),
+          )
+        ],
+        style: TeXViewStyle(
+          elevation: 10,
+          borderRadius: TeXViewBorderRadius.all(25),
+          border: TeXViewBorder.all(TeXViewBorderDecoration(
+              borderColor: Colors.blue,
+              borderStyle: TeXViewBorderStyle.Solid,
+              borderWidth: 5)),
+          backgroundColor: Colors.white,
+        ),
+        loadingWidget: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+              Text("Rendering...")
+            ],
+          ),
+        ),
+        onTap: (childID) {
+          print("TeXView $childID is tapped.");
+        });
   }
 }
 
