@@ -51,14 +51,19 @@
 </head>
 
 <body>
+
 <div id="TeXView"></div>
 <script>
-    const teXView = document.getElementById('TeXView');
+    teXView = document.getElementById('TeXView');
     initTeXView();
 
-    function onTeXViewRenderComplete() {
+    function onTeXViewRenderComplete(webCallback) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
-            RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
+            if (isWeb) {
+                webCallback();
+            } else {
+                RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
+            }
         });
     }
 </script>

@@ -1,26 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/models/tex_view_container.dart';
+import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 import 'package:flutter_tex/src/views/mobile_tex_view.dart'
-    if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart'
-    as teXView;
+    if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
-class TeXView extends StatelessWidget {
+class TeXView extends StatefulWidget {
   final Key key;
 
   /// A list of TeXViewChild.
   @required
-  final List<TeXViewContainer> children;
+  final List<TeXViewWidget> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
   /// Render Engine to render TeX.
-  @required
   final TeXViewRenderingEngine renderingEngine;
 
   /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
@@ -50,26 +48,14 @@ class TeXView extends StatelessWidget {
       this.style,
       this.height,
       this.loadingWidget,
-      this.showLoadingWidget = false,
+      this.showLoadingWidget,
       this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine});
+      this.renderingEngine})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return teXView.TeXView(
-        height: this.height,
-        loadingWidget: this.loadingWidget,
-        showLoadingWidget: this.showLoadingWidget,
-        keepAlive: this.keepAlive,
-        key: this.key,
-        onTap: this.onTap,
-        onPageFinished: this.onPageFinished,
-        onRenderFinished: this.onRenderFinished,
-        children: this.children,
-        style: this.style,
-        renderingEngine: this.renderingEngine);
-  }
+  TeXViewState createState() => TeXViewState();
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String teXViewDefaultStyle = "overflow: hidden;position: relative; ";
+
 String _getColor(Color color) {
   return "rgba(${color?.red}, ${color?.green}, ${color?.blue}, ${color?.alpha})";
 }
@@ -219,8 +221,8 @@ class TeXViewStyle {
 
   String initStyle() {
     return cascadingStyleSheets == null
-        ? """${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + _getLength(height, lengthUnit) + ";" : ""}${width != null ? "width: " + _getLength(width, lengthUnit) + ";" : ""}${elevation != null ? "box-shadow: " + _getElevation(elevation, lengthUnit) + ";" : ""}${contentColor != null ? "color: " + _getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + _getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + _TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}"""
-        : cascadingStyleSheets;
+        ? """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + _getLength(height, lengthUnit) + ";" : ""}${width != null ? "width: " + _getLength(width, lengthUnit) + ";" : ""}${elevation != null ? "box-shadow: " + _getElevation(elevation, lengthUnit) + ";" : ""}${contentColor != null ? "color: " + _getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + _getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + _TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}"""
+        : teXViewDefaultStyle + cascadingStyleSheets;
   }
 }
 

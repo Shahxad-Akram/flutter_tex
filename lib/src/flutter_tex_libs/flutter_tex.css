@@ -1,35 +1,14 @@
-
 * {
     margin: 0;
     padding: 0;
 }
-
 
 #TeXView {
     overflow: hidden;
     position: relative;
 }
 
-.tex-view-container {
-    overflow: hidden;
-    position: relative;
-}
-
-.tex-view-tex {
-    overflow: hidden;
-    position: relative;
-}
-
-
-.tex-view-container .ripple {
-    border-radius: 50%;
-    background-color: lightgrey;
-    position: absolute;
-    transform: scale(0);
-    animation: ripple 0.5s linear;
-}
-
-.tex-view-tex .ripple {
+.tex-view-ink-well .ripple {
     border-radius: 50%;
     background-color: lightgrey;
     position: absolute;

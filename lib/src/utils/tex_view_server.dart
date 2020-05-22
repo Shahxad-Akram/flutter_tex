@@ -6,16 +6,15 @@ import 'package:mime/mime.dart';
 
 class TeXViewServer {
   HttpServer _httpServer;
+  final int _port;
 
-  final int port;
-
-  TeXViewServer(this.port);
+  TeXViewServer(this._port);
 
   ///Closes the server.
   Future<void> close() async {
     if (this._httpServer != null) {
       await this._httpServer.close(force: true);
-      print('Server running on http://localhost:$port closed');
+      print('Server running on http://localhost:$_port closed');
       this._httpServer = null;
     }
   }
@@ -23,12 +22,12 @@ class TeXViewServer {
   ///Starts the server
   Future<void> start(Function(HttpRequest request) request) async {
     if (this._httpServer != null) {
-      throw Exception('Server already started on http://localhost:$port');
+      throw Exception('Server already started on http://localhost:$_port');
     }
     var completer = new Completer();
     runZoned(() {
-      HttpServer.bind('localhost', port, shared: true).then((server) {
-        print('Server running on http://localhost:' + port.toString());
+      HttpServer.bind('localhost', _port, shared: true).then((server) {
+        print('Server running on http://localhost:' + _port.toString());
         this._httpServer = server;
         server.listen((HttpRequest httpRequest) async {
           request(httpRequest);
@@ -62,17 +61,6 @@ class TeXViewServer {
         });
         completer.complete();
       });
-/*      HttpServer.bind('localhost', _wsPort).then((HttpServer server) {
-        this._wsHttpServer = server;
-        print('[+]WebSocket listening at -- ws://localhost:$_wsPort');
-        server.listen((HttpRequest wsRequest) {
-          WebSocketTransformer.upgrade(wsRequest).then(webSocket,
-              onError: (err) => print('[!]Error -- ${err.toString()}'));
-        }, onError: (err) => print('[!]Error -- ${err.toString()}'));
-      }, onError: (err) => print('[!]Error -- ${err.toString()}')).then((_) {
-
-
-      });*/
     }, onError: (e, stackTrace) => print('Error: $e $stackTrace'));
     return completer.future;
   }

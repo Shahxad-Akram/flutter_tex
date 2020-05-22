@@ -3,7 +3,11 @@ import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
-class TeXViewContainer extends TeXViewWidget {
+class TeXViewInkWell extends TeXViewWidget {
+  /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
+  @required
+  final String id;
+
   /// A [TeXViewWidget] as child.
   @required
   final TeXViewWidget child;
@@ -11,13 +15,14 @@ class TeXViewContainer extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewContainer({this.child, this.style});
+  TeXViewInkWell({this.child, this.id, this.style});
 
   @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
                 tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild)
             .toJson(),
+        'id': this.id,
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
       };

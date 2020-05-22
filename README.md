@@ -147,13 +147,7 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 
 
 # Api Changes since flutter_tex:^3.6.1
-* `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
-* Minor API Changes for `TeXViewBorder` `TeXViewMargin` `TeXViewPadding` and `TeXViewBorderRadius`.
-* `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
-* Katex Configurations added.
-
-# Api Changes since flutter_tex:^3.5.0
-- `teXHTML` has been removed from the API and replaced by the `children` which contains the list of `TeXViewChild` for more information please see the example. For any problem please report the issue.
+* Please see `CHANGELOG.md`.
 
 # Api Usage.
 
@@ -161,7 +155,7 @@ Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** f
 
 - `TeXViewContainer:` A list of `TeXViewTeX`
 
-- `TeXViewTeX` holds TeX data by using a raw string e.g.
+- `TeXViewDocument` holds TeX data by using a raw string e.g.
 `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put javascript code in it.<br>
     If you load **Network Image** in your document you should go like this.
     ``` 

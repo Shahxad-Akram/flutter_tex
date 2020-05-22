@@ -1,3 +1,10 @@
+## 3.6.2
+* Minor API Changes
+* `TeXViewTeX` replaced by `TeXViewDocument`
+* `TeXViewContainer` children replaced by a single child.
+* `TeXViewWidget`, `TeXViewImage`, `TeXViewColumn` and `TeXViewInkWell` added.
+* `onTap` will only work with `TeXViewInkwell`.
+  
 ## 3.6.1+3
 * `&` sign encoding issue solved.
 

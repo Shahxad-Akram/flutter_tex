@@ -3,22 +3,24 @@ import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
-class TeXViewContainer extends TeXViewWidget {
-  /// A [TeXViewWidget] as child.
+class TeXViewColumn extends TeXViewWidget {
+  /// A list of [TeXViewWidget].
   @required
-  final TeXViewWidget child;
+  final List<TeXViewWidget> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewContainer({this.child, this.style});
+  TeXViewColumn({this.children, this.style});
 
   @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
-                tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild)
+                tag: 'div',
+                type: 'tex-view-column',
+                node: Node.InternalChildren)
             .toJson(),
-        'data': this.child.toJson(),
+        'data': this.children?.map((child) => child?.toJson())?.toList(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

@@ -1,82 +1,27 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/models/tex_view_container.dart';
-import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/utils/tex_view_server.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
-class TeXView extends StatefulWidget {
-  final Key key;
-
-  /// A list of TeXViewChild.
-  @required
-  final List<TeXViewContainer> children;
-
-  /// Style TeXView Widget with [TeXViewStyle].
-  final TeXViewStyle style;
-
-  /// Render Engine to render TeX.
-  final TeXViewRenderingEngine renderingEngine;
-
-  /// Fixed Height for TeXView. (Avoid using fixed height for TeXView, let it to adopt the height by itself)
-  final double height;
-
-  /// Show a loading widget before rendering completes.
-  final Widget loadingWidget;
-
-  /// Show or hide loadingWidget.
-  final bool showLoadingWidget;
-
-  /// On Tap Callback when a TeXViewChild is tapped.
-  final Function(String childID) onTap;
-
-  /// Callback when TEX rendering finishes.
-  final Function(double height) onRenderFinished;
-
-  /// Callback when TeXView loading finishes.
-  final Function(String message) onPageFinished;
-
-  /// Keep widget Alive. (True by default).
-  final bool keepAlive;
-
-  TeXView(
-      {this.key,
-      this.children,
-      this.style,
-      this.height,
-      this.loadingWidget,
-      this.showLoadingWidget,
-      this.onTap,
-      this.keepAlive,
-      this.onRenderFinished,
-      this.onPageFinished,
-      this.renderingEngine})
-      : super(key: key);
-
-  @override
-  _TeXViewState createState() => _TeXViewState();
-}
-
-class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  static int viewInstanceCount = 0;
-
+class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+  static int instanceCount = 0;
   WebViewController _teXWebViewController;
-  int _teXViewServerPort = 5353 + viewInstanceCount;
+  int _port = 5353 + instanceCount;
   TeXViewServer _flutterTeXServer;
   double _teXViewHeight = 1;
   String _lastTeXHTML;
   String _lastRenderingEngine;
 
-  _TeXViewState() {
-    _flutterTeXServer = TeXViewServer(_teXViewServerPort);
-    viewInstanceCount += 1;
-    _flutterTeXServer.start(handleRequest /*, handleWebSocket*/);
+  TeXViewState() {
+    _flutterTeXServer = TeXViewServer(_port);
+    instanceCount += 1;
+    _flutterTeXServer.start(handleRequest);
   }
 
   @override
@@ -129,14 +74,17 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   void dispose() {
     _flutterTeXServer.close();
-    viewInstanceCount -= 1;
+    instanceCount -= 1;
     super.dispose();
   }
 
   String getJsonRawTeXHTML() {
     return jsonEncode({
-      "children": widget.children.map((child) => child.toJson()).toList(),
-      "style": widget.style?.initStyle()
+      'meta': TeXViewWidgetMeta(tag: 'div', type: 'tex-view', node: Node.Root)
+          .toJson(),
+      'id': null,
+      'data': widget.children.map((child) => child.toJson()).toList(),
+      'style': widget.style?.initStyle() ?? teXViewDefaultStyle
     });
   }
 
@@ -151,34 +99,11 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     }
   }
 
-  handleWebSocket(WebSocket ws) {
-    /*   const oneSec = const Duration(seconds: 1);
-    new Timer.periodic(oneSec, (Timer t) => ws.add(getJsonRawTeXHTML()));
-
-    ws.listen(
-      (data) {
-        print(data.toString());
-      },
-      onDone: () => print('[+]Done :)'),
-      onError: (err) => print('[!]Error -- ${err.toString()}'),
-      cancelOnError: true,
-    );*/
-  }
-
-/*
   String _getTeXViewUrl() {
-    return Uri.encodeFull(
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}${getJsonRawTeXHTML().length < 1500 ? "&urlRawTeXHTML=" + getJsonRawTeXHTML() : ""}");
-  }
-*/
-
-  String _getTeXViewUrl() {
-
     String baseUri =
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}";
-
+        "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}";
     String rawTeXHTMLUri =
-        "http://localhost:$_teXViewServerPort/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?teXViewServerPort=$_teXViewServerPort&viewInstanceCount=$viewInstanceCount&configurations=${widget.renderingEngine?.getConfigurations()}&urlRawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
+        "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${widget.renderingEngine?.getConfigurations()}&urlRawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
 
     return rawTeXHTMLUri.length < 2048 ? rawTeXHTMLUri : baseUri;
   }
@@ -190,10 +115,8 @@ class _TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       if (widget.showLoadingWidget) {
         _teXViewHeight = 1;
       }
-
       _teXWebViewController.loadUrl(_getTeXViewUrl());
       this._lastTeXHTML = getJsonRawTeXHTML();
-
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }
   }
