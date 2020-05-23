@@ -1,11 +1,10 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:js' as js;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/core_utils.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String lastTeXHTML;
@@ -30,10 +29,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getJsonRawTeXHTML() {
-    return jsonEncode({
-      "children": widget.children.map((child) => child.toJson()).toList(),
-      "style": widget.style?.initStyle()
-    });
+    return CoreUtils.getJsonRawTeXHTML(widget.children, widget?.style);
   }
 
   @override

@@ -5,30 +5,30 @@ import 'package:flutter/services.dart';
 import 'package:mime/mime.dart';
 
 class TeXViewServer {
-  HttpServer _httpServer;
+  HttpServer _server;
   final int _port;
 
   TeXViewServer(this._port);
 
   ///Closes the server.
   Future<void> close() async {
-    if (this._httpServer != null) {
-      await this._httpServer.close(force: true);
+    if (this._server != null) {
+      await this._server.close(force: true);
       print('Server running on http://localhost:$_port closed');
-      this._httpServer = null;
+      this._server = null;
     }
   }
 
   ///Starts the server
   Future<void> start(Function(HttpRequest request) request) async {
-    if (this._httpServer != null) {
+    if (this._server != null) {
       throw Exception('Server already started on http://localhost:$_port');
     }
     var completer = new Completer();
     runZoned(() {
       HttpServer.bind('localhost', _port, shared: true).then((server) {
         print('Server running on http://localhost:' + _port.toString());
-        this._httpServer = server;
+        this._server = server;
         server.listen((HttpRequest httpRequest) async {
           request(httpRequest);
           var body = List<int>();

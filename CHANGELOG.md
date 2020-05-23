@@ -1,4 +1,7 @@
 ## 3.6.2+1
+* iOS rendering bug fixed.
+
+## 3.6.2+1
 * Minor bug fixed.
 
 ## 3.6.2

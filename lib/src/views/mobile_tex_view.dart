@@ -1,27 +1,25 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/tex_view_meta.dart';
+import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:flutter_tex/src/utils/tex_view_server.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   static int instanceCount = 0;
-  WebViewController _teXWebViewController;
+  WebViewController _controller;
   int _port = 5353 + instanceCount;
-  TeXViewServer _flutterTeXServer;
-  double _teXViewHeight = 1;
+  TeXViewServer _server;
+  double _height = 1;
   String _lastTeXHTML;
   String _lastRenderingEngine;
 
   TeXViewState() {
-    _flutterTeXServer = TeXViewServer(_port);
+    _server = TeXViewServer(_port);
     instanceCount += 1;
-    _flutterTeXServer.start(handleRequest);
+    _server.start(handleRequest);
   }
 
   @override
@@ -33,10 +31,10 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     updateKeepAlive();
     _initTeXView();
     return IndexedStack(
-      index: widget.showLoadingWidget ? _teXViewHeight == 1 ? 1 : 0 : 0,
+      index: widget.showLoadingWidget ? _height == 1 ? 1 : 0 : 0,
       children: <Widget>[
         Container(
-          height: widget.height ?? _teXViewHeight,
+          height: widget.height ?? _height,
           child: WebView(
             onPageFinished: _onPageFinished,
             onWebViewCreated: _onWebViewCreated,
@@ -73,20 +71,13 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _flutterTeXServer.close();
+    _server.close();
     instanceCount -= 1;
     super.dispose();
   }
 
   String getJsonRawTeXHTML() {
-   // print(widget.children.map((child) => child.toJson()).toList().toString());
-    return jsonEncode({
-      'meta': TeXViewWidgetMeta(tag: 'div', type: 'tex-view', node: Node.Root)
-          .toJson(),
-      'id': null,
-      'data': widget.children.map((child) => child.toJson()).toList(),
-      'style': widget.style?.initStyle() ?? teXViewDefaultStyle
-    });
+    return CoreUtils.getJsonRawTeXHTML(widget.children, widget?.style);
   }
 
   void handleRequest(HttpRequest request) {
@@ -101,22 +92,17 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String _getTeXViewUrl() {
-    String baseUri =
-        "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}";
-    String rawTeXHTMLUri =
-        "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${widget.renderingEngine?.getConfigurations()}&urlRawTeXHTML=${Uri.encodeComponent(getJsonRawTeXHTML())}";
-
-    return rawTeXHTMLUri.length < 2048 ? rawTeXHTMLUri : baseUri;
+    return "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}";
   }
 
   void _initTeXView() {
-    if (_teXWebViewController != null &&
+    if (_controller != null &&
         (getJsonRawTeXHTML() != _lastTeXHTML ||
             widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
       if (widget.showLoadingWidget) {
-        _teXViewHeight = 1;
+        _height = 1;
       }
-      _teXWebViewController.loadUrl(_getTeXViewUrl());
+      _controller.loadUrl(_getTeXViewUrl());
       this._lastTeXHTML = getJsonRawTeXHTML();
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }
@@ -129,19 +115,19 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _onWebViewCreated(WebViewController controller) {
-    _teXWebViewController = controller;
+    _controller = controller;
     _initTeXView();
   }
 
   void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
     double viewHeight = double.parse(javascriptMessage.message);
-    if (_teXViewHeight != viewHeight) {
+    if (_height != viewHeight) {
       setState(() {
-        _teXViewHeight = viewHeight;
+        _height = viewHeight;
       });
     }
     if (widget.onRenderFinished != null) {
-      widget.onRenderFinished(_teXViewHeight);
+      widget.onRenderFinished(_height);
     }
   }
 

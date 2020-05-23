@@ -31,7 +31,7 @@ class TeXView extends StatefulWidget {
   final bool showLoadingWidget;
 
   /// On Tap Callback when a TeXViewChild is tapped.
-  final Function(String childID) onTap;
+  final Function(String id) onTap;
 
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
