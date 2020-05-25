@@ -47,16 +47,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     };
   }
 
-  String _getTeXViewUrl() {
-    String baseUri = Uri.base.toString();
-    String currentUrl = "";
-    if (!baseUri.contains('http://localhost:')) {
-      currentUrl =
-          "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
-    }
-    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html";
-  }
-
   void _initTeXView() {
     if (getRawData() != _lastData) {
       // ignore: undefined_prefixed_name
@@ -65,7 +55,8 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           (int id) => html.IFrameElement()
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
-            ..src = _getTeXViewUrl()
+            ..src =
+                "assets/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html"
             ..id = 'tex_view_$viewId'
             ..style.border = 'none');
       js.context.callMethod('initWebTeXView', [viewId, getRawData()]);

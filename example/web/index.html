@@ -1,27 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Flutter TeX</title>
-    <!--
-        <script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>
-    -->
-    <script>
-        document.head.append(initScript('packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js'));
-
-        function initScript(src) {
-            var location = window.location;
-            var path = '';
-            if (!location.toString().includes('http://localhost:')) {
-                path = location.toString().replace('/#/', '').replace('#', '') + '/assets/';
-            }
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = path + src;
-            return script;
-        }
-    </script>
-
+    <script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>
 </head>
 <body>
 <script src="main.dart.js" type="application/javascript"></script>

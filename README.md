@@ -6,6 +6,9 @@
 # Contents
 * [About](#about)
 * [How to use?](#how-to-use)
+   * [Android](#android)
+   * [iOS](#ios)
+   * [Web](#web)    
 * [Example](#example)
 * [Api Changes](#api-changes)
 * [Api Usage](#api-usage)
@@ -35,13 +38,13 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
 
-## How to use?
+# How to use?
 
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.2+3
+  flutter_tex: ^3.6.2+4
 ```
 
 
@@ -54,7 +57,10 @@ $ flutter packages get
 Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
 
 
-**3:** For **Android** Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
+**3:** Now you need to put following implementations in `Android`, `iOS` and `Web` respectively.
+
+##### Android
+Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
 ```xml
 <application
        android:usesCleartextTraffic="true">
@@ -68,17 +74,24 @@ and permissions
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
-
-For **iOS** add following code in your `<project-directory>/ios/Runner/Info.plist`
+##### iOS
+Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```plist
-
 <key>NSAppTransportSecurity</key>
-  
   <dict>
     <key>NSAllowsArbitraryLoads</key> <true/>
   </dict>
-
 <key>io.flutter.embedded_views_preview</key> <true/> 
+```
+
+##### Web
+For Web support you need to put `<script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
+```html
+<head>
+    <meta charset="UTF-8">
+    <title>Flutter TeX</title>
+    <script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>
+</head>
 ```
 
 **4:** Now in your Dart code, you can use:
