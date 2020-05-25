@@ -2,15 +2,14 @@ import 'dart:convert';
 
 class TeXViewRenderingEngine {
   final String configurations;
-  String _engineName;
+  final String _engineName;
 
-  TeXViewRenderingEngine.katex({this.configurations}) {
-    this._engineName = "katex";
-  }
+  const TeXViewRenderingEngine.katex({this.configurations})
+      : this._engineName = "katex";
 
-  TeXViewRenderingEngine.mathjax() : configurations = null {
-    this._engineName = "mathjax";
-  }
+  const TeXViewRenderingEngine.mathjax()
+      : this._engineName = "mathjax",
+        configurations = null;
 
   String getConfigurations() {
     return json.encode(configurations ?? "{}");

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String teXViewDefaultStyle = "overflow: hidden;position: relative; ";
+String teXViewDefaultStyle = "overflow: hidden; position: relative; ";
 
 String _getColor(Color color) {
   return "rgba(${color?.red}, ${color?.green}, ${color?.blue}, ${color?.alpha})";
@@ -17,15 +17,20 @@ String _getLength(int value, LengthUnit lengthUnit) {
 enum LengthUnit { Pixels, Percent, Em }
 
 class TeXViewBorder {
-  TeXViewBorderDecoration top;
-  TeXViewBorderDecoration bottom;
-  TeXViewBorderDecoration right;
-  TeXViewBorderDecoration left;
-  TeXViewBorderDecoration all;
+  final TeXViewBorderDecoration top;
+  final TeXViewBorderDecoration bottom;
+  final TeXViewBorderDecoration right;
+  final TeXViewBorderDecoration left;
+  final TeXViewBorderDecoration all;
 
-  TeXViewBorder.all(this.all);
+  const TeXViewBorder.all(this.all)
+      : this.top = null,
+        this.bottom = null,
+        this.right = null,
+        this.left = null;
 
-  TeXViewBorder.only({this.top, this.bottom, this.right, this.left});
+  const TeXViewBorder.only({this.top, this.bottom, this.right, this.left})
+      : this.all = null;
 
   String getBorder() {
     return this.all == null
@@ -35,11 +40,11 @@ class TeXViewBorder {
 }
 
 class TeXViewBorderDecoration {
-  int borderWidth;
-  TeXViewBorderStyle borderStyle;
-  Color borderColor;
+  final int borderWidth;
+  final TeXViewBorderStyle borderStyle;
+  final Color borderColor;
 
-  TeXViewBorderDecoration(
+  const TeXViewBorderDecoration(
       {this.borderWidth, this.borderStyle, this.borderColor});
 
   String getBorderDecoration() {
@@ -48,21 +53,26 @@ class TeXViewBorderDecoration {
 }
 
 class TeXViewBorderRadius {
-  LengthUnit lengthUnit;
-  int topLeft;
-  int topRight;
-  int bottomRight;
-  int bottomLeft;
-  int all;
+  final LengthUnit lengthUnit;
+  final int topLeft;
+  final int topRight;
+  final int bottomRight;
+  final int bottomLeft;
+  final int all;
 
-  TeXViewBorderRadius.all(this.all, {this.lengthUnit});
+  const TeXViewBorderRadius.all(this.all, {this.lengthUnit})
+      : this.topLeft = null,
+        this.topRight = null,
+        this.bottomRight = null,
+        this.bottomLeft = null;
 
-  TeXViewBorderRadius.only(
+  const TeXViewBorderRadius.only(
       {this.lengthUnit,
       this.topLeft,
       this.topRight,
       this.bottomRight,
-      this.bottomLeft});
+      this.bottomLeft})
+      : this.all = null;
 
   String getRadius() {
     return this.all != null
@@ -91,33 +101,45 @@ enum TeXViewBorderStyle {
 
 ///TeXViewMargin to manage different types of margin of TeXView.
 class TeXViewMargin {
-  LengthUnit lengthUnit;
+  final LengthUnit lengthUnit;
 
   /// Top margin.
-  int top;
+  final int top;
 
   /// Bottom margin.
-  int bottom;
+  final int bottom;
 
   /// Right margin.
-  int right;
+  final int right;
 
   /// Left margin.
-  int left;
+  final int left;
 
   /// All sides margin and it'll override top, bottom,right and left margins.
-  int all;
+  final int all;
 
-  String zeroAuto;
+  final String zeroAuto;
 
-  TeXViewMargin.all(this.all, {this.lengthUnit});
+  const TeXViewMargin.all(this.all, {this.lengthUnit})
+      : this.zeroAuto = null,
+        this.top = null,
+        this.bottom = null,
+        this.right = null,
+        this.left = null;
 
-  TeXViewMargin.only(
-      {this.lengthUnit, this.top, this.bottom, this.right, this.left});
+  const TeXViewMargin.only(
+      {this.lengthUnit, this.top, this.bottom, this.right, this.left})
+      : this.all = null,
+        this.zeroAuto = null;
 
-  TeXViewMargin.zeroAuto() {
-    this.zeroAuto = "0 auto";
-  }
+  const TeXViewMargin.zeroAuto()
+      : this.zeroAuto = "0 auto",
+        this.lengthUnit = null,
+        this.all = null,
+        this.top = null,
+        this.bottom = null,
+        this.right = null,
+        this.left = null;
 
   /// It'll provide CSS margin code.
   String getMargin() {
@@ -133,27 +155,32 @@ class TeXViewMargin {
 
 ///TeXViewPadding to manage different types of padding of TeXView.
 class TeXViewPadding {
-  LengthUnit lengthUnit;
+  final LengthUnit lengthUnit;
 
   /// Top padding.
-  int top;
+  final int top;
 
   /// Bottom padding.
-  int bottom;
+  final int bottom;
 
   /// Right padding.
-  int right;
+  final int right;
 
   /// Left padding.
-  int left;
+  final int left;
 
   /// All sides padding and it'll override top, bottom,right and left padding.
-  int all;
+  final int all;
 
-  TeXViewPadding.all(this.all, {this.lengthUnit});
+  const TeXViewPadding.all(this.all, {this.lengthUnit})
+      : this.top = null,
+        this.bottom = null,
+        this.right = null,
+        this.left = null;
 
-  TeXViewPadding.only(
-      {this.lengthUnit, this.top, this.bottom, this.right, this.left});
+  const TeXViewPadding.only(
+      {this.lengthUnit, this.top, this.bottom, this.right, this.left})
+      : this.all = null;
 
   /// It'll provide CSS margin code.
   String getPadding() {
@@ -168,42 +195,42 @@ class TeXViewPadding {
 /// TeXViewStyle provide an easy interface for styling TeXView which converts dart code to CSS code.
 class TeXViewStyle {
   ///Hard coded CSS code.
-  String cascadingStyleSheets;
+  final String cascadingStyleSheets;
 
   ///TeXViewPadding to manage padding of by using [TeXViewPadding].
-  TeXViewPadding padding;
+  final TeXViewPadding padding;
 
   ///TeXViewMargin to manage margin of View by using [TeXViewMargin].
-  TeXViewMargin margin;
+  final TeXViewMargin margin;
 
   ///[LengthUnit] either px, % or em.
-  LengthUnit lengthUnit;
+  final LengthUnit lengthUnit;
 
   ///Height of View.
-  int height;
+  final int height;
 
   ///Width of view.
-  int width;
+  final int width;
 
   ///Elevation of View.
-  int elevation;
+  final int elevation;
 
   ///Color of content(fonts) within the View.
-  Color contentColor;
+  final Color contentColor;
 
   ///Background color of View.
-  Color backgroundColor;
+  final Color backgroundColor;
 
   ///Styling of border by using [TeXViewBorder] class.
-  TeXViewBorder border;
+  final TeXViewBorder border;
 
   ///Managing radius of border by using [TeXViewBorderRadius] class.
-  TeXViewBorderRadius borderRadius;
+  final TeXViewBorderRadius borderRadius;
 
   /// Text alignment within TeXView.
-  TeXViewTextAlign textAlign;
+  final TeXViewTextAlign textAlign;
 
-  TeXViewStyle(
+  const TeXViewStyle(
       {this.padding,
       this.margin,
       this.lengthUnit,
@@ -214,10 +241,22 @@ class TeXViewStyle {
       this.backgroundColor,
       this.border,
       this.borderRadius,
-      this.textAlign});
+      this.textAlign})
+      : this.cascadingStyleSheets = null;
 
   /// Styling TeXView with hard coded CSS e.g. "color:green;background-color:red".
-  TeXViewStyle.fromCSS(this.cascadingStyleSheets);
+  const TeXViewStyle.fromCSS(this.cascadingStyleSheets)
+      : this.padding = null,
+        this.margin = null,
+        this.lengthUnit = null,
+        this.height = null,
+        this.width = null,
+        this.elevation = null,
+        this.contentColor = null,
+        this.backgroundColor = null,
+        this.border = null,
+        this.borderRadius = null,
+        this.textAlign = null;
 
   String initStyle() {
     return cascadingStyleSheets == null

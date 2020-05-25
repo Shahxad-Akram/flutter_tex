@@ -5,7 +5,7 @@ class TeXViewWidgetMeta {
   final String tag;
   final Node node;
 
-  TeXViewWidgetMeta({this.type, this.tag, this.node});
+  const TeXViewWidgetMeta({this.type, this.tag, this.node});
 
   Map toJson() => {
         'type': this.type,

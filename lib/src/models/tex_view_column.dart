@@ -11,7 +11,7 @@ class TeXViewColumn extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewColumn({this.children, this.style});
+  const TeXViewColumn({this.children, this.style});
 
   @override
   Map toJson() => {

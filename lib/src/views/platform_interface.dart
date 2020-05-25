@@ -42,7 +42,7 @@ class TeXView extends StatefulWidget {
   /// Keep widget Alive. (True by default).
   final bool keepAlive;
 
-  TeXView(
+  const TeXView(
       {this.key,
       this.children,
       this.style,
@@ -53,7 +53,7 @@ class TeXView extends StatefulWidget {
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,
-      this.renderingEngine})
+      this.renderingEngine = const TeXViewRenderingEngine.katex()})
       : super(key: key);
 
   @override

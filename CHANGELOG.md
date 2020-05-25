@@ -1,4 +1,7 @@
-## 3.6.2+1
+## 3.6.2+3
+* Web support fixes.
+
+## 3.6.2+2
 * iOS rendering bug fixed.
 
 ## 3.6.2+1

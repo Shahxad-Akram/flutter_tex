@@ -7,10 +7,10 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  String lastTeXHTML;
-  double _height = 300;
+  String _lastData;
+  double _height;
 
-  String platformId;
+  String viewId = UniqueKey().toString();
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
@@ -21,26 +21,30 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     updateKeepAlive();
     _initTeXView();
     return SizedBox(
-      height: 1118,
+      height: widget.height ?? 500,
       child: HtmlElementView(
-        viewType: platformId.toString(),
+        viewType: viewId.toString(),
       ),
     );
   }
 
-  String getJsonRawTeXHTML() {
-    return CoreUtils.getJsonRawTeXHTML(widget.children, widget?.style);
+  String getRawData() {
+    return CoreUtils.getRawData(widget.children, widget?.style);
   }
 
   @override
   void initState() {
-    js.context['renderedWebTeXViewHeight'] = (height) {
-      setState(() {
-        _height = double.parse(height.toString());
-        print(_height.toString());
-      });
-    };
     super.initState();
+    js.context['RenderedTeXViewHeight'] = (height) {
+      //setState(() {
+      _height = double.parse(height.toString());
+      // });
+    };
+    js.context['OnTapCallback'] = (id) {
+      if (widget.onTap != null) {
+        widget.onTap(id);
+      }
+    };
   }
 
   String _getTeXViewUrl() {
@@ -50,24 +54,22 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       currentUrl =
           "${baseUri.replaceFirst("/#/", "").replaceFirst("#", "")}/assets/";
     }
-    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html?platformId=$platformId";
+    return "${currentUrl}packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html";
   }
 
   void _initTeXView() {
-    if (getJsonRawTeXHTML() != lastTeXHTML) {
-      platformId = DateTime.now().microsecondsSinceEpoch.toString();
+    if (getRawData() != _lastData) {
       // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
-          platformId.toString(),
-          (int viewId) => html.IFrameElement()
+          viewId.toString(),
+          (int id) => html.IFrameElement()
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
             ..src = _getTeXViewUrl()
-            ..id = 'tex_view_$platformId'
+            ..id = 'tex_view_$viewId'
             ..style.border = 'none');
-      js.context
-          .callMethod('initWebTeXView', [platformId, getJsonRawTeXHTML()]);
-      this.lastTeXHTML = getJsonRawTeXHTML();
+      js.context.callMethod('initWebTeXView', [viewId, getRawData()]);
+      this._lastData = getRawData();
     }
   }
 }

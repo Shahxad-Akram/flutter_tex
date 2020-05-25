@@ -8,9 +8,10 @@ class TeXViewImage extends TeXViewWidget {
 
   final String _type;
 
-  TeXViewImage.asset(this.imageUri) : this._type = 'tex-view-asset-image';
+  const TeXViewImage.asset(this.imageUri) : this._type = 'tex-view-asset-image';
 
-  TeXViewImage.network(this.imageUri) : this._type = 'tex-view-network-image';
+  const TeXViewImage.network(this.imageUri)
+      : this._type = 'tex-view-network-image';
 
   @override
   Map toJson() => {

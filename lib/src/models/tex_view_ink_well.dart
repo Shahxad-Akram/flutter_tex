@@ -15,7 +15,7 @@ class TeXViewInkWell extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewInkWell({this.child, this.id, this.style});
+  const TeXViewInkWell({this.child, this.id, this.style});
 
   @override
   Map toJson() => {

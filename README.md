@@ -9,7 +9,8 @@
 * [Example](#example)
 * [Api Changes](#api-changes)
 * [Api Usage](#api-usage)
-* [Demo Application](#demo-application)
+* [Demo Application](#application-demo)
+* [Demo Web](#web-demo)
 * [Screenshots](#screenshots)
 * [Todo](#to-do)
 * [Cautions](#cautions)
@@ -40,7 +41,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.2+2
+  flutter_tex: ^3.6.2+3
 ```
 
 
@@ -175,10 +176,15 @@ TeXView(
 
 For more please see .
 
-# Demo Application.
+# Application Demo.
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
 [Example Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
+
+
+# Web Demo.
+
+You can find web demo at [**https://flutter-tex.web.app**](https://flutter-tex.web.app)
 
 # Screenshots
 Screenshot# 01             |  Screenshot# 02
@@ -191,7 +197,7 @@ Screenshot# 03             |  Screenshot# 04
 
 # To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
-- Poor support for Flutter Web, Please don't use that for production.
+- * `Bug in Web Support` on setState everything disappears.
 
 # Cautions:
 - Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app.

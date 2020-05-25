@@ -11,7 +11,7 @@ class TeXViewDocument extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewDocument(this.data, {this.style});
+  const TeXViewDocument(this.data, {this.style});
 
   @override
   Map toJson() => {

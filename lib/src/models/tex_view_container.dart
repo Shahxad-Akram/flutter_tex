@@ -11,7 +11,7 @@ class TeXViewContainer extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  TeXViewContainer({this.child, this.style});
+  const TeXViewContainer({this.child, this.style});
 
   @override
   Map toJson() => {

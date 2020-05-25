@@ -57,13 +57,9 @@
     teXView = document.getElementById('TeXView');
     initTeXView();
 
-    function onTeXViewRenderComplete(webCallback) {
+    function onTeXViewRenderComplete(onCompleteCallback) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
-            if (isWeb) {
-                webCallback();
-            } else {
-                RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
-            }
+            onCompleteCallback();
         });
     }
 </script>

@@ -32,16 +32,12 @@
     teXView = document.getElementById('TeXView');
     initTeXView();
 
-    function onTeXViewRenderComplete(webCallback) {
+    function onTeXViewRenderComplete(onCompleteCallback) {
         var viewInstanceCount = getUrlParam('instanceCount');
         if (!viewInstanceCount) viewInstanceCount = 1;
         renderMathInElement(teXView, configurations);
         setTimeout(function () {
-            if (isWeb) {
-                webCallback();
-            } else {
-                RenderedTeXViewHeight.postMessage(getTeXViewHeight(teXView));
-            }
+            onCompleteCallback();
         }, 250 * viewInstanceCount)
     }
 </script>
