@@ -4,22 +4,6 @@
 <head>
     <script src="../flutter_tex.js" type="text/javascript"></script>
     <link crossorigin="anonymous" href="../flutter_tex.css" rel="stylesheet">
-    <style>
-        .katex-display > .katex {
-            display: inline-block;
-            white-space: nowrap;
-            max-width: 100%;
-            overflow-x: scroll;
-            text-align: initial;
-        }
-
-        .katex {
-            font: normal 1.21em KaTeX_Main, Times New Roman, serif;
-            line-height: 1.2;
-            white-space: normal;
-            text-indent: 0;
-        }
-    </style>
     <link crossorigin="anonymous" href="katex.css" rel="stylesheet">
     <script crossorigin="anonymous" src="katex.js"></script>
     <script crossorigin="anonymous" src="contrib/auto-render.js"></script>
@@ -30,7 +14,23 @@
 <div id="TeXView"></div>
 <script>
     teXView = document.getElementById('TeXView');
-    if (!isWeb) initTeXView();
+    if (!isWeb) {
+        appendStyle(' .katex-display > .katex {\n' +
+            '            display: inline-block;\n' +
+            '            white-space: nowrap;\n' +
+            '            max-width: 100%;\n' +
+            '            overflow-x: scroll;\n' +
+            '            text-align: initial;\n' +
+            '        }\n' +
+            '\n' +
+            '        .katex {\n' +
+            '            font: normal 1.21em KaTeX_Main, Times New Roman, serif;\n' +
+            '            line-height: 1.2;\n' +
+            '            white-space: normal;\n' +
+            '            text-indent: 0;\n' +
+            '        }');
+        initTeXView();
+    }
 
     function onTeXViewRenderComplete(onCompleteCallback) {
         var viewInstanceCount = getUrlParam('instanceCount');
@@ -39,6 +39,13 @@
         setTimeout(function () {
             onCompleteCallback();
         }, 250 * viewInstanceCount)
+    }
+
+    function appendStyle(content) {
+        var style = document.createElement('STYLE');
+        style.type = 'text/css';
+        style.appendChild(document.createTextNode(content));
+        document.head.appendChild(style);
     }
 </script>
 </body>

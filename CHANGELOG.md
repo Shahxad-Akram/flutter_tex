@@ -1,3 +1,6 @@
+## 3.6.2+6
+* Katex Web improvements.
+
 ## 3.6.2+5
 * Minor improvements.
 
