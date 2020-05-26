@@ -7,4 +7,4 @@ Demo for [Flutter TeX](https://pub.dev/packages/flutter_tex) a Flutter Package  
 
 
 ### Web Demo.
-You can find web demo at [**https://flutter-tex.web.app**](https://flutter-tex.web.app)
+You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)

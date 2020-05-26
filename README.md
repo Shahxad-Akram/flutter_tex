@@ -9,7 +9,7 @@
    * [Android](#android)
    * [iOS](#ios)
    * [Web](#web)    
-* [Example](#example)
+   * [Example](#example)
 * [Api Changes](#api-changes)
 * [Api Usage](#api-usage)
 * [Demo Application](#application-demo)
@@ -44,7 +44,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.2+4
+  flutter_tex: ^3.6.2+5
 ```
 
 
@@ -59,7 +59,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 **3:** Now you need to put following implementations in `Android`, `iOS` and `Web` respectively.
 
-##### Android
+### Android
 Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
 ```xml
 <application
@@ -74,7 +74,7 @@ and permissions
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
-##### iOS
+### iOS
 Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```plist
 <key>NSAppTransportSecurity</key>
@@ -84,7 +84,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 <key>io.flutter.embedded_views_preview</key> <true/> 
 ```
 
-##### Web
+### Web
 For Web support you need to put `<script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
 ```html
 <head>
@@ -197,7 +197,7 @@ For more please see .
 
 # Web Demo.
 
-You can find web demo at [**https://flutter-tex.web.app**](https://flutter-tex.web.app)
+You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Screenshots
 Screenshot# 01             |  Screenshot# 02
@@ -210,7 +210,7 @@ Screenshot# 03             |  Screenshot# 04
 
 # To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
-- * `Bug in Web Support` on setState everything disappears.
+- `Bug in Web Support` on setState everything disappears.
 
 # Cautions:
 - Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app.
