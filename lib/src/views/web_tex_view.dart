@@ -8,8 +8,7 @@ import 'package:flutter_tex/src/utils/core_utils.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String _lastData;
-  double _height;
-
+  double _height = 250;
   String viewId = UniqueKey().toString();
 
   @override
@@ -20,8 +19,9 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.build(context);
     updateKeepAlive();
     _initTeXView();
-    return SizedBox(
-      height: widget.height ?? 500,
+    return Container(
+      color: Colors.green,
+      height: widget.height ?? _height,
       child: HtmlElementView(
         viewType: viewId.toString(),
       ),
@@ -35,10 +35,13 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
-    js.context['RenderedTeXViewHeight'] = (height) {
+    js.context['RenderedTeXViewHeight'] = (message) {
+      double height = double.parse(message.toString());
+      print("new-$height     old-$_height");
+      //if (widget.height == null)
       //setState(() {
-      _height = double.parse(height.toString());
-      // });
+      _height = height;
+      //});
     };
     js.context['OnTapCallback'] = (id) {
       if (widget.onTap != null) {
@@ -57,7 +60,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             ..height = MediaQuery.of(context).size.height.toString()
             ..src =
                 "assets/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html"
-            ..id = 'tex_view_$viewId'
+            ..id = viewId
             ..style.border = 'none');
       js.context.callMethod('initWebTeXView', [viewId, getRawData()]);
       this._lastData = getRawData();

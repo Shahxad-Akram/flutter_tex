@@ -16,6 +16,14 @@
     animation: ripple 0.5s linear;
 }
 
+.tex-view-group-item .ripple {
+    border-radius: 50%;
+    background-color: lightgrey;
+    position: absolute;
+    transform: scale(0);
+    animation: ripple 0.5s linear;
+}
+
 @keyframes ripple {
     to {
         transform: scale(2.5);

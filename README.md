@@ -44,7 +44,7 @@ This package mainly depends on [webview_flutter](https://pub.dartlang.org/packag
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.2+6
+  flutter_tex: ^3.6.3
 ```
 
 
@@ -166,6 +166,7 @@ TeXView(
     - `TeXViewImage` renders image from assets or network.
     - `TeXViewColumn` holds a list of `TeXViewWidget` vertically.
     - `TeXViewInkWell` for listening tap events. Its child and id is mandatory.
+    - `TeXViewGroup` a group of `TeXViewGroupItem` usually used to create quiz layout.
             
 - `TeXViewStyle()` You can style each and everything using `TeXViewStyle()` or by using custom `CSS` code by `TeXViewStyle.fromCSS()` where you can pass hard coded String containing CSS code. For more information please check the example.
     
@@ -200,13 +201,13 @@ For more please see .
 You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Screenshots
-Screenshot# 01             |  Screenshot# 02
-:-------------------------:|:-------------------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/>
+Screenshot# 01 |Screenshot# 02 |Screenshot# 03
+:-------------:|:-------------:|:-------------:
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/>
 
-Screenshot# 03             |  Screenshot# 04
-:-------------------------:|:-------------------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/>
+Screenshot# 04 |Screenshot# 05 |Screenshot# 06
+:-------------:|:-------------:|:-------------:
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_5.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_6.png"/>
 
 # To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)

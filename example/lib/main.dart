@@ -5,28 +5,6 @@ main() async {
   runApp(FlutterTeXExample());
 }
 
-TeXViewWidget _customTeXViewChild(String title, String body) {
-  return TeXViewColumn(
-      style: TeXViewStyle(
-        margin: TeXViewMargin.all(10),
-        borderRadius: TeXViewBorderRadius.all(25),
-        backgroundColor: Colors.green,
-        contentColor: Colors.white,
-      ),
-      children: [
-        TeXViewDocument(title,
-            style: TeXViewStyle(
-              padding: TeXViewPadding.only(top: 5, bottom: 5),
-              textAlign: TeXViewTextAlign.Center,
-              backgroundColor: Colors.red,
-              contentColor: Colors.white,
-            )),
-        TeXViewDocument(body,
-            style: TeXViewStyle.fromCSS(
-                "color:white;background-color:light-green;padding:10px"))
-      ]);
-}
-
 class FlutterTeXExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,177 +14,23 @@ class FlutterTeXExample extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("Flutter TeX (Demo)"),
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Image.asset(
-              "assets/flutter_tex_banner.png",
-              fit: BoxFit.contain,
-              height: 200,
-            ),
-          ),
-          Divider(
-            height: 30,
-            color: Colors.transparent,
-          ),
-          getRenderEngineButton(
-              context,
-              "Katex",
-              'assets/katex.png',
-              "RenderingEngine for Fast Rendering",
-              TeXViewRenderingEngine.katex(configurations: r"""
-                  {
-                    displayMode: true,
-                    macros: {
-                      "\\RR": "\\mathbb{R}"
-                    }
-                  }
-                  """), [
-            TeXExamples.introduction,
-            TeXExamples.quadraticEquation,
-            TeXExamples.relationEnergyPrincipalQuantum,
-            TeXExamples.alignedTag,
-            TeXExamples.bohrRadius,
-            TeXExamples.chemistryEquations,
-            TeXExamples.matrix,
-          ]),
-          getRenderEngineButton(
-              context,
-              "MathJax",
-              'assets/mathjax.png',
-              "RenderingEngine for Quality Rendering",
-              TeXViewRenderingEngine.mathjax(), [
-            TeXExamples.introduction,
-            TeXExamples.quadraticEquation,
-            TeXExamples.relationEnergyPrincipalQuantum,
-            TeXExamples.alignedTag,
-            TeXExamples.bohrRadius,
-            TeXExamples.chemistryEquations,
-            TeXExamples.matrix,
-            TeXExamples.others,
-          ]),
-        ],
-      ),
-    );
-  }
-
-  getRenderEngineButton(
-      BuildContext context,
-      String label,
-      String asset,
-      String text,
-      TeXViewRenderingEngine renderingEngine,
-      List<TeXViewWidget> teXViewChildren) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: RaisedButton(
-        elevation: 7.5,
-        color: Colors.white,
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => TeXViewPage(
-                        label: label,
-                        teXViewChildren: teXViewChildren,
-                        renderingEngine: renderingEngine,
-                      )));
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Ink.image(
-                image: AssetImage(asset),
-                height: 75,
-                fit: BoxFit.contain,
-              ),
-              Divider(
-                height: 5,
-                color: Colors.transparent,
-              ),
-              Text(
-                text,
-                style: TextStyle(fontSize: 15),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  _MainPageState createState() => _MainPageState();
 }
 
-class TestExample extends StatelessWidget {
+class TeXViewPage extends StatefulWidget {
+  final List<TeXViewWidget> teXViewChildren;
+  final String title;
+  final TeXViewRenderingEngine renderingEngine;
+
+  TeXViewPage({this.title, this.teXViewChildren, this.renderingEngine});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: TeXView(
-            renderingEngine: TeXViewRenderingEngine.katex(),
-            children: [
-              TeXViewColumn(children: [
-                TeXViewDocument(
-                  r"<h3>Quadratic Equation</h3>",
-                  style: TeXViewStyle(
-                    textAlign: TeXViewTextAlign.Center,
-                    backgroundColor: Colors.red,
-                    contentColor: Colors.white,
-                  ),
-                ),
-                TeXViewDocument(r"""<p>                                
-                           When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                           $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                    style: TeXViewStyle.fromCSS(
-                        "color:white;background-color:green;padding:20px")),
-              ])
-            ],
-            style: TeXViewStyle(
-              margin: TeXViewMargin.all(20),
-              elevation: 10,
-              borderRadius: TeXViewBorderRadius.all(20),
-              border: TeXViewBorder.all(
-                TeXViewBorderDecoration(
-                    borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.Solid,
-                    borderWidth: 5),
-              ),
-              backgroundColor: Colors.white,
-            ),
-            loadingWidget: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  Text("Rendering with ")
-                ],
-              ),
-            ),
-            onTap: (childID) {
-              print("TeXView $childID is tapped.");
-            }),
-      ),
-    );
-  }
+  _TeXViewPageState createState() => _TeXViewPageState();
 }
 
-class TeXExamples {
+class _MainPageState extends State<MainPage> {
   static TeXViewWidget introduction = TeXViewColumn(
       style: TeXViewStyle(
           margin: TeXViewMargin.all(10),
@@ -283,43 +107,200 @@ class TeXExamples {
             \end{array}} \right)p^k q^{n - k} 
      $$
     </p>""");
-}
 
-class TeXViewPage extends StatefulWidget {
-  final List<TeXViewWidget> teXViewChildren;
-  final String label;
-  final TeXViewRenderingEngine renderingEngine;
+  List<TeXViewWidget> quizExample = [
+    TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \) Statement</h2>""",
+        style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+    TeXViewGroup(
+        children: [
+          TeXViewGroupItem(
+            id: "item_1",
+            child: TeXViewDocument(r"""<h3>Flutter \( \rm\\TeX \) 1</h3>""",
+                style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+          ),
+          TeXViewGroupItem(
+            id: "item_2",
+            child: TeXViewDocument(r"""<h3>Flutter \( \rm\\TeX \) 2</h3>""",
+                style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+          ),
+          TeXViewGroupItem(
+            id: "item_3",
+            child: TeXViewDocument(r"""<h3>Flutter \( \rm\\TeX \) 3</h3>""",
+                style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+          ),
+          TeXViewGroupItem(
+            id: "item_4",
+            child: TeXViewDocument(r"""<h3>Flutter \( \rm\\TeX \) 4</h3>""",
+                style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+          ),
+        ],
+        selectedItemStyle: TeXViewStyle(
+            border: TeXViewBorder.all(TeXViewBorderDecoration(
+                borderWidth: 3, borderColor: Colors.blue)),
+            margin: TeXViewMargin.all(5)),
+        normalItemStyle: TeXViewStyle(margin: TeXViewMargin.all(5)))
+  ];
 
-  TeXViewPage({this.label, this.teXViewChildren, this.renderingEngine});
+  int radVal = 0;
 
-  @override
-  _TeXViewPageState createState() => _TeXViewPageState();
-}
-
-class _TeXViewPageState extends State<TeXViewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Rendering with ${widget.label} Example"),
+        title: Text("Flutter TeX (Demo)"),
+      ),
+      body: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Image.asset(
+              "assets/flutter_tex_banner.png",
+              fit: BoxFit.contain,
+              height: 200,
+            ),
+          ),
+          Divider(
+            height: 30,
+            color: Colors.transparent,
+          ),
+          RadioListTile(
+            value: 0,
+            groupValue: radVal,
+            onChanged: (val) {
+              setState(() {
+                this.radVal = val;
+              });
+            },
+            title: Text("Katex"),
+            subtitle: Text("RenderingEngine for Fast Rendering"),
+          ),
+          RadioListTile(
+            value: 1,
+            groupValue: radVal,
+            onChanged: (val) {
+              setState(() {
+                this.radVal = val;
+              });
+            },
+            title: Text("MathJax"),
+            subtitle: Text("RenderingEngine for Quality Rendering"),
+          ),
+          getExampleButton("Simple Examples", [
+            introduction,
+            quadraticEquation,
+            relationEnergyPrincipalQuantum,
+            alignedTag,
+            bohrRadius,
+            chemistryEquations,
+            matrix,
+            if (radVal == 1) ...[others]
+          ]),
+          getExampleButton("Quiz Example", quizExample),
+          getExampleButton("Image Example", [
+            TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
+                style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+            TeXViewContainer(
+              child: TeXViewImage.network(
+                  'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+              style: TeXViewStyle(
+                margin: TeXViewMargin.all(10),
+                borderRadius: TeXViewBorderRadius.all(20),
+              ),
+            ),
+          ]),
+          getExampleButton("Tap callback Example", [
+            TeXViewInkWell(
+              id: "this_item_is_clicked",
+              child: TeXViewDocument(r"""<h2>Click \( \rm\\Here \)</h2>""",
+                  style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+            )
+          ]),
+        ],
+      ),
+    );
+  }
+
+  getExampleButton(String title, List<TeXViewWidget> teXViewChildren) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: RaisedButton(
+        elevation: 7.5,
+        color: Colors.white,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => TeXViewPage(
+                        teXViewChildren: teXViewChildren,
+                        title: title,
+                        renderingEngine: radVal == 0
+                            ? TeXViewRenderingEngine.katex(configurations: r"""
+                  {
+                    displayMode: true,
+                    macros: {
+                      "\\RR": "\\mathbb{R}"
+                    }
+                  }
+                  """)
+                            : TeXViewRenderingEngine.mathjax(),
+                      )));
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static TeXViewWidget _customTeXViewChild(String title, String body) {
+    return TeXViewColumn(
+        style: TeXViewStyle(
+          margin: TeXViewMargin.all(10),
+          borderRadius: TeXViewBorderRadius.all(25),
+          backgroundColor: Colors.green,
+          contentColor: Colors.white,
+        ),
+        children: [
+          TeXViewDocument(title,
+              style: TeXViewStyle(
+                padding: TeXViewPadding.only(top: 5, bottom: 5),
+                textAlign: TeXViewTextAlign.Center,
+                backgroundColor: Colors.red,
+                contentColor: Colors.white,
+              )),
+          TeXViewDocument(body,
+              style: TeXViewStyle.fromCSS(
+                  "color:white;background-color:light-green;padding:10px"))
+        ]);
+  }
+}
+
+class _TeXViewPageState extends State<TeXViewPage> {
+  String onTapMessage;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
       body: ListView(
         physics: ScrollPhysics(),
         children: <Widget>[
           Text(
-            "Rendered TeX HTML with ${widget.label}",
+            onTapMessage ?? "",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-            ),
+            style: TextStyle(fontSize: 18),
           ),
-          teXView(),
           TeXView(
-              showLoadingWidget: false,
+              showLoadingWidget: true,
               renderingEngine: widget.renderingEngine,
               children: [...widget.teXViewChildren],
               style: TeXViewStyle(
@@ -341,12 +322,14 @@ class _TeXViewPageState extends State<TeXViewPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text("Rendering with ${widget.label}")
+                    Text("Rendering...!")
                   ],
                 ),
               ),
               onTap: (childID) {
-                print("TeXView $childID is tapped.");
+                setState(() {
+                  this.onTapMessage = "TeXView $childID is tapped.";
+                });
               }),
         ],
       ),
@@ -355,7 +338,7 @@ class _TeXViewPageState extends State<TeXViewPage> {
 
   TeXView teXView() {
     return TeXView(
-        showLoadingWidget: false,
+        showLoadingWidget: true,
         renderingEngine: widget.renderingEngine,
         children: [
           TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
@@ -371,13 +354,40 @@ class _TeXViewPageState extends State<TeXViewPage> {
                   borderRadius: TeXViewBorderRadius.all(20),
                 ),
               ),
-              TeXViewDocument(r"""<p>                                
-                           When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                           $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                  style: TeXViewStyle.fromCSS(
-                      'padding: 15px; color: white; background: green'))
             ]),
-          )
+          ),
+          TeXViewGroup(
+              children: [
+                TeXViewGroupItem(
+                  id: "item_1",
+                  child: TeXViewDocument(
+                      r"""<h2>Flutter \( \rm\\TeX \) 1</h2>""",
+                      style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                ),
+                TeXViewGroupItem(
+                  id: "item_2",
+                  child: TeXViewDocument(
+                      r"""<h2>Flutter \( \rm\\TeX \) 2</h2>""",
+                      style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                ),
+                TeXViewGroupItem(
+                  id: "item_3",
+                  child: TeXViewDocument(
+                      r"""<h2>Flutter \( \rm\\TeX \) 3</h2>""",
+                      style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                ),
+                TeXViewGroupItem(
+                  id: "item_4",
+                  child: TeXViewDocument(
+                      r"""<h2>Flutter \( \rm\\TeX \) 4</h2>""",
+                      style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                ),
+              ],
+              selectedItemStyle: TeXViewStyle(
+                  border: TeXViewBorder.all(TeXViewBorderDecoration(
+                      borderWidth: 5, borderColor: Colors.blue)),
+                  margin: TeXViewMargin.all(5)),
+              normalItemStyle: TeXViewStyle(margin: TeXViewMargin.all(5)))
         ],
         style: TeXViewStyle(
           elevation: 10,

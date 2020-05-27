@@ -1,3 +1,7 @@
+## 3.6.3
+* `TeXViewGroup` added, a group of `TeXViewGroupItem` usually used to create quiz layout.
+* Example updated
+
 ## 3.6.2+6
 * Katex Web improvements.
 

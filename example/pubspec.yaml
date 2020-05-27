@@ -32,5 +32,3 @@ flutter:
 
   assets:
     - assets/flutter_tex_banner.png
-    - assets/katex.png
-    - assets/mathjax.png

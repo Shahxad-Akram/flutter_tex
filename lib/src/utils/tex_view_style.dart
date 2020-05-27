@@ -293,7 +293,7 @@ class _TeXViewBorderStyleHelper {
       case TeXViewBorderStyle.Initial:
         return "initial";
       default:
-        return "none";
+        return "solid";
     }
   }
 }

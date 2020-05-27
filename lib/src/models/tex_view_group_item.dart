@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
-class TeXViewContainer extends TeXViewWidget {
+class TeXViewGroupItem extends TeXViewInkWell {
+  /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
+  @required
+  final String id;
+
   /// A [TeXViewWidget] as child.
   @required
   final TeXViewWidget child;
 
-  /// Style TeXView Widget with [TeXViewStyle].
-  final TeXViewStyle style;
-
-  const TeXViewContainer({this.child, this.style});
+  const TeXViewGroupItem({this.id, this.child});
 
   @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
                 tag: 'div',
-                type: 'tex-view-container',
+                type: 'tex-view-group-item',
                 node: Node.InternalChild)
             .toJson(),
+        'id': this.id,
         'data': this.child.toJson(),
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

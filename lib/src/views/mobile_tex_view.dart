@@ -19,7 +19,10 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   TeXViewState() {
     _server = TeXViewServer(_port);
     instanceCount += 1;
-    _server.start(_handleRequest);
+    _server.start(_handleRequest /*, (ws){
+
+    }*/
+        );
   }
 
   @override
