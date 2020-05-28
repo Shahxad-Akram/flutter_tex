@@ -14,6 +14,9 @@ class TeXViewImage extends TeXViewWidget {
       : this._type = 'tex-view-network-image';
 
   @override
+  void onTapManager(String id) {}
+
+  @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(tag: 'img', type: _type, node: Node.Leaf)
             .toJson(),

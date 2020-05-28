@@ -14,6 +14,11 @@ class TeXViewContainer extends TeXViewWidget {
   const TeXViewContainer({this.child, this.style});
 
   @override
+  void onTapManager(String id) {
+    this.child.onTapManager(id);
+  }
+
+  @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
                 tag: 'div',

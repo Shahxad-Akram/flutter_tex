@@ -13,7 +13,7 @@ class TeXView extends StatefulWidget {
 
   /// A list of TeXViewChild.
   @required
-  final List<TeXViewWidget> children;
+  final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
@@ -30,9 +30,6 @@ class TeXView extends StatefulWidget {
   /// Show or hide loadingWidget.
   final bool showLoadingWidget;
 
-  /// On Tap Callback when a TeXViewChild is tapped.
-  final Function(String id) onTap;
-
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
@@ -44,12 +41,11 @@ class TeXView extends StatefulWidget {
 
   const TeXView(
       {this.key,
-      this.children,
+      this.child,
       this.style,
       this.height,
       this.loadingWidget,
       this.showLoadingWidget = false,
-      this.onTap,
       this.keepAlive,
       this.onRenderFinished,
       this.onPageFinished,

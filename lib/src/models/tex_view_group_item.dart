@@ -3,7 +3,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 
-class TeXViewGroupItem extends TeXViewInkWell {
+class TeXViewGroupItem extends TeXViewWidget {
   /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
   @required
   final String id;
@@ -12,7 +12,12 @@ class TeXViewGroupItem extends TeXViewInkWell {
   @required
   final TeXViewWidget child;
 
-  const TeXViewGroupItem({this.id, this.child});
+  final bool rippleEffect;
+
+  const TeXViewGroupItem({this.id, this.child, this.rippleEffect});
+
+  @override
+  void onTapManager(String id) {}
 
   @override
   Map toJson() => {
@@ -22,6 +27,7 @@ class TeXViewGroupItem extends TeXViewInkWell {
                 node: Node.InternalChild)
             .toJson(),
         'id': this.id,
+        'rippleEffect': this.rippleEffect ?? true,
         'data': this.child.toJson(),
       };
 }

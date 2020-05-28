@@ -29,7 +29,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getRawData() {
-    return CoreUtils.getRawData(widget.children, widget?.style);
+    return CoreUtils.getRawData(widget.child, widget?.style);
   }
 
   @override
@@ -44,9 +44,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       //});
     };
     js.context['OnTapCallback'] = (id) {
-      if (widget.onTap != null) {
-        widget.onTap(id);
-      }
+      widget.child.onTapManager(id);
     };
   }
 

@@ -14,6 +14,9 @@ class TeXViewDocument extends TeXViewWidget {
   const TeXViewDocument(this.data, {this.style});
 
   @override
+  void onTapManager(String id) {}
+
+  @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
                 tag: 'div', type: 'tex-view-document', node: Node.Leaf)

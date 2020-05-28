@@ -1,3 +1,9 @@
+## 3.6.4
+* Minor API Changes
+    * `TeXView` children attribute changed to child, you can use `TeXViewColumn` to pass children.
+    * `onTap` removed from main `TeXView` widget and available to `TeXViewInkWell` and `TeXViewGroupItem`.
+* Example updated.
+
 ## 3.6.3
 * `TeXViewGroup` added, a group of `TeXViewGroupItem` usually used to create quiz layout.
 * Example updated
@@ -22,10 +28,10 @@
 
 ## 3.6.2
 * Minor API Changes
-* `TeXViewTeX` replaced by `TeXViewDocument`
-* `TeXViewContainer` children replaced by a single child.
-* `TeXViewWidget`, `TeXViewImage`, `TeXViewColumn` and `TeXViewInkWell` added.
-* `onTap` will only work with `TeXViewInkwell`.
+    * `TeXViewTeX` replaced by `TeXViewDocument`
+    * `TeXViewContainer` children replaced by a single child.
+    * `TeXViewWidget`, `TeXViewImage`, `TeXViewColumn` and `TeXViewInkWell` added.
+    * `onTap` will only work with `TeXViewInkwell`.
   
 ## 3.6.1+3
 * `&` sign encoding issue solved.
@@ -47,13 +53,13 @@
 
 ## 3.6.0
 * Major API Changes
-* `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
-* `onTap` callback has been added for each view.
+    * `TeXViewChild` removed, `TeXViewContainer` child of `TeXView` added and `TeXViewTeX` child of `TeXViewChild` added which holds `TeX` data styling.
+    * `onTap` callback has been added for each view.
 
 ## 3.5.2
 * Minor API Changes
-* `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
-* Katex Configurations added.
+    * `RenderingEngine` has been replaced with `TeXViewRenderingEngine`
+    * Katex Configurations added.
 * Katex rendered height issue has been resolved.
 
 ## 3.5.1
@@ -70,10 +76,10 @@
 
 ## 3.5.0
 *  Heavy API Changes.
-* `teXHTML` removed from API
-* `children` has been added, where you can pass List of `TeXViewChild`.
-* `TeXViewStyles` added where you can easily customise TeXView Widget.
-* `onTap` callback support for each individual child.
+    * `teXHTML` removed from API
+    * `children` has been added, where you can pass List of `TeXViewChild`.
+    * `TeXViewStyles` added where you can easily customise TeXView Widget.
+    * `onTap` callback support for each individual child.
 
 ## 3.1.4+1
 * FlutterWeb rendering Bug fixed.

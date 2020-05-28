@@ -10,6 +10,9 @@ class TeXViewGroup extends TeXViewWidget {
   @required
   final List<TeXViewGroupItem> children;
 
+  /// On Tap Callback when a child is tapped.
+  final Function(String id) onTap;
+
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
@@ -21,9 +24,16 @@ class TeXViewGroup extends TeXViewWidget {
 
   const TeXViewGroup(
       {this.children,
+      this.onTap,
       this.style,
       this.selectedItemStyle,
       this.normalItemStyle});
+
+  @override
+  void onTapManager(String id) {
+    for (TeXViewGroupItem child in this.children)
+      if (child.id == id) this.onTap(id);
+  }
 
   @override
   Map toJson() => {

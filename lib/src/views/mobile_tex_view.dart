@@ -55,9 +55,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
               JavascriptChannel(
                   name: 'OnTapCallback',
                   onMessageReceived: (javascriptMessage) {
-                    if (widget.onTap != null) {
-                      widget.onTap(javascriptMessage.message);
-                    }
+                    widget.child.onTapManager(javascriptMessage.message);
                   }),
             ]),
             javascriptMode: JavascriptMode.unrestricted,
@@ -91,7 +89,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getJsonData() {
-    return CoreUtils.getRawData(widget.children, widget?.style);
+    return CoreUtils.getRawData(widget.child, widget?.style);
   }
 
   void _handleRequest(HttpRequest request) {

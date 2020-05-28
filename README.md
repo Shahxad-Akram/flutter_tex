@@ -5,16 +5,16 @@
 
 # Contents
 * [About](#about)
+* [Screenshots](#screenshots)
 * [How to use?](#how-to-use)
    * [Android](#android)
    * [iOS](#ios)
    * [Web](#web)    
-   * [Example](#example)
-* [Api Changes](#api-changes)
-* [Api Usage](#api-usage)
+* [Example](#example)
 * [Demo Application](#application-demo)
 * [Demo Web](#web-demo)
-* [Screenshots](#screenshots)
+* [Api Changes](#api-changes)
+* [Api Usage](#api-usage)
 * [Todo](#to-do)
 * [Cautions](#cautions)
 
@@ -37,16 +37,22 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 
 This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
 
+# Screenshots
+Main Page      |Quiz Example   | TeX Examples
+:-------------:|:-------------:|:-------------:
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/>
+
+TeX Examples   | Image Example | InkWell Example
+:-------------:|:-------------:|:-------------:
+<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_5.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_6.png"/>
 
 # How to use?
-
 **1:** Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.3
+  flutter_tex: ^3.6.4
 ```
-
 
 **2:** You can install packages from the command line:
 
@@ -100,59 +106,63 @@ For Web support you need to put `<script src="assets/packages/flutter_tex/src/fl
 import 'package:flutter_tex/flutter_tex.dart'; 
 ```
 
-**5:** Now you can use TeXHTML widget like this.
+**5:** Now you can use TeXView as a widget:
 
-### Example
+# Example
 ```dart
 TeXView(
-        showLoadingWidget: false,
-        renderingEngine: widget.renderingEngine,
-        children: [
+    showLoadingWidget: false,
+    child: TeXViewColumn(children: [
+      TeXViewInkWell(
+        id: "id_0",
+        child: TeXViewColumn(children: [
           TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
               style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
-          TeXViewInkWell(
-            id: "id_0",
-            child: TeXViewColumn(children: [
-              TeXViewContainer(
-                child: TeXViewImage.network(
-                    'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
-                style: TeXViewStyle(
-                  margin: TeXViewMargin.all(10),
-                  borderRadius: TeXViewBorderRadius.all(20),
-                ),
-              ),
-              TeXViewDocument(r"""<p>                                
-                           When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-                           $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
-                  style: TeXViewStyle.fromCSS(
-                      'padding: 15px; color: white; background: green'))
-            ]),
-          )
-        ],
-        style: TeXViewStyle(
-          elevation: 10,
-          borderRadius: TeXViewBorderRadius.all(25),
-          border: TeXViewBorder.all(TeXViewBorderDecoration(
-              borderColor: Colors.blue,
-              borderStyle: TeXViewBorderStyle.Solid,
-              borderWidth: 5)),
-          backgroundColor: Colors.white,
-        ),
-        loadingWidget: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-              Text("Rendering...")
-            ],
+          TeXViewContainer(
+            child: TeXViewImage.network(
+                'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(10),
+              borderRadius: TeXViewBorderRadius.all(20),
+            ),
           ),
-        ),
-        onTap: (childID) {
-          print("TeXView $childID is tapped.");
-        })
+          TeXViewDocument(r"""<p>                                
+                       When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+                       $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>""",
+              style: TeXViewStyle.fromCSS(
+                  'padding: 15px; color: white; background: green'))
+        ]),
+      )
+    ]),
+    style: TeXViewStyle(
+      elevation: 10,
+      borderRadius: TeXViewBorderRadius.all(25),
+      border: TeXViewBorder.all(TeXViewBorderDecoration(
+          borderColor: Colors.blue,
+          borderStyle: TeXViewBorderStyle.Solid,
+          borderWidth: 5)),
+      backgroundColor: Colors.white,
+    ),
+    loadingWidget: Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Text("Rendering...")
+        ],
+      ),
+    ))
 ```
+Do check the [Complete Example](https://github.com/shah-xad/flutter_tex/tree/master/example) for the true understanding of the package.
+
+# Application Demo.
+<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+[Example Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
+
+# Web Demo.
+You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Api Changes.
 * Please see [CHANGELOG.md](https://github.com/shah-xad/flutter_tex/blob/master/CHANGELOG.md).
@@ -160,7 +170,7 @@ TeXView(
 # Api Usage.
 - `children:` A list of `TeXViewWidget`
 
-- #### **`TeXViewWidget`**
+- **`TeXViewWidget`**
     - `TeXViewDocument` holds TeX data by using a raw string e.g. `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put HTML and Javascript code in it.
     - `TeXViewContainer` holds a single `TeXViewWidget` with styling.
     - `TeXViewImage` renders image from assets or network.
@@ -179,35 +189,13 @@ TeXView(
 
 - `showLoadingWidget:` Show or hide loadingWidget.
   
-- `onTap:` On Tap Callback returns id of `TeXViewInkWell`.
-
 - `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
   
 - `onPageFinished:` Callback when TeXView loading finishes.
   
 - `keepAlive:` Keep widget Alive . (True by default).
 
-
-For more please see .
-
-# Application Demo.
-<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-[Example Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
-
-
-# Web Demo.
-
-You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
-
-# Screenshots
-Screenshot# 01 |Screenshot# 02 |Screenshot# 03
-:-------------:|:-------------:|:-------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/>
-
-Screenshot# 04 |Screenshot# 05 |Screenshot# 06
-:-------------:|:-------------:|:-------------:
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_5.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_6.png"/>
+For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/master/example).
 
 # To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)

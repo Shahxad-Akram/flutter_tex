@@ -14,6 +14,11 @@ class TeXViewColumn extends TeXViewWidget {
   const TeXViewColumn({this.children, this.style});
 
   @override
+  void onTapManager(String id) {
+    for (TeXViewWidget child in this.children) child.onTapManager(id);
+  }
+
+  @override
   Map toJson() => {
         'meta': TeXViewWidgetMeta(
                 tag: 'div',

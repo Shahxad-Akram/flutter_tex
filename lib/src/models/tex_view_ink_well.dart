@@ -15,7 +15,18 @@ class TeXViewInkWell extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  const TeXViewInkWell({this.child, this.id, this.style});
+  final bool rippleEffect;
+
+  /// On Tap Callback when a tap is triggered.
+  final Function(String id) onTap;
+
+  const TeXViewInkWell(
+      {this.child, this.id, this.onTap, this.rippleEffect, this.style});
+
+  @override
+  void onTapManager(String id) {
+    if (this.id == id) this.onTap(id);
+  }
 
   @override
   Map toJson() => {
@@ -23,6 +34,7 @@ class TeXViewInkWell extends TeXViewWidget {
                 tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild)
             .toJson(),
         'id': this.id,
+        'rippleEffect': this.rippleEffect ?? true,
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
       };
