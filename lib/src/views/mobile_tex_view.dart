@@ -111,7 +111,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
         _height = 1;
       }
       _controller.loadUrl(
-          "http://localhost:$_port/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}");
+          "http://localhost:$_port/packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}");
       this._lastData = getJsonData();
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }

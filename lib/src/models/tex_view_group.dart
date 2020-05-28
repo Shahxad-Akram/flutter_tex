@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_group_item.dart';
-import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
+import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
 class TeXViewGroup extends TeXViewWidget {
@@ -30,6 +30,12 @@ class TeXViewGroup extends TeXViewWidget {
       this.normalItemStyle});
 
   @override
+  TeXViewWidgetMeta meta() {
+    return TeXViewWidgetMeta(
+        tag: 'div', type: 'tex-view-group', node: Node.InternalChildren);
+  }
+
+  @override
   void onTapManager(String id) {
     for (TeXViewGroupItem child in this.children)
       if (child.id == id) this.onTap(id);
@@ -37,9 +43,7 @@ class TeXViewGroup extends TeXViewWidget {
 
   @override
   Map toJson() => {
-        'meta': TeXViewWidgetMeta(
-                tag: 'div', type: 'tex-view-group', node: Node.InternalChildren)
-            .toJson(),
+        'meta': meta().toJson(),
         'data': this.children?.map((child) => child?.toJson())?.toList(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
         'selectedItemStyle':

@@ -51,7 +51,7 @@ TeX Examples   | Image Example | InkWell Example
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.4
+  flutter_tex: ^3.6.4+1
 ```
 
 **2:** You can install packages from the command line:
@@ -63,7 +63,7 @@ $ flutter packages get
 Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
 
 
-**3:** Now you need to put following implementations in `Android`, `iOS` and `Web` respectively.
+**3:** Now you need to put the following implementations in `Android`, `iOS`, and `Web` respectively.
 
 ### Android
 Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
@@ -73,8 +73,7 @@ Make sure to add this line `android:usesCleartextTraffic="true"` in your `<proje
 </application>
 ```
 
-and permissions
-
+Required Permissions are:
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -187,13 +186,13 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
   
 - `loadingWidget:` Show a loading widget before rendering completes.
 
-- `showLoadingWidget:` Show or hide loadingWidget.
+- `showLoadingWidget:` Show or hide `loadingWidget`.
   
 - `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
   
 - `onPageFinished:` Callback when TeXView loading finishes.
   
-- `keepAlive:` Keep widget Alive . (True by default).
+- `keepAlive:` Keep widget Alive. (True by default).
 
 For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/master/example).
 
@@ -201,5 +200,5 @@ For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/m
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
 - `Bug in Web Support` on setState everything disappears.
 
-# Cautions:
-- Please avoid using too many TeXViews in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app.
+# Caution:
+- Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/shah-xad/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/shah-xad/flutter_tex/issues/new).

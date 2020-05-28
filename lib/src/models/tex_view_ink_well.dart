@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
+import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
 class TeXViewInkWell extends TeXViewWidget {
@@ -24,15 +24,19 @@ class TeXViewInkWell extends TeXViewWidget {
       {this.child, this.id, this.onTap, this.rippleEffect, this.style});
 
   @override
+  TeXViewWidgetMeta meta() {
+    return TeXViewWidgetMeta(
+        tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild);
+  }
+
+  @override
   void onTapManager(String id) {
     if (this.id == id) this.onTap(id);
   }
 
   @override
   Map toJson() => {
-        'meta': TeXViewWidgetMeta(
-                tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild)
-            .toJson(),
+        'meta': meta().toJson(),
         'id': this.id,
         'rippleEffect': this.rippleEffect ?? true,
         'data': this.child.toJson(),

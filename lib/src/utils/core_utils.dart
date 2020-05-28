@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_tex/src/models/tex_view_meta.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
+import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/utils/tex_view_style.dart';
 
 class CoreUtils {

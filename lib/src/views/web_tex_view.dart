@@ -57,7 +57,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
             ..src =
-                "assets/packages/flutter_tex/src/flutter_tex_libs/${widget.renderingEngine.getEngineName()}/index.html"
+                "assets/packages/flutter_tex/js/${widget.renderingEngine.getEngineName()}/index.html"
             ..id = viewId
             ..style.border = 'none');
       js.context.callMethod('initWebTeXView', [viewId, getRawData()]);

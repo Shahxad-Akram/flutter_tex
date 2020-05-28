@@ -1,3 +1,6 @@
+## 3.6.4+1
+* Minor Fixes
+
 ## 3.6.4
 * Minor API Changes
     * `TeXView` children attribute changed to child, you can use `TeXViewColumn` to pass children.
