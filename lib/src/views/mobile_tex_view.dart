@@ -4,25 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:flutter_tex/src/utils/tex_view_server.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   static int instanceCount = 0;
-  WebViewController _controller;
-  int _port = 5353 + instanceCount;
-  TeXViewServer _server;
+  WebViewPlusController _controller;
   double _height = 1;
   String _lastData;
   String _lastRenderingEngine;
 
   TeXViewState() {
-    _server = TeXViewServer(_port);
     instanceCount += 1;
-    _server.start(_handleRequest /*, (ws){
-
-    }*/
-        );
   }
 
   @override
@@ -38,7 +30,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         Container(
           height: widget.height ?? _height,
-          child: WebView(
+          child: WebViewPlus(
             onPageFinished: (message) {
               if (widget.onPageFinished != null) {
                 widget.onPageFinished(message);
@@ -59,6 +51,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                   }),
             ]),
             javascriptMode: JavascriptMode.unrestricted,
+            onRequest: _handleRequest,
           ),
         ),
         widget.loadingWidget ??
@@ -83,7 +76,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _server.close();
     instanceCount -= 1;
     super.dispose();
   }
@@ -96,7 +88,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     try {
       if (request.method == 'GET' &&
           request.requestedUri.pathSegments[0] == 'rawData' &&
-          request.requestedUri.port == _port)
+          request.requestedUri.port == _controller.getServerPort())
         request.response.write(getJsonData());
     } catch (e) {
       print('Exception in handleRequest: $e');
@@ -110,8 +102,9 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       if (widget.showLoadingWidget) {
         _height = 1;
       }
-      _controller.loadUrl(
-          "http://localhost:$_port/packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?port=$_port&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}");
+
+      _controller.loadAsset(
+          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?port=${_controller.getServerPort()}&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}");
       this._lastData = getJsonData();
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }
