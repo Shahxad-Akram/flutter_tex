@@ -51,7 +51,7 @@ TeX Examples   | Image Example | InkWell Example
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.4+1
+  flutter_tex: ^3.6.4+2
 ```
 
 **2:** You can install packages from the command line:
