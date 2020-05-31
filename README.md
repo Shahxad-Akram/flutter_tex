@@ -5,7 +5,7 @@
 
 # Contents
 * [About](#about)
-* [Demo Video](#demo-video-click-to-watch-on-youtubehttpswwwyoutubecomwatchvyinbvexv_nm)
+* [Demo Video](#demo-video)
 * [Screenshots](#screenshots)
 * [How to use?](#how-to-use)
    * [Android](#android)
@@ -13,11 +13,11 @@
    * [Web](#web)    
 * [Examples](#examples)
     * [General Example](#general-example)
-    * [TeXView Document Example](#texview-document-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_document_examplesdart)
-    * [TeXView Quiz Example](#texview-quiz-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_quiz_examplesdart)
-    * [TeXView Custom Fonts Example](#texview-custom-fonts-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_fonts_examplesdart)
-    * [TeXView Image and Video Example](#texview-image-and-video-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_image_video_examplesdart)
-    * [TeXView InkWell Example](#texview-inkwell-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_ink_well_examplesdart)
+    * [TeXView Document Example](#texview-document-example)
+    * [TeXView Quiz Example](#texview-quiz-example)
+    * [TeXView Custom Fonts Example](#texview-custom-fonts-example)
+    * [TeXView Image and Video Example](#texview-image-and-video-example)
+    * [TeXView InkWell Example](#texview-inkwell-example)
 * [Demo Application](#application-demo)
 * [Demo Web](#web-demo)
 * [Api Changes](#api-changes)
@@ -45,7 +45,9 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.org/packages/webview_flutter_plus) a very powerful extension of [webview_flutter](https://pub.dartlang.org/packages/webview_flutter).
 
 
-# Demo Video: [Click to Watch on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
+# Demo Video
+
+ ###[Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
 
 # Screenshots
  Fonts Sample  |Quiz Sample    | TeX Document
@@ -165,11 +167,20 @@ TeXView(
     ))
 ```
 
-### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_examples.dart)
-### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
-### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_examples.dart)
-### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
-### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
+### TeXView Document Example
+#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_examples.dart)
+
+### TeXView Quiz Example
+#### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
+
+### TeXView Custom Fonts Example
+#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_examples.dart)
+
+### TeXView Image and Video Example
+#### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
+
+### TeXView InkWell Example
+#### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
 
 Do check the [Complete Example](https://github.com/shah-xad/flutter_tex/tree/master/example) for the true understanding of the package.
 
