@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_group_item.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
+import 'package:flutter_tex/src/style/tex_view_style.dart';
 
 class TeXViewGroup extends TeXViewWidget {
   /// A list of [TeXViewWidget].
-  @required
   final List<TeXViewGroupItem> children;
 
   /// On Tap Callback when a child is tapped.
@@ -23,8 +22,8 @@ class TeXViewGroup extends TeXViewWidget {
   final TeXViewStyle normalItemStyle;
 
   const TeXViewGroup(
-      {this.children,
-      this.onTap,
+      {@required this.children,
+      @required this.onTap,
       this.style,
       this.selectedItemStyle,
       this.normalItemStyle});

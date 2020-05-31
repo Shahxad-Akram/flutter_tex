@@ -14,23 +14,27 @@
 <div id="TeXView"></div>
 <script>
     teXView = document.getElementById('TeXView');
+    var formulasScrollStyle =
+        '.katex-display > .katex {                                              \n' +
+        '   display: inline-block;                                              \n' +
+        '   white-space: nowrap;                                                \n' +
+        '   max-width: 100%;                                                    \n' +
+        '   overflow-x: scroll;                                                 \n' +
+        '   text-align: initial;                                                \n' +
+        '}                                                                      \n' +
+
+        '.katex {                                                               \n' +
+        '   font: normal 1.21em KaTeX_Main, Times New Roman, serif;             \n' +
+        '   line-height: 1.2;                                                   \n' +
+        '   white-space: normal;                                                \n' +
+        '   text-indent: 0;                                                     \n' +
+        '}';
+
     if (!isWeb) {
-        appendStyle(' .katex-display > .katex {\n' +
-            '            display: inline-block;\n' +
-            '            white-space: nowrap;\n' +
-            '            max-width: 100%;\n' +
-            '            overflow-x: scroll;\n' +
-            '            text-align: initial;\n' +
-            '        }\n' +
-            '\n' +
-            '        .katex {\n' +
-            '            font: normal 1.21em KaTeX_Main, Times New Roman, serif;\n' +
-            '            line-height: 1.2;\n' +
-            '            white-space: normal;\n' +
-            '            text-indent: 0;\n' +
-            '        }');
+        appendStyle(formulasScrollStyle);
         initTeXView();
     }
+
 
     function onTeXViewRenderComplete(onCompleteCallback) {
         var viewInstanceCount = getUrlParam('instanceCount');
@@ -41,12 +45,6 @@
         }, 250 * viewInstanceCount)
     }
 
-    function appendStyle(content) {
-        var style = document.createElement('STYLE');
-        style.type = 'text/css';
-        style.appendChild(document.createTextNode(content));
-        document.head.appendChild(style);
-    }
 </script>
 </body>
 </html>

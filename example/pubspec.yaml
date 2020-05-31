@@ -32,3 +32,11 @@ flutter:
 
   assets:
     - assets/flutter_tex_banner.png
+    - fonts/Army.ttf
+    - fonts/Budhrg.ttf
+    - fonts/CELTG.ttf
+    - fonts/hillock.ttf
+    - fonts/intimacy.ttf
+    - fonts/SansationLight.ttf
+    - fonts/slenmini.ttf
+    - fonts/SubaccuzRegular.ttf

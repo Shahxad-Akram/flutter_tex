@@ -1,15 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
+import 'package:flutter_tex/src/style/tex_view_style.dart';
 
 class TeXViewInkWell extends TeXViewWidget {
   /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
-  @required
   final String id;
 
   /// A [TeXViewWidget] as child.
-  @required
   final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
@@ -21,7 +19,11 @@ class TeXViewInkWell extends TeXViewWidget {
   final Function(String id) onTap;
 
   const TeXViewInkWell(
-      {this.child, this.id, this.onTap, this.rippleEffect, this.style});
+      {@required this.child,
+      @required this.id,
+      this.onTap,
+      this.rippleEffect,
+      this.style});
 
   @override
   TeXViewWidgetMeta meta() {

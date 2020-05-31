@@ -1,22 +1,22 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_tex/src/models/tex_view_font.dart';
+import 'package:flutter_tex/src/models/tex_view_rendering_engine.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
-import 'package:flutter_tex/src/utils/tex_view_rendering_engine.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
-import 'package:flutter_tex/src/views/mobile_tex_view.dart'
-    if (dart.library.html) 'package:flutter_tex/src/views/web_tex_view.dart';
+import 'package:flutter_tex/src/style/tex_view_style.dart';
+import 'package:flutter_tex/src/views/tex_view_mobile.dart'
+    if (dart.library.html) 'package:flutter_tex/src/views/tex_view_web.dart';
 
 ///A Flutter Widget to render Mathematics / Maths, Physics and Chemistry, Statistics / Stats Equations based on LaTeX with full HTML and JavaScript support.
 class TeXView extends StatefulWidget {
   final Key key;
 
   /// A list of TeXViewChild.
-  @required
   final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
+
+  final List<TeXViewFont> fonts;
 
   /// Render Engine to render TeX.
   final TeXViewRenderingEngine renderingEngine;
@@ -41,7 +41,8 @@ class TeXView extends StatefulWidget {
 
   const TeXView(
       {this.key,
-      this.child,
+      @required this.child,
+      this.fonts = const [],
       this.style,
       this.height,
       this.loadingWidget,

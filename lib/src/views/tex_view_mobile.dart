@@ -81,7 +81,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getJsonData() {
-    return CoreUtils.getRawData(widget.child, widget?.style);
+    return CoreUtils.getRawData(widget.child, widget?.style, widget.fonts);
   }
 
   void _handleRequest(HttpRequest request) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXExample {
@@ -131,7 +132,6 @@ class _TeXViewDocumentExamplesState extends State<TeXViewDocumentExamples> {
                   }
                   """)
                   : TeXViewRenderingEngine.mathjax(),
-              showLoadingWidget: true,
               child: TeXViewColumn(children: [
                 TeXExample.introduction,
                 TeXExample.quadraticEquation,

@@ -5,12 +5,19 @@
 
 # Contents
 * [About](#about)
+* [Demo Video](#demo-video-click-to-watch-on-youtubehttpswwwyoutubecomwatchvyinbvexv_nm)
 * [Screenshots](#screenshots)
 * [How to use?](#how-to-use)
    * [Android](#android)
    * [iOS](#ios)
    * [Web](#web)    
-* [Example](#example)
+* [Examples](#examples)
+    * [General Example](#general-example)
+    * [TeXView Document Example](#texview-document-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_document_examplesdart)
+    * [TeXView Quiz Example](#texview-quiz-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_quiz_examplesdart)
+    * [TeXView Custom Fonts Example](#texview-custom-fonts-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_fonts_examplesdart)
+    * [TeXView Image and Video Example](#texview-image-and-video-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_image_video_examplesdart)
+    * [TeXView InkWell Example](#texview-inkwell-examplehttpsgithubcomshah-xadflutter_texblobmasterexamplelibtex_view_ink_well_examplesdart)
 * [Demo Application](#application-demo)
 * [Demo Web](#web-demo)
 * [Api Changes](#api-changes)
@@ -19,7 +26,7 @@
 * [Cautions](#cautions)
 
 # About
-A Flutter Package to render so many types of equations based on **LaTeX** and **TeX**, most commonly used are as followings:
+A Flutter Package to render **fully offline** so many types of equations based on **LaTeX** and **TeX**, most commonly used are as followings:
 
 - **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
 
@@ -37,12 +44,15 @@ Rendering of equations depends on [mini-mathjax](https://github.com/electricbook
 
 This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.org/packages/webview_flutter_plus) a very powerful extension of [webview_flutter](https://pub.dartlang.org/packages/webview_flutter).
 
+
+# Demo Video: [Click to Watch on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
+
 # Screenshots
-Main Page      |Quiz Example   | TeX Examples
+ Fonts Sample  |Quiz Sample    | TeX Document
 :-------------:|:-------------:|:-------------:
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_1.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_2.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_3.png"/>
 
-TeX Examples   | Image Example | InkWell Example
+ TeX Document  | Image & Video | InkWell 
 :-------------:|:-------------:|:-------------:
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_4.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_5.png"/> | <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/screenshots/screenshot_6.png"/>
 
@@ -51,7 +61,7 @@ TeX Examples   | Image Example | InkWell Example
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.4+2
+  flutter_tex: ^3.6.5
 ```
 
 **2:** You can install packages from the command line:
@@ -75,8 +85,6 @@ Make sure to add this line `android:usesCleartextTraffic="true"` in your `<proje
 
 Required Permissions are:
 ```xml
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
 ### iOS
@@ -85,7 +93,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 <key>NSAppTransportSecurity</key>
   <dict>
     <key>NSAllowsArbitraryLoads</key> <true/>
-  </dict>
+  </dict>Example
 <key>io.flutter.embedded_views_preview</key> <true/> 
 ```
 
@@ -107,7 +115,9 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 **5:** Now you can use TeXView as a widget:
 
-# Example
+# Examples
+
+### General Example
 ```dart
 TeXView(
     showLoadingWidget: false,
@@ -154,6 +164,13 @@ TeXView(
       ),
     ))
 ```
+
+### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_examples.dart)
+### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
+### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_examples.dart)
+### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
+### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
+
 Do check the [Complete Example](https://github.com/shah-xad/flutter_tex/tree/master/example) for the true understanding of the package.
 
 # Application Demo.

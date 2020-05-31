@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
-class TeXViewImageExample extends StatelessWidget {
+class TeXViewImageVideoExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TeXViewImage Example"),
+        title: Text("TeXView Image & Video Example"),
       ),
       body: ListView(
         children: [
           TeXView(
-              showLoadingWidget: true,
               child: TeXViewColumn(children: [
                 TeXViewDocument(
                     r"""<h2>Flutter \( \rm\\TeX \) Image Example</h2>""",
@@ -24,6 +24,9 @@ class TeXViewImageExample extends StatelessWidget {
                     borderRadius: TeXViewBorderRadius.all(20),
                   ),
                 ),
+                TeXViewDocument('Video loaded form Youtube link'),
+                TeXViewVideo.youtube(
+                    "https://www.youtube.com/watch?v=YiNbVEXV_NM&lc=Ugyg4ljzrK0D6YfrO854AaABAg"),
                 TeXViewDocument(
                     'Image Loaded From Network, this may take some time according to your network speed'),
                 TeXViewContainer(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class Quiz {
@@ -112,7 +113,6 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
             textAlign: TextAlign.center,
           ),
           TeXView(
-              showLoadingWidget: true,
               child: TeXViewColumn(children: [
                 TeXViewDocument(quizList[currentQuizIndex].statement,
                     style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),

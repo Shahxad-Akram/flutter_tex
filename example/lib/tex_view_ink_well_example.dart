@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewInkWellExample extends StatefulWidget {
@@ -35,7 +36,6 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
             style: TextStyle(fontSize: 18),
           ),
           TeXView(
-              showLoadingWidget: true,
               child: TeXViewColumn(children: [
                 TeXViewInkWell(
                     child: TeXViewDocument(

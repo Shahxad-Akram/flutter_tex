@@ -3,6 +3,7 @@ import 'dart:js' as js;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 
@@ -29,7 +30,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getRawData() {
-    return CoreUtils.getRawData(widget.child, widget?.style);
+    return CoreUtils.getRawData(widget.child, widget?.style, widget.fonts);
   }
 
   @override

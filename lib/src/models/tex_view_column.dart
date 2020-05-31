@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/src/models/tex_view_widget.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/utils/tex_view_style.dart';
+import 'package:flutter_tex/src/style/tex_view_style.dart';
 
 class TeXViewColumn extends TeXViewWidget {
   /// A list of [TeXViewWidget].
-  @required
+
   final List<TeXViewWidget> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  const TeXViewColumn({this.children, this.style});
+  const TeXViewColumn({@required this.children, this.style});
 
   @override
   TeXViewWidgetMeta meta() {

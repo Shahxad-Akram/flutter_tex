@@ -1,3 +1,6 @@
+## [3.6.5] - May 31, 2020
+* Custom font integration and video player from youtube added, see example folder.
+
 ## [3.6.4+2] - May 30, 2020
 * Moved to `webview_flutter_plus` a powerful extension of `webview_flutter`.
 
