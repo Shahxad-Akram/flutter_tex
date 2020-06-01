@@ -18,6 +18,7 @@
     * [TeXView Custom Fonts Example](#texview-custom-fonts-example)
     * [TeXView Image and Video Example](#texview-image-and-video-example)
     * [TeXView InkWell Example](#texview-inkwell-example)
+    * [Complete Example](#complete-example)
 * [Demo Application](#application-demo)
 * [Demo Web](#web-demo)
 * [Api Changes](#api-changes)
@@ -63,7 +64,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.5+1
+  flutter_tex: ^3.6.5+2
 ```
 
 **2:** You can install packages from the command line:
@@ -182,7 +183,9 @@ TeXView(
 ### TeXView InkWell Example
 #### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
 
-Do check the [Complete Example](https://github.com/shah-xad/flutter_tex/tree/master/example) for the true understanding of the package.
+### Complete Example
+#### [Complete Example Code](https://github.com/shah-xad/flutter_tex/tree/master/example)
+
 
 # Application Demo.
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>

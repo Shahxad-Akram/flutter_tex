@@ -18,7 +18,6 @@
             tex2jax: {
                 ignoreClass: "tex2jax_ignore",
             },
-
             jax: ["input/TeX", "output/SVG"],
             extensions: ["tex2jax.js", "MathEvents.js"],
             TeX: {
@@ -56,7 +55,8 @@
 <script>
     teXView = document.getElementById('TeXView');
     if (!isWeb) initTeXView();
-    function renderTeXView(onCompleteCallback, configurations) {
+
+    function renderTeXView(onCompleteCallback) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
             onCompleteCallback();
         });

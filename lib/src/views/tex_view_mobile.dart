@@ -28,14 +28,10 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     return IndexedStack(
       index: widget.showLoadingWidget ? _height == 1 ? 1 : 0 : 0,
       children: <Widget>[
-        Container(
+        SizedBox(
           height: widget.height ?? _height,
           child: WebViewPlus(
-            onPageFinished: (message) {
-              if (widget.onPageFinished != null) {
-                widget.onPageFinished(message);
-              }
-            },
+            onPageFinished: widget.onPageFinished,
             onWebViewCreated: (controller) {
               this._controller = controller;
               _initTeXView();
@@ -54,23 +50,26 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             onRequest: _handleRequest,
           ),
         ),
-        widget.loadingWidget ??
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  CircularProgressIndicator(),
-                  Divider(
-                    height: 5,
-                    color: Colors.transparent,
-                  ),
-                  Text("Rendering TeXView...!")
-                ],
-              ),
-            )
+        widget.loadingWidget ?? defaultLoadingWidget()
       ],
+    );
+  }
+
+  Widget defaultLoadingWidget() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          CircularProgressIndicator(),
+          Divider(
+            height: 5,
+            color: Colors.transparent,
+          ),
+          Text("Rendering TeXView...!")
+        ],
+      ),
     );
   }
 
@@ -99,10 +98,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     if (_controller != null &&
         (getJsonData() != _lastData ||
             widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
-      if (widget.showLoadingWidget) {
-        _height = 1;
-      }
-
+      if (widget.showLoadingWidget) _height = 1;
       _controller.loadAsset(
           "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?instanceCount=$instanceCount");
       this._lastData = getJsonData();
@@ -112,13 +108,11 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
     double viewHeight = double.parse(javascriptMessage.message);
-    if (_height != viewHeight) {
+    if (this._height != viewHeight)
       setState(() {
-        _height = viewHeight;
+        this._height = viewHeight;
       });
-    }
-    if (widget.onRenderFinished != null) {
-      widget.onRenderFinished(_height);
-    }
+
+    if (widget.onRenderFinished != null) widget.onRenderFinished(this._height);
   }
 }

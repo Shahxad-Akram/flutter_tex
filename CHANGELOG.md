@@ -1,3 +1,6 @@
+## [3.6.5+2] - June 1, 2020
+* Mathjax issues fixed.
+
 ## [3.6.5+1] - June 1, 2020
 * Major Fixes.
 
