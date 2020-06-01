@@ -12,7 +12,7 @@
     </style>
 
     <script>
-        const mathjaxConfigurations = {
+        var mathjaxConfigurations = {
             showMathMenu: false,
             delayStartupUntil: "configured",
             tex2jax: {
@@ -40,7 +40,7 @@
                 useGlobalCache: true,
                 matchFontHeight: true
 
-            },
+            }
         };
     </script>
     <script id="MathJaxConfig" type="text/x-mathjax-config">MathJax.Hub.Config(mathjaxConfigurations);</script>
@@ -53,8 +53,11 @@
 
 <div id="TeXView"></div>
 <script>
+    //||||||||||JSON||DATA||HERE||||||||||
     teXView = document.getElementById('TeXView');
-    if (!isWeb) initTeXView();
+    if (!isWeb) { // noinspection JSUnresolvedVariable
+        initTeXView(jsonData);
+    }
 
     function renderTeXView(onCompleteCallback) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {

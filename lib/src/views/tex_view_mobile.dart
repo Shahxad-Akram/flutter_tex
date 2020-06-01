@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
@@ -47,15 +45,29 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                   }),
             ]),
             javascriptMode: JavascriptMode.unrestricted,
-            onRequest: _handleRequest,
+            codeInjection: () {
+              return CodeInjection(
+                  from: '//||||||||||JSON||DATA||HERE||||||||||',
+                  to: "var jsonData = " + getJsonData());
+            },
           ),
         ),
-        widget.loadingWidget ?? defaultLoadingWidget()
+        widget.loadingWidget ?? _defaultLoadingWidget()
       ],
     );
   }
 
-  Widget defaultLoadingWidget() {
+  @override
+  void dispose() {
+    instanceCount -= 1;
+    super.dispose();
+  }
+
+  String getJsonData() {
+    return CoreUtils.getRawData(widget);
+  }
+
+  Widget _defaultLoadingWidget() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -71,27 +83,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    instanceCount -= 1;
-    super.dispose();
-  }
-
-  String getJsonData() {
-    return CoreUtils.getRawData(widget);
-  }
-
-  void _handleRequest(HttpRequest request) {
-    try {
-      if (request.method == 'GET' &&
-          request.requestedUri.pathSegments[0] == 'rawData' &&
-          request.requestedUri.port == _controller.getServerPort())
-        request.response.write(getJsonData());
-    } catch (e) {
-      print('Exception in handleRequest: $e');
-    }
   }
 
   void _initTeXView() {
