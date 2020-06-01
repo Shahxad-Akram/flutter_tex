@@ -56,8 +56,7 @@
 <script>
     teXView = document.getElementById('TeXView');
     if (!isWeb) initTeXView();
-
-    function onTeXViewRenderComplete(onCompleteCallback) {
+    function renderTeXView(onCompleteCallback, configurations) {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "TeXView"], function () {
             onCompleteCallback();
         });

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/utils/core_utils.dart';
+import 'package:flutter_tex/src/views/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
@@ -81,7 +81,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   String getJsonData() {
-    return CoreUtils.getRawData(widget.child, widget?.style, widget.fonts);
+    return CoreUtils.getRawData(widget);
   }
 
   void _handleRequest(HttpRequest request) {
@@ -104,7 +104,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       }
 
       _controller.loadAsset(
-          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?port=${_controller.getServerPort()}&instanceCount=$instanceCount&configurations=${Uri.encodeComponent(widget.renderingEngine?.getConfigurations())}");
+          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?instanceCount=$instanceCount");
       this._lastData = getJsonData();
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }

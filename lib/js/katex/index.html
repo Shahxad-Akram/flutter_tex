@@ -36,15 +36,13 @@
     }
 
 
-    function onTeXViewRenderComplete(onCompleteCallback) {
-        var viewInstanceCount = getUrlParam('instanceCount');
+    function renderTeXView(onCompleteCallback, configurations) {
         if (!viewInstanceCount) viewInstanceCount = 1;
         renderMathInElement(teXView, configurations);
         setTimeout(function () {
             onCompleteCallback();
         }, 250 * viewInstanceCount)
     }
-
 </script>
 </body>
 </html>

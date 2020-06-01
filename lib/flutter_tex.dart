@@ -1,6 +1,6 @@
 library flutter_tex;
 
-export 'src/models/tex_view_all_widgets.dart';
-export 'src/models/tex_view_rendering_engine.dart';
-export 'src/style/tex_view_style.dart';
-export 'src/views/tex_view.dart';
+export 'package:flutter_tex/src/manifests/models_manifest.dart';
+export 'package:flutter_tex/src/manifests/style_manifest.dart';
+export 'package:flutter_tex/src/manifests/widgets_manifest.dart';
+export 'package:flutter_tex/src/views/tex_view.dart';

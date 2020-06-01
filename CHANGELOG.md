@@ -1,3 +1,6 @@
+## [3.6.5+1] - June 1, 2020
+* Major Fixes.
+
 ## [3.6.5] - May 31, 2020
 * Custom font integration and video player from youtube added, see example folder.
 

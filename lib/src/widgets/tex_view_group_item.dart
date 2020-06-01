@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/tex_view_widget.dart';
+import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 
 class TeXViewGroupItem extends TeXViewWidget {

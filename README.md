@@ -63,7 +63,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.5
+  flutter_tex: ^3.6.5+1
 ```
 
 **2:** You can install packages from the command line:
@@ -105,7 +105,7 @@ For Web support you need to put `<script src="assets/packages/flutter_tex/src/fl
 <head>
     <meta charset="UTF-8">
     <title>Flutter TeX</title>
-    <script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>
+    <script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>
 </head>
 ```
 

@@ -1,8 +1,9 @@
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex/src/manifests/style_manifest.dart';
+import 'package:flutter_tex/src/style/style_utils.dart';
 
 ///TeXViewPadding to manage different types of padding of TeXView.
 class TeXViewPadding {
-  final SizeUnit sizeUnit;
+  final TeXViewSizeUnit sizeUnit;
 
   /// Top padding.
   final int top;

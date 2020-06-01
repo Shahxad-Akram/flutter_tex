@@ -94,7 +94,7 @@ class _TeXViewFontsExamplesState extends State<TeXViewFontsExamples> {
               style: TeXViewStyle(
                   fontStyle: TeXViewFontStyle(
                       fontSize: 20,
-                      sizeUnit: SizeUnit.Pt,
+                      sizeUnit: TeXViewSizeUnit.Pt,
                       fontFamily: fontFamily),
                   padding: TeXViewPadding.all(10),
                   borderRadius: TeXViewBorderRadius.all(10),

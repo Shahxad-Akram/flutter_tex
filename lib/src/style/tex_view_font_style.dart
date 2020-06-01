@@ -1,4 +1,5 @@
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex/src/manifests/style_manifest.dart';
+import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewFontStyle {
   /// Custom font name registered as [TeXViewFont]
@@ -8,7 +9,7 @@ class TeXViewFontStyle {
   final int fontSize;
 
   /// Font size unit.
-  final SizeUnit sizeUnit;
+  final TeXViewSizeUnit sizeUnit;
 
   TeXViewFontStyle({this.fontSize, this.fontFamily, this.sizeUnit});
 

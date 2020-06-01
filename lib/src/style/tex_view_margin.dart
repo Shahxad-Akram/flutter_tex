@@ -1,8 +1,9 @@
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex/src/manifests/style_manifest.dart';
+import 'package:flutter_tex/src/style/style_utils.dart';
 
 ///TeXViewMargin to manage different types of margin of TeXView.
 class TeXViewMargin {
-  final SizeUnit sizeUnit;
+  final TeXViewSizeUnit sizeUnit;
 
   /// Top margin.
   final int top;

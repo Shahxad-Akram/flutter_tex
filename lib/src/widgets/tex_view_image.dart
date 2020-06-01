@@ -1,6 +1,6 @@
-import 'package:flutter_tex/src/models/tex_view_widget.dart';
+import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/style/tex_view_style.dart';
+import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewImage extends TeXViewWidget {
   /// Uri for Image.

@@ -1,15 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/style/tex_view_border.dart';
-import 'package:flutter_tex/src/style/tex_view_font_style.dart';
-import 'package:flutter_tex/src/style/tex_view_margin.dart';
-import 'package:flutter_tex/src/style/tex_view_padding.dart';
-import 'package:flutter_tex/src/utils/style_utils.dart';
-
-export '../utils/style_utils.dart';
-export 'tex_view_border.dart';
-export 'tex_view_font_style.dart';
-export 'tex_view_margin.dart';
-export 'tex_view_padding.dart';
+import 'package:flutter_tex/src/manifests/style_manifest.dart';
+import 'package:flutter_tex/src/style/style_utils.dart';
 
 /// TeXViewStyle provide an easy interface for styling TeXView which converts dart code to CSS code.
 class TeXViewStyle {
@@ -22,8 +13,8 @@ class TeXViewStyle {
   ///TeXViewMargin to manage margin of View by using [TeXViewMargin].
   final TeXViewMargin margin;
 
-  ///[SizeUnit] for [height], [width] and [elevation].
-  final SizeUnit sizeUnit;
+  ///[TeXViewSizeUnit] for [height], [width] and [elevation].
+  final TeXViewSizeUnit sizeUnit;
 
   ///Height of View.
   final int height;
