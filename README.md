@@ -64,7 +64,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.6
+  flutter_tex: ^3.6.6+1
 ```
 
 **2:** You can install packages from the command line:
@@ -86,10 +86,16 @@ Make sure to add this line `android:usesCleartextTraffic="true"` in your `<proje
 </application>
 ```
 
-Required Permissions are:
+It completely works offline, without internet connection, but these are required permissions to work properly:
+
 ```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 ```
+
+It'll still work in debug mode without permissions, but it won't work in release application without mentioned permissions.
+
 ### iOS
 Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```plist

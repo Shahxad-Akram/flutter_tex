@@ -1,4 +1,7 @@
 ## [3.6.6] - June 1, 2020
+* Bugs fixed.
+
+## [3.6.6] - June 1, 2020
 * Speed Optimizations. Rendering speed has been improved very much.
 
 ## [3.6.5+2] - June 1, 2020
