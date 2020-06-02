@@ -107,7 +107,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```
 
 ### Web
-For Web support you need to put `<script src="assets/packages/flutter_tex/src/flutter_tex_libs/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
+For Web support you need to put `<script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
 ```html
 <head>
     <meta charset="UTF-8">

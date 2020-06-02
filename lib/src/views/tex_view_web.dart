@@ -1,4 +1,4 @@
-import 'dart:html' as html;
+import 'dart:html';
 import 'dart:js' as js;
 import 'dart:ui' as ui;
 
@@ -54,7 +54,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
           viewId.toString(),
-          (int id) => html.IFrameElement()
+          (int id) => IFrameElement()
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
             ..src =

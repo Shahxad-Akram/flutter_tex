@@ -87,7 +87,6 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
   @override
   Widget build(BuildContext context) {
     return TeXView(
-        showLoadingWidget: false,
         child: TeXViewColumn(children: [
           TeXViewInkWell(
             id: "id_0",

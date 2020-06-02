@@ -26,6 +26,8 @@ class TeXViewVideo extends TeXViewWidget {
       };
 
   String _initData() {
-    return """<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${Uri.parse(this.url).queryParameters['v']}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>""";
+    return """<iframe width="100%" height="100%" frameborder="0" allowfullscreen
+    src="https://www.youtube.com/embed/${Uri.parse(this.url).queryParameters['v']}"
+    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>""";
   }
 }
