@@ -1,3 +1,6 @@
+## [3.6.6+2] - June 1, 2020
+* Minor Fixes
+
 ## [3.6.6+1] - June 1, 2020
 * Bugs fixed.
 
