@@ -1,3 +1,6 @@
+## [3.6.6+4] - June 2, 2020
+* Size reduced
+
 ## [3.6.6+3] - June 2, 2020
 * Minor Fixes
 
