@@ -16,7 +16,7 @@ class TeXViewContainer extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', type: 'tex-view-container', node: Node.InternalChild);
+        tag: 'div', classList: 'tex-view-container', node: Node.InternalChild);
   }
 
   @override

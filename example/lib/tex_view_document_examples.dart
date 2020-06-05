@@ -122,6 +122,7 @@ class _TeXViewDocumentExamplesState extends State<TeXViewDocumentExamples> {
             subtitle: Text("RenderingEngine for Quality Rendering"),
           ),
           TeXView(
+              showLoadingWidget: true,
               renderingEngine: radVal == 0
                   ? TeXViewRenderingEngine.katex(configurations: r"""
                   {

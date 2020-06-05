@@ -10,40 +10,42 @@
     <script crossorigin="anonymous" src="contrib/auto-render.js"></script>
     <script crossorigin="anonymous" src="contrib/mhchem.js"></script>
     <title>katex</title>
+    <script>
+        var formulasScrollStyle =
+            '.katex-display > .katex {                                    \n' +
+            '   display: inline-block;                                    \n' +
+            '   white-space: nowrap;                                      \n' +
+            '   max-width: 100%;                                          \n' +
+            '   overflow-x: scroll;                                       \n' +
+            '   text-align: initial;                                      \n' +
+            '}                                                            \n' +
+
+            '.katex {                                                     \n' +
+            '   font: normal 1.21em KaTeX_Main, Times New Roman, serif;   \n' +
+            '   line-height: 1.2;                                         \n' +
+            '   white-space: normal;                                      \n' +
+            '   text-indent: 0;                                           \n' +
+            '}';
+    </script>
 </head>
 <body>
 <div id="TeXView"></div>
 <script>
-    //||||||||||JSON||DATA||HERE||||||||||
     teXView = document.getElementById('TeXView');
-    var formulasScrollStyle =
-        '.katex-display > .katex {                                              \n' +
-        '   display: inline-block;                                              \n' +
-        '   white-space: nowrap;                                                \n' +
-        '   max-width: 100%;                                                    \n' +
-        '   overflow-x: scroll;                                                 \n' +
-        '   text-align: initial;                                                \n' +
-        '}                                                                      \n' +
-
-        '.katex {                                                               \n' +
-        '   font: normal 1.21em KaTeX_Main, Times New Roman, serif;             \n' +
-        '   line-height: 1.2;                                                   \n' +
-        '   white-space: normal;                                                \n' +
-        '   text-indent: 0;                                                     \n' +
-        '}';
+    //  |*|isWeb = ? |*|
     if (!isWeb) {
         appendStyle(formulasScrollStyle);
-        // noinspection JSUnresolvedVariable
+        var jsonData = {}; //  |*|jsonData = ? |*|
         initTeXView(jsonData);
     }
 
     function renderTeXView(onCompleteCallback, configurations) {
-        if (!viewInstanceCount) viewInstanceCount = 1;
         renderMathInElement(teXView, configurations);
         setTimeout(function () {
             onCompleteCallback();
-        }, 250 * viewInstanceCount)
+        }, 0)
     }
+
 </script>
 </body>
 </html>

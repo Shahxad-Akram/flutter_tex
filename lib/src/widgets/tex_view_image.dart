@@ -15,7 +15,7 @@ class TeXViewImage extends TeXViewWidget {
 
   @override
   TeXViewWidgetMeta meta() {
-    return TeXViewWidgetMeta(tag: 'img', type: _type, node: Node.Leaf);
+    return TeXViewWidgetMeta(tag: 'img', classList: _type, node: Node.Leaf);
   }
 
   @override

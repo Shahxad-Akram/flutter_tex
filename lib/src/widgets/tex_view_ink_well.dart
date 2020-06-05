@@ -29,7 +29,7 @@ class TeXViewInkWell extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', type: 'tex-view-ink-well', node: Node.InternalChild);
+        tag: 'div', classList: 'tex-view-ink-well', node: Node.InternalChild);
   }
 
   @override

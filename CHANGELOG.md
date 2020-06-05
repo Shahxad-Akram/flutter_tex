@@ -1,3 +1,6 @@
+## [3.6.6+5] - June 2, 2020
+* Speed Optimizations.
+
 ## [3.6.6+4] - June 2, 2020
 * Size reduced
 

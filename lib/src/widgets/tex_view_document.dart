@@ -15,7 +15,7 @@ class TeXViewDocument extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', type: 'tex-view-document', node: Node.Leaf);
+        tag: 'div', classList: 'tex-view-document', node: Node.Leaf);
   }
 
   @override

@@ -30,7 +30,7 @@ class TeXViewGroup extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', type: 'tex-view-group', node: Node.InternalChildren);
+        tag: 'div', classList: 'tex-view-group', node: Node.InternalChildren);
   }
 
   @override

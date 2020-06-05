@@ -7,8 +7,9 @@ import 'package:flutter_tex/src/views/tex_view.dart';
 class CoreUtils {
   static String getRawData(TeXView teXView) {
     return jsonEncode({
-      'meta': TeXViewWidgetMeta(tag: 'div', type: 'tex-view', node: Node.Root)
-          .toJson(),
+      'meta':
+          TeXViewWidgetMeta(tag: 'div', classList: 'tex-view', node: Node.Root)
+              .toJson(),
       'id': null,
       'configurations': teXView.renderingEngine?.getConfigurations(),
       'fonts': teXView.fonts.map((font) => font.toJson()).toList(),

@@ -12,7 +12,7 @@ class TeXViewVideo extends TeXViewWidget {
 
   @override
   TeXViewWidgetMeta meta() {
-    return TeXViewWidgetMeta(tag: 'div', type: _type, node: Node.Leaf);
+    return TeXViewWidgetMeta(tag: 'div', classList: _type, node: Node.Leaf);
   }
 
   @override

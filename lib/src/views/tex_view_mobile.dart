@@ -4,17 +4,11 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/views/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
-class TeXViewState extends State<TeXView>
-    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  static int instanceCount = 0;
+class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   WebViewPlusController _controller;
   double _height = 1;
   String _lastData;
   String _lastRenderingEngine;
-
-  TeXViewState() {
-    instanceCount += 1;
-  }
 
   @override
   bool get wantKeepAlive => widget.keepAlive ?? true;
@@ -23,34 +17,29 @@ class TeXViewState extends State<TeXView>
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
-    _initTeXView();
+    _buildTeXView();
     return IndexedStack(
       index: widget.showLoadingWidget ? _height == 1 ? 1 : 0 : 0,
       children: <Widget>[
-        AnimatedSize(
-          vsync: this,
-          curve: Curves.easeInSine,
-          duration: Duration(milliseconds: 1),
-          child: SizedBox(
-            height: widget.height ?? _height,
-            child: WebViewPlus(
-              onPageFinished: widget.onPageFinished,
-              onWebViewCreated: (controller) {
-                this._controller = controller;
-                _initTeXView();
-              },
-              javascriptChannels: Set.from([
-                JavascriptChannel(
-                    name: 'RenderedTeXViewHeight',
-                    onMessageReceived: _renderedTeXViewHeightHandler),
-                JavascriptChannel(
-                    name: 'OnTapCallback',
-                    onMessageReceived: (javascriptMessage) {
-                      widget.child.onTapManager(javascriptMessage.message);
-                    }),
-              ]),
-              javascriptMode: JavascriptMode.unrestricted,
-            ),
+        SizedBox(
+          height: widget.height ?? _height,
+          child: WebViewPlus(
+            onPageFinished: widget.onPageFinished,
+            onWebViewCreated: (controller) {
+              this._controller = controller;
+              _buildTeXView();
+            },
+            javascriptChannels: Set.from([
+              JavascriptChannel(
+                  name: 'RenderedTeXViewHeight',
+                  onMessageReceived: _renderedTeXViewHeightHandler),
+              JavascriptChannel(
+                  name: 'OnTapCallback',
+                  onMessageReceived: (javascriptMessage) {
+                    widget.child.onTapManager(javascriptMessage.message);
+                  }),
+            ]),
+            javascriptMode: JavascriptMode.unrestricted,
           ),
         ),
         widget.loadingWidget ?? _defaultLoadingWidget()
@@ -58,14 +47,27 @@ class TeXViewState extends State<TeXView>
     );
   }
 
-  @override
-  void dispose() {
-    instanceCount -= 1;
-    super.dispose();
-  }
-
   String getJsonData() {
     return CoreUtils.getRawData(widget);
+  }
+
+  void _buildTeXView() {
+    if (_controller != null &&
+        (getJsonData() != _lastData ||
+            widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
+      if (widget.showLoadingWidget) _height = 1;
+      _controller.loadAsset(
+          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html",
+          codeInjections: () => <CodeInjection>[
+                CodeInjection(
+                    from: '//  |*|jsonData = ? |*|',
+                    to: "jsonData = " + getJsonData()),
+                CodeInjection(
+                    from: '//  |*|isWeb = ? |*|', to: 'isWeb = false;'),
+              ]);
+      this._lastData = getJsonData();
+      this._lastRenderingEngine = widget.renderingEngine.getEngineName();
+    }
   }
 
   Widget _defaultLoadingWidget() {
@@ -86,30 +88,14 @@ class TeXViewState extends State<TeXView>
     );
   }
 
-  void _initTeXView() {
-    if (_controller != null &&
-        (getJsonData() != _lastData ||
-            widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
-      if (widget.showLoadingWidget) _height = 1;
-      _controller.loadAsset(
-          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html?instanceCount=$instanceCount",
-          codeInjections: <CodeInjection>[
-            CodeInjection(
-                from: '//||||||||||JSON||DATA||HERE||||||||||',
-                to: "var jsonData = " + getJsonData())
-          ]);
-      this._lastData = getJsonData();
-      this._lastRenderingEngine = widget.renderingEngine.getEngineName();
-    }
-  }
-
-  void _renderedTeXViewHeightHandler(JavascriptMessage javascriptMessage) {
-    double viewHeight = double.parse(javascriptMessage.message);
-    if (this._height != viewHeight)
+  void _renderedTeXViewHeightHandler(
+      JavascriptMessage javascriptMessage) async {
+    //double height = double.parse(javascriptMessage.message);
+    double height = await _controller.getWebviewPlusHeight();
+    if (this._height != height)
       setState(() {
-        this._height = viewHeight;
+        this._height = height;
       });
-
-    if (widget.onRenderFinished != null) widget.onRenderFinished(this._height);
+    widget.onRenderFinished?.call(height);
   }
 }
