@@ -64,7 +64,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.6+5
+  flutter_tex: ^3.6.6+6
 ```
 
 **2:** You can install packages from the command line:

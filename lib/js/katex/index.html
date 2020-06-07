@@ -31,11 +31,13 @@
 <body>
 <div id="TeXView"></div>
 <script>
+    pageLoaded();
+
     teXView = document.getElementById('TeXView');
-    //  |*|isWeb = ? |*|
-    if (!isWeb) {
+
+    function initView(jsonData) {
+        isWeb = false;
         appendStyle(formulasScrollStyle);
-        var jsonData = {}; //  |*|jsonData = ? |*|
         initTeXView(jsonData);
     }
 

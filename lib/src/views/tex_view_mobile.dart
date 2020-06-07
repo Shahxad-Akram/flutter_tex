@@ -35,9 +35,16 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                   onMessageReceived: _renderedTeXViewHeightHandler),
               JavascriptChannel(
                   name: 'OnTapCallback',
-                  onMessageReceived: (javascriptMessage) {
-                    widget.child.onTapManager(javascriptMessage.message);
+                  onMessageReceived: (jm) {
+                    widget.child.onTapManager(jm.message);
                   }),
+              JavascriptChannel(
+                  name: 'LoadData',
+                  onMessageReceived: (_) {
+                    _controller.evaluateJavascript("var jsonData = " +
+                        getJsonData() +
+                        ";initView(jsonData);");
+                  })
             ]),
             javascriptMode: JavascriptMode.unrestricted,
           ),
@@ -57,14 +64,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             widget.renderingEngine.getEngineName() != _lastRenderingEngine)) {
       if (widget.showLoadingWidget) _height = 1;
       _controller.loadAsset(
-          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html",
-          codeInjections: () => <CodeInjection>[
-                CodeInjection(
-                    from: '//  |*|jsonData = ? |*|',
-                    to: "jsonData = " + getJsonData()),
-                CodeInjection(
-                    from: '//  |*|isWeb = ? |*|', to: 'isWeb = false;'),
-              ]);
+          "packages/flutter_tex/js/${widget.renderingEngine?.getEngineName()}/index.html");
       this._lastData = getJsonData();
       this._lastRenderingEngine = widget.renderingEngine.getEngineName();
     }
@@ -88,10 +88,9 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  void _renderedTeXViewHeightHandler(
-      JavascriptMessage javascriptMessage) async {
-    //double height = double.parse(javascriptMessage.message);
-    double height = await _controller.getWebviewPlusHeight();
+  void _renderedTeXViewHeightHandler(_) async {
+    double height = double.parse(
+        await _controller.evaluateJavascript('getTeXViewHeight()'));
     if (this._height != height)
       setState(() {
         this._height = height;

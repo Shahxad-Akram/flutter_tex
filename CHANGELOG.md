@@ -1,3 +1,6 @@
+## [3.6.6+6] - June 7, 2020
+* Rendering Enhancements.
+
 ## [3.6.6+5] - June 2, 2020
 * Speed Optimizations.
 

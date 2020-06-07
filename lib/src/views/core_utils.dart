@@ -12,7 +12,7 @@ class CoreUtils {
               .toJson(),
       'id': null,
       'configurations': teXView.renderingEngine?.getConfigurations(),
-      'fonts': teXView.fonts.map((font) => font.toJson()).toList(),
+      'fonts': (teXView.fonts ?? []).map((font) => font.toJson()).toList(),
       'data': teXView.child.toJson(),
       'style': teXView.style?.initStyle() ?? teXViewDefaultStyle
     });

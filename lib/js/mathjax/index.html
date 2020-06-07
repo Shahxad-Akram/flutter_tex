@@ -47,10 +47,11 @@
 <body>
 <div id="TeXView"></div>
 <script>
+    pageLoaded();
     teXView = document.getElementById('TeXView');
-    //  |*|isWeb = ? |*|
-    if (!isWeb) {
-        var jsonData = {}; //  |*|jsonData = ? |*|
+
+    function initView(jsonData) {
+        isWeb = false;
         initTeXView(jsonData);
     }
 

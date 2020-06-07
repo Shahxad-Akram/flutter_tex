@@ -41,7 +41,7 @@ class TeXView extends StatefulWidget {
   const TeXView(
       {this.key,
       @required this.child,
-      this.fonts = const [],
+      this.fonts,
       this.style,
       this.height,
       this.loadingWidget,
