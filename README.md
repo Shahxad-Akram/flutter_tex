@@ -65,7 +65,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7
+  flutter_tex: ^3.6.7+1
 ``` 
 
 
@@ -177,22 +177,22 @@ TeXView(
 ```
 
 ### TeXView Document Example
-#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_examples.dart)
+#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
 
 ### TeXView Markdown Example
 #### [TeXView Markdown Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
 
 ### TeXView Quiz Example
-#### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
+#### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
 
 ### TeXView Custom Fonts Example
-#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_examples.dart)
+#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
 
 ### TeXView Image and Video Example
-#### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
+#### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
 
 ### TeXView InkWell Example
-#### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
+#### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
 
 ### Complete Example
 #### [Complete Example Code](https://github.com/shah-xad/flutter_tex/tree/master/example)
@@ -213,8 +213,9 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
 - `children:` A list of `TeXViewWidget`
 
 - **`TeXViewWidget`**
-    - `TeXViewDocument` holds TeX data by using a raw string e.g. `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put HTML and Javascript code in it.
-    - `TeXViewContainer` holds a single `TeXViewWidget` with styling.
+    - `TeXViewDocument` Holds TeX data by using a raw string e.g. `r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """` You can also put HTML and Javascript code in it.
+    - `TeXViewMarkdown` Holds markdown data.
+    - `TeXViewContainer` Holds a single `TeXViewWidget` with styling.
     - `TeXViewImage` renders image from assets or network.
     - `TeXViewColumn` holds a list of `TeXViewWidget` vertically.
     - `TeXViewInkWell` for listening tap events. Its child and id is mandatory.

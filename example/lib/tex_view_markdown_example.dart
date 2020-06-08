@@ -121,13 +121,13 @@ import 'package:flutter_tex/flutter_tex.dart';
 # Examples
 
 ### TeXView Document Example
-#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_examples.dart)
+#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
 
 ### TeXView Quiz Example
 #### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
 
 ### TeXView Custom Fonts Example
-#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_examples.dart)
+#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
 
 ### TeXView Image and Video Example
 #### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)

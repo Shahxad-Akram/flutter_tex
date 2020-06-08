@@ -1,3 +1,6 @@
+## [3.6.7+1]- June 8, 2020
+* example links issue solved.
+
 ## [3.6.7] - June 7, 2020
 * Example updated.
 * `onTeXViewCreated` added.
