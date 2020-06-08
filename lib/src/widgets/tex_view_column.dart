@@ -5,6 +5,8 @@ import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewColumn extends TeXViewWidget {
+  final String id;
+
   /// A list of [TeXViewWidget].
 
   final List<TeXViewWidget> children;
@@ -12,12 +14,15 @@ class TeXViewColumn extends TeXViewWidget {
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  const TeXViewColumn({@required this.children, this.style});
+  const TeXViewColumn({this.id, @required this.children, this.style});
 
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', classList: 'tex-view-column', node: Node.InternalChildren);
+        id: this.id,
+        tag: 'div',
+        classList: 'tex-view-column',
+        node: Node.InternalChildren);
   }
 
   @override
@@ -26,7 +31,8 @@ class TeXViewColumn extends TeXViewWidget {
   }
 
   @override
-  Map toJson() => {
+  Map toJson() =>
+      {
         'meta': meta().toJson(),
         'data': this.children?.map((child) => child?.toJson())?.toList(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

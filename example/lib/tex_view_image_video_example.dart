@@ -3,15 +3,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewImageVideoExample extends StatelessWidget {
+  final TeXViewRenderingEngine renderingEngine;
+
+  TeXViewImageVideoExample(
+      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TeXView Image & Video Example"),
+        title: Text("TeXView Image & Video"),
       ),
       body: ListView(
         children: [
           TeXView(
+              renderingEngine: renderingEngine,
               child: TeXViewColumn(children: [
                 TeXViewDocument(
                     r"""<h2>Flutter \( \rm\\TeX \) Image Example</h2>""",
@@ -50,14 +56,14 @@ class TeXViewImageVideoExample extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
               ),
-              loadingWidget: Center(
+              loadingWidgetBuilder: (context) => Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text("Rendering...!")
+                    Text("Rendering...")
                   ],
                 ),
               ))

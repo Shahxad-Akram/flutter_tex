@@ -30,23 +30,27 @@
 </head>
 <body>
 <div id="TeXView"></div>
-<script>
-    pageLoaded();
 
+<script>
+
+    pageLoaded();
     teXView = document.getElementById('TeXView');
 
-    function initView(jsonData) {
-        isWeb = false;
+
+    function initView(jsonData, configs) {
+        configurations = configs;
         appendStyle(formulasScrollStyle);
         initTeXView(jsonData);
     }
 
-    function renderTeXView(onCompleteCallback, configurations) {
-        renderMathInElement(teXView, configurations);
+    function renderTeXView(onCompleteCallback) {
+        renderMathInElement(teXView);
         setTimeout(function () {
             onCompleteCallback();
         }, 0)
     }
+
+    console.log()
 
 </script>
 </body>

@@ -29,7 +29,10 @@ class TeXViewInkWell extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', classList: 'tex-view-ink-well', node: Node.InternalChild);
+        id: this.id,
+        tag: 'div',
+        classList: 'tex-view-ink-well',
+        node: Node.InternalChild);
   }
 
   @override
@@ -40,7 +43,6 @@ class TeXViewInkWell extends TeXViewWidget {
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'id': this.id,
         'rippleEffect': this.rippleEffect ?? true,
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

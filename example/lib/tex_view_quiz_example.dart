@@ -18,6 +18,11 @@ class QuizOption {
 }
 
 class TeXViewQuizExample extends StatefulWidget {
+  final TeXViewRenderingEngine renderingEngine;
+
+  TeXViewQuizExample(
+      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+
   @override
   _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();
 }
@@ -102,7 +107,7 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXView Quiz Example"),
+        title: Text("TeXView Quiz"),
       ),
       body: ListView(
         physics: ScrollPhysics(),
@@ -113,57 +118,47 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
             textAlign: TextAlign.center,
           ),
           TeXView(
-              child: TeXViewColumn(children: [
-                TeXViewDocument(quizList[currentQuizIndex].statement,
-                    style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
-                TeXViewGroup(
-                    children: quizList[currentQuizIndex]
-                        .options
-                        .map((QuizOption option) {
-                      return TeXViewGroupItem(
-                          rippleEffect: false,
-                          id: option.id,
-                          child: TeXViewDocument(option.option,
-                              style: TeXViewStyle(
-                                  padding: TeXViewPadding.all(10))));
-                    }).toList(),
-                    selectedItemStyle: TeXViewStyle(
-                        borderRadius: TeXViewBorderRadius.all(10),
-                        border: TeXViewBorder.all(TeXViewBorderDecoration(
-                            borderWidth: 3, borderColor: Colors.green[900])),
-                        margin: TeXViewMargin.all(10)),
-                    normalItemStyle:
-                        TeXViewStyle(margin: TeXViewMargin.all(10)),
-                    onTap: (id) {
-                      this.selectedOptionId = id;
-                      setState(() {
-                        isWrong = false;
-                      });
-                    })
-              ]),
-              style: TeXViewStyle(
-                margin: TeXViewMargin.all(5),
-                padding: TeXViewPadding.all(10),
-                borderRadius: TeXViewBorderRadius.all(10),
-                border: TeXViewBorder.all(
-                  TeXViewBorderDecoration(
-                      borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.Solid,
-                      borderWidth: 5),
-                ),
-                backgroundColor: Colors.white,
+            renderingEngine: widget.renderingEngine,
+            child: TeXViewColumn(children: [
+              TeXViewDocument(quizList[currentQuizIndex].statement,
+                  style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+              TeXViewGroup(
+                  children: quizList[currentQuizIndex]
+                      .options
+                      .map((QuizOption option) {
+                    return TeXViewGroupItem(
+                        rippleEffect: false,
+                        id: option.id,
+                        child: TeXViewDocument(option.option,
+                            style:
+                                TeXViewStyle(padding: TeXViewPadding.all(10))));
+                  }).toList(),
+                  selectedItemStyle: TeXViewStyle(
+                      borderRadius: TeXViewBorderRadius.all(10),
+                      border: TeXViewBorder.all(TeXViewBorderDecoration(
+                          borderWidth: 3, borderColor: Colors.green[900])),
+                      margin: TeXViewMargin.all(10)),
+                  normalItemStyle: TeXViewStyle(margin: TeXViewMargin.all(10)),
+                  onTap: (id) {
+                    this.selectedOptionId = id;
+                    setState(() {
+                      isWrong = false;
+                    });
+                  })
+            ]),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(5),
+              padding: TeXViewPadding.all(10),
+              borderRadius: TeXViewBorderRadius.all(10),
+              border: TeXViewBorder.all(
+                TeXViewBorderDecoration(
+                    borderColor: Colors.blue,
+                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderWidth: 5),
               ),
-              loadingWidget: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text("Rendering...!")
-                  ],
-                ),
-              )),
+              backgroundColor: Colors.white,
+            ),
+          ),
           if (isWrong)
             Padding(
               padding: const EdgeInsets.all(20),

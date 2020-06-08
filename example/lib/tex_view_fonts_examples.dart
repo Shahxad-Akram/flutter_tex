@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
-class TeXViewFontsExamples extends StatefulWidget {
-  @override
-  _TeXViewFontsExamplesState createState() => _TeXViewFontsExamplesState();
-}
+class TeXViewFontsExamples extends StatelessWidget {
+  final TeXViewRenderingEngine renderingEngine;
 
-class _TeXViewFontsExamplesState extends State<TeXViewFontsExamples> {
+  TeXViewFontsExamples(
+      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXView Fonts Example"),
+        title: Text("TeXView Fonts"),
       ),
       body: ListView(
         physics: ScrollPhysics(),
@@ -33,14 +33,7 @@ class _TeXViewFontsExamplesState extends State<TeXViewFontsExamples> {
                     fontFamily: 'subaccuz_regular',
                     src: 'fonts/SubaccuzRegular.ttf'),
               ],
-              renderingEngine: TeXViewRenderingEngine.katex(configurations: r"""
-                  {
-                    displayMode: true,
-                    macros: {
-                      "\\RR": "\\mathbb{R}"
-                    }
-                  }
-                  """),
+              renderingEngine: renderingEngine,
               child: TeXViewColumn(children: [
                 _teXViewWidget("Army", 'army'),
                 _teXViewWidget("Budhrg", 'budhrg'),
@@ -63,14 +56,14 @@ class _TeXViewFontsExamplesState extends State<TeXViewFontsExamples> {
                 ),
                 backgroundColor: Colors.white,
               ),
-              loadingWidget: Center(
+              loadingWidgetBuilder: (context) => Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text("Rendering...!")
+                    Text("Rendering...")
                   ],
                 ),
               )),

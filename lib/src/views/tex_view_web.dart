@@ -22,21 +22,18 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     _initTeXView();
     return Container(
       color: Colors.green,
-      height: widget.height ?? _height,
+      height: _height,
       child: HtmlElementView(
         viewType: viewId.toString(),
       ),
     );
   }
 
-  String getRawData() {
-    return CoreUtils.getRawData(widget);
-  }
 
   @override
   void initState() {
     super.initState();
-    js.context['RenderedTeXViewHeight'] = (message) {
+    js.context['TeXViewRenderedCallback'] = (message) {
       double height = double.parse(message.toString());
       print("new-$height     old-$_height");
       //if (widget.height == null)
@@ -50,7 +47,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _initTeXView() {
-    if (getRawData() != _lastData) {
+    if (getRawData(widget) != _lastData) {
       // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
           viewId.toString(),
@@ -58,11 +55,11 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
             ..src =
-                "assets/packages/flutter_tex/js/${widget.renderingEngine.getEngineName()}/index.html"
+                "assets/packages/flutter_tex/js/${widget.renderingEngine.name}/index.html"
             ..id = viewId
             ..style.border = 'none');
-      js.context.callMethod('initWebTeXView', [viewId, getRawData()]);
-      this._lastData = getRawData();
+      js.context.callMethod('initWebTeXView', [viewId, getRawData(widget)]);
+      this._lastData = getRawData(widget);
     }
   }
 }

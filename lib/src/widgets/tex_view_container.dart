@@ -5,18 +5,23 @@ import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewContainer extends TeXViewWidget {
+  final String id;
+
   /// A [TeXViewWidget] as child.
   final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle style;
 
-  const TeXViewContainer({@required this.child, this.style});
+  const TeXViewContainer({this.id, @required this.child, this.style});
 
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        tag: 'div', classList: 'tex-view-container', node: Node.InternalChild);
+        id: this.id,
+        tag: 'div',
+        classList: 'tex-view-container',
+        node: Node.InternalChild);
   }
 
   @override
@@ -25,7 +30,8 @@ class TeXViewContainer extends TeXViewWidget {
   }
 
   @override
-  Map toJson() => {
+  Map toJson() =>
+      {
         'meta': meta().toJson(),
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

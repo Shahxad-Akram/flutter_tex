@@ -5,6 +5,8 @@ import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewGroup extends TeXViewWidget {
+  final String id;
+
   /// A list of [TeXViewWidget].
   final List<TeXViewGroupItem> children;
 
@@ -21,7 +23,8 @@ class TeXViewGroup extends TeXViewWidget {
   final TeXViewStyle normalItemStyle;
 
   const TeXViewGroup(
-      {@required this.children,
+      {this.id,
+      @required this.children,
       @required this.onTap,
       this.style,
       this.selectedItemStyle,
@@ -40,13 +43,14 @@ class TeXViewGroup extends TeXViewWidget {
   }
 
   @override
-  Map toJson() => {
+  Map toJson() =>
+      {
         'meta': meta().toJson(),
         'data': this.children?.map((child) => child?.toJson())?.toList(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
         'selectedItemStyle':
-            this.selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
+        this.selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
         'normalItemStyle':
-            this.normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
+        this.normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
       };
 }

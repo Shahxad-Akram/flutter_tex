@@ -1,7 +1,21 @@
+## [3.6.7] - June 7, 2020
+* Example updated.
+* `onTeXViewCreated` added.
+* `TeXViewMarkdown` widget added for markdown support.
+* **Minor API changes.**
+    * `showLoadingWidget` removed.
+    * `loadingWidget` moved to `loadingWidgetBuilder`
+    * `height` removed.
+
+
+## [3.6.6+6] - June 7, 2020
+* Speed Optimizations for `TeXViewGroup`.
+* Example Updated.
+
 ## [3.6.6+6] - June 7, 2020
 * Rendering Enhancements.
 
-## [3.6.6+5] - June 2, 2020
+## [3.6.6+5] - June 5, 2020
 * Speed Optimizations.
 
 ## [3.6.6+4] - June 2, 2020

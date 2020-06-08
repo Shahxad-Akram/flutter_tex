@@ -1,17 +1,20 @@
 enum Node { Root, InternalChild, InternalChildren, Leaf }
 
 class TeXViewWidgetMeta {
+  final String id;
   final String classList;
   final String tag;
   final Node node;
 
-  const TeXViewWidgetMeta({this.classList, this.tag, this.node});
+  const TeXViewWidgetMeta({this.id, this.classList, this.tag, this.node});
 
   Map toJson() => {
+        'id': this.id,
         'classList': this.classList,
         'tag': this.tag,
         'node': _getNodeValue(this.node),
       };
+
 
   static String _getNodeValue(Node node) {
     switch (node) {

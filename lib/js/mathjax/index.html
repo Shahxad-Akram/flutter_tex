@@ -48,10 +48,11 @@
 <div id="TeXView"></div>
 <script>
     pageLoaded();
+
     teXView = document.getElementById('TeXView');
 
-    function initView(jsonData) {
-        isWeb = false;
+    function initView(jsonData, configs) {
+        configurations = configs;
         initTeXView(jsonData);
     }
 

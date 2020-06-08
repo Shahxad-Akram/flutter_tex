@@ -5,5 +5,6 @@ export 'package:flutter_tex/src/widgets/tex_view_group.dart';
 export 'package:flutter_tex/src/widgets/tex_view_group_item.dart';
 export 'package:flutter_tex/src/widgets/tex_view_image.dart';
 export 'package:flutter_tex/src/widgets/tex_view_ink_well.dart';
+export 'package:flutter_tex/src/widgets/tex_view_markdown.dart';
 export 'package:flutter_tex/src/widgets/tex_view_video.dart';
 export 'package:flutter_tex/src/widgets/tex_view_widget.dart';

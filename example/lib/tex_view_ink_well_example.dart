@@ -3,6 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewInkWellExample extends StatefulWidget {
+  final TeXViewRenderingEngine renderingEngine;
+
+  TeXViewInkWellExample(
+      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+
   @override
   _TeXViewInkWellExampleState createState() => _TeXViewInkWellExampleState();
 }
@@ -26,7 +31,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TeXViewImage Example"),
+        title: Text("TeXViewInkWell"),
       ),
       body: ListView(
         children: [
@@ -36,6 +41,10 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
             style: TextStyle(fontSize: 18),
           ),
           TeXView(
+              onTeXViewCreated: (controller) {
+                controller.loadCode();
+              },
+              renderingEngine: widget.renderingEngine,
               child: TeXViewColumn(children: [
                 TeXViewInkWell(
                     child: TeXViewDocument(
@@ -78,17 +87,17 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
                 ),
                 backgroundColor: Colors.white,
               ),
-              loadingWidget: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text("Rendering...!")
-                  ],
-                ),
-              ))
+              loadingWidgetBuilder: (context) => Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text("Rendering...")
+                      ],
+                    ),
+                  ))
         ],
       ),
     );

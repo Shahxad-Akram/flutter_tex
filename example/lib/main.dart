@@ -5,6 +5,7 @@ import 'package:flutter_tex_example/tex_view_document_examples.dart';
 import 'package:flutter_tex_example/tex_view_fonts_examples.dart';
 import 'package:flutter_tex_example/tex_view_image_video_example.dart';
 import 'package:flutter_tex_example/tex_view_ink_well_example.dart';
+import 'package:flutter_tex_example/tex_view_markdown_example.dart';
 import 'package:flutter_tex_example/tex_view_quiz_example.dart';
 
 main() async {
@@ -21,9 +22,21 @@ class FlutterTeXExample extends StatelessWidget {
   }
 }
 
-class TeXViewFullExample extends StatelessWidget {
+class TeXViewFullExample extends StatefulWidget {
+  @override
+  _TeXViewFullExampleState createState() => _TeXViewFullExampleState();
+}
+
+class _TeXViewFullExampleState extends State<TeXViewFullExample> {
+  int radVal = 0;
+
+  TeXViewRenderingEngine renderingEngine;
+
   @override
   Widget build(BuildContext context) {
+    renderingEngine = radVal == 0
+        ? TeXViewRenderingEngine.katex()
+        : TeXViewRenderingEngine.mathjax();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -40,17 +53,68 @@ class TeXViewFullExample extends StatelessWidget {
               height: 200,
             ),
           ),
+          RadioListTile(
+            value: 0,
+            groupValue: radVal,
+            onChanged: (val) {
+              setState(() {
+                this.radVal = val;
+              });
+            },
+            title: Text("Katex"),
+            subtitle: Text("RenderingEngine for Fast Rendering"),
+          ),
+          RadioListTile(
+            value: 1,
+            groupValue: radVal,
+            onChanged: (val) {
+              setState(() {
+                this.radVal = val;
+              });
+            },
+            title: Text("MathJax"),
+            subtitle: Text("RenderingEngine for Quality Rendering"),
+          ),
           Divider(
             height: 30,
             color: Colors.transparent,
           ),
-          getExampleButton(context, 'Quiz Example', TeXViewQuizExample()),
-          getExampleButton(context, 'TeX Examples', TeXViewDocumentExamples()),
           getExampleButton(
-              context, 'Custom Fonts Examples', TeXViewFontsExamples()),
+              context,
+              'Quiz Example',
+              TeXViewQuizExample(
+                renderingEngine: renderingEngine,
+              )),
           getExampleButton(
-              context, 'Image & Video Example', TeXViewImageVideoExample()),
-          getExampleButton(context, 'Inkwell Example', TeXViewInkWellExample()),
+              context,
+              'TeX Examples',
+              TeXViewDocumentExamples(
+                renderingEngine: renderingEngine,
+              )),
+          getExampleButton(
+              context,
+              'Markdown Examples',
+              TeXViewMarkdownExamples(
+                renderingEngine: renderingEngine,
+              )),
+          getExampleButton(
+              context,
+              'Custom Fonts Examples',
+              TeXViewFontsExamples(
+                renderingEngine: renderingEngine,
+              )),
+          getExampleButton(
+              context,
+              'Image & Video Example',
+              TeXViewImageVideoExample(
+                renderingEngine: renderingEngine,
+              )),
+          getExampleButton(
+              context,
+              'Inkwell Example',
+              TeXViewInkWellExample(
+                renderingEngine: renderingEngine,
+              )),
         ],
       ),
     );
@@ -118,16 +182,16 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
               borderWidth: 5)),
           backgroundColor: Colors.white,
         ),
-        loadingWidget: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CircularProgressIndicator(),
-              Text("Rendering...")
-            ],
-          ),
-        ));
+        loadingWidgetBuilder: (context) => Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  Text("Rendering...")
+                ],
+              ),
+            ));
   }
 }

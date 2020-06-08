@@ -4,7 +4,8 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXExample {
   static TeXViewWidget introduction =
-      _teXViewWidget(r"""<h4>Flutter \( \rm\\TeX \)</h4>""", r"""  
+      _teXViewWidget(r"""<h4>Flutter \( \rm\\TeX \)</h4>""", r""" 
+       
       <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
       """);
@@ -66,6 +67,7 @@ class TeXExample {
                 borderStyle: TeXViewBorderStyle.Groove,
                 borderColor: Colors.green))),
         children: [
+          TeXViewMarkdown("**data**"),
           TeXViewDocument(title,
               style: TeXViewStyle(
                   padding: TeXViewPadding.all(10),
@@ -80,59 +82,24 @@ class TeXExample {
   }
 }
 
-class TeXViewDocumentExamples extends StatefulWidget {
-  @override
-  _TeXViewDocumentExamplesState createState() =>
-      _TeXViewDocumentExamplesState();
-}
+class TeXViewDocumentExamples extends StatelessWidget {
+  final TeXViewRenderingEngine renderingEngine;
 
-class _TeXViewDocumentExamplesState extends State<TeXViewDocumentExamples> {
-  int radVal = 0;
+  TeXViewDocumentExamples(
+      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXViewDocument Examples"),
+        title: Text("TeXViewDocument"),
       ),
       body: ListView(
         physics: ScrollPhysics(),
         children: <Widget>[
-          RadioListTile(
-            value: 0,
-            groupValue: radVal,
-            onChanged: (val) {
-              setState(() {
-                this.radVal = val;
-              });
-            },
-            title: Text("Katex"),
-            subtitle: Text("RenderingEngine for Fast Rendering"),
-          ),
-          RadioListTile(
-            value: 1,
-            groupValue: radVal,
-            onChanged: (val) {
-              setState(() {
-                this.radVal = val;
-              });
-            },
-            title: Text("MathJax"),
-            subtitle: Text("RenderingEngine for Quality Rendering"),
-          ),
           TeXView(
-              showLoadingWidget: true,
-              renderingEngine: radVal == 0
-                  ? TeXViewRenderingEngine.katex(configurations: r"""
-                  {
-                    displayMode: true,
-                    macros: {
-                      "\\RR": "\\mathbb{R}"
-                    }
-                  }
-                  """)
-                  : TeXViewRenderingEngine.mathjax(),
+              renderingEngine: renderingEngine,
               child: TeXViewColumn(children: [
                 TeXExample.introduction,
                 TeXExample.quadraticEquation,
@@ -141,7 +108,7 @@ class _TeXViewDocumentExamplesState extends State<TeXViewDocumentExamples> {
                 TeXExample.bohrRadius,
                 TeXExample.chemistryEquations,
                 TeXExample.matrix,
-                if (radVal == 1) ...[TeXExample.others]
+                if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
               ]),
               style: TeXViewStyle(
                 margin: TeXViewMargin.all(10),
@@ -155,19 +122,21 @@ class _TeXViewDocumentExamplesState extends State<TeXViewDocumentExamples> {
                 ),
                 backgroundColor: Colors.white,
               ),
-              loadingWidget: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text("Rendering...!")
-                  ],
-                ),
-              )),
+              loadingWidgetBuilder: (context) =>
+                  Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircularProgressIndicator(),
+                        Text("Rendering...")
+                      ],
+                    ),
+                  )),
         ],
       ),
     );
   }
+
 }
