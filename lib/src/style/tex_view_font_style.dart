@@ -8,6 +8,7 @@ class TeXViewFontStyle {
   /// Font size
   final int fontSize;
 
+  /// Font weight
   final String fontWeight;
 
   /// Font size unit.
