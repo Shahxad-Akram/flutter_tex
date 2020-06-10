@@ -3,7 +3,6 @@ import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 
 class TeXViewGroupItem extends TeXViewWidget {
-  /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
   final String id;
 
   /// A [TeXViewWidget] as child.
@@ -22,9 +21,6 @@ class TeXViewGroupItem extends TeXViewWidget {
         classList: 'tex-view-group-item',
         node: Node.InternalChild);
   }
-
-  @override
-  void onTapManager(String id) {}
 
   @override
   Map toJson() => {

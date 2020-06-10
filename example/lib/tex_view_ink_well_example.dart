@@ -41,9 +41,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
             style: TextStyle(fontSize: 18),
           ),
           TeXView(
-              onTeXViewCreated: (controller) {
-                controller.loadCode();
-              },
+              onTeXViewCreated: (controller) {},
               renderingEngine: widget.renderingEngine,
               child: TeXViewColumn(children: [
                 TeXViewInkWell(

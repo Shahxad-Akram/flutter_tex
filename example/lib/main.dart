@@ -27,6 +27,11 @@ class TeXViewFullExample extends StatefulWidget {
   _TeXViewFullExampleState createState() => _TeXViewFullExampleState();
 }
 
+class TeXViewMiniExample extends StatefulWidget {
+  @override
+  _TeXViewMiniExampleState createState() => _TeXViewMiniExampleState();
+}
+
 class _TeXViewFullExampleState extends State<TeXViewFullExample> {
   int radVal = 0;
 
@@ -140,11 +145,6 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
       ),
     );
   }
-}
-
-class TeXViewMiniExample extends StatefulWidget {
-  @override
-  _TeXViewMiniExampleState createState() => _TeXViewMiniExampleState();
 }
 
 class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {

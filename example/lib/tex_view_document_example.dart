@@ -67,7 +67,6 @@ class TeXExample {
                 borderStyle: TeXViewBorderStyle.Groove,
                 borderColor: Colors.green))),
         children: [
-          TeXViewMarkdown("**data**"),
           TeXViewDocument(title,
               style: TeXViewStyle(
                   padding: TeXViewPadding.all(10),
@@ -122,8 +121,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
               ),
-              loadingWidgetBuilder: (context) =>
-                  Center(
+              loadingWidgetBuilder: (context) => Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
@@ -138,5 +136,4 @@ class TeXViewDocumentExamples extends StatelessWidget {
       ),
     );
   }
-
 }

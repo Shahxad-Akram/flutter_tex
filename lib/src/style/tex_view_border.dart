@@ -35,7 +35,59 @@ class TeXViewBorderDecoration {
       {this.borderWidth, this.borderStyle, this.borderColor});
 
   String getBorderDecoration() {
-    return "${this.borderWidth}px ${_TeXViewBorderStyleHelper.getValue(borderStyle)} ${getColor(this.borderColor)}";
+    return "${this.borderWidth}px ${_getTeXViewBorderStyleValue(borderStyle)} ${getColor(this.borderColor)}";
+  }
+
+  static String _getTeXViewBorderStyleValue(
+      TeXViewBorderStyle teXViewBorderStyle) {
+    switch (teXViewBorderStyle) {
+      case TeXViewBorderStyle.None:
+        return "none";
+        break;
+
+      case TeXViewBorderStyle.Hidden:
+        return "hidden";
+        break;
+
+      case TeXViewBorderStyle.Dotted:
+        return "dotted";
+        break;
+
+      case TeXViewBorderStyle.Dashed:
+        return "dashed";
+        break;
+
+      case TeXViewBorderStyle.Solid:
+        return "solid";
+        break;
+
+      case TeXViewBorderStyle.Double:
+        return "double";
+        break;
+
+      case TeXViewBorderStyle.Groove:
+        return "groove";
+        break;
+
+      case TeXViewBorderStyle.Ridge:
+        return "ridge";
+        break;
+
+      case TeXViewBorderStyle.Inset:
+        return "inset";
+        break;
+
+      case TeXViewBorderStyle.Outset:
+        return "outset";
+        break;
+
+      case TeXViewBorderStyle.Initial:
+        return "initial";
+        break;
+
+      default:
+        return "solid";
+    }
   }
 }
 
@@ -84,35 +136,4 @@ enum TeXViewBorderStyle {
   Inset,
   Outset,
   Initial
-}
-
-class _TeXViewBorderStyleHelper {
-  static String getValue(TeXViewBorderStyle teXViewBorderStyle) {
-    switch (teXViewBorderStyle) {
-      case TeXViewBorderStyle.None:
-        return "none";
-      case TeXViewBorderStyle.Hidden:
-        return "hidden";
-      case TeXViewBorderStyle.Dotted:
-        return "dotted";
-      case TeXViewBorderStyle.Dashed:
-        return "dashed";
-      case TeXViewBorderStyle.Solid:
-        return "solid";
-      case TeXViewBorderStyle.Double:
-        return "double";
-      case TeXViewBorderStyle.Groove:
-        return "groove";
-      case TeXViewBorderStyle.Ridge:
-        return "ridge";
-      case TeXViewBorderStyle.Inset:
-        return "inset";
-      case TeXViewBorderStyle.Outset:
-        return "outset";
-      case TeXViewBorderStyle.Initial:
-        return "initial";
-      default:
-        return "solid";
-    }
-  }
 }

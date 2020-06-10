@@ -29,7 +29,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     );
   }
 
-
   @override
   void initState() {
     super.initState();

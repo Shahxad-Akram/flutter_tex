@@ -15,7 +15,6 @@ class TeXViewWidgetMeta {
         'node': _getNodeValue(this.node),
       };
 
-
   static String _getNodeValue(Node node) {
     switch (node) {
       case Node.Root:

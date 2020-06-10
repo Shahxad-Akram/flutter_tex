@@ -5,7 +5,6 @@ import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
 import 'package:flutter_tex/src/style/style_utils.dart';
 
 class TeXViewInkWell extends TeXViewWidget {
-  /// A random ID as an identifier to listen Callback in [onTap] in [TeXView]  when tap on TeXViewChild. If ID is null it won't trigger Callback event.
   final String id;
 
   /// A [TeXViewWidget] as child.

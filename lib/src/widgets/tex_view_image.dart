@@ -23,12 +23,9 @@ class TeXViewImage extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {}
-
-  @override
   Map toJson() => {
-    'meta': meta().toJson(),
-    'data': this.imageUri,
-    'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
-  };
+        'meta': meta().toJson(),
+        'data': this.imageUri,
+        'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
+      };
 }

@@ -28,17 +28,17 @@
 * [Cautions](#cautions)
 
 # About
-A Flutter Package to render **fully offline** so many types of equations based on **LaTeX** and **TeX**, most commonly used are as followings:
+A Flutter Package to render **fully offline** so many types of equations and expressions based on **LaTeX** and **TeX**, most commonly used are as followings:
 
-- **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
+- **Mathematics / Maths Equations and expressions** (Algebra, Calculus, Geometry, Geometry etc...)
 
-- **Physics Equations**
+- **Physics Equations and expressions**
 
-- **Signal Processing Equations**
+- **Signal Processing Equations and expressions**
 
-- **Chemistry Equations**
+- **Chemistry Equations and expressions**
 
-- **Statistics / Stats Equations**
+- **Statistics / Stats Equations and expressions**
 
 - It also includes full **HTML** with **JavaScript** support.
 
@@ -65,7 +65,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7+1
+  flutter_tex: ^3.6.7+2
 ``` 
 
 

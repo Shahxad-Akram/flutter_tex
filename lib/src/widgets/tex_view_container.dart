@@ -30,8 +30,7 @@ class TeXViewContainer extends TeXViewWidget {
   }
 
   @override
-  Map toJson() =>
-      {
+  Map toJson() => {
         'meta': meta().toJson(),
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

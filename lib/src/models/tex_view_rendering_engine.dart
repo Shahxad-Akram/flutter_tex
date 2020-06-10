@@ -1,23 +1,5 @@
 import 'dart:convert';
 
-class TeXViewRenderingEngine {
-  final String configurations;
-  final String name;
-
-  const TeXViewRenderingEngine.katex({this.configurations})
-      : this.name = "katex";
-
-  const TeXViewRenderingEngine.mathjax(
-      {this.configurations = Configurations.mathjaxDefaultConfiguration})
-      : this.name = "mathjax";
-
-  String getConfigurations() {
-    return json.encode(configurations ?? "{}");
-  }
-
-  static String dd = "dfd";
-}
-
 class Configurations {
   static const String mathjaxDefaultConfiguration = """
   {
@@ -50,4 +32,22 @@ class Configurations {
       }
   }
   """;
+}
+
+class TeXViewRenderingEngine {
+  static String dd = "dfd";
+  final String configurations;
+
+  final String name;
+
+  const TeXViewRenderingEngine.katex({this.configurations})
+      : this.name = "katex";
+
+  const TeXViewRenderingEngine.mathjax(
+      {this.configurations = Configurations.mathjaxDefaultConfiguration})
+      : this.name = "mathjax";
+
+  String getConfigurations() {
+    return json.encode(configurations ?? "{}");
+  }
 }

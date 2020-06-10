@@ -24,11 +24,7 @@ class TeXViewDocument extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {}
-
-  @override
-  Map toJson() =>
-      {
+  Map toJson() => {
         'meta': meta().toJson(),
         'data': this.data,
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

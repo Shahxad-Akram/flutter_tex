@@ -20,14 +20,11 @@ class TeXViewVideo extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {}
-
-  @override
   Map toJson() => {
-    'meta': meta().toJson(),
-    'data': _initData(),
-    'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
-  };
+        'meta': meta().toJson(),
+        'data': _initData(),
+        'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
+      };
 
   String _initData() {
     return """<iframe width="100%" height="100%" frameborder="0" allowfullscreen

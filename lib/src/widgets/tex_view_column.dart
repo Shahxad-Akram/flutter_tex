@@ -8,7 +8,6 @@ class TeXViewColumn extends TeXViewWidget {
   final String id;
 
   /// A list of [TeXViewWidget].
-
   final List<TeXViewWidget> children;
 
   /// Style TeXView Widget with [TeXViewStyle].
@@ -31,8 +30,7 @@ class TeXViewColumn extends TeXViewWidget {
   }
 
   @override
-  Map toJson() =>
-      {
+  Map toJson() => {
         'meta': meta().toJson(),
         'data': this.children?.map((child) => child?.toJson())?.toList(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,

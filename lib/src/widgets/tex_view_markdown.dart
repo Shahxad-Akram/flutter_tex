@@ -39,9 +39,6 @@ class TeXViewMarkdown extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {}
-
-  @override
   Map toJson() => {
         'meta': meta().toJson(),
         'data': markdownToHtml(this.markdown,

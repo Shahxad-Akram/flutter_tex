@@ -1,3 +1,8 @@
+## [3.6.7+2]- June 10, 2020
+* `TeXViewFontWeight` property added in styling.
+* `TeXViewGroup.multipleSelection()` added to select multiple options in group.
+
+
 ## [3.6.7+1]- June 8, 2020
 * example links issue solved.
 
