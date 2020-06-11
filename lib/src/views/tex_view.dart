@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/manifests/models_manifest.dart';
-import 'package:flutter_tex/src/manifests/style_manifest.dart';
-import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/views/tex_view_mobile.dart'
     if (dart.library.html) 'package:flutter_tex/src/views/tex_view_web.dart';
 

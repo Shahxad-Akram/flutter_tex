@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter_tex/src/manifests/style_manifest.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 
 String teXViewDefaultStyle = "overflow: hidden; position: relative; ";
 

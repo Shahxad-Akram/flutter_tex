@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/manifests/style_manifest.dart';
-import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/style/style_utils.dart';
+import 'package:flutter_tex/src/utils/style_utils.dart';
 
 class TeXViewInkWell extends TeXViewWidget {
   final String id;
@@ -42,8 +41,8 @@ class TeXViewInkWell extends TeXViewWidget {
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'rippleEffect': this.rippleEffect ?? true,
         'data': this.child.toJson(),
         'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'rippleEffect': this.rippleEffect ?? true,
       };
 }

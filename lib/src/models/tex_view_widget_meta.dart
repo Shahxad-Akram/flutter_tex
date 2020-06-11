@@ -19,12 +19,16 @@ class TeXViewWidgetMeta {
     switch (node) {
       case Node.Root:
         return "root";
+        break;
       case Node.InternalChild:
         return "internal_child";
+        break;
       case Node.InternalChildren:
         return "internal_children";
+        break;
       case Node.Leaf:
         return "leaf";
+        break;
       default:
         return "leaf";
     }

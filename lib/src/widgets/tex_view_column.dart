@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/src/manifests/style_manifest.dart';
-import 'package:flutter_tex/src/manifests/widgets_manifest.dart';
+import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
-import 'package:flutter_tex/src/style/style_utils.dart';
+import 'package:flutter_tex/src/utils/style_utils.dart';
 
 class TeXViewColumn extends TeXViewWidget {
   final String id;

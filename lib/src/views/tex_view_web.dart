@@ -5,7 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/views/core_utils.dart';
+import 'package:flutter_tex/src/utils/core_utils.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String _lastData;

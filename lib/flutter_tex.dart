@@ -1,6 +1,22 @@
 library flutter_tex;
 
-export 'package:flutter_tex/src/manifests/models_manifest.dart';
-export 'package:flutter_tex/src/manifests/style_manifest.dart';
-export 'package:flutter_tex/src/manifests/widgets_manifest.dart';
+export 'package:flutter_tex/src/models/tex_view_font.dart';
+export 'package:flutter_tex/src/models/tex_view_rendering_engine.dart';
+export 'package:flutter_tex/src/styles/tex_view_border.dart';
+export 'package:flutter_tex/src/styles/tex_view_font_style.dart';
+export 'package:flutter_tex/src/styles/tex_view_margin.dart';
+export 'package:flutter_tex/src/styles/tex_view_padding.dart';
+export 'package:flutter_tex/src/styles/tex_view_size_unit.dart';
+export 'package:flutter_tex/src/styles/tex_view_style.dart';
+export 'package:flutter_tex/src/styles/tex_view_text_align.dart';
 export 'package:flutter_tex/src/views/tex_view.dart';
+export 'package:flutter_tex/src/widgets/tex_view_column.dart';
+export 'package:flutter_tex/src/widgets/tex_view_container.dart';
+export 'package:flutter_tex/src/widgets/tex_view_document.dart';
+export 'package:flutter_tex/src/widgets/tex_view_group.dart';
+export 'package:flutter_tex/src/widgets/tex_view_group_item.dart';
+export 'package:flutter_tex/src/widgets/tex_view_image.dart';
+export 'package:flutter_tex/src/widgets/tex_view_ink_well.dart';
+export 'package:flutter_tex/src/widgets/tex_view_markdown.dart';
+export 'package:flutter_tex/src/widgets/tex_view_video.dart';
+export 'package:flutter_tex/src/widgets/tex_view_widget.dart';

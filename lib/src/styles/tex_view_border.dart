@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter_tex/src/manifests/style_manifest.dart';
-import 'package:flutter_tex/src/style/style_utils.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/style_utils.dart';
 
 class TeXViewBorder {
   final TeXViewBorderDecoration top;
