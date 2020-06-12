@@ -8,7 +8,7 @@ import 'package:flutter_tex_example/tex_view_ink_well_example.dart';
 import 'package:flutter_tex_example/tex_view_markdown_example.dart';
 import 'package:flutter_tex_example/tex_view_quiz_example.dart';
 
-main() async {
+main() {
   runApp(FlutterTeXExample());
 }
 

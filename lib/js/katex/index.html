@@ -33,12 +33,9 @@
 
 <script>
 
-    pageLoaded();
     teXView = document.getElementById('TeXView');
 
-
-    function initView(jsonData, configs) {
-        configurations = configs;
+    function initView(jsonData) {
         appendStyle(formulasScrollStyle);
         initTeXView(jsonData);
     }
@@ -49,9 +46,6 @@
             onCompleteCallback();
         }, 0)
     }
-
-    console.log()
-
 </script>
 </body>
 </html>

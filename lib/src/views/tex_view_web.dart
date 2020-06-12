@@ -13,7 +13,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String viewId = UniqueKey().toString();
 
   @override
-  bool get wantKeepAlive => widget.keepAlive ?? true;
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

@@ -44,7 +44,7 @@ A Flutter Package to render **fully offline** so many types of equations and exp
 
 Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) and [Katex](https://github.com/KaTeX/KaTeX) JavaScript libraries.
 
-This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.org/packages/webview_flutter_plus) a very powerful extension of [webview_flutter](https://pub.dartlang.org/packages/webview_flutter).
+This package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter).
 
 
 # Demo Video
@@ -65,7 +65,7 @@ This package mainly depends on [**webview_flutter_plus**](https://pub.dartlang.o
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7+3
+  flutter_tex: ^3.6.7+4
 ``` 
 
 
@@ -230,8 +230,6 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
 - `onRenderFinished:` Callback with the rendered page height, when TEX rendering finishes.
   
 - `onTeXViewCreated:` Callback when TeXView loading finishes.
-  
-- `keepAlive:` Keep widget Alive. (True by default).
 
 For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/master/example).
 
@@ -240,4 +238,4 @@ For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/m
 - `Bug in Web Support` on `setState` everything disappears.
 
 # Cautions:
-- Please avoid using too many `TeXView` in a single page, because this is based on [**webview_flutter_plus**](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/shah-xad/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/shah-xad/flutter_tex/issues/new).
+- Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/shah-xad/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/shah-xad/flutter_tex/issues/new).

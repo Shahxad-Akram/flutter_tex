@@ -1,38 +1,22 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:flutter_tex/src/utils/style_utils.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
-
-class TeXViewController {
-  final WebViewPlusController _controller;
-
-  TeXViewController._({WebViewPlusController controller})
-      : _controller = controller;
-
-  Future<String> setTeXViewState({String id, TeXViewStyle style}) {
-    String jsCode = """
-    injectCode();
-    function injectCode() {
-    ${style != null ? "element.setAttribute('style', ${style?.initStyle() ?? teXViewDefaultStyle});" : ""}
-    }
-    """;
-
-    return Future<String>.value(_controller.evaluateJavascript(jsCode));
-  }
-}
+import 'package:flutter_tex/src/utils/tex_view_server.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  WebViewPlusController _controller;
+  WebViewController _controller;
   double _height = 1;
   String _lastData;
   bool _pageLoaded = false;
 
+  TeXViewState() {
+    TeXViewServer.start();
+  }
+
   @override
-  bool get wantKeepAlive => widget.keepAlive ?? true;
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +30,50 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         SizedBox(
           height: _height,
-          child: WebViewPlus(
+          child: WebView(
+            initialUrl:
+                "http://localhost:5353/packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
             onWebViewCreated: (controller) {
-              this._controller = controller
-                ..loadAsset(
-                    "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html");
+              this._controller = controller;
             },
-            javascriptChannels: Set.from([
-              JavascriptChannel(
-                  name: 'TeXViewRenderedCallback',
-                  onMessageReceived: _renderedTeXViewHeightHandler),
-              JavascriptChannel(
-                  name: 'OnTapCallback',
-                  onMessageReceived: (jm) {
-                    widget.child.onTapManager(jm.message);
-                  }),
-              JavascriptChannel(
-                  name: 'TeXViewCreatedCallback',
-                  onMessageReceived: (_) {
-                    widget.onTeXViewCreated?.call(
-                        TeXViewController._(controller: this._controller));
-                    _pageLoaded = true;
-                    _buildTeXView();
-                  })
-            ]),
+            onPageFinished: (message) {
+              _pageLoaded = true;
+              _buildTeXView();
+            },
+            javascriptChannels: jsChannels(),
             javascriptMode: JavascriptMode.unrestricted,
           ),
         ),
         widget.loadingWidgetBuilder?.call(context) ?? SizedBox.shrink()
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    TeXViewServer.start();
+    super.dispose();
+  }
+
+  Set<JavascriptChannel> jsChannels() {
+    return Set.from([
+      JavascriptChannel(
+          name: 'TeXViewRenderedCallback',
+          onMessageReceived: (_) async {
+            double height = double.parse(
+                await _controller.evaluateJavascript('getTeXViewHeight()'));
+            if (this._height != height)
+              setState(() {
+                this._height = height;
+              });
+            widget.onRenderFinished?.call(height);
+          }),
+      JavascriptChannel(
+          name: 'OnTapCallback',
+          onMessageReceived: (jm) {
+            widget.child.onTapManager(jm.message);
+          })
+    ]);
   }
 
   void _buildTeXView() {
@@ -85,15 +83,5 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           "var jsonData = " + getRawData(widget) + ";initView(jsonData);");
       this._lastData = getRawData(widget);
     }
-  }
-
-  void _renderedTeXViewHeightHandler(_) async {
-    double height = double.parse(
-        await _controller.evaluateJavascript('getTeXViewHeight()'));
-    if (this._height != height)
-      setState(() {
-        this._height = height;
-      });
-    widget.onRenderFinished?.call(height);
   }
 }

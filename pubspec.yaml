@@ -1,7 +1,7 @@
 name: flutter_tex
 description: A Flutter Package to render fully offline Mathematics / Maths, Physics and Chemistry, Statistics Equations and expressions based on LaTeX with HTML and JavaScript support.
 
-version: 3.6.7+3
+version: 3.6.7+4
 
 homepage: https://github.com/shah-xad/flutter_tex
 
@@ -11,9 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter_plus: ^0.1.1+5
+  webview_flutter: ^0.3.20+2
   markdown: ^2.1.4
-
+  mime: ^0.9.6+3
 
 dev_dependencies:
   flutter_test:
@@ -23,7 +23,6 @@ flutter:
   assets:
     - packages/flutter_tex/js/flutter_tex.js
     - packages/flutter_tex/js/flutter_tex.css
-
     #MathJax
     - packages/flutter_tex/js/mathjax/extensions/Safe.js
     - packages/flutter_tex/js/mathjax/extensions/FontWarnings.js
@@ -274,7 +273,6 @@ flutter:
     - packages/flutter_tex/js/mathjax/jax/output/SVG/autoload/mmultiscripts.js
     - packages/flutter_tex/js/mathjax/jax/input/TeX/jax.js
     - packages/flutter_tex/js/mathjax/jax/input/TeX/config.js
-
     #Katex
     - packages/flutter_tex/js/katex/katex.css
     - packages/flutter_tex/js/katex/katex.mjs

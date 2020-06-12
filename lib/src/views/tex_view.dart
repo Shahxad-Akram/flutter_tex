@@ -23,21 +23,13 @@ class TeXView extends StatefulWidget {
   /// Callback when TEX rendering finishes.
   final Function(double height) onRenderFinished;
 
-  /// Callback when TeXView loading finishes.
-  final Function(TeXViewController controller) onTeXViewCreated;
-
-  /// Keep widget Alive. (True by default).
-  final bool keepAlive;
-
   const TeXView({
     Key key,
     @required this.child,
     this.fonts,
     this.style,
     this.loadingWidgetBuilder,
-    this.keepAlive,
     this.onRenderFinished,
-    this.onTeXViewCreated,
     this.renderingEngine,
   }) : super(key: key);
 
