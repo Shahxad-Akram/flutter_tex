@@ -1,3 +1,6 @@
+## [3.6.7+5]- June 11, 2020
+* Minor fixes.
+
 ## [3.6.7+4]- June 11, 2020
 * Minor changes.
 

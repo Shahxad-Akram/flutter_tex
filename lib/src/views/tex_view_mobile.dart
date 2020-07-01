@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:flutter_tex/src/utils/tex_view_server.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  WebViewController _controller;
+  WebViewPlusController _controller;
   double _height = 1;
   String _lastData;
   bool _pageLoaded = false;
-
-  TeXViewState() {
-    TeXViewServer.start();
-  }
 
   @override
   bool get wantKeepAlive => true;
@@ -30,9 +26,9 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         SizedBox(
           height: _height,
-          child: WebView(
+          child: WebViewPlus(
             initialUrl:
-                "http://localhost:5353/packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
+                "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
             onWebViewCreated: (controller) {
               this._controller = controller;
             },
@@ -49,19 +45,12 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  @override
-  void dispose() {
-    TeXViewServer.start();
-    super.dispose();
-  }
-
   Set<JavascriptChannel> jsChannels() {
     return Set.from([
       JavascriptChannel(
           name: 'TeXViewRenderedCallback',
           onMessageReceived: (_) async {
-            double height = double.parse(
-                await _controller.evaluateJavascript('getTeXViewHeight()'));
+            double height = await _controller.getHeight();
             if (this._height != height)
               setState(() {
                 this._height = height;
