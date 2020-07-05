@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
