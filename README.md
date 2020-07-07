@@ -20,7 +20,6 @@
     * [TeXView Image and Video](#texview-image-and-video-example)
     * [TeXView InkWell](#texview-inkwell-example)
     * [Complete Example](#complete-example)
-* [Demo Application](#application-demo)
 * [Demo Web](#web-demo)
 * [Api Changes](#api-changes)
 * [Api Usage](#api-usage)
@@ -65,7 +64,7 @@ This package mainly depends on [webview_flutter_plus](https://pub.dartlang.org/p
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7+6
+  flutter_tex: ^3.6.7+7
 ``` 
 
 
@@ -196,12 +195,6 @@ TeXView(
 
 ### Complete Example
 #### [Complete Example Code](https://github.com/shah-xad/flutter_tex/tree/master/example)
-
-
-# Application Demo.
-<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-
-[Demo Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
 
 # Web Demo.
 You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)

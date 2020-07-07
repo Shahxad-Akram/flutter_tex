@@ -98,40 +98,41 @@ class TeXViewDocumentExamples extends StatelessWidget {
         physics: ScrollPhysics(),
         children: <Widget>[
           TeXView(
-              renderingEngine: renderingEngine,
-              child: TeXViewColumn(children: [
-                TeXExample.introduction,
-                TeXExample.quadraticEquation,
-                TeXExample.relationEnergyPrincipalQuantum,
-                TeXExample.alignedTag,
-                TeXExample.bohrRadius,
-                TeXExample.chemistryEquations,
-                TeXExample.matrix,
-                if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
-              ]),
-              style: TeXViewStyle(
-                margin: TeXViewMargin.all(10),
-                elevation: 10,
-                borderRadius: TeXViewBorderRadius.all(25),
-                border: TeXViewBorder.all(
-                  TeXViewBorderDecoration(
-                      borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.Solid,
-                      borderWidth: 5),
-                ),
-                backgroundColor: Colors.white,
+            renderingEngine: renderingEngine,
+            child: TeXViewColumn(children: [
+              TeXExample.introduction,
+              TeXExample.quadraticEquation,
+              TeXExample.relationEnergyPrincipalQuantum,
+              TeXExample.alignedTag,
+              TeXExample.bohrRadius,
+              TeXExample.chemistryEquations,
+              TeXExample.matrix,
+              if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
+            ]),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(10),
+              elevation: 10,
+              borderRadius: TeXViewBorderRadius.all(25),
+              border: TeXViewBorder.all(
+                TeXViewBorderDecoration(
+                    borderColor: Colors.blue,
+                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderWidth: 5),
               ),
-              loadingWidgetBuilder: (context) => Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text("Rendering...")
-                      ],
-                    ),
-                  )),
+              backgroundColor: Colors.white,
+            ),
+            // loadingWidgetBuilder: (context) => Center(
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     mainAxisSize: MainAxisSize.min,
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: <Widget>[
+            //       CircularProgressIndicator(),
+            //       Text("Rendering...")
+            //     ],
+            //   ),
+            // ),
+          ),
         ],
       ),
     );
