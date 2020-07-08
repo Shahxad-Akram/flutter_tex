@@ -1,6 +1,8 @@
+## [3.6.7+8]- Jul 5, 2020
+* Minor issues Fixed.
+
 ## [3.6.7+7]- Jul 5, 2020
 * Minor Fixes.
-
 
 ## [3.6.7+6]- Jul 5, 2020
 * Added support for inline formula by using delimiter `$..$` for mathjax.

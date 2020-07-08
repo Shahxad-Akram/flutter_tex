@@ -65,7 +65,7 @@ This package mainly depends on [webview_flutter_plus](https://pub.dartlang.org/p
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7+7
+  flutter_tex: ^3.6.7+8
 ``` 
 
 
@@ -131,7 +131,6 @@ import 'package:flutter_tex/flutter_tex.dart';
 ### Quick Example
 ```dart
 TeXView(
-    showLoadingWidget: false,
     child: TeXViewColumn(children: [
       TeXViewInkWell(
         id: "id_0",
@@ -163,17 +162,8 @@ TeXView(
           borderWidth: 5)),
       backgroundColor: Colors.white,
     ),
-    loadingWidget: Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          CircularProgressIndicator(),
-          Text("Rendering...")
-        ],
-      ),
-    ))
+   ),
+  )
 ```
 
 ### TeXView Document Example

@@ -31,10 +31,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
             onWebViewCreated: (controller) {
               this._controller = controller;
             },
-            onPageFinished: (message) {
-              _pageLoaded = true;
-              _buildTeXView();
-            },
             javascriptChannels: jsChannels(),
             javascriptMode: JavascriptMode.unrestricted,
           ),
@@ -60,6 +56,12 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           name: 'OnTapCallback',
           onMessageReceived: (jm) {
             widget.child.onTapManager(jm.message);
+          }),
+      JavascriptChannel(
+          name: 'OnPageLoaded',
+          onMessageReceived: (jm) {
+            _pageLoaded = true;
+            _buildTeXView();
           })
     ]);
   }
