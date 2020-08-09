@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:html';
 import 'dart:js' as js;
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
+import 'package:flutter_tex/src/utils/fake_ui.dart'
+    if (dart.library.html) 'dart:ui' as ui;
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   String _lastData;
@@ -60,7 +61,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   void _initTeXView() {
     if (getRawData(widget) != _lastData) {
-      // ignore: undefined_prefixed_name
       ui.platformViewRegistry.registerViewFactory(
           viewId.toString(),
           (int id) => IFrameElement()

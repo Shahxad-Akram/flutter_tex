@@ -1,3 +1,6 @@
+## [3.6.7+9]- August 9, 2020
+* Minor fixes.
+
 ## [3.6.7+8]- Jul 5, 2020
 * Minor issues Fixed.
 
