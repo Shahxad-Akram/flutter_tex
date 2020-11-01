@@ -104,7 +104,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 <key>NSAppTransportSecurity</key>
   <dict>
     <key>NSAllowsArbitraryLoads</key> <true/>
-  </dict>Example
+  </dict>
 <key>io.flutter.embedded_views_preview</key> <true/> 
 ```
 
