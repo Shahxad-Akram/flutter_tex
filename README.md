@@ -28,7 +28,7 @@
 * [Cautions](#cautions)
 
 # About
-A Flutter Package to render **fully offline** so many types of equations and expressions based on **LaTeX** and **TeX**, most commonly used are as followings:
+A Flutter Package to render **fully offline** so many types of equations and expressions based on **LaTeX** , **TeX** and **MathML**, most commonly used are as followings:
 
 - **Mathematics / Maths Equations and expressions** (Algebra, Calculus, Geometry, Geometry etc...)
 
@@ -42,9 +42,9 @@ A Flutter Package to render **fully offline** so many types of equations and exp
 
 - It also includes full **HTML** with **JavaScript** support.
 
-Rendering of equations depends on [mini-mathjax](https://github.com/electricbookworks/mini-mathjax) a simplified version of [MathJax](https://github.com/mathjax/MathJax/) and [Katex](https://github.com/KaTeX/KaTeX) JavaScript libraries.
+# How it works?
 
-This package mainly depends on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus).
+Basically it's a flutter dart wrapper around the most powerful JavaScript libraries [MathJax](https://github.com/mathjax/MathJax) and [Katex](https://github.com/KaTeX/KaTeX) which render the equations in [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus).
 
 
 # Demo Video
@@ -65,8 +65,7 @@ This package mainly depends on [webview_flutter_plus](https://pub.dartlang.org/p
 
 ```yaml
 dependencies:
-  flutter_tex: ^3.6.7+9
-``` 
+  flutter_tex: ^4.0.0``` 
 
 
 **2:** You can install packages from the command line:
@@ -109,12 +108,15 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 ```
 
 ### Web
-For Web support you need to put `<script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
+For Web support you need to put `<script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>` and `<script type="text/javascript">window.flutterWebRenderer = "html";</script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
 ```html
 <head>
+  
     <meta charset="UTF-8">
     <title>Flutter TeX</title>
+
     <script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>
+    <script type="text/javascript">window.flutterWebRenderer = "html";</script>
 </head>
 ```
 

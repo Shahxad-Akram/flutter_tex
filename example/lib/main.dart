@@ -128,9 +128,10 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
   getExampleButton(BuildContext context, String title, Widget widget) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: RaisedButton(
-        elevation: 5,
-        color: Colors.white,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            elevation: MaterialStateProperty.all(5),
+            backgroundColor: MaterialStateProperty.all(Colors.white)),
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => widget));
@@ -139,7 +140,7 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
           padding: const EdgeInsets.all(15.0),
           child: Text(
             title,
-            style: TextStyle(fontSize: 15),
+            style: TextStyle(fontSize: 15, color: Colors.black),
           ),
         ),
       ),

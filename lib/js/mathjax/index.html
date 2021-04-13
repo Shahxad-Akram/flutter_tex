@@ -18,11 +18,22 @@
                 processEscapes: true,
                 ignoreClass: "tex2jax_ignore"
             },
-            jax: ["input/TeX", "output/SVG"],
-            extensions: ["tex2jax.js", "MathEvents.js"],
+            jax: ["input/MathML", "input/TeX", "output/SVG"],
+
+            extensions: ["tex2jax.js", "MathEvents.js", "toMathML.js", "mml2jax.js"],
+
             TeX: {
                 extensions: ["mhchem.js", "noErrors.js", "noUndefined.js", "autoload-all.js"],
-                noErrors: {disabled: true}
+                noErrors: { disabled: true },
+                Macros: {
+
+                    RR: "{\\bf R}",
+                    bold: ["{\\bf #1}", 1]
+                }
+            },
+            MathMl: {
+                extensions: ["Mathcontent-mathml.js", "mml3.js"],
+                noErrors: { disabled: true }
             },
             MathMenu: {
                 showRenderer: false
@@ -60,9 +71,7 @@
             onCompleteCallback();
         });
     }
-
-    OnPageLoaded.postMessage("Page has been Loaded...!");
-
+    
 </script>
 </body>
 </html>

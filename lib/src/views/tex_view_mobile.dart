@@ -5,9 +5,9 @@ import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  WebViewPlusController _controller;
+  WebViewPlusController? _controller;
   double _height = 1;
-  String _lastData;
+  String? _lastData;
   bool _pageLoaded = false;
 
   @override
@@ -20,12 +20,18 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     _buildTeXView();
     return IndexedStack(
       index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _height == 1 ? 1 : 0
+          ? _height == 1
+              ? 1
+              : 0
           : 0,
       children: <Widget>[
         SizedBox(
           height: _height,
           child: WebViewPlus(
+            onPageFinished: (message) {
+              _pageLoaded = true;
+              _buildTeXView();
+            },
             initialUrl:
                 "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
             onWebViewCreated: (controller) {
@@ -45,7 +51,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       JavascriptChannel(
           name: 'TeXViewRenderedCallback',
           onMessageReceived: (_) async {
-            double height = await _controller.getHeight();
+            double height = await _controller!.getHeight();
             if (this._height != height)
               setState(() {
                 this._height = height;
@@ -56,12 +62,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           name: 'OnTapCallback',
           onMessageReceived: (jm) {
             widget.child.onTapManager(jm.message);
-          }),
-      JavascriptChannel(
-          name: 'OnPageLoaded',
-          onMessageReceived: (jm) {
-            _pageLoaded = true;
-            _buildTeXView();
           })
     ]);
   }
@@ -69,7 +69,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   void _buildTeXView() {
     if (_pageLoaded && _controller != null && getRawData(widget) != _lastData) {
       if (widget.loadingWidgetBuilder != null) _height = 1;
-      _controller.evaluateJavascript(
+      _controller!.webViewController.evaluateJavascript(
           "var jsonData = " + getRawData(widget) + ";initView(jsonData);");
       this._lastData = getRawData(widget);
     }

@@ -15,6 +15,26 @@ class TeXExample {
      When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
      $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
 
+  static TeXViewWidget mathML =
+      _teXViewWidget(r"<h4>MathML (MathJax Only)</h4>", r"""
+<math xmlns = "http://www.w3.org/1998/Math/MathML">
+   <mrow>
+      <mrow>
+         <msup> <mi>x</mi> <mn>2</mn> </msup> <mo>+</mo>
+         <mrow>
+            <mn>4</mn>
+            <mo>⁢</mo>
+            <mi>x</mi>
+         </mrow>
+         <mo>+</mo>
+         <mn>4</mn>
+      </mrow>
+      
+      <mo>=</mo>
+      <mn>0</mn>
+   </mrow>
+</math>""");
+
   static TeXViewWidget bohrRadius = _teXViewWidget(r"<h4>Bohr's Radius</h4>",
       r"""\( a_0 = \frac{{\hbar ^2 }}{{m_e ke^2 }} \)""");
 
@@ -101,6 +121,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
             renderingEngine: renderingEngine,
             child: TeXViewColumn(children: [
               TeXExample.introduction,
+              TeXExample.mathML,
               TeXExample.quadraticEquation,
               TeXExample.relationEnergyPrincipalQuantum,
               TeXExample.alignedTag,

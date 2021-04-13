@@ -173,7 +173,7 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
                     if (currentQuizIndex > 0) {
@@ -184,7 +184,7 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                 },
                 child: Text("Previous"),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   setState(() {
                     if (selectedOptionId ==

@@ -1,3 +1,10 @@
+## [4.0.1]- Apr 13, 2021 
+* Dependencies upgrade.
+
+## [4.0.0]- Apr 11, 2021 
+* Null Safety Migrations.
+* MathML Support Added.
+
 ## [3.6.7+9]- August 9, 2020
 * Minor fixes.
 

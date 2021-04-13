@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_tex/src/models/tex_view_widget_meta.dart';
+import 'package:flutter_tex/src/models/widget_meta.dart';
 import 'package:flutter_tex/src/utils/style_utils.dart';
 import 'package:flutter_tex/src/views/tex_view.dart';
 

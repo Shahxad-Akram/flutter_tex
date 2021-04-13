@@ -1,5 +1,6 @@
-import 'dart:async';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
@@ -10,11 +11,9 @@ import 'package:flutter_tex/src/utils/fake_ui.dart'
     if (dart.library.html) 'dart:ui' as ui;
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  String _lastData;
-  double _height = 750;
-  String viewId = UniqueKey().toString();
-
-  Completer<double> heightCompleter = Completer<double>();
+  String? _lastData;
+  double? _height;
+  String _viewId = UniqueKey().toString();
 
   @override
   bool get wantKeepAlive => true;
@@ -24,26 +23,17 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.build(context);
     updateKeepAlive();
     _initTeXView();
-    return FutureBuilder(
-      future: heightCompleter.future,
-      initialData: 500.0,
-      builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
-        if (snapshot.hasData && !snapshot.hasError) {
-          return SizedBox(
-            height: snapshot.data,
-            child: HtmlElementView(
-              viewType: viewId.toString(),
-            ),
-          );
-        } else {
-          return SizedBox.shrink();
-        }
-      },
+    return SizedBox(
+      height: _height ?? 1,
+      child: HtmlElementView(
+        viewType: _viewId.toString(),
+      ),
     );
   }
 
   @override
   void initState() {
+    _height = widget.height;
     super.initState();
     js.context['TeXViewRenderedCallback'] = (message) {
       double height = double.parse(message.toString());
@@ -54,6 +44,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       //heightCompleter.complete(height);
       //});
     };
+
     js.context['OnTapCallback'] = (id) {
       widget.child.onTapManager(id);
     };
@@ -62,15 +53,15 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   void _initTeXView() {
     if (getRawData(widget) != _lastData) {
       ui.platformViewRegistry.registerViewFactory(
-          viewId.toString(),
+          _viewId.toString(),
           (int id) => IFrameElement()
             ..width = MediaQuery.of(context).size.width.toString()
             ..height = MediaQuery.of(context).size.height.toString()
             ..src =
                 "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
-            ..id = viewId
+            ..id = _viewId
             ..style.border = 'none');
-      js.context.callMethod('initWebTeXView', [viewId, getRawData(widget)]);
+      js.context.callMethod('initWebTeXView', [_viewId, getRawData(widget)]);
       this._lastData = getRawData(widget);
     }
   }

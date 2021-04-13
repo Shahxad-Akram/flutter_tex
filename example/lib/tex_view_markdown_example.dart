@@ -189,32 +189,33 @@ class TeXViewMarkdownExamples extends StatelessWidget {
         physics: ScrollPhysics(),
         children: <Widget>[
           TeXView(
-              renderingEngine: renderingEngine,
-              child: TeXViewMarkdown(_markdownFlutterTeX),
-              style: TeXViewStyle(
-                margin: TeXViewMargin.all(10),
-                padding: TeXViewPadding.all(20),
-                elevation: 10,
-                borderRadius: TeXViewBorderRadius.all(25),
-                border: TeXViewBorder.all(
-                  TeXViewBorderDecoration(
-                      borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.Solid,
-                      borderWidth: 5),
-                ),
-                backgroundColor: Colors.white,
+            renderingEngine: renderingEngine,
+            child: TeXViewMarkdown(_markdownFlutterTeX),
+            style: TeXViewStyle(
+              margin: TeXViewMargin.all(10),
+              padding: TeXViewPadding.all(20),
+              elevation: 10,
+              borderRadius: TeXViewBorderRadius.all(25),
+              border: TeXViewBorder.all(
+                TeXViewBorderDecoration(
+                    borderColor: Colors.blue,
+                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderWidth: 5),
               ),
-              loadingWidgetBuilder: (context) => Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircularProgressIndicator(),
-                        Text("Rendering...")
-                      ],
-                    ),
-                  )),
+              backgroundColor: Colors.white,
+            ),
+            loadingWidgetBuilder: (context) => Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                  Text("Rendering...")
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
