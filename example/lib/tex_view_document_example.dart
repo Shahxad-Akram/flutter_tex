@@ -4,9 +4,11 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXExample {
   static TeXViewWidget introduction =
-      _teXViewWidget(r"""<h4>Flutter \( \rm\\TeX \)</h4>""", r""" 
+      _teXViewWidget(r"""<h4>Flutter \( \rm\TeX \)</h4>""", r""" 
+
+
        
-      <p>Flutter \( \rm\\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\\LaTeX \), It also includes full HTML with JavaScript
+      <p>Flutter \( \rm\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
       """);
 
@@ -74,6 +76,14 @@ class TeXExample {
               k  \\
             \end{array}} \right)p^k q^{n - k} 
      $$
+
+           <details>
+  <summary>Hint</summary>
+     <p>     
+        Some explanation TeX ..
+     </p>
+</details> 
+
     </p>""");
 
   static TeXViewWidget _teXViewWidget(String title, String body) {
@@ -114,47 +124,42 @@ class TeXViewDocumentExamples extends StatelessWidget {
       appBar: AppBar(
         title: Text("TeXViewDocument"),
       ),
-      body: ListView(
-        physics: ScrollPhysics(),
-        children: <Widget>[
-          TeXView(
-            renderingEngine: renderingEngine,
-            child: TeXViewColumn(children: [
-              TeXExample.introduction,
-              TeXExample.mathML,
-              TeXExample.quadraticEquation,
-              TeXExample.relationEnergyPrincipalQuantum,
-              TeXExample.alignedTag,
-              TeXExample.bohrRadius,
-              TeXExample.chemistryEquations,
-              TeXExample.matrix,
-              if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
-            ]),
-            style: TeXViewStyle(
-              margin: TeXViewMargin.all(10),
-              elevation: 10,
-              borderRadius: TeXViewBorderRadius.all(25),
-              border: TeXViewBorder.all(
-                TeXViewBorderDecoration(
-                    borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.Solid,
-                    borderWidth: 5),
-              ),
-              backgroundColor: Colors.white,
-            ),
-            // loadingWidgetBuilder: (context) => Center(
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     mainAxisSize: MainAxisSize.min,
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: <Widget>[
-            //       CircularProgressIndicator(),
-            //       Text("Rendering...")
-            //     ],
-            //   ),
-            // ),
+      body: TeXView(
+        renderingEngine: renderingEngine,
+        child: TeXViewColumn(children: [
+          TeXExample.introduction,
+          TeXExample.mathML,
+          TeXExample.quadraticEquation,
+          TeXExample.relationEnergyPrincipalQuantum,
+          TeXExample.alignedTag,
+          TeXExample.bohrRadius,
+          TeXExample.chemistryEquations,
+          TeXExample.matrix,
+          if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
+        ]),
+        style: TeXViewStyle(
+          margin: TeXViewMargin.all(10),
+          elevation: 10,
+          borderRadius: TeXViewBorderRadius.all(25),
+          border: TeXViewBorder.all(
+            TeXViewBorderDecoration(
+                borderColor: Colors.blue,
+                borderStyle: TeXViewBorderStyle.Solid,
+                borderWidth: 5),
           ),
-        ],
+          backgroundColor: Colors.white,
+        ),
+        // loadingWidgetBuilder: (context) => Center(
+        //   child: Column(
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     mainAxisSize: MainAxisSize.min,
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: <Widget>[
+        //       CircularProgressIndicator(),
+        //       Text("Rendering...")
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

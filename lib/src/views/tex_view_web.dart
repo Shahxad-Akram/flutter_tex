@@ -1,7 +1,8 @@
 // ignore: avoid_web_libraries_in_flutter
-import 'dart:html';
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:js' as js;
+
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,59 +11,93 @@ import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:flutter_tex/src/utils/fake_ui.dart'
     if (dart.library.html) 'dart:ui' as ui;
 
-class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
+class TeXViewState extends State<TeXView> {
   String? _lastData;
-  double? _height;
+  double viewHeight = 1;
   String _viewId = UniqueKey().toString();
 
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
-    updateKeepAlive();
     _initTeXView();
-    return SizedBox(
-      height: _height ?? 1,
-      child: HtmlElementView(
-        viewType: _viewId.toString(),
-      ),
-    );
+
+    return LayoutBuilder(
+        builder: (BuildContext ctx, BoxConstraints constraints) {
+      return SizedBox(
+        height: viewHeight,
+        width: constraints.maxWidth,
+        child: AbsorbPointer(
+          child: RepaintBoundary(
+            child: HtmlElementView(
+              key: widget.key ?? ValueKey(_viewId),
+              viewType: _viewId,
+            ),
+          ),
+        ),
+      );
+    });
   }
 
   @override
   void initState() {
-    _height = widget.height;
-    super.initState();
+    print("viewid $_viewId");
+
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      /*  final _iframe = _iframeElementMap[widget.key];
+      _iframe?.onLoad.listen((event) {});*/
+    });
+
     js.context['TeXViewRenderedCallback'] = (message) {
-      double height = double.parse(message.toString());
-      print("new-$height     old-$_height");
-      //if (widget.height == null)
-      //setState(() {
-      _height = height;
-      //heightCompleter.complete(height);
-      //});
+      double rHeight = double.parse(message.toString());
+      double dHeight = MediaQuery.of(context).size.height;
+      // print(
+      //     "key-$_viewId       new-$rHeight     old-$viewHeight     device-$dHeight");
+      if (rHeight > dHeight / 1.8) {
+        rHeight = dHeight / 1.8;
+      }
+      if (rHeight != viewHeight) {
+        setState(() {
+          viewHeight = rHeight;
+        });
+      }
     };
 
     js.context['OnTapCallback'] = (id) {
       widget.child.onTapManager(id);
     };
+
+    super.initState();
   }
 
   void _initTeXView() {
     if (getRawData(widget) != _lastData) {
       ui.platformViewRegistry.registerViewFactory(
-          _viewId.toString(),
-          (int id) => IFrameElement()
-            ..width = MediaQuery.of(context).size.width.toString()
-            ..height = MediaQuery.of(context).size.height.toString()
+          _viewId,
+          (int id) => html.IFrameElement()
             ..src =
                 "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
             ..id = _viewId
-            ..style.border = 'none');
+            ..style.border = '0');
       js.context.callMethod('initWebTeXView', [_viewId, getRawData(widget)]);
       this._lastData = getRawData(widget);
     }
+  }
+
+  @override
+  void didUpdateWidget(TeXView oldWidget) {
+    if (mounted) setState(() {});
+
+/*    if (oldWidget.height != widget.height) {
+      if (mounted) setState(() {});
+    }
+    if (oldWidget.width != widget.width) {
+      if (mounted) setState(() {});
+    }
+    if (oldWidget.src != widget.src) {
+      if (mounted) setState(() {});
+    }
+    if (oldWidget.headers != widget.headers) {
+      if (mounted) setState(() {});
+    }*/
+    super.didUpdateWidget(oldWidget);
   }
 }

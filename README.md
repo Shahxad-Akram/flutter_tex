@@ -65,7 +65,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.0``` 
+  flutter_tex: ^4.0.2``` 
 
 
 **2:** You can install packages from the command line:
@@ -81,6 +81,7 @@ Alternatively, your editor might support flutter packages get. Check the docs fo
 
 ### Android
 Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
+
 ```xml
 <application
        android:usesCleartextTraffic="true">
@@ -99,6 +100,7 @@ It'll still work in debug mode without permissions, but it won't work in release
 
 ### iOS
 Add following code in your `<project-directory>/ios/Runner/Info.plist`
+
 ```plist
 <key>NSAppTransportSecurity</key>
   <dict>
@@ -109,6 +111,7 @@ Add following code in your `<project-directory>/ios/Runner/Info.plist`
 
 ### Web
 For Web support you need to put `<script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>` and `<script type="text/javascript">window.flutterWebRenderer = "html";</script>` in `<head>` tag of your `<project-directory>/web/index.html` like this.
+
 ```html
 <head>
   
@@ -131,6 +134,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 # Examples
 
 ### Quick Example
+
 ```dart
 TeXView(
     child: TeXViewColumn(children: [

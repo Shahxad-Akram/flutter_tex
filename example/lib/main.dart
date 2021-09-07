@@ -42,6 +42,7 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
     renderingEngine = radVal == 0
         ? TeXViewRenderingEngine.katex()
         : TeXViewRenderingEngine.mathjax();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

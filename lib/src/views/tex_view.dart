@@ -12,7 +12,7 @@ class TeXView extends StatefulWidget {
   final TeXViewStyle? style;
 
   /// TeXView height (Only for Web)
-  final double? height;
+  //final double? height;
 
   /// Register fonts.
   final List<TeXViewFont>? fonts;
@@ -30,7 +30,7 @@ class TeXView extends StatefulWidget {
     Key? key,
     required this.child,
     this.fonts,
-    this.height = 500,
+   // this.height = 500,
     this.style,
     this.loadingWidgetBuilder,
     this.onRenderFinished,
