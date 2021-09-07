@@ -1,4 +1,7 @@
 ## [4.0.2]- Sep 07, 2021 
+* `README.md` improvements.
+
+## [4.0.2]- Sep 07, 2021 
 * Improvements for web.
 
 ## [4.0.1]- Apr 13, 2021 

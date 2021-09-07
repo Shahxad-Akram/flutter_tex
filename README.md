@@ -65,8 +65,8 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.2``` 
-
+  flutter_tex: ^4.0.3
+``` 
 
 **2:** You can install packages from the command line:
 
@@ -89,6 +89,7 @@ Make sure to add this line `android:usesCleartextTraffic="true"` in your `<proje
 ```
 
 It completely works offline, without internet connection, but these are required permissions to work properly:
+
 
 ```xml
     <uses-permission android:name="android.permission.INTERNET" />
