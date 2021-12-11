@@ -242,4 +242,4 @@ flutter:
     - assets/js/katex/README.md
     - assets/js/katex/katex.min.css
     - assets/js/katex/index.html
-    - assets/js/katex/test.html
+#    - assets/js/katex/test.html
