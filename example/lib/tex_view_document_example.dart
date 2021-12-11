@@ -118,7 +118,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         title: Text("TeXViewDocument"),
       ),
@@ -145,19 +145,19 @@ class TeXViewDocumentExamples extends StatelessWidget {
                 borderStyle: TeXViewBorderStyle.Solid,
                 borderWidth: 5),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
         ),
-        // loadingWidgetBuilder: (context) => Center(
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisSize: MainAxisSize.min,
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-        //       CircularProgressIndicator(),
-        //       Text("Rendering...")
-        //     ],
-        //   ),
-        // ),
+        loadingWidgetBuilder: (context) => Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CircularProgressIndicator(),
+              Text("Rendering...")
+            ],
+          ),
+        ),
       ),
     );
   }

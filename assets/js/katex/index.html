@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<head>
+    <script src="../flutter_tex.js" type="text/javascript">
+    </script>
+    <link  href="../flutter_tex.css" rel="stylesheet">
+    <link  href="katex.css" rel="stylesheet">
+    <script  src="katex.js"></script>
+    <script  src="contrib/auto-render.js"></script>
+    <script  src="contrib/mhchem.js"></script>
+    <title>katex</title>
+    <script>
+        var formulasScrollStyle =
+            '.katex-display > .katex {                                    \n' +
+            '   display: inline-block;                                    \n' +
+            '   white-space: nowrap;                                      \n' +
+            '   max-width: 100%;                                          \n' +
+            '   overflow-x: scroll;                                       \n' +
+            '   text-align: initial;                                      \n' +
+            '}                                                            \n' +
+
+            '.katex {                                                     \n' +
+            '   font: normal 1.21em KaTeX_Main, Times New Roman, serif;   \n' +
+            '   line-height: 1.2;                                         \n' +
+            '   white-space: normal;                                      \n' +
+            '   text-indent: 0;                                           \n' +
+            '}';
+    </script>
+</head>
+<body>
+<div id="TeXView"></div>
+
+<script>
+
+    teXView = document.getElementById('TeXView');
+
+    function initView(jsonData) {
+        appendStyle(formulasScrollStyle);
+        initTeXView(jsonData);
+    }
+
+    function renderTeXView(onCompleteCallback) {
+        renderMathInElement(teXView);
+        setTimeout(function () {
+            onCompleteCallback();
+        }, 0)
+    }
+
+
+</script>
+</body>
+</html>
