@@ -1,6 +1,7 @@
-example/firebase
-
 # Miscellaneous
+
+firebase
+
 *.class
 *.log
 *.pyc

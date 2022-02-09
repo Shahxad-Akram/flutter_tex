@@ -16,21 +16,21 @@ class TeXViewContainer extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id,
+        id: id,
         tag: 'div',
         classList: 'tex-view-container',
-        node: Node.InternalChild);
+        node: Node.internalChild);
   }
 
   @override
   void onTapManager(String id) {
-    this.child.onTapManager(id);
+    child.onTapManager(id);
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.child.toJson(),
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'data': child.toJson(),
+        'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

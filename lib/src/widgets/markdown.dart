@@ -32,22 +32,22 @@ class TeXViewMarkdown extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id,
+        id: id,
         tag: 'div',
         classList: 'tex-view-markdown',
-        node: Node.Leaf);
+        node: Node.leaf);
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': markdownToHtml(this.markdown,
-            blockSyntaxes: this.blockSyntaxes,
-            extensionSet: this.extensionSet,
-            imageLinkResolver: this.imageLinkResolver,
-            inlineOnly: this.inlineOnly,
-            inlineSyntaxes: this.inlineSyntaxes,
-            linkResolver: this.linkResolver),
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'data': markdownToHtml(markdown,
+            blockSyntaxes: blockSyntaxes,
+            extensionSet: extensionSet,
+            imageLinkResolver: imageLinkResolver,
+            inlineOnly: inlineOnly,
+            inlineSyntaxes: inlineSyntaxes,
+            linkResolver: linkResolver),
+        'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

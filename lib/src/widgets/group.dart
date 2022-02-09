@@ -49,29 +49,30 @@ class TeXViewGroup extends TeXViewWidget {
 
   @override
   TeXViewWidgetMeta meta() {
-    return TeXViewWidgetMeta(
-        tag: 'div', classList: 'tex-view-group', node: Node.InternalChildren);
+    return const TeXViewWidgetMeta(
+        tag: 'div', classList: 'tex-view-group', node: Node.internalChildren);
   }
 
   @override
   void onTapManager(String id) {
     if (single) {
-      for (TeXViewGroupItem child in this.children)
-        if (child.id == id) this.onTap!(id);
+      for (TeXViewGroupItem child in children) {
+        if (child.id == id) onTap!(id);
+      }
     } else {
-      this.onItemsSelection!((jsonDecode(id) as List<dynamic>).cast<String>());
+      onItemsSelection!((jsonDecode(id) as List<dynamic>).cast<String>());
     }
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.children.map((child) => child.toJson()).toList(),
-        'single': this.single,
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'data': children.map((child) => child.toJson()).toList(),
+        'single': single,
+        'style': style?.initStyle() ?? teXViewDefaultStyle,
         'selectedItemStyle':
-            this.selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
+            selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
         'normalItemStyle':
-            this.normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
+            normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
       };
 }

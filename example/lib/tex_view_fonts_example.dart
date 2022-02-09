@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewFontsExamples extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
-  TeXViewFontsExamples(
-      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+  const TeXViewFontsExamples(
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXView Fonts"),
+        title: const Text("TeXView Fonts"),
       ),
       body: ListView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         children: <Widget>[
           TeXView(
-              fonts: [
+              fonts: const [
                 TeXViewFont(fontFamily: 'army', src: 'fonts/Army.ttf'),
                 TeXViewFont(fontFamily: 'budhrg', src: 'fonts/Budhrg.ttf'),
                 TeXViewFont(fontFamily: 'celtg', src: 'fonts/CELTG.ttf'),
@@ -44,14 +44,14 @@ class TeXViewFontsExamples extends StatelessWidget {
                 _teXViewWidget("Slenmini", 'slenmini'),
                 _teXViewWidget("Subaccuz Regular'", 'subaccuz_regular')
               ]),
-              style: TeXViewStyle(
+              style: const TeXViewStyle(
                 margin: TeXViewMargin.all(10),
                 elevation: 10,
                 borderRadius: TeXViewBorderRadius.all(25),
                 border: TeXViewBorder.all(
                   TeXViewBorderDecoration(
                       borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.Solid,
+                      borderStyle: TeXViewBorderStyle.dolid,
                       borderWidth: 5),
                 ),
                 backgroundColor: Colors.white,
@@ -61,7 +61,7 @@ class TeXViewFontsExamples extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: const <Widget>[
                         CircularProgressIndicator(),
                         Text("Rendering...")
                       ],
@@ -74,26 +74,26 @@ class TeXViewFontsExamples extends StatelessWidget {
 
   static TeXViewWidget _teXViewWidget(String title, String fontFamily) {
     return TeXViewColumn(
-        style: TeXViewStyle(
+        style: const TeXViewStyle(
             margin: TeXViewMargin.all(5),
             padding: TeXViewPadding.all(5),
             borderRadius: TeXViewBorderRadius.all(10),
             border: TeXViewBorder.all(TeXViewBorderDecoration(
                 borderWidth: 2,
-                borderStyle: TeXViewBorderStyle.Groove,
+                borderStyle: TeXViewBorderStyle.groove,
                 borderColor: Colors.green))),
         children: [
           TeXViewDocument(title,
               style: TeXViewStyle(
                   fontStyle: TeXViewFontStyle(
                       fontSize: 20,
-                      sizeUnit: TeXViewSizeUnit.Pt,
+                      sizeUnit: TeXViewSizeUnit.pt,
                       fontFamily: fontFamily),
-                  padding: TeXViewPadding.all(10),
-                  borderRadius: TeXViewBorderRadius.all(10),
-                  textAlign: TeXViewTextAlign.Center,
+                  padding: const TeXViewPadding.all(10),
+                  borderRadius: const TeXViewBorderRadius.all(10),
+                  textAlign: TeXViewTextAlign.center,
                   width: 250,
-                  margin: TeXViewMargin.zeroAuto())),
+                  margin: const TeXViewMargin.zeroAuto())),
         ]);
   }
 }

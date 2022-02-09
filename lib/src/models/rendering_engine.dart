@@ -1,7 +1,7 @@
 class TeXViewRenderingEngine {
   final String name;
 
-  const TeXViewRenderingEngine.katex() : this.name = "katex";
+  const TeXViewRenderingEngine.katex() : name = "katex";
 
-  const TeXViewRenderingEngine.mathjax() : this.name = "mathjax";
+  const TeXViewRenderingEngine.mathjax() : name = "mathjax";
 }

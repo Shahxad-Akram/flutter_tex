@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex_example/tex_view_document_example.dart';
 import 'package:flutter_tex_example/tex_view_fonts_example.dart';
@@ -9,13 +8,15 @@ import 'package:flutter_tex_example/tex_view_markdown_example.dart';
 import 'package:flutter_tex_example/tex_view_quiz_example.dart';
 
 main() {
-  runApp(FlutterTeXExample());
+  runApp(const FlutterTeXExample());
 }
 
 class FlutterTeXExample extends StatelessWidget {
+  const FlutterTeXExample({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: TeXViewFullExample(),
     );
@@ -23,11 +24,15 @@ class FlutterTeXExample extends StatelessWidget {
 }
 
 class TeXViewFullExample extends StatefulWidget {
+  const TeXViewFullExample({Key? key}) : super(key: key);
+
   @override
   _TeXViewFullExampleState createState() => _TeXViewFullExampleState();
 }
 
 class TeXViewMiniExample extends StatefulWidget {
+  const TeXViewMiniExample({Key? key}) : super(key: key);
+
   @override
   _TeXViewMiniExampleState createState() => _TeXViewMiniExampleState();
 }
@@ -35,18 +40,18 @@ class TeXViewMiniExample extends StatefulWidget {
 class _TeXViewFullExampleState extends State<TeXViewFullExample> {
   int radVal = 0;
 
-  TeXViewRenderingEngine renderingEngine;
+  late TeXViewRenderingEngine renderingEngine;
 
   @override
   Widget build(BuildContext context) {
     renderingEngine = radVal == 0
-        ? TeXViewRenderingEngine.katex()
-        : TeXViewRenderingEngine.mathjax();
+        ? const TeXViewRenderingEngine.katex()
+        : const TeXViewRenderingEngine.mathjax();
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Flutter TeX (Demo)"),
+        title: const Text("Flutter TeX (Demo)"),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -59,29 +64,29 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
               height: 200,
             ),
           ),
-          RadioListTile(
+          RadioListTile<int>(
             value: 0,
             groupValue: radVal,
             onChanged: (val) {
               setState(() {
-                this.radVal = val;
+                radVal = val!;
               });
             },
-            title: Text("Katex"),
-            subtitle: Text("RenderingEngine for Fast Rendering"),
+            title: const Text("Katex"),
+            subtitle: const Text("RenderingEngine for Fast Rendering"),
           ),
-          RadioListTile(
+          RadioListTile<int>(
             value: 1,
             groupValue: radVal,
             onChanged: (val) {
               setState(() {
-                this.radVal = val;
+                radVal = val!;
               });
             },
-            title: Text("MathJax"),
-            subtitle: Text("RenderingEngine for Quality Rendering"),
+            title: const Text("MathJax"),
+            subtitle: const Text("RenderingEngine for Quality Rendering"),
           ),
-          Divider(
+          const Divider(
             height: 30,
             color: Colors.transparent,
           ),
@@ -141,7 +146,7 @@ class _TeXViewFullExampleState extends State<TeXViewFullExample> {
           padding: const EdgeInsets.all(15.0),
           child: Text(
             title,
-            style: TextStyle(fontSize: 15, color: Colors.black),
+            style: const TextStyle(fontSize: 15, color: Colors.black),
           ),
         ),
       ),
@@ -153,12 +158,12 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
   @override
   Widget build(BuildContext context) {
     return TeXView(
-        child: TeXViewColumn(children: [
+        child: const TeXViewColumn(children: [
           TeXViewInkWell(
             id: "id_0",
             child: TeXViewColumn(children: [
               TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-                  style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                  style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
               TeXViewContainer(
                 child: TeXViewImage.network(
                     'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
@@ -175,12 +180,12 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
             ]),
           )
         ]),
-        style: TeXViewStyle(
+        style: const TeXViewStyle(
           elevation: 10,
           borderRadius: TeXViewBorderRadius.all(25),
           border: TeXViewBorder.all(TeXViewBorderDecoration(
               borderColor: Colors.blue,
-              borderStyle: TeXViewBorderStyle.Solid,
+              borderStyle: TeXViewBorderStyle.dolid,
               borderWidth: 5)),
           backgroundColor: Colors.white,
         ),
@@ -189,7 +194,7 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: const <Widget>[
                   CircularProgressIndicator(),
                   Text("Rendering...")
                 ],

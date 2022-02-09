@@ -15,16 +15,16 @@ class TeXViewGroupItem extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id,
+        id: id,
         tag: 'div',
         classList: 'tex-view-group-item',
-        node: Node.InternalChild);
+        node: Node.internalChild);
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.child.toJson(),
-        'rippleEffect': this.rippleEffect ?? true,
+        'data': child.toJson(),
+        'rippleEffect': rippleEffect ?? true,
       };
 }

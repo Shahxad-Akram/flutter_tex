@@ -11,21 +11,21 @@ class TeXViewImage extends TeXViewWidget {
   final String _type;
 
   const TeXViewImage.asset(this.imageUri, {this.id})
-      : this._type = 'tex-view-asset-image';
+      : _type = 'tex-view-asset-image';
 
   const TeXViewImage.network(this.imageUri, {this.id})
-      : this._type = 'tex-view-network-image';
+      : _type = 'tex-view-network-image';
 
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id, tag: 'img', classList: _type, node: Node.Leaf);
+        id: id, tag: 'img', classList: _type, node: Node.leaf);
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.imageUri,
+        'data': imageUri,
         'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
       };
 }

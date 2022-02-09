@@ -16,16 +16,16 @@ class TeXViewDocument extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id,
+        id: id,
         tag: 'div',
         classList: 'tex-view-document',
-        node: Node.Leaf);
+        node: Node.leaf);
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.data,
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'data': data,
+        'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

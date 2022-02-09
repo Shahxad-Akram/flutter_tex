@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class Quiz {
@@ -7,7 +6,10 @@ class Quiz {
   final List<QuizOption> options;
   final String correctOptionId;
 
-  Quiz({this.statement, this.options, this.correctOptionId});
+  Quiz(
+      {required this.statement,
+      required this.options,
+      required this.correctOptionId});
 }
 
 class QuizOption {
@@ -20,8 +22,8 @@ class QuizOption {
 class TeXViewQuizExample extends StatefulWidget {
   final TeXViewRenderingEngine renderingEngine;
 
-  TeXViewQuizExample(
-      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+  const TeXViewQuizExample(
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()}): super(key: key);
 
   @override
   _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();
@@ -29,7 +31,7 @@ class TeXViewQuizExample extends StatefulWidget {
 
 class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
   int currentQuizIndex = 0;
-  String selectedOptionId;
+  String selectedOptionId = "";
   bool isWrong = false;
 
   List<Quiz> quizList = [
@@ -107,21 +109,21 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXView Quiz"),
+        title: const Text("TeXView Quiz"),
       ),
       body: ListView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         children: <Widget>[
           Text(
             'Quiz ${currentQuizIndex + 1}/${quizList.length}',
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textAlign: TextAlign.center,
           ),
           TeXView(
             renderingEngine: widget.renderingEngine,
             child: TeXViewColumn(children: [
               TeXViewDocument(quizList[currentQuizIndex].statement,
-                  style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                  style: const TeXViewStyle(textAlign: TeXViewTextAlign.center)),
               TeXViewGroup(
                   children: quizList[currentQuizIndex]
                       .options
@@ -131,37 +133,37 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                         id: option.id,
                         child: TeXViewDocument(option.option,
                             style:
-                                TeXViewStyle(padding: TeXViewPadding.all(10))));
+                                const TeXViewStyle(padding: TeXViewPadding.all(10))));
                   }).toList(),
                   selectedItemStyle: TeXViewStyle(
-                      borderRadius: TeXViewBorderRadius.all(10),
+                      borderRadius: const TeXViewBorderRadius.all(10),
                       border: TeXViewBorder.all(TeXViewBorderDecoration(
                           borderWidth: 3, borderColor: Colors.green[900])),
-                      margin: TeXViewMargin.all(10)),
-                  normalItemStyle: TeXViewStyle(margin: TeXViewMargin.all(10)),
+                      margin: const TeXViewMargin.all(10)),
+                  normalItemStyle: const TeXViewStyle(margin: TeXViewMargin.all(10)),
                   onTap: (id) {
-                    this.selectedOptionId = id;
+                    selectedOptionId = id;
                     setState(() {
                       isWrong = false;
                     });
                   })
             ]),
-            style: TeXViewStyle(
+            style: const TeXViewStyle(
               margin: TeXViewMargin.all(5),
               padding: TeXViewPadding.all(10),
               borderRadius: TeXViewBorderRadius.all(10),
               border: TeXViewBorder.all(
                 TeXViewBorderDecoration(
                     borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderStyle: TeXViewBorderStyle.dolid,
                     borderWidth: 5),
               ),
               backgroundColor: Colors.white,
             ),
           ),
           if (isWrong)
-            Padding(
-              padding: const EdgeInsets.all(20),
+            const Padding(
+              padding: EdgeInsets.all(20),
               child: Text(
                 "Wrong answer!!! Please choose a correct option.",
                 textAlign: TextAlign.center,
@@ -177,27 +179,28 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                 onPressed: () {
                   setState(() {
                     if (currentQuizIndex > 0) {
-                      selectedOptionId = null;
+                      selectedOptionId = "";
                       currentQuizIndex--;
                     }
                   });
                 },
-                child: Text("Previous"),
+                child: const Text("Previous"),
               ),
               ElevatedButton(
                 onPressed: () {
                   setState(() {
                     if (selectedOptionId ==
                         quizList[currentQuizIndex].correctOptionId) {
-                      selectedOptionId = null;
-                      if (currentQuizIndex != quizList.length - 1)
+                      selectedOptionId = "";
+                      if (currentQuizIndex != quizList.length - 1) {
                         currentQuizIndex++;
+                      }
                     } else {
                       isWrong = true;
                     }
                   });
                 },
-                child: Text("Next"),
+                child: const Text("Next"),
               ),
             ],
           )

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+import 'package:flutter_tex/src/utils/server.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  WebViewPlusController? _controller;
+  WebViewController? _controller;
 
   double _height = minHeight;
   String? _lastData;
@@ -19,44 +19,62 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.build(context);
     updateKeepAlive();
     _buildTeXView();
-    return IndexedStack(
-      index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _height == minHeight
-              ? 1
-              : 0
-          : 0,
-      children: <Widget>[
-        SizedBox(
-          height: _height,
-          child: WebViewPlus(
-            onPageFinished: (message) {
-              _pageLoaded = true;
-              _buildTeXView();
-            },
-            initialUrl:
-                "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
-            onWebViewCreated: (controller) {
-              this._controller = controller;
-            },
-            javascriptChannels: jsChannels(),
-            javascriptMode: JavascriptMode.unrestricted,
-          ),
-        ),
-        widget.loadingWidgetBuilder?.call(context) ?? SizedBox.shrink()
-      ],
+
+    return FutureBuilder(
+      future: TeXServer.start(),
+      builder: (BuildContext context, AsyncSnapshot<int> snap) {
+        return snap.hasData && !snap.hasError
+            ? IndexedStack(
+                index: widget.loadingWidgetBuilder?.call(context) != null
+                    ? _height == minHeight
+                        ? 1
+                        : 0
+                    : 0,
+                children: <Widget>[
+                  SizedBox(
+                    height: _height,
+                    child: WebView(
+                      onPageFinished: (message) {
+                        _pageLoaded = true;
+                        _buildTeXView();
+                      },
+                      initialUrl:
+                          "http://localhost:${snap.data}/packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
+                      onWebViewCreated: (controller) {
+                        _controller = controller;
+                      },
+                      backgroundColor: Colors.transparent,
+                      allowsInlineMediaPlayback: true,
+                      javascriptChannels: jsChannels(),
+                      javascriptMode: JavascriptMode.unrestricted,
+                    ),
+                  ),
+                  widget.loadingWidgetBuilder?.call(context) ??
+                      const SizedBox.shrink()
+                ],
+              )
+            : const SizedBox.shrink();
+      },
     );
   }
 
+  @override
+  void dispose() {
+    TeXServer.close();
+    super.dispose();
+  }
+
   Set<JavascriptChannel> jsChannels() {
-    return Set.from([
+    return {
       JavascriptChannel(
           name: 'TeXViewRenderedCallback',
-          onMessageReceived: (_) async {
-            double height = await _controller!.getHeight();
-            if (this._height != height)
+          onMessageReceived: (jm) async {
+            double height = double.parse(jm.message);
+            if (_height != height) {
               setState(() {
-                this._height = height;
+                _height = height;
               });
+            }
             widget.onRenderFinished?.call(height);
           }),
       JavascriptChannel(
@@ -64,15 +82,15 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           onMessageReceived: (jm) {
             widget.child.onTapManager(jm.message);
           })
-    ]);
+    };
   }
 
   void _buildTeXView() {
     if (_pageLoaded && _controller != null && getRawData(widget) != _lastData) {
       if (widget.loadingWidgetBuilder != null) _height = minHeight;
-      _controller!.webViewController.runJavascript(
+      _controller!.runJavascript(
           "var jsonData = " + getRawData(widget) + ";initView(jsonData);");
-      this._lastData = getRawData(widget);
+      _lastData = getRawData(widget);
     }
   }
 }

@@ -13,7 +13,7 @@ import 'package:flutter_tex/src/utils/fake_ui.dart'
 class TeXViewState extends State<TeXView> {
   String? _lastData;
   double widgetHeight = minHeight;
-  String _viewId = UniqueKey().toString();
+  final String _viewId = UniqueKey().toString();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class TeXViewState extends State<TeXView> {
             ..id = _viewId
             ..style.border = '0');
       js.context.callMethod('initWebTeXView', [_viewId, getRawData(widget)]);
-      this._lastData = getRawData(widget);
+      _lastData = getRawData(widget);
     }
   }
 }

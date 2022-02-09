@@ -13,5 +13,5 @@ String getElevation(int? elevation, TeXViewSizeUnit? sizeUnit) {
 }
 
 String getSizeWithUnit(int? value, TeXViewSizeUnit? sizeUnit) {
-  return "${(value ?? 0).toString() + "${UnitHelper.getValue(sizeUnit)}"}";
+  return (value ?? 0).toString() + UnitHelper.getValue(sizeUnit);
 }

@@ -11,12 +11,12 @@ class TeXViewVideo extends TeXViewWidget {
   final String _type;
 
   const TeXViewVideo.youtube(this.url, {this.id})
-      : this._type = 'tex-view-video-youtube';
+      : _type = 'tex-view-video-youtube';
 
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id, tag: 'div', classList: _type, node: Node.Leaf);
+        id: id, tag: 'div', classList: _type, node: Node.leaf);
   }
 
   @override
@@ -28,7 +28,7 @@ class TeXViewVideo extends TeXViewWidget {
 
   String _initData() {
     return """<iframe width="100%" height="100%" frameborder="0" allowfullscreen
-    src="https://www.youtube.com/embed/${Uri.parse(this.url).queryParameters['v']}"
+    src="https://www.youtube.com/embed/${Uri.parse(url).queryParameters['v']}"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>""";
   }
 }

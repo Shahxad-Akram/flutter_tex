@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 String _markdownFlutterTeX = r"""
@@ -175,23 +174,24 @@ For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/m
 class TeXViewMarkdownExamples extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
-  TeXViewMarkdownExamples(
-      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+  const TeXViewMarkdownExamples(
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("TeXViewMarkdown"),
+        title: const Text("TeXViewMarkdown"),
       ),
       body: ListView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         children: <Widget>[
           TeXView(
             renderingEngine: renderingEngine,
             child: TeXViewMarkdown(_markdownFlutterTeX),
-            style: TeXViewStyle(
+            style: const TeXViewStyle(
               margin: TeXViewMargin.all(10),
               padding: TeXViewPadding.all(20),
               elevation: 10,
@@ -199,7 +199,7 @@ class TeXViewMarkdownExamples extends StatelessWidget {
               border: TeXViewBorder.all(
                 TeXViewBorderDecoration(
                     borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.Solid,
+                    borderStyle: TeXViewBorderStyle.dolid,
                     borderWidth: 5),
               ),
               backgroundColor: Colors.white,
@@ -209,7 +209,7 @@ class TeXViewMarkdownExamples extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: const <Widget>[
                   CircularProgressIndicator(),
                   Text("Rendering...")
                 ],

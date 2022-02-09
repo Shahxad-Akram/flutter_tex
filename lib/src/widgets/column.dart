@@ -16,21 +16,23 @@ class TeXViewColumn extends TeXViewWidget {
   @override
   TeXViewWidgetMeta meta() {
     return TeXViewWidgetMeta(
-        id: this.id,
+        id: id,
         tag: 'div',
         classList: 'tex-view-column',
-        node: Node.InternalChildren);
+        node: Node.internalChildren);
   }
 
   @override
   void onTapManager(String id) {
-    for (TeXViewWidget child in this.children) child.onTapManager(id);
+    for (TeXViewWidget child in children) {
+      child.onTapManager(id);
+    }
   }
 
   @override
   Map toJson() => {
         'meta': meta().toJson(),
-        'data': this.children.map((child) => child.toJson()).toList(),
-        'style': this.style?.initStyle() ?? teXViewDefaultStyle,
+        'data': children.map((child) => child.toJson()).toList(),
+        'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
 }

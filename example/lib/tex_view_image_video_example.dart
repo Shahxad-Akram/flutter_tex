@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXViewImageVideoExample extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
-  TeXViewImageVideoExample(
-      {this.renderingEngine = const TeXViewRenderingEngine.katex()});
+  const TeXViewImageVideoExample(
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("TeXView Image & Video"),
+        title: const Text("TeXView Image & Video"),
       ),
       body: ListView(
         children: [
           TeXView(
               renderingEngine: renderingEngine,
-              child: TeXViewColumn(children: [
+              child: const TeXViewColumn(children: [
                 TeXViewDocument(
                     r"""<h2>Flutter \( \rm\\TeX \) Image Example</h2>""",
-                    style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+                    style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
                 TeXViewDocument('Image Loaded From Assets'),
                 TeXViewContainer(
                   child: TeXViewImage.asset('assets/flutter_tex_banner.png'),
@@ -44,14 +43,14 @@ class TeXViewImageVideoExample extends StatelessWidget {
                   ),
                 ),
               ]),
-              style: TeXViewStyle(
+              style: const TeXViewStyle(
                 margin: TeXViewMargin.all(5),
                 padding: TeXViewPadding.all(10),
                 borderRadius: TeXViewBorderRadius.all(10),
                 border: TeXViewBorder.all(
                   TeXViewBorderDecoration(
                       borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.Solid,
+                      borderStyle: TeXViewBorderStyle.dolid,
                       borderWidth: 5),
                 ),
                 backgroundColor: Colors.white,
@@ -61,7 +60,7 @@ class TeXViewImageVideoExample extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
+                      children: const <Widget>[
                         CircularProgressIndicator(),
                         Text("Rendering...")
                       ],

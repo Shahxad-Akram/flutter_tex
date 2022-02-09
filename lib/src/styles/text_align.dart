@@ -1,18 +1,18 @@
-enum TeXViewTextAlign { Center, Left, Right, Justify }
+enum TeXViewTextAlign { center, left, right, justify }
 
 class TeXViewTextAlignHelper {
   static String getValue(TeXViewTextAlign? teXViewTextAlign) {
     switch (teXViewTextAlign) {
-      case TeXViewTextAlign.Center:
+      case TeXViewTextAlign.center:
         return "center";
 
-      case TeXViewTextAlign.Left:
+      case TeXViewTextAlign.left:
         return "left";
 
-      case TeXViewTextAlign.Right:
+      case TeXViewTextAlign.right:
         return "right";
 
-      case TeXViewTextAlign.Justify:
+      case TeXViewTextAlign.justify:
         return "justify";
 
       default:
