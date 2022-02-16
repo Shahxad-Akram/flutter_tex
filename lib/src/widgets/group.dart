@@ -5,8 +5,6 @@ import 'package:flutter_tex/src/models/widget_meta.dart';
 import 'package:flutter_tex/src/utils/style_utils.dart';
 
 class TeXViewGroup extends TeXViewWidget {
-  final String? id;
-
   /// A list of [TeXViewWidget].
   final List<TeXViewGroupItem> children;
 
@@ -28,8 +26,7 @@ class TeXViewGroup extends TeXViewWidget {
   final bool single;
 
   const TeXViewGroup(
-      {this.id,
-      required this.children,
+      {required this.children,
       required this.onTap,
       this.style,
       this.selectedItemStyle,
@@ -38,8 +35,7 @@ class TeXViewGroup extends TeXViewWidget {
         single = true;
 
   const TeXViewGroup.multipleSelection(
-      {this.id,
-      required this.children,
+      {required this.children,
       required this.onItemsSelection,
       this.style,
       this.selectedItemStyle,
@@ -54,7 +50,7 @@ class TeXViewGroup extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {
+  void onTapCallback(String id) {
     if (single) {
       for (TeXViewGroupItem child in children) {
         if (child.id == id) onTap!(id);
@@ -72,7 +68,6 @@ class TeXViewGroup extends TeXViewWidget {
         'style': style?.initStyle() ?? teXViewDefaultStyle,
         'selectedItemStyle':
             selectedItemStyle?.initStyle() ?? teXViewDefaultStyle,
-        'normalItemStyle':
-            normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
+        'normalItemStyle': normalItemStyle?.initStyle() ?? teXViewDefaultStyle,
       };
 }

@@ -5,7 +5,8 @@ class TeXViewImageVideoExample extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewImageVideoExample(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()}): super(key: key);
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

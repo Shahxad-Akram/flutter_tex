@@ -38,6 +38,21 @@ class TeXViewState extends State<TeXView> {
 
   @override
   void initState() {
+    _initWebview();
+    super.initState();
+  }
+
+  void _initWebview() {
+    ui.platformViewRegistry.registerViewFactory(
+        _viewId,
+        (int id) => html.IFrameElement()
+          ..src =
+              "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
+          ..id = _viewId
+          ..style.height = '100%'
+          ..style.width = '100%'
+          ..style.border = '0');
+
     js.context['TeXViewRenderedCallback'] = (message) {
       double viewHeight = double.parse(message.toString());
       if (viewHeight != widgetHeight) {
@@ -48,21 +63,12 @@ class TeXViewState extends State<TeXView> {
     };
 
     js.context['OnTapCallback'] = (id) {
-      widget.child.onTapManager(id);
+      widget.child.onTapCallback(id);
     };
-
-    super.initState();
   }
 
   void _initTeXView() {
     if (getRawData(widget) != _lastData) {
-      ui.platformViewRegistry.registerViewFactory(
-          _viewId,
-          (int id) => html.IFrameElement()
-            ..src =
-                "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
-            ..id = _viewId
-            ..style.border = '0');
       js.context.callMethod('initWebTeXView', [_viewId, getRawData(widget)]);
       _lastData = getRawData(widget);
     }

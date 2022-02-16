@@ -114,7 +114,7 @@ class TeXViewBorderRadius {
 }
 
 enum TeXViewBorderStyle {
-  none ,
+  none,
   hidden,
   dotted,
   dashed,

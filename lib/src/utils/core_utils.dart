@@ -8,9 +8,9 @@ const double minHeight = 1;
 
 String getRawData(TeXView teXView) {
   return jsonEncode({
-    'meta':
-        const TeXViewWidgetMeta(tag: 'div', classList: 'tex-view', node: Node.root)
-            .toJson(),
+    'meta': const TeXViewWidgetMeta(
+            tag: 'div', classList: 'tex-view', node: Node.root)
+        .toJson(),
     'fonts': (teXView.fonts ?? []).map((font) => font.toJson()).toList(),
     'data': teXView.child.toJson(),
     'style': teXView.style?.initStyle() ?? teXViewDefaultStyle

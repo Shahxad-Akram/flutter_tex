@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:flutter_tex/src/utils/server.dart';
+import 'package:flutter_tex/src/utils/tex_server.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
@@ -18,8 +18,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
-    _buildTeXView();
-
+    _initTeXView();
     return FutureBuilder(
       future: TeXServer.start(),
       builder: (BuildContext context, AsyncSnapshot<int> snap) {
@@ -36,16 +35,35 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                     child: WebView(
                       onPageFinished: (message) {
                         _pageLoaded = true;
-                        _buildTeXView();
+                        _initTeXView();
                       },
                       initialUrl:
                           "http://localhost:${snap.data}/packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
                       onWebViewCreated: (controller) {
                         _controller = controller;
                       },
+                      initialMediaPlaybackPolicy:
+                          AutoMediaPlaybackPolicy.always_allow,
                       backgroundColor: Colors.transparent,
                       allowsInlineMediaPlayback: true,
-                      javascriptChannels: jsChannels(),
+                      javascriptChannels: {
+                        JavascriptChannel(
+                            name: 'TeXViewRenderedCallback',
+                            onMessageReceived: (jm) async {
+                              double height = double.parse(jm.message);
+                              if (_height != height) {
+                                setState(() {
+                                  _height = height;
+                                });
+                              }
+                              widget.onRenderFinished?.call(height);
+                            }),
+                        JavascriptChannel(
+                            name: 'OnTapCallback',
+                            onMessageReceived: (jm) {
+                              widget.child.onTapCallback(jm.message);
+                            })
+                      },
                       javascriptMode: JavascriptMode.unrestricted,
                     ),
                   ),
@@ -64,32 +82,10 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.dispose();
   }
 
-  Set<JavascriptChannel> jsChannels() {
-    return {
-      JavascriptChannel(
-          name: 'TeXViewRenderedCallback',
-          onMessageReceived: (jm) async {
-            double height = double.parse(jm.message);
-            if (_height != height) {
-              setState(() {
-                _height = height;
-              });
-            }
-            widget.onRenderFinished?.call(height);
-          }),
-      JavascriptChannel(
-          name: 'OnTapCallback',
-          onMessageReceived: (jm) {
-            widget.child.onTapManager(jm.message);
-          })
-    };
-  }
-
-  void _buildTeXView() {
+  void _initTeXView() {
     if (_pageLoaded && _controller != null && getRawData(widget) != _lastData) {
       if (widget.loadingWidgetBuilder != null) _height = minHeight;
-      _controller!.runJavascript(
-          "var jsonData = " + getRawData(widget) + ";initView(jsonData);");
+      _controller!.runJavascript("initView(${getRawData(widget)})");
       _lastData = getRawData(widget);
     }
   }

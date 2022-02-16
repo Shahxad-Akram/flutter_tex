@@ -5,7 +5,7 @@ abstract class TeXViewWidget {
 
   TeXViewWidgetMeta meta();
 
-  void onTapManager(String id) {}
+  void onTapCallback(String id) {}
 
   Map<dynamic, dynamic> toJson();
 }

@@ -187,6 +187,7 @@ class TeXViewMarkdownExamples extends StatelessWidget {
       ),
       body: ListView(
         physics: const ScrollPhysics(),
+        shrinkWrap: true,
         children: <Widget>[
           TeXView(
             renderingEngine: renderingEngine,

@@ -2,7 +2,7 @@ name: flutter_tex
 
 description: A Flutter Package to render Mathematics / Maths, Physics and Chemistry, Statistics Equations and expressions based on LaTeX, TeX, and MathML with HTML and JavaScript support.
 
-version: 4.0.3+1
+version: 4.0.3+2
 
 homepage: https://github.com/shah-xad/flutter_tex
 
@@ -10,12 +10,14 @@ environment:
   sdk: ">=2.16.0 <3.0.0"
   flutter: ">=1.17.0"
 
+
 dependencies:
-  flutter:
-    sdk: flutter
   webview_flutter: ^3.0.0
   mime: ^1.0.1
   markdown: ^4.0.1
+
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:

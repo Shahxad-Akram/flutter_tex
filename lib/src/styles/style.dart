@@ -74,6 +74,7 @@ class TeXViewStyle {
         textAlign = null;
 
   String? initStyle() {
-    return cascadingStyleSheets ?? """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + getSizeWithUnit(height, sizeUnit) + ";" : ""}${width != null ? "width: " + getSizeWithUnit(width, sizeUnit) + ";" : ""}${elevation != null ? "box-shadow: " + getElevation(elevation, sizeUnit) + ";" : ""}${contentColor != null ? "color: " + getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}${fontStyle?.initFontStyle() ?? ""}""";
+    return cascadingStyleSheets ??
+        """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + getSizeWithUnit(height, sizeUnit) + ";" : ""}${width != null ? "width: " + getSizeWithUnit(width, sizeUnit) + ";" : ""}${elevation != null ? "box-shadow: " + getElevation(elevation, sizeUnit) + ";" : ""}${contentColor != null ? "color: " + getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}${fontStyle?.initFontStyle() ?? ""}""";
   }
 }

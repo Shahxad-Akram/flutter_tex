@@ -23,7 +23,8 @@ class TeXViewQuizExample extends StatefulWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewQuizExample(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()}): super(key: key);
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
+      : super(key: key);
 
   @override
   _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();
@@ -123,7 +124,8 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
             renderingEngine: widget.renderingEngine,
             child: TeXViewColumn(children: [
               TeXViewDocument(quizList[currentQuizIndex].statement,
-                  style: const TeXViewStyle(textAlign: TeXViewTextAlign.center)),
+                  style:
+                      const TeXViewStyle(textAlign: TeXViewTextAlign.center)),
               TeXViewGroup(
                   children: quizList[currentQuizIndex]
                       .options
@@ -132,15 +134,16 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
                         rippleEffect: false,
                         id: option.id,
                         child: TeXViewDocument(option.option,
-                            style:
-                                const TeXViewStyle(padding: TeXViewPadding.all(10))));
+                            style: const TeXViewStyle(
+                                padding: TeXViewPadding.all(10))));
                   }).toList(),
                   selectedItemStyle: TeXViewStyle(
                       borderRadius: const TeXViewBorderRadius.all(10),
                       border: TeXViewBorder.all(TeXViewBorderDecoration(
                           borderWidth: 3, borderColor: Colors.green[900])),
                       margin: const TeXViewMargin.all(10)),
-                  normalItemStyle: const TeXViewStyle(margin: TeXViewMargin.all(10)),
+                  normalItemStyle:
+                      const TeXViewStyle(margin: TeXViewMargin.all(10)),
                   onTap: (id) {
                     selectedOptionId = id;
                     setState(() {

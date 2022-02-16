@@ -30,7 +30,7 @@ class TeXView extends StatefulWidget {
     Key? key,
     required this.child,
     this.fonts,
-   // this.height = 500,
+    // this.height = 500,
     this.style,
     this.loadingWidgetBuilder,
     this.onRenderFinished,

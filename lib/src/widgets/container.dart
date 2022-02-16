@@ -2,29 +2,24 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/widget_meta.dart';
 import 'package:flutter_tex/src/utils/style_utils.dart';
 
-class TeXViewContainer extends TeXViewWidget {
-  final String? id;
-
+class TeXViewContainer implements TeXViewWidget {
   /// A [TeXViewWidget] as child.
   final TeXViewWidget child;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle? style;
 
-  const TeXViewContainer({this.id, required this.child, this.style});
+  const TeXViewContainer({required this.child, this.style});
 
   @override
   TeXViewWidgetMeta meta() {
-    return TeXViewWidgetMeta(
-        id: id,
-        tag: 'div',
-        classList: 'tex-view-container',
-        node: Node.internalChild);
+    return const TeXViewWidgetMeta(
+        tag: 'div', classList: 'tex-view-container', node: Node.internalChild);
   }
 
   @override
-  void onTapManager(String id) {
-    child.onTapManager(id);
+  void onTapCallback(String id) {
+    child.onTapCallback(id);
   }
 
   @override

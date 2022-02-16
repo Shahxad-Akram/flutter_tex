@@ -65,7 +65,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.3+1
+  flutter_tex: ^4.0.3+2
 ``` 
 
 **2:** You can install packages from the command line:
@@ -219,7 +219,9 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
     - `TeXViewColumn` holds a list of `TeXViewWidget` vertically.
     - `TeXViewInkWell` for listening tap events. Its child and id is mandatory.
     - `TeXViewGroup` a group of `TeXViewGroupItem` usually used to create quiz layout.
-            
+    - `TeXViewDetails` like html `<details>`.
+
+
 - `TeXViewStyle()` You can style each and everything using `TeXViewStyle()` or by using custom `CSS` code by `TeXViewStyle.fromCSS()` where you can pass hard coded String containing CSS code. For more information please check the example.
     
 - `renderingEngine:` Render Engine to render TeX (Default is Katex Rendering Engine). Use **Katex RenderingEngine** for fast render and  **MathJax RenderingEngine** for quality render.

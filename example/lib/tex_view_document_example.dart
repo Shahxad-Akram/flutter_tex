@@ -74,13 +74,6 @@ class TeXExample {
             \end{array}} \right)p^k q^{n - k} 
      $$
 
-           <details>
-  <summary>Hint</summary>
-     <p>     
-        Some explanation TeX ..
-     </p>
-</details> 
-
     </p>""");
 
   static TeXViewWidget _teXViewWidget(String title, String body) {
@@ -133,6 +126,11 @@ class TeXViewDocumentExamples extends StatelessWidget {
           TeXExample.bohrRadius,
           TeXExample.chemistryEquations,
           TeXExample.matrix,
+          TeXViewDetails(
+            title: "sdfsdfsdsd",
+            style: const TeXViewStyle(backgroundColor: Colors.amber),
+            body: TeXExample.matrix,
+          ),
           if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
         ]),
         style: const TeXViewStyle(

@@ -2,7 +2,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/widget_meta.dart';
 import 'package:flutter_tex/src/utils/style_utils.dart';
 
-class TeXViewInkWell extends TeXViewWidget {
+class TeXViewInkWell implements TeXViewWidget {
   final String id;
 
   /// A [TeXViewWidget] as child.
@@ -33,7 +33,7 @@ class TeXViewInkWell extends TeXViewWidget {
   }
 
   @override
-  void onTapManager(String id) {
+  void onTapCallback(String id) {
     if (this.id == id) onTap!(id);
   }
 

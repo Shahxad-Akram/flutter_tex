@@ -4,8 +4,6 @@ import 'package:flutter_tex/src/utils/style_utils.dart';
 import 'package:markdown/markdown.dart' hide Node;
 
 class TeXViewMarkdown extends TeXViewWidget {
-  final String? id;
-
   /// Raw String containing HTML and TEX Code e.g. r"""$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br> """
   final String markdown;
 
@@ -20,8 +18,7 @@ class TeXViewMarkdown extends TeXViewWidget {
   final bool inlineOnly;
 
   const TeXViewMarkdown(this.markdown,
-      {this.id,
-      this.style,
+      {this.style,
       this.blockSyntaxes = const [],
       this.inlineSyntaxes = const [],
       this.extensionSet,
@@ -31,11 +28,8 @@ class TeXViewMarkdown extends TeXViewWidget {
 
   @override
   TeXViewWidgetMeta meta() {
-    return TeXViewWidgetMeta(
-        id: id,
-        tag: 'div',
-        classList: 'tex-view-markdown',
-        node: Node.leaf);
+    return const TeXViewWidgetMeta(
+        tag: 'div', classList: 'tex-view-markdown', node: Node.leaf);
   }
 
   @override

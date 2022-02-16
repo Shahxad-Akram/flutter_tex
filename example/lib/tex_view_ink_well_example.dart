@@ -5,7 +5,8 @@ class TeXViewInkWellExample extends StatefulWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewInkWellExample(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()}): super(key: key);
+      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
+      : super(key: key);
 
   @override
   _TeXViewInkWellExampleState createState() => _TeXViewInkWellExampleState();

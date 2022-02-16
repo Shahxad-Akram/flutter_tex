@@ -1,7 +1,7 @@
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/models/widget_meta.dart';
 
-class TeXViewGroupItem extends TeXViewWidget {
+class TeXViewGroupItem implements TeXViewWidget {
   final String id;
 
   /// A [TeXViewWidget] as child.
@@ -27,4 +27,9 @@ class TeXViewGroupItem extends TeXViewWidget {
         'data': child.toJson(),
         'rippleEffect': rippleEffect ?? true,
       };
+
+  @override
+  void onTapCallback(String id) {
+    child.onTapCallback(id);
+  }
 }
