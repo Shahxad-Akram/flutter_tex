@@ -53,7 +53,7 @@ class TeXViewBorderDecoration {
       case TeXViewBorderStyle.dashed:
         return "dashed";
 
-      case TeXViewBorderStyle.dolid:
+      case TeXViewBorderStyle.solid:
         return "solid";
 
       case TeXViewBorderStyle.double:
@@ -118,7 +118,7 @@ enum TeXViewBorderStyle {
   hidden,
   dotted,
   dashed,
-  dolid,
+  solid,
   double,
   groove,
   ridge,
