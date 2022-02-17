@@ -140,7 +140,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
           border: TeXViewBorder.all(
             TeXViewBorderDecoration(
                 borderColor: Colors.blue,
-                borderStyle: TeXViewBorderStyle.dolid,
+                borderStyle: TeXViewBorderStyle.solid,
                 borderWidth: 5),
           ),
           backgroundColor: Colors.white,

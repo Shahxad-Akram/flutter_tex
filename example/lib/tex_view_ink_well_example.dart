@@ -20,7 +20,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
     border: TeXViewBorder.all(
       TeXViewBorderDecoration(
           borderColor: Colors.blue,
-          borderStyle: TeXViewBorderStyle.dolid,
+          borderStyle: TeXViewBorderStyle.solid,
           borderWidth: 2),
     ),
   );
@@ -79,7 +79,7 @@ class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
                 border: TeXViewBorder.all(
                   TeXViewBorderDecoration(
                       borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.dolid,
+                      borderStyle: TeXViewBorderStyle.solid,
                       borderWidth: 5),
                 ),
                 backgroundColor: Colors.white,

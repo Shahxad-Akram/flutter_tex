@@ -185,7 +185,7 @@ class _TeXViewMiniExampleState extends State<TeXViewMiniExample> {
           borderRadius: TeXViewBorderRadius.all(25),
           border: TeXViewBorder.all(TeXViewBorderDecoration(
               borderColor: Colors.blue,
-              borderStyle: TeXViewBorderStyle.dolid,
+              borderStyle: TeXViewBorderStyle.solid,
               borderWidth: 5)),
           backgroundColor: Colors.white,
         ),
