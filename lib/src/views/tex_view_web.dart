@@ -1,8 +1,7 @@
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:js' as js;
+// ignore_for_file: avoid_web_libraries_in_flutter
 
+import 'dart:html' as html;
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
@@ -18,22 +17,13 @@ class TeXViewState extends State<TeXView> {
   @override
   Widget build(BuildContext context) {
     _initTeXView();
-
-    return LayoutBuilder(
-        builder: (BuildContext ctx, BoxConstraints constraints) {
-      return SizedBox(
-        height: widgetHeight,
-        width: constraints.maxWidth,
-        child: AbsorbPointer(
-          child: RepaintBoundary(
-            child: HtmlElementView(
-              key: widget.key ?? ValueKey(_viewId),
-              viewType: _viewId,
-            ),
-          ),
-        ),
-      );
-    });
+    return SizedBox(
+      height: widgetHeight,
+      child: HtmlElementView(
+        key: widget.key ?? ValueKey(_viewId),
+        viewType: _viewId,
+      ),
+    );
   }
 
   @override
@@ -69,7 +59,11 @@ class TeXViewState extends State<TeXView> {
 
   void _initTeXView() {
     if (getRawData(widget) != _lastData) {
-      js.context.callMethod('initWebTeXView', [_viewId, getRawData(widget)]);
+      js.context.callMethod('initWebTeXView', [
+        _viewId,
+        getRawData(widget),
+        widget.renderingEngine?.name ?? "katex"
+      ]);
       _lastData = getRawData(widget);
     }
   }

@@ -15,60 +15,54 @@ class TeXViewFontsExamples extends StatelessWidget {
       appBar: AppBar(
         title: const Text("TeXView Fonts"),
       ),
-      body: ListView(
-        physics: const ScrollPhysics(),
-        children: <Widget>[
-          TeXView(
-              fonts: const [
-                TeXViewFont(fontFamily: 'army', src: 'fonts/Army.ttf'),
-                TeXViewFont(fontFamily: 'budhrg', src: 'fonts/Budhrg.ttf'),
-                TeXViewFont(fontFamily: 'celtg', src: 'fonts/CELTG.ttf'),
-                TeXViewFont(fontFamily: 'hillock', src: 'fonts/hillock.ttf'),
-                TeXViewFont(fontFamily: 'intimacy', src: 'fonts/intimacy.ttf'),
-                TeXViewFont(
-                    fontFamily: 'sansation_light',
-                    src: 'fonts/SansationLight.ttf'),
-                TeXViewFont(fontFamily: 'slenmini', src: 'fonts/slenmini.ttf'),
-                TeXViewFont(
-                    fontFamily: 'subaccuz_regular',
-                    src: 'fonts/SubaccuzRegular.ttf'),
-              ],
-              renderingEngine: renderingEngine,
-              child: TeXViewColumn(children: [
-                _teXViewWidget("Army", 'army'),
-                _teXViewWidget("Budhrg", 'budhrg'),
-                _teXViewWidget("CELTG", 'celtg'),
-                _teXViewWidget("Hillock", 'hillock'),
-                _teXViewWidget("intimacy", 'intimacy'),
-                _teXViewWidget("Sansation Light", 'sansation_light'),
-                _teXViewWidget("Slenmini", 'slenmini'),
-                _teXViewWidget("Subaccuz Regular'", 'subaccuz_regular')
-              ]),
-              style: const TeXViewStyle(
-                margin: TeXViewMargin.all(10),
-                elevation: 10,
-                borderRadius: TeXViewBorderRadius.all(25),
-                border: TeXViewBorder.all(
-                  TeXViewBorderDecoration(
-                      borderColor: Colors.blue,
-                      borderStyle: TeXViewBorderStyle.solid,
-                      borderWidth: 5),
+      body: TeXView(
+          fonts: const [
+            TeXViewFont(fontFamily: 'army', src: 'fonts/Army.ttf'),
+            TeXViewFont(fontFamily: 'budhrg', src: 'fonts/Budhrg.ttf'),
+            TeXViewFont(fontFamily: 'celtg', src: 'fonts/CELTG.ttf'),
+            TeXViewFont(fontFamily: 'hillock', src: 'fonts/hillock.ttf'),
+            TeXViewFont(fontFamily: 'intimacy', src: 'fonts/intimacy.ttf'),
+            TeXViewFont(
+                fontFamily: 'sansation_light', src: 'fonts/SansationLight.ttf'),
+            TeXViewFont(fontFamily: 'slenmini', src: 'fonts/slenmini.ttf'),
+            TeXViewFont(
+                fontFamily: 'subaccuz_regular',
+                src: 'fonts/SubaccuzRegular.ttf'),
+          ],
+          renderingEngine: renderingEngine,
+          child: TeXViewColumn(children: [
+            _teXViewWidget("Army", 'army'),
+            _teXViewWidget("Budhrg", 'budhrg'),
+            _teXViewWidget("CELTG", 'celtg'),
+            _teXViewWidget("Hillock", 'hillock'),
+            _teXViewWidget("intimacy", 'intimacy'),
+            _teXViewWidget("Sansation Light", 'sansation_light'),
+            _teXViewWidget("Slenmini", 'slenmini'),
+            _teXViewWidget("Subaccuz Regular'", 'subaccuz_regular')
+          ]),
+          style: const TeXViewStyle(
+            margin: TeXViewMargin.all(10),
+            elevation: 10,
+            borderRadius: TeXViewBorderRadius.all(25),
+            border: TeXViewBorder.all(
+              TeXViewBorderDecoration(
+                  borderColor: Colors.blue,
+                  borderStyle: TeXViewBorderStyle.solid,
+                  borderWidth: 5),
+            ),
+            backgroundColor: Colors.white,
+          ),
+          loadingWidgetBuilder: (context) => Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const <Widget>[
+                    CircularProgressIndicator(),
+                    Text("Rendering...")
+                  ],
                 ),
-                backgroundColor: Colors.white,
-              ),
-              loadingWidgetBuilder: (context) => Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const <Widget>[
-                        CircularProgressIndicator(),
-                        Text("Rendering...")
-                      ],
-                    ),
-                  )),
-        ],
-      ),
+              )),
     );
   }
 

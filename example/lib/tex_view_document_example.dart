@@ -145,17 +145,6 @@ class TeXViewDocumentExamples extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
         ),
-        // loadingWidgetBuilder: (context) => Center(
-        //   child: Column(
-        //     crossAxisAlignment: CrossAxisAlignment.center,
-        //     mainAxisSize: MainAxisSize.min,
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: <Widget>[
-        //       CircularProgressIndicator(),
-        //       Text("Rendering...")
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }

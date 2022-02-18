@@ -185,39 +185,33 @@ class TeXViewMarkdownExamples extends StatelessWidget {
       appBar: AppBar(
         title: const Text("TeXViewMarkdown"),
       ),
-      body: ListView(
-        physics: const ScrollPhysics(),
-        shrinkWrap: true,
-        children: <Widget>[
-          TeXView(
-            renderingEngine: renderingEngine,
-            child: TeXViewMarkdown(_markdownFlutterTeX),
-            style: const TeXViewStyle(
-              margin: TeXViewMargin.all(10),
-              padding: TeXViewPadding.all(20),
-              elevation: 10,
-              borderRadius: TeXViewBorderRadius.all(25),
-              border: TeXViewBorder.all(
-                TeXViewBorderDecoration(
-                    borderColor: Colors.blue,
-                    borderStyle: TeXViewBorderStyle.solid,
-                    borderWidth: 5),
-              ),
-              backgroundColor: Colors.white,
-            ),
-            loadingWidgetBuilder: (context) => Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  CircularProgressIndicator(),
-                  Text("Rendering...")
-                ],
-              ),
-            ),
+      body: TeXView(
+        renderingEngine: renderingEngine,
+        child: TeXViewMarkdown(_markdownFlutterTeX),
+        style: const TeXViewStyle(
+          margin: TeXViewMargin.all(10),
+          padding: TeXViewPadding.all(20),
+          elevation: 10,
+          borderRadius: TeXViewBorderRadius.all(25),
+          border: TeXViewBorder.all(
+            TeXViewBorderDecoration(
+                borderColor: Colors.blue,
+                borderStyle: TeXViewBorderStyle.solid,
+                borderWidth: 5),
           ),
-        ],
+          backgroundColor: Colors.white,
+        ),
+        loadingWidgetBuilder: (context) => Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              CircularProgressIndicator(),
+              Text("Rendering...")
+            ],
+          ),
+        ),
       ),
     );
   }
