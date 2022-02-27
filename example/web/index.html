@@ -34,13 +34,30 @@
   <script src="assets/packages/flutter_tex/js/flutter_tex.js"></script>
   <script type="text/javascript">window.flutterWebRenderer = "canvaskit";</script>
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="index.css">
+
 </head>
 
 <body>
+
+
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
+
+
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
+
+
+    window.onload = (event) => {
+      var element = document.getElementById("loader");
+      element.parentNode.removeChild(element);
+    };
+
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
