@@ -41,7 +41,7 @@
 <body>
 
 
-  <div class="loading">
+  <div class="loading" id="tex_loader">
     <div class="loader"></div>
   </div>
 
@@ -54,8 +54,7 @@
 
 
     window.onload = (event) => {
-      var element = document.getElementById("loader");
-      element.parentNode.removeChild(element);
+     // document.getElementById("tex_loader").remove();
     };
 
     var serviceWorkerVersion = null;
