@@ -50,13 +50,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -87,7 +80,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.3+2"
+    version: "4.0.3+3"
   lints:
     dependency: transitive
     description:
@@ -232,7 +225,7 @@ packages:
       name: webview_flutter_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.0+1"
   webview_flutter_wkwebview:
     dependency: transitive
     description:

@@ -65,7 +65,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.3+2
+  flutter_tex: ^4.0.3+3
 ``` 
 
 **2:** You can install packages from the command line:
@@ -167,7 +167,7 @@ TeXView(
       borderRadius: TeXViewBorderRadius.all(25),
       border: TeXViewBorder.all(TeXViewBorderDecoration(
           borderColor: Colors.blue,
-          borderStyle: TeXViewBorderStyle.Solid,
+          borderStyle: TeXViewBorderStyle.solid,
           borderWidth: 5)),
       backgroundColor: Colors.white,
     ),
