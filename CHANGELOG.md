@@ -1,38 +1,41 @@
+## [4.0.3+4]- March 05, 2021
+* Dependencies updated.
+
 ## [4.0.3+3]- March 01, 2021
 * Minor Fixes.
 
-## [4.0.3+2]- Feb 19, 2021
+## [4.0.3+2]- February 19, 2021
 * Major improvements.
 
 ## [4.0.3+1]- November 23, 2021
 * `Web` improvements.
 
-## [4.0.3]- Sep 07, 2021 
+## [4.0.3]- September 07, 2021 
 * `README.md` improvements.
 
-## [4.0.2]- Sep 07, 2021 
+## [4.0.2]- September 07, 2021 
 * Improvements for web.
 
-## [4.0.1]- Apr 13, 2021 
+## [4.0.1]- April 13, 2021 
 * Dependencies upgrade.
 
-## [4.0.0]- Apr 11, 2021 
+## [4.0.0]- April 11, 2021 
 * Null Safety Migrations.
 * MathML Support Added.
 
 ## [3.6.7+9]- August 9, 2020
 * Minor fixes.
 
-## [3.6.7+8]- Jul 5, 2020
+## [3.6.7+8]- July 5, 2020
 * Minor issues Fixed.
 
-## [3.6.7+7]- Jul 5, 2020
+## [3.6.7+7]- July 5, 2020
 * Minor Fixes.
 
-## [3.6.7+6]- Jul 5, 2020
+## [3.6.7+6]- July 5, 2020
 * Added support for inline formula by using delimiter `$..$` for mathjax.
 
-## [3.6.7+5]- Jul 1, 2020
+## [3.6.7+5]- July 1, 2020
 * Minor fixes.
 
 ## [3.6.7+4]- June 11, 2020

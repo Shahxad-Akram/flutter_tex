@@ -80,7 +80,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.3+3"
+    version: "4.0.3+4"
   lints:
     dependency: transitive
     description:
@@ -204,7 +204,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   webview_flutter_android:
     dependency: transitive
     description:
@@ -225,7 +225,7 @@ packages:
       name: webview_flutter_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0+1"
+    version: "0.3.0+2"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
