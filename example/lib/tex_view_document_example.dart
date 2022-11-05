@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class TeXExample {
   static TeXViewWidget introduction =
@@ -117,6 +118,11 @@ class TeXViewDocumentExamples extends StatelessWidget {
       ),
       body: TeXView(
         renderingEngine: renderingEngine,
+        navigationDelegate: (NavigationRequest request) {
+          // ignore: avoid_print
+          print("Current URL : ${request.url}");
+          return NavigationDecision.prevent;
+        },
         child: TeXViewColumn(children: [
           TeXExample.introduction,
           TeXExample.mathML,
