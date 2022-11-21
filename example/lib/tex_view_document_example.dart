@@ -95,7 +95,6 @@ class TeXExample {
                 borderRadius: TeXViewBorderRadius.all(10),
                 textAlign: TeXViewTextAlign.center,
                 width: 250,
-                lineHeight: 1.5,
                 margin: TeXViewMargin.zeroAuto(),
                 backgroundColor: Colors.green),
           ),
