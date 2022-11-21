@@ -88,14 +88,17 @@ class TeXExample {
                 borderStyle: TeXViewBorderStyle.groove,
                 borderColor: Colors.green))),
         children: [
-          TeXViewDocument(title,
-              style: const TeXViewStyle(
-                  padding: TeXViewPadding.all(10),
-                  borderRadius: TeXViewBorderRadius.all(10),
-                  textAlign: TeXViewTextAlign.center,
-                  width: 250,
-                  margin: TeXViewMargin.zeroAuto(),
-                  backgroundColor: Colors.green)),
+          TeXViewDocument(
+            title,
+            style: const TeXViewStyle(
+                padding: TeXViewPadding.all(10),
+                borderRadius: TeXViewBorderRadius.all(10),
+                textAlign: TeXViewTextAlign.center,
+                width: 250,
+                lineHeight: 1.5,
+                margin: TeXViewMargin.zeroAuto(),
+                backgroundColor: Colors.green),
+          ),
           TeXViewDocument(body,
               style: const TeXViewStyle(margin: TeXViewMargin.only(top: 10)))
         ]);
@@ -122,6 +125,9 @@ class TeXViewDocumentExamples extends StatelessWidget {
           // ignore: avoid_print
           print("Current URL : ${request.url}");
           return NavigationDecision.prevent;
+        },
+        onProgress: (progressVal) {
+          print("progressVal : $progressVal");
         },
         child: TeXViewColumn(children: [
           TeXExample.introduction,
