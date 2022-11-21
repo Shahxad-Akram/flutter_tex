@@ -32,7 +32,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
               _pageLoaded = true;
               _initTeXView();
             },
-            onProgress: widget.onProgress,
             initialUrl:
                 "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
             onWebViewCreated: (controller) {

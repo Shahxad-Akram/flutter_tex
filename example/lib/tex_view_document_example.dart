@@ -125,7 +125,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
           print("Current URL : ${request.url}");
           return NavigationDecision.prevent;
         },
-        onProgress: (progressVal) {
+        onPageFinished: (progressVal) {
           print("progressVal : $progressVal");
         },
         child: TeXViewColumn(children: [
