@@ -25,6 +25,9 @@ class TeXViewStyle {
   ///Elevation of View.
   final int? elevation;
 
+  ///Line-Height of the view
+  final double? lineHeight;
+
   ///Color of content(fonts) within the View.
   final Color? contentColor;
 
@@ -43,20 +46,21 @@ class TeXViewStyle {
   /// Font styling for TeXView widgets
   final TeXViewFontStyle? fontStyle;
 
-  const TeXViewStyle(
-      {this.padding,
-      this.margin,
-      this.sizeUnit,
-      this.height,
-      this.width,
-      this.elevation,
-      this.contentColor,
-      this.backgroundColor,
-      this.border,
-      this.borderRadius,
-      this.textAlign,
-      this.fontStyle})
-      : cascadingStyleSheets = null;
+  const TeXViewStyle({
+    this.padding,
+    this.margin,
+    this.sizeUnit,
+    this.height,
+    this.width,
+    this.elevation,
+    this.contentColor,
+    this.backgroundColor,
+    this.border,
+    this.borderRadius,
+    this.textAlign,
+    this.fontStyle,
+    this.lineHeight,
+  }) : cascadingStyleSheets = null;
 
   /// Styling TeXView with hard coded CSS e.g. "color:green;background-color:red".
   const TeXViewStyle.fromCSS(this.cascadingStyleSheets)
@@ -71,10 +75,11 @@ class TeXViewStyle {
         border = null,
         borderRadius = null,
         fontStyle = null,
+        lineHeight = null,
         textAlign = null;
 
   String? initStyle() {
     return cascadingStyleSheets ??
-        """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + getSizeWithUnit(height, sizeUnit) + ";" : ""}${width != null ? "width: " + getSizeWithUnit(width, sizeUnit) + ";" : ""}${elevation != null ? "box-shadow: " + getElevation(elevation, sizeUnit) + ";" : ""}${contentColor != null ? "color: " + getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}${fontStyle?.initFontStyle() ?? ""}""";
+        """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + getSizeWithUnit(height, sizeUnit) + ";" : ""}${width != null ? "width: " + getSizeWithUnit(width, sizeUnit) + ";" : ""}${elevation != null ? "box-shadow: " + getElevation(elevation, sizeUnit) + ";" : ""}${contentColor != null ? "color: " + getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + getColor(backgroundColor) + ";" : ""}${lineHeight != null ? "line-height:$lineHeight;" : ""} ${textAlign != null ? "text-align: " + TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}${fontStyle?.initFontStyle() ?? ""}""";
   }
 }
