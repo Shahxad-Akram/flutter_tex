@@ -34,7 +34,7 @@ class TeXView extends StatefulWidget {
       navigationDelegate;
 
   /// Gives the progress of loading, works only in mobile.
-  final Function(int? value)? onProgress;
+  final Function(bool)? onPageFinished;
 
   const TeXView({
     Key? key,
@@ -46,7 +46,7 @@ class TeXView extends StatefulWidget {
     this.onRenderFinished,
     this.renderingEngine,
     this.navigationDelegate,
-    this.onProgress,
+    this.onPageFinished,
   }) : super(key: key);
 
   @override

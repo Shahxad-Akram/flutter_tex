@@ -14,19 +14,15 @@ class TeXViewFontStyle {
   /// Font size unit.
   final TeXViewSizeUnit? sizeUnit;
 
-  /// Line Height
-  final double? lineHeight;
-
   TeXViewFontStyle({
     this.fontSize,
     this.fontFamily,
     this.sizeUnit,
     this.fontWeight,
-    this.lineHeight,
   });
 
   String initFontStyle() {
-    return "${fontSize != null ? "font-size: " + getSizeWithUnit(fontSize, sizeUnit) + ";" : ""}${fontFamily != null ? "font-family: " + fontFamily! + ";" : ""}${lineHeight != null ? "line-height:$lineHeight;" : ""}${fontWeight != null ? "font-weight: " + _getFontWeightValue(fontWeight) + ";" : ""}";
+    return "${fontSize != null ? "font-size: " + getSizeWithUnit(fontSize, sizeUnit) + ";" : ""}${fontFamily != null ? "font-family: " + fontFamily! + ";" : ""}${fontWeight != null ? "font-weight: " + _getFontWeightValue(fontWeight) + ";" : ""}";
   }
 
   static String _getFontWeightValue(TeXViewFontWeight? teXViewFontWeight) {
