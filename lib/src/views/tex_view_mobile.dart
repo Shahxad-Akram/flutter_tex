@@ -29,7 +29,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
           height: _height,
           child: WebViewPlus(
             onPageFinished: (message) {
-              widget.onPageFinished?.call(true);
               _pageLoaded = true;
               _initTeXView();
             },
