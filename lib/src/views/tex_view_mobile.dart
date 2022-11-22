@@ -9,15 +9,25 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   double _height = minHeight;
   String? _lastData;
   bool _pageLoaded = false;
+  bool _ignoreRenderStartCallBack = false;
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
     updateKeepAlive();
     _initTeXView();
+    if (getRawData(widget) != _lastData) {
+      widget.onRenderStarted?.call();
+      _ignoreRenderStartCallBack = true;
+    }
     return IndexedStack(
       index: widget.loadingWidgetBuilder?.call(context) != null
           ? _height == minHeight
@@ -52,6 +62,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
                       });
                     }
                     widget.onRenderFinished?.call(height);
+                    _ignoreRenderStartCallBack = false;
                   }),
               JavascriptChannel(
                   name: 'OnTapCallback',
@@ -70,7 +81,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   void _initTeXView() {
     if (_pageLoaded && _controller != null && getRawData(widget) != _lastData) {
       if (widget.loadingWidgetBuilder != null) _height = minHeight;
-      widget.onRenderStarted?.call();
+      if (!_ignoreRenderStartCallBack) widget.onRenderStarted?.call();
       _controller!.webViewController
           .runJavascript("initView(${getRawData(widget)})");
       _lastData = getRawData(widget);
