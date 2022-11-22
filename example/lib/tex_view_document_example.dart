@@ -125,8 +125,13 @@ class TeXViewDocumentExamples extends StatelessWidget {
           print("Current URL : ${request.url}");
           return NavigationDecision.prevent;
         },
+        onRenderStarted: () {
+          // ignore: avoid_print
+          print("Rendered successfully started the texView");
+        },
         onRenderFinished: (height) {
-          print("Rendered successfully the texView");
+          // ignore: avoid_print
+          print("Rendered successfully finished the texView");
         },
         child: TeXViewColumn(children: [
           TeXExample.introduction,

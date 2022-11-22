@@ -29,6 +29,8 @@ class TeXView extends StatefulWidget {
   /// Callback when TEX rendering finishes.
   final Function(double height)? onRenderFinished;
 
+  final Function()? onRenderStarted;
+
   /// Navigation Delegate, Works only in mobile
   final FutureOr<NavigationDecision> Function(NavigationRequest)?
       navigationDelegate;
@@ -43,6 +45,7 @@ class TeXView extends StatefulWidget {
     this.onRenderFinished,
     this.renderingEngine,
     this.navigationDelegate,
+    this.onRenderStarted,
   }) : super(key: key);
 
   @override
