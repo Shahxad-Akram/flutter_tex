@@ -6,8 +6,7 @@ class TeXExample {
   static TeXViewWidget introduction =
       _teXViewWidget(r"""<h4>Flutter \( \rm\TeX \)</h4>""", r""" 
              
-      <p>Flutter \( \rm\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\LaTeX \), It also includes full HTML with JavaScript
-      support.</p>
+      <html><head></head><body><p><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>S</mi><mi>i</mi><mi>m</mi><mi>o</mi><mi>n</mi><mo>&nbsp;</mo><mi>w</mi><mi>o</mi><mi>n</mi><mo>&nbsp;</mo><mo>$</mo><mn>50</mn><mo>,</mo><mn>000</mn><mo>&nbsp;</mo><mi>o</mi><mi>n</mi><mo>&nbsp;</mo><mi>a</mi><mo>&nbsp;</mo><mi>s</mi><mi>c</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>c</mi><mi>h</mi><mo>-</mo><mi>o</mi><mi>f</mi><mi>f</mi><mo>&nbsp;</mo><mi>t</mi><mi>i</mi><mi>c</mi><mi>k</mi><mi>e</mi><mi>t</mi><mo>.</mo><mo>&nbsp;</mo><mo>&nbsp;</mo><mi>A</mi><mi>f</mi><mi>t</mi><mi>e</mi><mi>r</mi><mo>&nbsp;</mo><mi>p</mi><mi>a</mi><mi>y</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo>&nbsp;</mo><mn>30</mn><mo>%</mo><mo>&nbsp;</mo><mi>i</mi><mi>n</mi><mo>&nbsp;</mo><mi>t</mi><mi>a</mi><mi>x</mi><mi>e</mi><mi>s</mi><mo>,</mo><mo>&nbsp;</mo><mi>h</mi><mi>e</mi><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>e</mi><mi>n</mi><mo>&nbsp;</mo><mi>p</mi><mi>a</mi><mi>i</mi><mi>d</mi><mo>&nbsp;</mo><mo>$</mo><mn>15</mn><mo>,</mo><mn>000</mn><mo>&nbsp;</mo><mi>f</mi><mi>o</mi><mi>r</mi><mo>&nbsp;</mo><mi>a</mi><mo>&nbsp;</mo><mi>n</mi><mi>e</mi><mi>w</mi><mo>&nbsp;</mo><mi>m</mi><mi>o</mi><mi>t</mi><mi>o</mi><mi>r</mi><mi>c</mi><mi>y</mi><mi>c</mi><mi>l</mi><mi>e</mi><mo>.</mo><mo>&nbsp;</mo><mo>&nbsp;</mo><mi>H</mi><mi>e</mi><mo>&nbsp;</mo><mi>t</mi><mi>o</mi><mi>o</mi><mi>k</mi><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>e</mi><mo>&nbsp;</mo><mi>r</mi><mi>e</mi><mi>m</mi><mi>a</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo>&nbsp;</mo><mi>o</mi><mi>f</mi><mo>&nbsp;</mo><mi>h</mi><mi>i</mi><mi>s</mi><mo>&nbsp;</mo><mi>w</mi><mi>i</mi><mi>n</mi><mi>n</mi><mi>i</mi><mi>n</mi><mi>g</mi><mi>s</mi><mo>&nbsp;</mo><mi>a</mi><mi>n</mi><mi>d</mi><mo>&nbsp;</mo><mi>i</mi><mi>n</mi><mi>v</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>d</mi><mo>&nbsp;</mo><mi>i</mi><mi>n</mi><mo>&nbsp;</mo><mi>d</mi><mi>a</mi><mi>y</mi><mo>&nbsp;</mo><mi>t</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo>,</mo><mo>&nbsp;</mo><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo>&nbsp;</mo><mi>h</mi><mi>e</mi><mo>&nbsp;</mo><mi>e</mi><mi>a</mi><mi>r</mi><mi>n</mi><mi>e</mi><mi>d</mi><mo>&nbsp;</mo><mn>20</mn><mo>%</mo><mo>&nbsp;</mo><mi>o</mi><mi>f</mi><mo>&nbsp;</mo><mi>h</mi><mi>i</mi><mi>s</mi><mo>&nbsp;</mo><mi>i</mi><mi>n</mi><mi>v</mi><mi>e</mi><mi>s</mi><mi>t</mi><mi>m</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo>.</mo><mo>&nbsp;</mo><mo>&nbsp;</mo><mspace linebreak=\"newline\">&nbsp;</mspace><mi>H</mi><mi>o</mi><mi>w</mi><mo>&nbsp;</mo><mi>m</mi><mi>u</mi><mi>c</mi><mi>h</mi><mo>&nbsp;</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>e</mi><mi>y</mi><mo>&nbsp;</mo><mi>d</mi><mi>o</mi><mi>e</mi><mi>s</mi><mo>&nbsp;</mo><mi>S</mi><mi>i</mi><mi>m</mi><mi>o</mi><mi>n</mi><mo>&nbsp;</mo><mi>h</mi><mi>a</mi><mi>v</mi><mi>e</mi><mo>&nbsp;</mo><mi>a</mi><mi>f</mi><mi>t</mi><mi>e</mi><mi>r</mi><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>i</mi><mi>s</mi><mo>?</mo></math></p><figure class=\"image image_resized\" style=\"width:417px;\"><span class=\"archerSourceImage\"><img src=\"https://cdn-dev.archerreview.com/storage/question/images/43e4a0f0-a6e6-4f13-9191-1191951892ef.jpeg\"><a style=\"font-size: 12px;margin-bottom: 10px;color: rgba(170, 170, 170, 1);font-style: italic;display:block;\" target=\"_blank\" class=\"archerreview_anchor_tag\">Source : teliport</a></span></figure><ol><li>Pre-modeling.</li><li>Model Building.</li><li>Model Runs.</li><li>Experimentation.</li><li>Final Thoughts.</li></ol><ul><li>Pre-modeling.</li><li>Model Building.</li><li>Model Runs.</li><li>Experimentation.</li><li>Final Thoughts.</li></ul></body></html>
       """);
 
   static TeXViewWidget quadraticEquation =
@@ -98,8 +97,13 @@ class TeXExample {
                 margin: TeXViewMargin.zeroAuto(),
                 backgroundColor: Colors.green),
           ),
-          TeXViewDocument(body,
-              style: const TeXViewStyle(margin: TeXViewMargin.only(top: 10)))
+          TeXViewDocument(
+            body,
+            style: const TeXViewStyle(
+              margin: TeXViewMargin.only(top: 10),
+              padding: TeXViewPadding.only(left: 20),
+            ),
+          )
         ]);
   }
 }
@@ -118,48 +122,104 @@ class TeXViewDocumentExamples extends StatelessWidget {
       appBar: AppBar(
         title: const Text("TeXViewDocument"),
       ),
-      body: TeXView(
-        renderingEngine: renderingEngine,
-        navigationDelegate: (NavigationRequest request) {
-          // ignore: avoid_print
-          print("Current URL : ${request.url}");
-          return NavigationDecision.prevent;
-        },
-        onRenderStarted: () {
-          // ignore: avoid_print
-          print("Rendered successfully started the texView");
-        },
-        onRenderFinished: (height) {
-          // ignore: avoid_print
-          print("Rendered successfully finished the texView");
-        },
-        child: TeXViewColumn(children: [
-          TeXExample.introduction,
-          TeXExample.mathML,
-          TeXExample.quadraticEquation,
-          TeXExample.relationEnergyPrincipalQuantum,
-          TeXExample.alignedTag,
-          TeXExample.bohrRadius,
-          TeXExample.chemistryEquations,
-          TeXExample.matrix,
-          TeXViewDetails(
-            title: "sdfsdfsdsd",
-            style: const TeXViewStyle(backgroundColor: Colors.amber),
-            body: TeXExample.matrix,
-          ),
-          if (renderingEngine.name == 'mathjax') ...[TeXExample.others]
-        ]),
-        style: const TeXViewStyle(
-          margin: TeXViewMargin.all(10),
-          elevation: 10,
-          borderRadius: TeXViewBorderRadius.all(25),
-          border: TeXViewBorder.all(
-            TeXViewBorderDecoration(
-                borderColor: Colors.blue,
-                borderStyle: TeXViewBorderStyle.solid,
-                borderWidth: 5),
-          ),
-          backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            TeXView(
+              renderingEngine: renderingEngine,
+              navigationDelegate: (NavigationRequest request) {
+                // ignore: avoid_print
+                print("Current URL : ${request.url}");
+                return NavigationDecision.prevent;
+              },
+              onRenderStarted: () {
+                // ignore: avoid_print
+                print("Rendered successfully started the texView");
+              },
+              onRenderFinished: (height) {
+                // ignore: avoid_print
+                print("Rendered successfully finished the texView");
+              },
+              child: TeXExample.introduction,
+              key: UniqueKey(),
+            ),
+            const SizedBox(height: 10),
+            TeXView(
+              renderingEngine: renderingEngine,
+              navigationDelegate: (NavigationRequest request) {
+                // ignore: avoid_print
+                print("Current URL : ${request.url}");
+                return NavigationDecision.prevent;
+              },
+              onRenderStarted: () {
+                // ignore: avoid_print
+                print("Rendered successfully started the texView");
+              },
+              onRenderFinished: (height) {
+                // ignore: avoid_print
+                print("Rendered successfully finished the texView");
+              },
+              child: TeXExample.quadraticEquation,
+              key: UniqueKey(),
+            ),
+            const SizedBox(height: 10),
+            TeXView(
+              renderingEngine: renderingEngine,
+              navigationDelegate: (NavigationRequest request) {
+                // ignore: avoid_print
+                print("Current URL : ${request.url}");
+                return NavigationDecision.prevent;
+              },
+              onRenderStarted: () {
+                // ignore: avoid_print
+                print("Rendered successfully started the texView");
+              },
+              onRenderFinished: (height) {
+                // ignore: avoid_print
+                print("Rendered successfully finished the texView");
+              },
+              child: TeXExample.mathML,
+              key: UniqueKey(),
+            ),
+            const SizedBox(height: 10),
+            TeXView(
+              renderingEngine: renderingEngine,
+              navigationDelegate: (NavigationRequest request) {
+                // ignore: avoid_print
+                print("Current URL : ${request.url}");
+                return NavigationDecision.prevent;
+              },
+              onRenderStarted: () {
+                // ignore: avoid_print
+                print("Rendered successfully started the texView");
+              },
+              onRenderFinished: (height) {
+                // ignore: avoid_print
+                print("Rendered successfully finished the texView");
+              },
+              child: TeXExample.relationEnergyPrincipalQuantum,
+              key: UniqueKey(),
+            ),
+            const SizedBox(height: 10),
+            TeXView(
+              renderingEngine: renderingEngine,
+              navigationDelegate: (NavigationRequest request) {
+                // ignore: avoid_print
+                print("Current URL : ${request.url}");
+                return NavigationDecision.prevent;
+              },
+              onRenderStarted: () {
+                // ignore: avoid_print
+                print("Rendered successfully started the texView");
+              },
+              onRenderFinished: (height) {
+                // ignore: avoid_print
+                print("Rendered successfully finished the texView");
+              },
+              child: TeXExample.chemistryEquations,
+              key: UniqueKey(),
+            ),
+          ],
         ),
       ),
     );
