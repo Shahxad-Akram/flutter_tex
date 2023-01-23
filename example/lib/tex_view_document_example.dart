@@ -11,8 +11,7 @@ class TeXExample {
 
   static TeXViewWidget quadraticEquation =
       _teXViewWidget(r"<h4>Quadratic Equation</h4>", r"""
-     When \(a \ne 0 \), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$<br>""");
+     <html><head></head><body><p>How long does a transmission last?</p><p>With proper maintenance, transmissions can last <strong>up to 300,000 miles or more</strong>. This includes changing the fluid in your transmission system and regular checkups. However, when you don't keep up with routine maintenance, your transmission might have problems at the 100,000-mile mark or even sooner.How long does a transmission last?With proper maintenance, transmissions can last <strong>up to 300,000 miles or more</strong>. This includes changing the fluid in your transmission system and regular checkups. However, when you don't keep up with routine maintenance, your transmission might have problems at the 100,000-mile mark or even sooner.</p><figure class=\"image image_resized\" style=\"width:18.19%;\"><span class=\"archerSourceImage\"><img src=\"https://cdn-dev.archerreview.com/storage/question/images/9344eaa2-5aad-4b78-ae9b-8d5ce4dae838.jpeg\"><a style=\"font-size: 12px;margin-bottom: 10px;color: rgba(170, 170, 170, 1);font-style: italic;display:block;\" target=\"_blank\" class=\"archerreview_anchor_tag\">Source : heater coill</a></span></figure></body></html>""");
 
   static TeXViewWidget mathML =
       _teXViewWidget(r"<h4>MathML (MathJax Only)</h4>", r"""
