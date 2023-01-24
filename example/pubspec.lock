@@ -137,6 +137,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  pointer_interceptor:
+    dependency: transitive
+    description:
+      name: pointer_interceptor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.3+3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -197,7 +204,7 @@ packages:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.4"
   webview_flutter_android:
     dependency: transitive
     description:
@@ -228,4 +235,4 @@ packages:
     version: "2.7.1"
 sdks:
   dart: ">=2.17.0-0 <3.0.0"
-  flutter: ">=2.5.0"
+  flutter: ">=2.10.0"

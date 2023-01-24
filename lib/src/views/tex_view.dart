@@ -32,6 +32,9 @@ class TeXView extends StatefulWidget {
   final FutureOr<NavigationDecision> Function(NavigationRequest)?
       navigationDelegate;
 
+  /// This disables any gestures on top of the [TeXView]. This allows other gestures to work like gestures for scrolling.
+  final bool disableGesturesOnWeb;
+
   const TeXView({
     Key? key,
     required this.child,
@@ -42,6 +45,7 @@ class TeXView extends StatefulWidget {
     this.renderingEngine,
     this.navigationDelegate,
     this.onRenderStarted,
+    this.disableGesturesOnWeb = true,
   }) : super(key: key);
 
   @override
