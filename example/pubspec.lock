@@ -143,7 +143,7 @@ packages:
       name: pointer_interceptor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.3+3"
+    version: "0.9.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -235,4 +235,4 @@ packages:
     version: "2.7.1"
 sdks:
   dart: ">=2.17.0-0 <3.0.0"
-  flutter: ">=2.10.0"
+  flutter: ">=2.5.0"

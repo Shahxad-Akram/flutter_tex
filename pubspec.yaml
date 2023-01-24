@@ -17,7 +17,8 @@ dependencies:
 
   flutter:
     sdk: flutter
-  pointer_interceptor: ^0.9.3+3
+  # Latest versions of pointer interceptor does not support for dialog
+  pointer_interceptor: 0.9.1
 
 dev_dependencies:
   flutter_test:
