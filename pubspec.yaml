@@ -12,7 +12,9 @@ environment:
 
 
 dependencies:
-  webview_flutter_plus: ^0.3.0+2
+  webview_flutter_plus: 
+    git:
+      url: https://github.com/libertas-netzwerk/webview_flutter_plus.git
   markdown: ^4.0.1
 
   flutter:
