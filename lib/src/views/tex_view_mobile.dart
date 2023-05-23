@@ -18,12 +18,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     super.build(context);
     updateKeepAlive();
     _initTeXView();
-    return IndexedStack(
-      index: widget.loadingWidgetBuilder?.call(context) != null
-          ? _height == minHeight
-              ? 1
-              : 0
-          : 0,
+    return Stack(
       children: <Widget>[
         SizedBox(
           height: _height,
