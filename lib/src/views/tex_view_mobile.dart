@@ -17,12 +17,14 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadPage();
   }
 
   void loadPage() async {
+    _controller.setNavigationDelegate(NavigationDelegate(
+      onNavigationRequest: widget.navigationDelegate,
+    ));
     _controller.addJavaScriptChannel(
       "TeXViewRenderedCallback",
       onMessageReceived: renderCallback,
