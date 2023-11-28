@@ -145,7 +145,7 @@ TeXView(
         id: "id_0",
         child: TeXViewColumn(children: [
           TeXViewDocument(r"""<h2>Flutter \( \rm\\TeX \)</h2>""",
-              style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
+              style: TeXViewStyle(textAlign: TeXViewTextAlign.center)),
           TeXViewContainer(
             child: TeXViewImage.network(
                 'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
