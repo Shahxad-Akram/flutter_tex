@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-// #docregion platform_imports
-// Import for Android features.
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-// Import for iOS features.
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
-// #enddocregion platform_imports
+import 'package:webview_flutter_plus_latest/webview_flutter_plus.dart';
 
 class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
-  late WebViewController _controller;
+  WebViewPlusController? _controller;
 
   double _height = minHeight;
   String? _lastData;
@@ -18,68 +12,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    super.initState();
-    // #docregion platform_features
-    late final PlatformWebViewControllerCreationParams params;
-    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-      params = WebKitWebViewControllerCreationParams(
-        allowsInlineMediaPlayback: true,
-        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
-      );
-    } else {
-      params = const PlatformWebViewControllerCreationParams();
-    }
-
-    final WebViewController controller =
-        WebViewController.fromPlatformCreationParams(params);
-    // #enddocregion platform_features
-
-    controller
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
-      ..setNavigationDelegate(
-        NavigationDelegate(
-          onPageFinished: (url) {
-            _pageLoaded = true;
-            _initTeXView();
-          },
-        ),
-      )
-      ..addJavaScriptChannel(
-        'TeXViewRenderedCallback',
-        onMessageReceived: (jm) async {
-          double height = double.parse(jm.message);
-          if (_height != height) {
-            setState(() {
-              _height = height;
-            });
-          }
-          widget.onRenderFinished?.call(height);
-        },
-      )
-      ..addJavaScriptChannel(
-        'OnTapCallback',
-        onMessageReceived: (jm) {
-          widget.child.onTapCallback(jm.message);
-        },
-      )
-      ..loadRequest(
-        Uri.parse(
-            "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html"),
-      );
-
-    // #docregion platform_features
-    if (controller.platform is AndroidWebViewController) {
-      AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController)
-          .setMediaPlaybackRequiresUserGesture(false);
-    }
-    // #enddocregion platform_features
-    _controller = controller;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +27,38 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       children: <Widget>[
         SizedBox(
           height: _height,
-          child: WebViewWidget(
-            controller: _controller,
+          child: WebViewPlus(
+            onPageFinished: (message) {
+              _pageLoaded = true;
+              _initTeXView();
+            },
+            initialUrl:
+                "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html",
+            onWebViewCreated: (controller) {
+              _controller = controller;
+            },
+            initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
+            backgroundColor: Colors.transparent,
+            allowsInlineMediaPlayback: true,
+            javascriptChannels: {
+              JavascriptChannel(
+                  name: 'TeXViewRenderedCallback',
+                  onMessageReceived: (jm) async {
+                    double height = double.parse(jm.message);
+                    if (_height != height) {
+                      setState(() {
+                        _height = height;
+                      });
+                    }
+                    widget.onRenderFinished?.call(height);
+                  }),
+              JavascriptChannel(
+                  name: 'OnTapCallback',
+                  onMessageReceived: (jm) {
+                    widget.child.onTapCallback(jm.message);
+                  })
+            },
+            javascriptMode: JavascriptMode.unrestricted,
           ),
         ),
         widget.loadingWidgetBuilder?.call(context) ?? const SizedBox.shrink()
@@ -105,9 +67,10 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
   }
 
   void _initTeXView() {
-    if (_pageLoaded && getRawData(widget) != _lastData) {
+    if (_pageLoaded && _controller != null && getRawData(widget) != _lastData) {
       if (widget.loadingWidgetBuilder != null) _height = minHeight;
-      _controller.runJavaScript("initView(${getRawData(widget)})");
+      _controller!.webViewController
+          .runJavascript("initView(${getRawData(widget)})");
       _lastData = getRawData(widget);
     }
   }

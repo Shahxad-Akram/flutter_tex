@@ -122,6 +122,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      sha256: e4ff8e8564c03f255408decd16e7899da1733852a9110a58fe6d1b817684a63e
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   path:
     dependency: transitive
     description:
@@ -211,34 +219,42 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: "42393b4492e629aa3a88618530a4a00de8bb46e50e7b3993fedbfdc5352f0dbf"
+      sha256: "392c1d83b70fe2495de3ea2c84531268d5b8de2de3f01086a53334d8b6030a88"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.2"
+    version: "3.0.4"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "8326ee235f87605a2bfc444a4abc897f4abc78d83f054ba7d3d1074ce82b4fbf"
+      sha256: "8b3b2450e98876c70bfcead876d9390573b34b9418c19e28168b74f6cb252dbd"
       url: "https://pub.dev"
     source: hosted
-    version: "3.12.1"
+    version: "2.10.4"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
-      sha256: "68e86162aa8fc646ae859e1585995c096c95fc2476881fa0c4a8d10f56013a5a"
+      sha256: "812165e4e34ca677bdfbfa58c01e33b27fd03ab5fa75b70832d4b7d4ca1fa8cf"
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.0"
+    version: "1.9.5"
+  webview_flutter_plus_latest:
+    dependency: transitive
+    description:
+      name: webview_flutter_plus_latest
+      sha256: b7c2c885412bac24c7cd2fd7f22cd2316bc3322a3c7fc0e356184bd4edda710a
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+2"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: accdaaa49a2aca2dc3c3230907988954cdd23fed0a19525d6c9789d380f4dc76
+      sha256: a5364369c758892aa487cbf59ea41d9edd10f9d9baf06a94e80f1bd1b4c7bbc0
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.4"
+    version: "2.9.5"
 sdks:
   dart: ">=3.1.3 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.0.0"

@@ -11,13 +11,11 @@ environment:
 
 
 dependencies:
-  webview_flutter: ^4.4.2
+  webview_flutter_plus_latest: ^1.0.0+2
   markdown: ^7.1.1
 
   flutter:
     sdk: flutter
-  webview_flutter_android: ^3.12.1
-  webview_flutter_wkwebview: ^3.9.4
 
 dev_dependencies:
   flutter_test:

@@ -9,7 +9,7 @@ class TeXViewInkWellExample extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TeXViewInkWellExampleState createState() => _TeXViewInkWellExampleState();
+  State createState() => _TeXViewInkWellExampleState();
 }
 
 class _TeXViewInkWellExampleState extends State<TeXViewInkWellExample> {
