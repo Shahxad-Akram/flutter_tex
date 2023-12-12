@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex_plus/flutter_tex.dart';
+import 'package:flutter_tex_plus/src/utils/style_utils.dart';
 
 /// TeXViewStyle provide an easy interface for styling TeXView which converts dart code to CSS code.
 class TeXViewStyle {
@@ -75,6 +75,6 @@ class TeXViewStyle {
 
   String? initStyle() {
     return cascadingStyleSheets ??
-        """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: " + getSizeWithUnit(height, sizeUnit) + ";" : ""}${width != null ? "width: " + getSizeWithUnit(width, sizeUnit) + ";" : ""}${elevation != null ? "box-shadow: " + getElevation(elevation, sizeUnit) + ";" : ""}${contentColor != null ? "color: " + getColor(contentColor) + ";" : ""}${backgroundColor != null ? "background-color: " + getColor(backgroundColor) + ";" : ""}${textAlign != null ? "text-align: " + TeXViewTextAlignHelper.getValue(textAlign) + ";" : ""}${fontStyle?.initFontStyle() ?? ""}""";
+        """$teXViewDefaultStyle ${padding?.getPadding() ?? ""}${margin?.getMargin() ?? ""}${borderRadius?.getRadius() ?? ""}${border?.getBorder() ?? ""}${height != null ? "height: ${getSizeWithUnit(height, sizeUnit)};" : ""}${width != null ? "width: ${getSizeWithUnit(width, sizeUnit)};" : ""}${elevation != null ? "box-shadow: ${getElevation(elevation, sizeUnit)};" : ""}${contentColor != null ? "color: ${getColor(contentColor)};" : ""}${backgroundColor != null ? "background-color: ${getColor(backgroundColor)};" : ""}${textAlign != null ? "text-align: ${TeXViewTextAlignHelper.getValue(textAlign)};" : ""}${fontStyle?.initFontStyle() ?? ""}""";
   }
 }

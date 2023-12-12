@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex_plus/flutter_tex.dart';
 
 String _markdownFlutterTeX = r"""
 # flutter_tex
@@ -112,7 +112,7 @@ For Web support you need to put `<script src="assets/packages/flutter_tex/js/flu
 **4:** Now in your Dart code, you can use:
 
 ```dart
-import 'package:flutter_tex/flutter_tex.dart'; 
+import 'package:flutter_tex_plus/flutter_tex.dart'; 
 ```
 
 **5:** Now you can use TeXView as a widget:
@@ -201,12 +201,12 @@ class TeXViewMarkdownExamples extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
         ),
-        loadingWidgetBuilder: (context) => Center(
+        loadingWidgetBuilder: (context) => const Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               CircularProgressIndicator(),
               Text("Rendering...")
             ],

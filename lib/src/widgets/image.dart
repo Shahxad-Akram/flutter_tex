@@ -1,6 +1,6 @@
-import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/widget_meta.dart';
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex_plus/flutter_tex.dart';
+import 'package:flutter_tex_plus/src/models/widget_meta.dart';
+import 'package:flutter_tex_plus/src/utils/style_utils.dart';
 
 class TeXViewImage extends TeXViewWidget {
   /// Uri for Image.
@@ -21,6 +21,6 @@ class TeXViewImage extends TeXViewWidget {
   Map toJson() => {
         'meta': meta().toJson(),
         'data': imageUri,
-        'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
+        'style': "max-width: 100%; max-height: 100%; $teXViewDefaultStyle",
       };
 }

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_tex/flutter_tex.dart';
-import 'package:flutter_tex/src/models/widget_meta.dart';
-import 'package:flutter_tex/src/utils/style_utils.dart';
+import 'package:flutter_tex_plus/flutter_tex.dart';
+import 'package:flutter_tex_plus/src/models/widget_meta.dart';
+import 'package:flutter_tex_plus/src/utils/style_utils.dart';
 
 class TeXViewGroup extends TeXViewWidget {
   /// A list of [TeXViewWidget].
