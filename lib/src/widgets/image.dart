@@ -21,6 +21,6 @@ class TeXViewImage extends TeXViewWidget {
   Map toJson() => {
         'meta': meta().toJson(),
         'data': imageUri,
-        'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
+        'style': "max-width: 100%; max-height: 100%; $teXViewDefaultStyle",
       };
 }

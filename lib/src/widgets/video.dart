@@ -19,7 +19,7 @@ class TeXViewVideo extends TeXViewWidget {
   Map toJson() => {
         'meta': meta().toJson(),
         'data': _getWidget(),
-        'style': "max-width: 100%; max-height: 100%; " + teXViewDefaultStyle,
+        'style': "max-width: 100%; max-height: 100%; $teXViewDefaultStyle",
       };
 
   String _getWidget() {

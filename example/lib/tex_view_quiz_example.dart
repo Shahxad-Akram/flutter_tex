@@ -27,7 +27,7 @@ class TeXViewQuizExample extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();
+  State createState() => _TeXViewQuizExampleState();
 }
 
 class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
