@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex_plus/flutter_tex.dart';
-import 'package:flutter_tex_plus/src/utils/style_utils.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/style_utils.dart';
 
 /// TeXViewStyle provide an easy interface for styling TeXView which converts dart code to CSS code.
 class TeXViewStyle {

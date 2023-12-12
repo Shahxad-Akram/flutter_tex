@@ -75,7 +75,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_tex_plus:
+  flutter_tex:
     dependency: "direct main"
     description:
       path: ".."

@@ -4,9 +4,9 @@ import 'dart:html' as html;
 import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tex_plus/flutter_tex.dart';
-import 'package:flutter_tex_plus/src/utils/core_utils.dart';
-import 'package:flutter_tex_plus/src/utils/fake_ui.dart'
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/core_utils.dart';
+import 'package:flutter_tex/src/utils/fake_ui.dart'
     if (dart.library.html) 'dart:ui' as ui;
 
 class TeXViewState extends State<TeXView> {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tex_plus/flutter_tex.dart';
-import 'package:flutter_tex_plus/src/utils/core_utils.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // #docregion platform_imports
 // Import for Android features.
