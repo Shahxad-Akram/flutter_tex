@@ -1,3 +1,6 @@
+## [4.0.4]- December 17, 2023
+* Dependencies updated.
+
 ## [4.0.3+4]- March 05, 2021
 * Dependencies updated.
 

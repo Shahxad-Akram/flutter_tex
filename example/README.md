@@ -1,10 +1,16 @@
-# Flutter TeX Example
-Demo for [Flutter TeX](https://pub.dev/packages/flutter_tex) a Flutter Package  to render LaTeX with full HTML and JavaScript support.
+# flutter_tex_example
 
+A new Flutter project.
 
-### Application Demo is available on Google Play.
-<a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+## Getting Started
 
+This project is a starting point for a Flutter application.
 
-### Web Demo.
-You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

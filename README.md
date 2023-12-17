@@ -4,28 +4,39 @@
 <img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
 
 # Contents
-* [About](#about)
-* [Demo Video](#demo-video)
-* [Screenshots](#screenshots)
-* [How to use?](#how-to-use)
-   * [Android](#android)
-   * [iOS](#ios)
-   * [Web](#web)    
-* [Examples](#examples)
-    * [Quick Example](#quick-example)
-    * [TeXView Document](#texview-document-example)
-    * [TeXView Markdown](#texview-markdown-example)
-    * [TeXView Quiz](#texview-quiz-example)
-    * [TeXView Custom Fonts](#texview-custom-fonts-example)
-    * [TeXView Image and Video](#texview-image-and-video-example)
-    * [TeXView InkWell](#texview-inkwell-example)
-    * [Complete Example](#complete-example)
-* [Demo Application](#application-demo)
-* [Demo Web](#web-demo)
-* [Api Changes](#api-changes)
-* [Api Usage](#api-usage)
-* [Todo](#to-do)
-* [Cautions](#cautions)
+- [flutter\_tex](#flutter_tex)
+- [Contents](#contents)
+- [About](#about)
+- [How it works?](#how-it-works)
+- [Demo Video](#demo-video)
+  - [Click to Watch Demo on Youtube](#click-to-watch-demo-on-youtube)
+- [Screenshots](#screenshots)
+- [How to use?](#how-to-use)
+    - [Android](#android)
+    - [iOS](#ios)
+    - [Web](#web)
+- [Examples](#examples)
+    - [Quick Example](#quick-example)
+    - [TeXView Document Example](#texview-document-example)
+      - [TeXView Document Example](#texview-document-example-1)
+    - [TeXView Markdown Example](#texview-markdown-example)
+      - [TeXView Markdown Example](#texview-markdown-example-1)
+    - [TeXView Quiz Example](#texview-quiz-example)
+      - [TeXView Quiz Example](#texview-quiz-example-1)
+    - [TeXView Custom Fonts Example](#texview-custom-fonts-example)
+      - [TeXView Custom Fonts Example](#texview-custom-fonts-example-1)
+    - [TeXView Image and Video Example](#texview-image-and-video-example)
+      - [TeXView Image and Video Example](#texview-image-and-video-example-1)
+    - [TeXView InkWell Example](#texview-inkwell-example)
+      - [TeXView InkWell Example](#texview-inkwell-example-1)
+    - [Complete Example](#complete-example)
+      - [Complete Example Code](#complete-example-code)
+- [Application Demo.](#application-demo)
+- [Web Demo.](#web-demo)
+- [Api Changes.](#api-changes)
+- [Api Usage.](#api-usage)
+- [To Do:](#to-do)
+- [Cautions:](#cautions)
 
 # About
 A Flutter Package to render **fully offline** so many types of equations and expressions based on **LaTeX** , **TeX** and **MathML**, most commonly used are as followings:
@@ -65,7 +76,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.3+4
+  flutter_tex: ^4.0.4
 ``` 
 
 **2:** You can install packages from the command line:

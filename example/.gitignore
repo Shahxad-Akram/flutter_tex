@@ -1,7 +1,4 @@
 # Miscellaneous
-
-firebase
-
 *.class
 *.log
 *.pyc
@@ -11,6 +8,7 @@ firebase
 .buildlog/
 .history
 .svn/
+migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -29,13 +27,9 @@ firebase
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
 .pub-cache/
 .pub/
 /build/
-
-# Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
