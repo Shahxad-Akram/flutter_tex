@@ -105,8 +105,7 @@ class TeXViewDocumentExamples extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewDocumentExamples(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
-      : super(key: key);
+      {super.key, this.renderingEngine = const TeXViewRenderingEngine.katex()});
 
   @override
   Widget build(BuildContext context) {

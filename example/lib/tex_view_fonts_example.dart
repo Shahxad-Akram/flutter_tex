@@ -5,8 +5,7 @@ class TeXViewFontsExamples extends StatelessWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewFontsExamples(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
-      : super(key: key);
+      {super.key, this.renderingEngine = const TeXViewRenderingEngine.katex()});
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +51,12 @@ class TeXViewFontsExamples extends StatelessWidget {
             ),
             backgroundColor: Colors.white,
           ),
-          loadingWidgetBuilder: (context) => Center(
+          loadingWidgetBuilder: (context) => const Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     CircularProgressIndicator(),
                     Text("Rendering...")
                   ],

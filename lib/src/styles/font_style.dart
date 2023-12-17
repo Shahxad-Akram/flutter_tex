@@ -18,7 +18,7 @@ class TeXViewFontStyle {
       {this.fontSize, this.fontFamily, this.sizeUnit, this.fontWeight});
 
   String initFontStyle() {
-    return "${fontSize != null ? "font-size: " + getSizeWithUnit(fontSize, sizeUnit) + ";" : ""}${fontFamily != null ? "font-family: " + fontFamily! + ";" : ""}${fontWeight != null ? "font-weight: " + _getFontWeightValue(fontWeight) + ";" : ""}";
+    return "${fontSize != null ? "font-size: ${getSizeWithUnit(fontSize, sizeUnit)};" : ""}${fontFamily != null ? "font-family: ${fontFamily!};" : ""}${fontWeight != null ? "font-weight: ${_getFontWeightValue(fontWeight)};" : ""}";
   }
 
   static String _getFontWeightValue(TeXViewFontWeight? teXViewFontWeight) {

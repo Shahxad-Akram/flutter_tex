@@ -75,7 +75,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _controller.closeServer();
+    _controller.server.close();
     super.dispose();
   }
 
@@ -84,7 +84,6 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
       if (widget.loadingWidgetBuilder != null) _height = minHeight;
       _controller
           .runJavaScriptReturningResult("initView(${getRawData(widget)})");
-      ("initView(${getRawData(widget)})");
       _lastData = getRawData(widget);
     }
   }

@@ -12,7 +12,7 @@ main() {
 }
 
 class FlutterTeXExample extends StatelessWidget {
-  const FlutterTeXExample({Key? key}) : super(key: key);
+  const FlutterTeXExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class FlutterTeXExample extends StatelessWidget {
 }
 
 class TeXViewFullExample extends StatefulWidget {
-  const TeXViewFullExample({Key? key}) : super(key: key);
+  const TeXViewFullExample({super.key});
 
   @override
   _TeXViewFullExampleState createState() => _TeXViewFullExampleState();

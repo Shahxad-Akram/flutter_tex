@@ -23,8 +23,7 @@ class TeXViewQuizExample extends StatefulWidget {
   final TeXViewRenderingEngine renderingEngine;
 
   const TeXViewQuizExample(
-      {Key? key, this.renderingEngine = const TeXViewRenderingEngine.katex()})
-      : super(key: key);
+      {super.key, this.renderingEngine = const TeXViewRenderingEngine.katex()});
 
   @override
   _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();

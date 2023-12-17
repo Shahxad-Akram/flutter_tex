@@ -27,7 +27,7 @@ class TeXView extends StatefulWidget {
   final Function(double height)? onRenderFinished;
 
   const TeXView({
-    Key? key,
+    super.key,
     required this.child,
     this.fonts,
     // this.height = 500,
@@ -35,7 +35,7 @@ class TeXView extends StatefulWidget {
     this.loadingWidgetBuilder,
     this.onRenderFinished,
     this.renderingEngine,
-  }) : super(key: key);
+  });
 
   @override
   TeXViewState createState() => TeXViewState();

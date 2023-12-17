@@ -81,7 +81,12 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.3+4"
+    version: "4.0.4"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   lints:
     dependency: transitive
     description:
@@ -243,10 +248,18 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_plus
-      sha256: "9b39ecb201b7e9ee32f53f9240ef7ba7a44daa1d50f613f66e7a387dfeaf032f"
+      sha256: e163b0f44f86c79bf801143c3bba4a4b351f4414d52072fe73abcb2a03f49de4
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
+  webview_flutter_web:
+    dependency: "direct main"
+    description:
+      name: webview_flutter_web
+      sha256: b6334cb5b44a5cc9ddec38ce132c7b9a3054d921768a13f95b8cd798ee5f17b4
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2+3"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
@@ -257,4 +270,4 @@ packages:
     version: "3.9.4"
 sdks:
   dart: ">=3.2.3 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.13.0"

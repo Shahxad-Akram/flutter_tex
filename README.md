@@ -76,7 +76,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.4
+  flutter_tex: ^4.0.5
 ``` 
 
 **2:** You can install packages from the command line:
