@@ -1,3 +1,6 @@
+## [4.0.6]- December 29, 2023
+* Minor Fixes.
+
 ## [4.0.5]- December 17, 2023
 * Minor Fixes.
 

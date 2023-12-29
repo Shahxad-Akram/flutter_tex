@@ -63,20 +63,20 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 ## [Click to Watch Demo on Youtube](https://www.youtube.com/watch?v=YiNbVEXV_NM)
 
 # Screenshots
- Fonts Sample  |Quiz Sample    | TeX Document
-:-------------:|:-------------:|:-------------:
-<img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/>
+ |                        Fonts Sample                         |                         Quiz Sample                         |                        TeX Document                         |
+ | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
+ | <img src="https://i.postimg.cc/651PXKYC/screenshot-1.png"/> | <img src="https://i.postimg.cc/wjyGxrGZ/screenshot-2.png"/> | <img src="https://i.postimg.cc/k4cjhP26/screenshot-3.png"/> |
 
- TeX Document  | Image & Video | InkWell 
-:-------------:|:-------------:|:-------------:
-<img src="https://i.postimg.cc/d0GNryv9/screenshot-4.png"/> | <img src="https://i.postimg.cc/prLswcj0/screenshot-5.png"/> | <img src="https://i.postimg.cc/rwBYDJ6m/screenshot-6.png"/>
+ |                        TeX Document                         |                        Image & Video                        |                           InkWell                           |
+ | :---------------------------------------------------------: | :---------------------------------------------------------: | :---------------------------------------------------------: |
+ | <img src="https://i.postimg.cc/d0GNryv9/screenshot-4.png"/> | <img src="https://i.postimg.cc/prLswcj0/screenshot-5.png"/> | <img src="https://i.postimg.cc/rwBYDJ6m/screenshot-6.png"/> |
 
 # How to use?
 **1:** Add flutter_tex latest  [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex) version under dependencies to your package's pubspec.yaml file.
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.5
+  flutter_tex: ^4.0.6
 ``` 
 
 **2:** You can install packages from the command line:
