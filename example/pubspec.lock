@@ -81,7 +81,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "4.0.4"
+    version: "4.0.5"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -248,10 +248,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_plus
-      sha256: e163b0f44f86c79bf801143c3bba4a4b351f4414d52072fe73abcb2a03f49de4
+      sha256: "54714cdf41b595970cd58b54e1f549f57583c91d9ccb7eb1fef24df9693ab3da"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.3"
+    version: "0.4.4"
   webview_flutter_web:
     dependency: "direct main"
     description:

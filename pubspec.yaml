@@ -11,10 +11,9 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  webview_flutter_plus: ^0.4.3
+  webview_flutter_plus: ^0.4.4
   mime: ^1.0.4
   markdown: ^7.1.1
-  provider: ^6.1.1
 
   flutter:
     sdk: flutter

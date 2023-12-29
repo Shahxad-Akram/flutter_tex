@@ -26,7 +26,7 @@ class TeXViewQuizExample extends StatefulWidget {
       {super.key, this.renderingEngine = const TeXViewRenderingEngine.katex()});
 
   @override
-  _TeXViewQuizExampleState createState() => _TeXViewQuizExampleState();
+  State<TeXViewQuizExample> createState() => _TeXViewQuizExampleState();
 }
 
 class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {

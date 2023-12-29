@@ -27,7 +27,7 @@ class TeXViewFullExample extends StatefulWidget {
   const TeXViewFullExample({super.key});
 
   @override
-  _TeXViewFullExampleState createState() => _TeXViewFullExampleState();
+  State<TeXViewFullExample> createState() => _TeXViewFullExampleState();
 }
 
 class _TeXViewFullExampleState extends State<TeXViewFullExample> {
