@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+**Important:** If this is an HTML or styling-related question, please refer to the relevant documentation.
+
 **Question:** Are you using the latest version of flutter_tex package? [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 **Answer:**
 

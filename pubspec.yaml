@@ -2,7 +2,7 @@ name: flutter_tex
 
 description: A Flutter Package to render Mathematics / Maths, Physics and Chemistry, Statistics Equations and expressions based on LaTeX, TeX, and MathML with HTML and JavaScript support.
 
-version: 4.0.7
+version: 4.0.8
 
 homepage: https://github.com/shah-xad/flutter_tex
 
@@ -159,13 +159,11 @@ flutter:
     - packages/flutter_tex/js/mathjax/LICENSE
     - packages/flutter_tex/js/mathjax/MathJax.js
     - packages/flutter_tex/js/mathjax/index.html
-
     # Katex
     - packages/flutter_tex/js/katex/index.html
-    - packages/flutter_tex/js/katex/katex.min.js
-    - packages/flutter_tex/js/katex/katex.min.css
-    - packages/flutter_tex/js/katex/auto-render.min.js
-    - packages/flutter_tex/js/katex/mhchem.min.js
+    - packages/flutter_tex/js/katex/contrib/auto-render.min.js
+    - packages/flutter_tex/js/katex/contrib/mathtex-script-type.min.js
+    - packages/flutter_tex/js/katex/contrib/mhchem.min.js
     - packages/flutter_tex/js/katex/fonts/KaTeX_AMS-Regular.ttf
     - packages/flutter_tex/js/katex/fonts/KaTeX_AMS-Regular.woff
     - packages/flutter_tex/js/katex/fonts/KaTeX_AMS-Regular.woff2
@@ -226,3 +224,5 @@ flutter:
     - packages/flutter_tex/js/katex/fonts/KaTeX_Typewriter-Regular.ttf
     - packages/flutter_tex/js/katex/fonts/KaTeX_Typewriter-Regular.woff
     - packages/flutter_tex/js/katex/fonts/KaTeX_Typewriter-Regular.woff2
+    - packages/flutter_tex/js/katex/katex.min.css
+    - packages/flutter_tex/js/katex/katex.min.js

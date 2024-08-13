@@ -1,3 +1,6 @@
+## [4.0.8]- August 13, 2024
+* Katex upgraded.
+
 ## [4.0.7]- August 05, 2024
 * Dependencies updated.
 

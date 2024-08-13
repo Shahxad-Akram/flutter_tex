@@ -3,7 +3,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 class TeXExample {
   static TeXViewWidget introduction =
-      _teXViewWidget(r"""<h4>Flutter \( \rm\TeX \)</h4>""", r""" 
+      _teXViewWidget(r"""<h4>Flutter \( \rm\TeX \)</h4>""", r"""
              
       <p>Flutter \( \rm\TeX \) is a Flutter Package to render so many types of equations based on \( \rm\LaTeX \), It also includes full HTML with JavaScript
       support.</p>
@@ -54,8 +54,7 @@ class TeXExample {
          c & d
       \end{bmatrix}$$</p>""");
 
-  static TeXViewWidget alignedTag =
-      _teXViewWidget(r"<h4>Aligned Tag</h4>", r"""    
+  static TeXViewWidget alignedTag = _teXViewWidget(r"<h4>Aligned Tag</h4>", r"""
            $$
            \begin{aligned}
            \dot{x} & = \sigma(y-x) \\
