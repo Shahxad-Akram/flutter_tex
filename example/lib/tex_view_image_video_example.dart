@@ -34,7 +34,7 @@ class TeXViewImageVideoExample extends StatelessWidget {
                 'Image Loaded From Network, this may take some time according to your network speed'),
             TeXViewContainer(
               child: TeXViewImage.network(
-                  'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+                  'https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png'),
               style: TeXViewStyle(
                 margin: TeXViewMargin.all(10),
                 borderRadius: TeXViewBorderRadius.all(20),

@@ -26,11 +26,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/flutter_tex_banner.png
-    - fonts/Army.ttf
-    - fonts/Budhrg.ttf
-    - fonts/CELTG.ttf
-    - fonts/hillock.ttf
-    - fonts/intimacy.ttf
-    - fonts/SansationLight.ttf
-    - fonts/slenmini.ttf
-    - fonts/SubaccuzRegular.ttf
+    - assets/fonts/Army.ttf
+    - assets/fonts/Budhrg.ttf
+    - assets/fonts/CELTG.ttf
+    - assets/fonts/hillock.ttf
+    - assets/fonts/intimacy.ttf
+    - assets/fonts/SansationLight.ttf
+    - assets/fonts/slenmini.ttf
+    - assets/fonts/SubaccuzRegular.ttf

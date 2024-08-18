@@ -3,7 +3,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 
 String _markdownFlutterTeX = r"""
 # flutter_tex
-[![GitHub stars](https://img.shields.io/github/stars/shah-xad/flutter_tex?style=social)](https://github.com/shah-xad/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
+[![GitHub stars](https://img.shields.io/github/stars/Shahxad-Akram/flutter_tex?style=social)](https://github.com/Shahxad-Akram/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
 # Contents
 * [About](#about)
@@ -120,29 +120,29 @@ import 'package:flutter_tex/flutter_tex.dart';
 # Examples
 
 ### TeXView Document Example
-#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
+#### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
 
 ### TeXView Quiz Example
-#### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
+#### [TeXView Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_examples.dart)
 
 ### TeXView Custom Fonts Example
-#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
+#### [TeXView Custom Fonts Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
 
 ### TeXView Image and Video Example
-#### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
+#### [TeXView Image and Video Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_image_video_examples.dart)
 
 ### TeXView InkWell Example
-#### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
+#### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_examples.dart)
 
 ### Complete Example
-#### [Complete Example Code](https://github.com/shah-xad/flutter_tex/tree/master/example)
+#### [Complete Example Code](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
 
 # Web Demo.
 You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Api Changes.
-* Please see [CHANGELOG.md](https://github.com/shah-xad/flutter_tex/blob/master/CHANGELOG.md).
+* Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
 
 # Api Usage.
 - `children:` A list of `TeXViewWidget`
@@ -167,7 +167,7 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
   
 - `keepAlive:` Keep widget Alive. (True by default).
 
-For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/master/example).
+For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
 """;
 

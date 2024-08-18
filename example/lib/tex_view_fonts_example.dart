@@ -16,17 +16,20 @@ class TeXViewFontsExamples extends StatelessWidget {
       ),
       body: TeXView(
           fonts: const [
-            TeXViewFont(fontFamily: 'army', src: 'fonts/Army.ttf'),
-            TeXViewFont(fontFamily: 'budhrg', src: 'fonts/Budhrg.ttf'),
-            TeXViewFont(fontFamily: 'celtg', src: 'fonts/CELTG.ttf'),
-            TeXViewFont(fontFamily: 'hillock', src: 'fonts/hillock.ttf'),
-            TeXViewFont(fontFamily: 'intimacy', src: 'fonts/intimacy.ttf'),
+            TeXViewFont(fontFamily: 'army', src: 'assets/fonts/Army.ttf'),
+            TeXViewFont(fontFamily: 'budhrg', src: 'assets/fonts/Budhrg.ttf'),
+            TeXViewFont(fontFamily: 'celtg', src: 'assets/fonts/CELTG.ttf'),
+            TeXViewFont(fontFamily: 'hillock', src: 'assets/fonts/hillock.ttf'),
             TeXViewFont(
-                fontFamily: 'sansation_light', src: 'fonts/SansationLight.ttf'),
-            TeXViewFont(fontFamily: 'slenmini', src: 'fonts/slenmini.ttf'),
+                fontFamily: 'intimacy', src: 'assets/fonts/intimacy.ttf'),
+            TeXViewFont(
+                fontFamily: 'sansation_light',
+                src: 'assets/fonts/SansationLight.ttf'),
+            TeXViewFont(
+                fontFamily: 'slenmini', src: 'assets/fonts/slenmini.ttf'),
             TeXViewFont(
                 fontFamily: 'subaccuz_regular',
-                src: 'fonts/SubaccuzRegular.ttf'),
+                src: 'assets/fonts/SubaccuzRegular.ttf'),
           ],
           renderingEngine: renderingEngine,
           child: TeXViewColumn(children: [

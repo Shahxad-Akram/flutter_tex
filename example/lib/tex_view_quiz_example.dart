@@ -162,6 +162,11 @@ class _TeXViewQuizExampleState extends State<TeXViewQuizExample> {
               ),
               backgroundColor: Colors.white,
             ),
+            loadingWidgetBuilder: (context) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
           if (isWrong)
             const Padding(

@@ -1,7 +1,7 @@
 # flutter_tex
-[![GitHub stars](https://img.shields.io/github/stars/shah-xad/flutter_tex?style=social)](https://github.com/shah-xad/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
+[![GitHub stars](https://img.shields.io/github/stars/Shahxad-Akram/flutter_tex?style=social)](https://github.com/Shahxad-Akram/flutter_tex/stargazers) [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex)
 
-<img src="https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
+<img src="https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png" alt=""/>
 
 # Contents
 - [flutter\_tex](#flutter_tex)
@@ -76,7 +76,7 @@ Basically it's a flutter dart wrapper around the most powerful JavaScript librar
 
 ```yaml
 dependencies:
-  flutter_tex: ^4.0.8
+  flutter_tex: ^4.0.9
 ``` 
 
 **2:** You can install packages from the command line:
@@ -159,7 +159,7 @@ TeXView(
               style: TeXViewStyle(textAlign: TeXViewTextAlign.Center)),
           TeXViewContainer(
             child: TeXViewImage.network(
-                'https://raw.githubusercontent.com/shah-xad/flutter_tex/master/example/assets/flutter_tex_banner.png'),
+                'https://raw.githubusercontent.com/Shahxad-Akram/flutter_tex/master/example/assets/flutter_tex_banner.png'),
             style: TeXViewStyle(
               margin: TeXViewMargin.all(10),
               borderRadius: TeXViewBorderRadius.all(20),
@@ -187,37 +187,37 @@ TeXView(
 ```
 
 ### TeXView Document Example
-#### [TeXView Document Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
+#### [TeXView Document Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_document_example.dart)
 
 ### TeXView Markdown Example
-#### [TeXView Markdown Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
+#### [TeXView Markdown Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_markdown_example.dart)
 
 ### TeXView Quiz Example
-#### [TeXView Quiz Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
+#### [TeXView Quiz Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_quiz_example.dart)
 
 ### TeXView Custom Fonts Example
-#### [TeXView Custom Fonts Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
+#### [TeXView Custom Fonts Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_fonts_example.dart)
 
 ### TeXView Image and Video Example
-#### [TeXView Image and Video Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
+#### [TeXView Image and Video Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_image_video_example.dart)
 
 ### TeXView InkWell Example
-#### [TeXView InkWell Example](https://github.com/shah-xad/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
+#### [TeXView InkWell Example](https://github.com/Shahxad-Akram/flutter_tex/blob/master/example/lib/tex_view_ink_well_example.dart)
 
 ### Complete Example
-#### [Complete Example Code](https://github.com/shah-xad/flutter_tex/tree/master/example)
+#### [Complete Example Code](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
 
 # Application Demo.
 <a href='https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-[Demo Source](https://github.com/shah-xad/flutter_tex/tree/master/example)
+[Demo Source](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example)
 
 # Web Demo.
 You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.app)
 
 # Api Changes.
-* Please see [CHANGELOG.md](https://github.com/shah-xad/flutter_tex/blob/master/CHANGELOG.md).
+* Please see [CHANGELOG.md](https://github.com/Shahxad-Akram/flutter_tex/blob/master/CHANGELOG.md).
 
 # Api Usage.
 - `children:` A list of `TeXViewWidget`
@@ -243,11 +243,11 @@ You can find web demo at [https://flutter-tex.web.app](https://flutter-tex.web.a
   
 - `onTeXViewCreated:` Callback when TeXView loading finishes.
 
-For more please see the [Example](https://github.com/shah-xad/flutter_tex/tree/master/example).
+For more please see the [Example](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example).
 
 # To Do:
 - ~~Speed Optimizations as it's a bit slow rendering speed. It takes 1-2 seconds to render after application loaded.~~ (Solved by adding Katex Support)
 - `Bug in Web Support` on `setState` everything disappears.
 
 # Cautions:
-- Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/shah-xad/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/shah-xad/flutter_tex/issues/new).
+- Please avoid using too many `TeXView` in a single page, because this is based on [webview_flutter_plus](https://pub.dartlang.org/packages/webview_flutter_plus) a complete web browser. Which may cause slowing down your app. I am trying to add all necessary widgets within `TeXView`, So please prefer to use `TeXViewWidget`. You can check [example folder](https://github.com/Shahxad-Akram/flutter_tex/tree/master/example) for details. If you find any problem you can [report an issue](https://github.com/Shahxad-Akram/flutter_tex/issues/new).

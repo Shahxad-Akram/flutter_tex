@@ -1,3 +1,6 @@
+## [4.0.8]- August 18, 2024
+* Minor Fixes.
+
 ## [4.0.8]- August 13, 2024
 * Katex upgraded.
 
