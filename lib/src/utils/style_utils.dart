@@ -5,7 +5,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 String teXViewDefaultStyle = "overflow: hidden; position: relative; ";
 
 String getColor(Color? color) {
-  return "rgba(${((color?.r ?? 0) * 255).toInt()}, ${((color?.g ?? 0) * 255).toInt()}, ${((color?.b ?? 0) * 255).toInt()}, ${((color?.a ?? 0) * 255).toInt()})";
+  return "rgba(${((color?.r ?? 0) * 255).toInt()}, ${((color?.g ?? 0) * 255).toInt()}, ${((color?.b ?? 0) * 255).toInt()}, ${color?.a ?? 0})";
 }
 
 String getElevation(int? elevation, TeXViewSizeUnit? sizeUnit) {
