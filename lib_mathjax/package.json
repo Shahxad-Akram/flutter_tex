@@ -1,13 +1,16 @@
 {
   "scripts": {
-    "build_mathjax": "node node_modules/@mathjax/src/components/bin/makeAll",
+    "build_mathjax": "esbuild mathjax_core.js --bundle --minify --outfile=dist/mathjax.js --define:global=window",
     "build_test": "node ./dist/test.js"
   },
   "dependencies": {
-    "@mathjax/mathjax-mhchem-font-extension": "^4.1.0",
-    "@mathjax/src": "^4.1.0",
-    "terser-webpack-plugin": "^5.3.16",
-    "webpack": "^5.104.1",
-    "webpack-cli": "^6.0.1"
+    "@mathjax/mathjax-mhchem-font-extension": "^4.1.1",
+    "@mathjax/src": "^4.1.1",
+    "terser-webpack-plugin": "^5.4.0",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.4"
   }
 }

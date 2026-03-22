@@ -11,13 +11,13 @@
 
 </div>
 
-Flutter $\rm\TeX$ is a self-contained Flutter package leveraging [MathJax](https://github.com/mathjax/MathJax) to deliver robust, fully offline rendering of mathematical and chemical notations.
+Flutter TeX is a self-contained Flutter package leveraging [MathJax](https://github.com/mathjax/MathJax) to deliver robust, fully offline rendering of mathematical and chemical notations.
 ---
 
 ## 🚀 Key Features
 
 * **Offline Rendering**: No internet connection required after setup.
-* **Multiple Formats**: Supports LaTeX, $\rm\TeX$, MathML, and AsciiMath.
+* **Multiple Formats**: Supports LaTeX, TeX, MathML, and AsciiMath.
 * **Three Powerful Widgets**:
   - [Math2SVG](https://flutter-tex.readthedocs.io/en/latest/math-2-svg/): Pure Flutter based (no webview) high-performance widget, for maths formulas rendering, support LaTeX, MathML and AsciiMath.
   - [TeXWidget](https://flutter-tex.readthedocs.io/en/latest/tex-widget/): Based on `Math2SVG` dedicated for LaTeX rendering.
