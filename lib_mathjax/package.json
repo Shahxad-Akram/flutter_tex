@@ -6,7 +6,7 @@
   "dependencies": {
     "@mathjax/mathjax-mhchem-font-extension": "^4.1.0",
     "@mathjax/src": "^4.1.0",
-    "terser-webpack-plugin": "^5.3.16",
+    "terser-webpack-plugin": "^5.4.0",
     "webpack": "^5.104.1",
     "webpack-cli": "^6.0.1"
   }
