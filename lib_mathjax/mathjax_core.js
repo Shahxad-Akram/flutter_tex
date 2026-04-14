@@ -56,18 +56,13 @@ Loader.preLoaded(
   'output/svg',
 );
 
-// Save the version of the MathJax core
 Loader.saveVersion('mathjax_core.js');
-
-// Load the font for MathJax
 loadFont(startup, true);
 
-// Import MathJax MHchem font extension
 import '@mathjax/mathjax-mhchem-font-extension/svg.js';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 import { mathjax } from '@mathjax/src/js/mathjax.js';
 import { liteAdaptor } from '@mathjax/src/js/adaptors/liteAdaptor.js';
@@ -77,8 +72,7 @@ import { MathML } from '@mathjax/src/js/input/mathml.js';
 import { AsciiMath } from '@mathjax/src/js/input/asciimath.js';
 import { SVG } from '@mathjax/src/js/output/svg.js';
 
-// Define default packages outside the class to ensure they are never null
-const DEFAULT_TEX_PACKAGES = ['base', 'ams', 'newcommand', 'textmacros', 'noundefined', 'require', 'autoload', 'configmacros'];
+const DEFAULT_TEX_PACKAGES = ['base', 'ams', 'textmacros'];
 
 class FlutterTeXLiteDOM {
   constructor() {
@@ -93,14 +87,12 @@ class FlutterTeXLiteDOM {
     let inputJax;
 
     if (isTeX) {
-      // Safely grab external packages
-      const externalPackages = (typeof window.tex_packages !== 'undefined' && window.tex_packages !== null) 
-        ? window.tex_packages 
+      const externalPackages = (typeof window.tex_packages !== 'undefined' && window.tex_packages !== null)
+        ? window.tex_packages
         : [];
-      
+
       inputJax = new TeX({
         ...this.options,
-        // Ensure this is a flat array of strings with no nulls
         packages: [...DEFAULT_TEX_PACKAGES, ...externalPackages].filter(p => typeof p === 'string')
       });
     } else {
@@ -115,20 +107,18 @@ class FlutterTeXLiteDOM {
 
   math2SVG(math, inputType = 'teX', options = {}) {
     try {
-      // Ensure math is a string and not null/undefined
       const content = math || '';
       const doc = this.#getJaxDoc(inputType);
-      
+
       const node = doc.convert(content, options);
       const svg = this.adaptor.innerHTML(node);
-      
-      // Clear internal state to prevent memory leaks
-      doc.clear(); 
-      
+
+      doc.clear();
+
       return svg;
     } catch (e) {
       console.error(`Error in math2SVG (${inputType}):`, e);
-      return ''; // Return empty string so Flutter doesn't crash
+      return '';
     }
   }
 
@@ -148,7 +138,7 @@ class FlutterTeXLiteDOM {
         doc = this.#createDoc(TeX, true);
         break;
     }
-    
+
     this.docs.set(input, doc);
     return doc;
   }
@@ -159,12 +149,3 @@ const flutterTeXLiteDOM = new FlutterTeXLiteDOM();
 // Attach to window
 window.MathJax = window.MathJax || {};
 window.MathJax.flutterTeXLiteDOM = flutterTeXLiteDOM;
-window.MathJax.startup = window.MathJax.startup || { promise: Promise.resolve() };
-
-window.MathJax.typesetPromise = (elements) => {
-  const startup = window.MathJax.startup;
-  if (startup.typeset) {
-    return startup.promise.then(() => startup.typeset(elements));
-  }
-  return Promise.resolve();
-};

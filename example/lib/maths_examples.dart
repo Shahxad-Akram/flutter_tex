@@ -27,6 +27,7 @@ const Map<String, String> laTeXExamples = {
       r"\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) e^{-2\pi i x \xi} \, dx",
   "Black-Scholes":
       r"\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS \frac{\partial V}{\partial S} - rV = 0",
+  "Chemical Equation": r"\ce{CO2 + C -> 2 CO}"
 };
 
 const Map<String, String> mathMLExamples = {

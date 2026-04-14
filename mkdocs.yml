@@ -1,6 +1,6 @@
 site_name: Flutter TeX
 extra:
-  flutter_tex_version: "5.2.6"
+  flutter_tex_version: "5.2.7"
 
 site_url: https://flutter-tex.readthedocs.io
 repo_url: https://github.com/Shahxad-Akram/flutter_tex

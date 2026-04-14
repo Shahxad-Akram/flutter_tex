@@ -90,10 +90,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_svg
-      sha256: "87fbd7c534435b6c5d9d98b01e1fd527812b82e68ddd8bd35fc45ed0fa8f0a95"
+      sha256: "1ded017b39c8e15c8948ea855070a5ff8ff8b3d5e83f3446e02d6bb12add7ad9"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.3"
+    version: "2.2.4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -179,10 +179,10 @@ packages:
     dependency: transitive
     description:
       name: markdown
-      sha256: "935e23e1ff3bc02d390bad4d4be001208ee92cc217cb5b5a6c19bc14aaa318c1"
+      sha256: ee85086ad7698b42522c6ad42fe195f1b9898e4d974a1af4576c1a3a176cada9
       url: "https://pub.dev"
     source: hosted
-    version: "7.3.0"
+    version: "7.3.1"
   matcher:
     dependency: transitive
     description:
@@ -235,10 +235,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: "1a97266a94f7350d30ae522c0af07890c70b8e62c71e8e3920d1db4d23c057d1"
+      sha256: "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.1"
+    version: "7.0.2"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -328,10 +328,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_ios
-      sha256: cfde38aa257dae62ffe79c87fab20165dfdf6988c1d31b58ebf59b9106062aad
+      sha256: "580fe5dfb51671ae38191d316e027f6b76272b026370708c2d898799750a02b0"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.6"
+    version: "6.4.1"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -376,10 +376,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics
-      sha256: a4f059dc26fc8295b5921376600a194c4ec7d55e72f2fe4c7d2831e103d461e6
+      sha256: "7076216a10d5c390315fbe536a30f1254c341e7543e6c4c8a815e591307772b1"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.19"
+    version: "1.1.20"
   vector_graphics_codec:
     dependency: transitive
     description:
@@ -392,10 +392,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics_compiler
-      sha256: "201e876b5d52753626af64b6359cd13ac6011b80728731428fd34bc840f71c9b"
+      sha256: "5a88dd14c0954a5398af544651c7fb51b457a2a556949bfb25369b210ef73a74"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.20"
+    version: "1.2.0"
   vector_math:
     dependency: transitive
     description:
@@ -432,10 +432,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: eeeb3fcd5f0ff9f8446c9f4bbc18a99b809e40297528a3395597d03aafb9f510
+      sha256: "2a03df01df2fd30b075d1e7f24c28aee593f2e5d5ac4c3c4283c5eda63717b24"
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.11"
+    version: "4.10.13"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -456,10 +456,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: "0412b657a2828fb301e73509909e6ec02b77cd2b441ae9f77125d482b3ddf0e7"
+      sha256: "0d85e8bc5db9a7c49f6ff57cbeafc6cd8216ad9c9ebc70b2c4579d955698933a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.23.6"
+    version: "3.24.1"
   xml:
     dependency: transitive
     description:
