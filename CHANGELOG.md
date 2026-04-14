@@ -1,5 +1,6 @@
 ## [5.2.7]
 * `Math2SVG` loading tex extensions, fixed [#229](https://github.com/Shahxad-Akram/flutter_tex/issues/229)
+* Minor changes for [Web Installation](https://flutter-tex.readthedocs.io/en/latest/installation/#web).
 
 ## [5.2.6]
 * Performance optimizations
