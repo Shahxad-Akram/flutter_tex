@@ -94,8 +94,8 @@ For Web support modify `<project-directory>/web/index.html` like this.
 <head>
     ...
     ...
-  <link rel="stylesheet" href="../../../assets/flutter_tex.css" type="text/css">
-  <script src="../../../assets/flutter_tex.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="assets/assets/flutter_tex.css" type="text/css">
+  <script src="assets/assets/flutter_tex.js" type="text/javascript"></script>
   <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
   <script src="assets/packages/flutter_tex/core/mathjax_core.js"></script>
 </head>
