@@ -79,7 +79,9 @@ extra_css:
 plugins:
   - search
   - macros
-  - glightbox
+  - glightbox:
+      skip_classes:
+        - skip-lightbox
   - git-revision-date-localized:
       type: date
 

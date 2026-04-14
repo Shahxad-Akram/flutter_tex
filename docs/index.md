@@ -26,36 +26,41 @@ We extend our sincere credit to the original [MathJax](https://github.com/mathja
 
 
 ## Demos
-<div style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">
-  
-  <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-    <a href="https://flutter-tex.web.app" class="tex-link-card" target="_blank" rel="noopener noreferrer">
-      <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" width="75%" alt="Flutter Web">
-      </div>
-    </a>
-    <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Web Demo</h3>
-    <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">View the live Flutter TeX implementation directly in your browser.</p>
-  </div>
-
-  <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-    <a href="https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example" class="tex-link-card" target="_blank" rel="noopener noreferrer">
-      <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" width="75%" alt="Get it on Google Play"/>
-      </div>
-    </a>
-      <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Android App</h3>
-    <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">Download and install the example application from the Google Play Store.</p>
-  </div>
-
-  <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-    <a href="https://www.youtube.com/watch?v=YiNbVEXV_NM" class="tex-link-card" target="_blank" rel="noopener noreferrer">
-      <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/YouTube_2024.svg/960px-YouTube_2024.svg.png" width="75%" alt="YouTube Demo"/>
-      </div>
-    </a>
-      <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Video Demo</h3>
-    <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">Watch a quick video on YouTube showcasing the features.</p>
-  </div>
-
+<div
+    style="display: flex; justify-content: space-around; align-items: flex-start; gap: 20px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://flutter-tex.web.app" class="tex-link-card" target="_blank" rel="noopener noreferrer">
+            <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png" width="75%"
+                    alt="Flutter Web" class="skip-lightbox">
+            </div>
+        </a>
+        <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Web Demo</h3>
+        <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">View the live Flutter TeX implementation
+            directly in your browser.</p>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://play.google.com/store/apps/details?id=com.shahxad.flutter_tex_example" class="tex-link-card"
+            target="_blank" rel="noopener noreferrer">
+            <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
+                <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                    width="75%" alt="Get it on Google Play" class="skip-lightbox" />
+            </div>
+        </a>
+        <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Android App</h3>
+        <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">Download and install the example
+            application from the Google Play Store.</p>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+        <a href="https://www.youtube.com/watch?v=YiNbVEXV_NM" class="tex-link-card" target="_blank"
+            rel="noopener noreferrer">
+            <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/YouTube_2024.svg/960px-YouTube_2024.svg.png"
+                    width="75%" alt="YouTube Demo" class="skip-lightbox" />
+            </div>
+        </a>
+        <h3 style="margin: 15px 0 10px 0; font-size: 1.17em;">Video Demo</h3>
+        <p style="font-size: 14px; color: #555; line-height: 1.4; margin: 0;">Watch a quick video on YouTube showcasing
+            the features.</p>
+    </div>
 </div>
