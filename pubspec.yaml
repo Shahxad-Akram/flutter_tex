@@ -19,8 +19,8 @@ dependencies:
     sdk: flutter
 
   webview_flutter_plus: ^0.4.20
-  flutter_svg: ^2.2.4
-  url_launcher: ^6.3.2
+  flutter_svg: ^2.3.0
+  url_launcher: ^6.3.3
   markdown: ^7.3.1
   web: ^1.1.1
 
