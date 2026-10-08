@@ -13,18 +13,15 @@ const double initialHeight = 1;
 
 /// Asynchronously serializes the complete [TeXView] widget tree into a JSON string.
 ///
-/// This specific optimization employs `compute` to offload the potentially expensive
-/// [jsonEncode] operation to a background isolate. This ensures that the main UI thread
-/// remains responsive (free of jank), even when rendering large or complex TeX documents.
+/// For lightweight payloads or web targets, serialization runs synchronously. For
+/// larger trees on native platforms, encoding is offloaded to a background isolate via
+/// [compute] to keep the UI thread smooth.
 ///
 /// Returns a JSON string containing:
 /// - `meta`: The root element metadata (tag, class, id).
-/// - `data`: The serialized children widgets.
+/// - `data`: The serialized child widgets.
 /// - `style`: The compiled CSS string.
 Future<String> getRawDataAsync(TeXView teXView) async {
-  // 1. Structure Preparation:
-  // We prepare the Map structure on the main thread. This is lightweight.
-  // We use `teXViewDefaultStyle` as a fallback to avoid creating new string objects repeatedly.
   final Map<String, dynamic> dataMap = {
     'meta': const TeXViewWidgetMeta(
       tag: 'div',
@@ -35,10 +32,28 @@ Future<String> getRawDataAsync(TeXView teXView) async {
     'style': teXView.style?.initStyle() ?? teXViewDefaultStyle,
   };
 
-  // 2. Background Serialization:
-  // The encoding process is delegated to a separate isolate. This is crucial for
-  // performance when scrolling through lists of TeXViews.
+  // On web, isolates are not supported; serialize directly.
+  // On native platforms, offload trees exceeding the complexity threshold.
+  if (kIsWeb || _calculateComplexity(dataMap['data']) < 50) {
+    return jsonEncode(dataMap);
+  }
+
   return compute(jsonEncode, dataMap);
+}
+
+/// Recursively estimates the node count in the serialized widget hierarchy.
+int _calculateComplexity(dynamic node) {
+  int count = 1;
+  if (node is Map) {
+    if (node.containsKey('data')) {
+      count += _calculateComplexity(node['data']);
+    }
+  } else if (node is List) {
+    for (final child in node) {
+      count += _calculateComplexity(child);
+    }
+  }
+  return count;
 }
 
 /// The default CSS styling for the TeXView container.

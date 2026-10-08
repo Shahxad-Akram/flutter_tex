@@ -17,10 +17,11 @@ String getColor(Color? color) {
 
 /// Generates a CSS `box-shadow` value to simulate elevation.
 ///
-/// The [elevation] value is used to create a simple shadow effect.
-/// The [sizeUnit] determines the unit for the shadow offsets.
+/// Uses [elevation] to scale blur and spread offsets, formatted with [sizeUnit].
 String getElevation(int? elevation, TeXViewSizeUnit? sizeUnit) {
-  return "0 ${elevation ?? 0 * 1}${UnitHelper.getValue(sizeUnit)} ${elevation ?? 0 * 2}${UnitHelper.getValue(sizeUnit)} 0 rgba(0,0,0,0.2)";
+  final int elev = elevation ?? 0;
+  final String unit = UnitHelper.getValue(sizeUnit);
+  return "0 ${elev * 1}$unit ${elev * 2}$unit 0 rgba(0,0,0,0.2)";
 }
 
 /// Combines a numerical [value] with its [sizeUnit] to create a CSS size string.

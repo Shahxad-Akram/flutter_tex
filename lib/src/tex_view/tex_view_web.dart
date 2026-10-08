@@ -30,7 +30,7 @@ class TeXViewState extends State<TeXView>
   /// Reference to the iframe's internal window object for calling functions.
   late final Window _iframeContentWindow;
 
-  /// Cache for de-duplicating render calls.
+  /// Cached JSON representation of the last rendered payload to avoid redundant bridge calls.
   String _oldRawData = '';
 
   /// Web loading state flag.
@@ -40,7 +40,6 @@ class TeXViewState extends State<TeXView>
   void initState() {
     super.initState();
 
-    // Configure the iframe element
     iframeElement = HTMLIFrameElement()
       ..id = _iframeId
       ..src = "assets/packages/flutter_tex/core/flutter_tex.html"
@@ -48,32 +47,26 @@ class TeXViewState extends State<TeXView>
       ..style.width = '100%'
       ..style.border = '0';
 
-    // Register this instance so the global JS controller can route events back to us.
     TeXRenderingControllerWeb.registerInstance(_iframeId, this);
 
-    // Wait for the 'load' event. This guarantees the iframe content (scripts) are fully parsed.
     iframeElement.onLoad.listen((_) {
       _iframeContentWindow = iframeElement.contentWindow!;
       _isReady = true;
-      _renderTeXView(); // Perform the first render immediately after load.
+      _renderTeXView();
     });
 
-    // Register the HTML element as a Platform View in Flutter Web.
     platformViewRegistry.registerViewFactory(
         _iframeId, (int viewId) => iframeElement);
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // Required for AutomaticKeepAliveClientMixin.
-    // Ensure we check for updates on every build (e.g. if dependencies changed).
-    // The internal de-duplication logic prevents unnecessary JS calls.
+    super.build(context);
     _renderTeXView();
 
     return StreamBuilder<double>(
         stream: heightStreamController.stream,
         builder: (context, snap) {
-          // We use HtmlElementView to embed the iframe in the Flutter tree.
           return SizedBox(
             height: snap.hasData && !snap.hasError ? snap.data! : initialHeight,
             child: HtmlElementView(
@@ -89,7 +82,6 @@ class TeXViewState extends State<TeXView>
 
   /// Handles height updates routed from JavaScript.
   void onTeXViewRendered(JSNumber h) {
-    // Add offset to prevent scrollbar flickering due to sub-pixel rendering differences.
     double height = h.toDartDouble + widget.heightOffset;
 
     if (mounted) {
@@ -98,32 +90,30 @@ class TeXViewState extends State<TeXView>
     }
   }
 
-  /// Asynchronously updates the TeX content in the IFrame.
+  /// Asynchronously updates the TeX content in the iframe.
   ///
-  /// **Optimization Note**:
-  /// Uses [Future.microtask] to schedule the update *after* the current build frame,
-  /// preventing "setState() called during build" errors and ensuring smoother UI performance.
-  void _renderTeXView() async {
-    if (!_isReady) {
-      return;
-    }
-
+  /// Defers execution to a microtask to avoid invoking interop during the build phase.
+  Future<void> _renderTeXView() async {
+    if (!_isReady) return;
     await Future.microtask(() async {
-      // Guard: Ensure widget didn't dispose while waiting for microtask.
       if (!mounted) return;
 
-      // Heavy lifting (JSON encoding) happens here, potentially in background isolate.
-      String currentRawData = await getRawDataAsync(widget);
-
-      // Guard again after async gap.
+      final currentRawData = await getRawDataAsync(widget);
       if (!mounted) return;
 
       if (currentRawData != _oldRawData) {
         _oldRawData = currentRawData;
-        // Direct JS Interop call to update the content.
         initTeXView(_iframeContentWindow, currentRawData, true, _iframeId);
       }
     });
+  }
+
+  @override
+  void didUpdateWidget(TeXView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.child != oldWidget.child || widget.style != oldWidget.style) {
+      _renderTeXView();
+    }
   }
 
   @override

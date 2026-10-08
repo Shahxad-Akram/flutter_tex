@@ -72,7 +72,6 @@ class _Math2SVGState extends State<Math2SVG>
     super.didUpdateWidget(oldWidget);
     if (widget.math != oldWidget.math ||
         widget.teXInputType != oldWidget.teXInputType) {
-      // Cancel previous request if it's still pending
       _currentRequest?.cancel();
 
       final cached =
@@ -90,7 +89,6 @@ class _Math2SVGState extends State<Math2SVG>
 
   @override
   void dispose() {
-    // Cancel the request if it hasn't started processing yet to save resources.
     _currentRequest?.cancel();
     super.dispose();
   }
@@ -119,8 +117,7 @@ class _Math2SVGState extends State<Math2SVG>
       }
     } catch (e) {
       if (mounted) {
-        // If cancelled, we might not want to show error depending on preference,
-        // but here we just show it. Often cancelled futures throw.
+        // Discard errors caused by intentional cancellation.
         if (e.toString().contains("Cancelled")) {
           return;
         }
@@ -142,10 +139,12 @@ class _Math2SVGState extends State<Math2SVG>
     }
 
     if (_svgData != null) {
-      // RepaintBoundary caches the rasterized pixels, improving performance for complex SVGs.
+      // RepaintBoundary isolates SVG rasterization from ancestor repaints.
       return RepaintBoundary(
-        child: Opacity(
+        child: AnimatedOpacity(
           opacity: _isRendering ? 0.6 : 1.0,
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOut,
           child: widget.formulaWidgetBuilder?.call(context, _svgData!) ??
               SvgPicture.string(
                 _svgData!,
@@ -157,7 +156,7 @@ class _Math2SVGState extends State<Math2SVG>
       );
     }
 
-    // Initial loading state
+    // Placeholder displayed prior to initial SVG resolution.
     return widget.loadingWidgetBuilder?.call(context) ??
         Center(
             child: Padding(

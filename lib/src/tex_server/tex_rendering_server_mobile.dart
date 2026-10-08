@@ -28,8 +28,7 @@ class TeXRenderingServer {
   static int? get port => _server.port;
   static bool multiTeXView = false;
 
-  // Limiting concurrency to 3 is crucial for mobile WebViews to prevent "bridge congestion"
-  // where too many JS calls choke the platform channel.
+  // Cap concurrency to prevent platform channel saturation across simultaneous renders.
   static final TexRenderingQueue _queue =
       TexRenderingQueue(maxConcurrentRequests: 3);
 
@@ -65,18 +64,21 @@ class TeXRenderingServer {
               final data = await teXRenderingController.webViewControllerPlus
                   .runJavaScriptReturningResult(
                       "$mathJaxFlutterTeXLiteDOMMath2SVGChannelLabel(${jsonEncode(math)}, '${mathInputType.type}');");
+              final String rawData = data.toString();
+              String svg = rawData;
 
-              String svg = Platform.isAndroid
-                  ? jsonDecode(data.toString()).toString()
-                  : data.toString();
-
-              if (svg.contains("Error: ")) {
-                throw svg;
-              } else if (svg.isNotEmpty && svg != "null") {
-                return svg;
-              } else {
-                throw 'Render failed';
+              try {
+                if (rawData.startsWith('"') && rawData.endsWith('"')) {
+                  final dynamic decoded = jsonDecode(rawData);
+                  if (decoded is String) {
+                    svg = decoded;
+                  }
+                }
+              } catch (_) {
+                svg = rawData;
               }
+
+              return svg;
             });
       },
     );

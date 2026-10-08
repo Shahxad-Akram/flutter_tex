@@ -172,7 +172,7 @@ class TeXViewFullExample extends StatelessWidget {
               padding: const EdgeInsets.all(12.0),
               child: Center(
                 child: Container(
-                  // widht half of the screen with max width of 750
+                  // Limit maximum width to 750 for centered layout.
                   constraints: const BoxConstraints(maxWidth: 750),
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(

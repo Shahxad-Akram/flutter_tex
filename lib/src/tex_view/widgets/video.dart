@@ -31,4 +31,13 @@ class TeXViewVideo extends TeXViewWidget {
     src="https://www.youtube.com/embed/${Uri.parse(url).queryParameters['v']}"
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>""";
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewVideo && other.url == url && other._type == _type;
+  }
+
+  @override
+  int get hashCode => Object.hash(url, _type);
 }

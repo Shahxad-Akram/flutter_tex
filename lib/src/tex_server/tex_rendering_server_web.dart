@@ -23,8 +23,7 @@ class TeXRenderingServer {
   /// A flag to indicate if multiple TeXViews are being used.
   static bool multiTeXView = false;
 
-  // We allow higher concurrency (6) on web compared to mobile (3) because the
-  // JS interop bridge is much faster and less prone to congestion than the WebView channel.
+  // Browser JS interop incurs negligible bridge overhead, allowing higher concurrency.
   static final TexRenderingQueue _queue =
       TexRenderingQueue(maxConcurrentRequests: 6);
 
@@ -55,7 +54,7 @@ class TeXRenderingServer {
             inputType: mathInputType,
             processor: () async {
               try {
-                // Yield to event loop to prevent UI blocking on heavy loads
+                // Yield briefly to the event loop to keep frame rendering smooth.
                 await Future.delayed(Duration.zero);
                 return math2SVGflutterTeXLiteDOM(math, mathInputType.type);
               } catch (e) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_view/utils/widget_meta.dart';
 import 'package:flutter_tex/src/tex_view/utils/style_utils.dart';
@@ -38,4 +39,15 @@ class TeXViewColumn implements TeXViewWidget {
         'data': children.map((child) => child.toJson()).toList(),
         'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewColumn &&
+        other.style == style &&
+        listEquals(children, other.children);
+  }
+
+  @override
+  int get hashCode => Object.hash(style, Object.hashAll(children));
 }

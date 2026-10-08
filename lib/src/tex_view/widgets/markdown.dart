@@ -63,4 +63,16 @@ class TeXViewMarkdown extends TeXViewWidget {
             linkResolver: linkResolver),
         'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewMarkdown &&
+        other.markdown == markdown &&
+        other.style == style &&
+        other.inlineOnly == inlineOnly;
+  }
+
+  @override
+  int get hashCode => Object.hash(markdown, style, inlineOnly);
 }

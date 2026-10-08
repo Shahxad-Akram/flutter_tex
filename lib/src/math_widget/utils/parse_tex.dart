@@ -12,58 +12,62 @@ class TeXSegment {
   TeXSegment(this.text, this.type);
 }
 
-// Corrected Order: More specific patterns (double delimiters) come first.
+// Display delimiters must precede inline delimiters so multi-character
+// patterns ($$, \[) take precedence over single-character ones ($, \().
 final RegExp _latexRegex = RegExp(
-  "${TeXDelimiter.displayDollar.delimiter}|${TeXDelimiter.displayBrackets.delimiter}|${TeXDelimiter.inlineDollar.delimiter}|${TeXDelimiter.inlineBrackets.delimiter}",
+  "${TeXDelimiter.displayDollar.delimiter}|"
+  "${TeXDelimiter.displayBrackets.delimiter}|"
+  "${TeXDelimiter.inlineDollar.delimiter}|"
+  "${TeXDelimiter.inlineBrackets.delimiter}",
 );
 
-/// Parses a raw TeX string into a list of [TeXSegment]s.
+/// Parses a raw string containing TeX markup into an ordered sequence of [TeXSegment]s.
 ///
-/// This function identifies LaTeX delimiters for display and inline math,
-/// splitting the string into corresponding segments of text and math.
+/// Delimited math blocks are classified as either [TeXSegmentType.display] or
+/// [TeXSegmentType.inline], and surrounding plain text is preserved as [TeXSegmentType.text].
 List<TeXSegment> parseTeX(String latexString) {
   final List<TeXSegment> parsedTeXSegments = [];
-
   int lastEnd = 0;
 
   for (final RegExpMatch match in _latexRegex.allMatches(latexString)) {
+    // Preserve preceding plain text segment.
     if (match.start > lastEnd) {
-      final String textSegment = latexString.substring(lastEnd, match.start);
-      if (textSegment.isNotEmpty) {
-        parsedTeXSegments.add(TeXSegment(textSegment, TeXSegmentType.text));
-      }
+      parsedTeXSegments.add(
+        TeXSegment(
+          latexString.substring(lastEnd, match.start),
+          TeXSegmentType.text,
+        ),
+      );
     }
 
-    // Group indices are updated to match the new RegExp order.
-    // displayDollar is now group 2, displayBrackets group 4, etc.
-    final String displayDollarContent = match.group(2) ?? "";
-    final String displayBracketContent = match.group(4) ?? "";
-    final String inlineDollarContent = match.group(6) ?? "";
-    final String inlineBracketContent = match.group(8) ?? "";
+    // Capture groups correspond to inner expressions:
+    // group(2): $$...$$, group(4): \[...\], group(6): $...$, group(8): \(...\)
+    final String? displayDollar = match.group(2);
+    final String? displayBracket = match.group(4);
+    final String? inlineDollar = match.group(6);
+    final String? inlineBracket = match.group(8);
 
-    // The order of these checks is also updated for clarity.
-    if (displayDollarContent.isNotEmpty) {
-      parsedTeXSegments
-          .add(TeXSegment(displayDollarContent, TeXSegmentType.display));
-    } else if (displayBracketContent.isNotEmpty) {
-      parsedTeXSegments
-          .add(TeXSegment(displayBracketContent, TeXSegmentType.display));
-    } else if (inlineDollarContent.isNotEmpty) {
-      parsedTeXSegments
-          .add(TeXSegment(inlineDollarContent, TeXSegmentType.inline));
-    } else if (inlineBracketContent.isNotEmpty) {
-      parsedTeXSegments
-          .add(TeXSegment(inlineBracketContent, TeXSegmentType.inline));
+    if (displayDollar != null && displayDollar.isNotEmpty) {
+      parsedTeXSegments.add(TeXSegment(displayDollar, TeXSegmentType.display));
+    } else if (displayBracket != null && displayBracket.isNotEmpty) {
+      parsedTeXSegments.add(TeXSegment(displayBracket, TeXSegmentType.display));
+    } else if (inlineDollar != null && inlineDollar.isNotEmpty) {
+      parsedTeXSegments.add(TeXSegment(inlineDollar, TeXSegmentType.inline));
+    } else if (inlineBracket != null && inlineBracket.isNotEmpty) {
+      parsedTeXSegments.add(TeXSegment(inlineBracket, TeXSegmentType.inline));
     }
 
     lastEnd = match.end;
   }
 
+  // Append any remaining text after the final math segment.
   if (lastEnd < latexString.length) {
-    final String trailingText = latexString.substring(lastEnd);
-    if (trailingText.isNotEmpty) {
-      parsedTeXSegments.add(TeXSegment(trailingText, TeXSegmentType.text));
-    }
+    parsedTeXSegments.add(
+      TeXSegment(
+        latexString.substring(lastEnd),
+        TeXSegmentType.text,
+      ),
+    );
   }
 
   return parsedTeXSegments;
