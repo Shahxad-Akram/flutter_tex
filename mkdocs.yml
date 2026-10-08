@@ -92,7 +92,9 @@ nav:
       - Math2SVG: math-2-svg.md
       - TeXWidget: tex-widget.md
       - TeXView: tex-view.md
+  - How to choose a widget?: choose-widget.md
   - Configuration:
       - MathJax Configs: mathjax-configs.md
       - Custom Fonts: custom-fonts.md
+  - Troubleshooting & FAQ: troubleshooting.md
   - Gallery: gallery.md
