@@ -14,9 +14,10 @@ dependencies:
   code_text_field: ^1.1.0
   flutter:
     sdk: flutter
-  flutter_highlight: ^0.7.0
   flutter_tex:
     path: ../
+
+  flutter_highlight: ^0.7.0
   highlight: ^0.7.0
 
 dev_dependencies:
