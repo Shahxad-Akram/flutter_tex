@@ -105,7 +105,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "5.2.7"
+    version: "5.3.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -203,10 +203,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: c82594181e3312f3d0695fc95aaaf7758d75b8d4ae2bbecf223b9fd5109a059d
+      sha256: "307249ce4ff29d58a18e97f6345f539382eb9c9c29ecda628900f31de0443dd9"
       url: "https://pub.dev"
     source: hosted
-    version: "1.18.3"
+    version: "1.19.0"
   mime:
     dependency: transitive
     description:
@@ -235,10 +235,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
+      sha256: "2f1564aadb14215e478563b5406cb80729d022158c01dc50c96013c2f7eb4790"
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.2"
+    version: "7.1.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -400,10 +400,10 @@ packages:
     dependency: transitive
     description:
       name: vector_math
-      sha256: "1d774bbdf6b72a0b12122fc1560c9c2d2a67db5a4a4cc2bd8a5c990ab20e3188"
+      sha256: "92b9910f66ed1057fd4da7b040ae7c74cafacf885bdc81be496928d5049b032d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.3"
   vm_service:
     dependency: transitive
     description:
@@ -448,10 +448,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_plus
-      sha256: "43628503cb687c3e02b34cf4c21c67a347b2e27563e006e0789676c8ed8ea65b"
+      sha256: ce2ce54ad45d70a140866c2c5821dc804988dd3949d1902d1817a2508c67cd62
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.20"
+    version: "0.4.21"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
