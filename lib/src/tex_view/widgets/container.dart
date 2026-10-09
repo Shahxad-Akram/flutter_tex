@@ -36,4 +36,15 @@ class TeXViewContainer implements TeXViewWidget {
         'data': child.toJson(),
         'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewContainer &&
+        other.child == child &&
+        other.style == style;
+  }
+
+  @override
+  int get hashCode => Object.hash(child, style);
 }

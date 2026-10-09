@@ -53,4 +53,16 @@ class TeXViewDetails implements TeXViewWidget {
   void onTapCallback(String id) {
     body.onTapCallback(id);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewDetails &&
+        other.title == title &&
+        other.body == body &&
+        other.style == style;
+  }
+
+  @override
+  int get hashCode => Object.hash(title, body, style);
 }

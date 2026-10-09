@@ -44,7 +44,9 @@ class TeXViewInkWell implements TeXViewWidget {
 
   @override
   void onTapCallback(String id) {
-    if (this.id == id) onTap!(id);
+    if (this.id == id) {
+      onTap?.call(id);
+    }
   }
 
   @override
@@ -54,4 +56,17 @@ class TeXViewInkWell implements TeXViewWidget {
         'style': style?.initStyle() ?? teXViewDefaultStyle,
         'rippleEffect': rippleEffect ?? true,
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewInkWell &&
+        other.id == id &&
+        other.child == child &&
+        other.style == style &&
+        other.rippleEffect == rippleEffect;
+  }
+
+  @override
+  int get hashCode => Object.hash(id, child, style, rippleEffect);
 }

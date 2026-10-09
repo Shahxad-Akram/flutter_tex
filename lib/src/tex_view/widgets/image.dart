@@ -32,4 +32,15 @@ class TeXViewImage extends TeXViewWidget {
         'data': imageUri,
         'style': "max-width: 100%; max-height: 100%; $teXViewDefaultStyle",
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewImage &&
+        other.imageUri == imageUri &&
+        other._type == _type;
+  }
+
+  @override
+  int get hashCode => Object.hash(imageUri, _type);
 }

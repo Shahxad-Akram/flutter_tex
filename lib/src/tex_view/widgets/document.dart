@@ -31,4 +31,15 @@ class TeXViewDocument extends TeXViewWidget {
         'data': data,
         'style': style?.initStyle() ?? teXViewDefaultStyle,
       };
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewDocument &&
+        other.data == data &&
+        other.style == style;
+  }
+
+  @override
+  int get hashCode => Object.hash(data, style);
 }

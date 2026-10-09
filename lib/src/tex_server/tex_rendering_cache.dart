@@ -3,48 +3,43 @@ import 'dart:collection';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/tex_server/tex_rendering_queue.dart';
 
-/// A mixin or helper to handle Caching and Request Deduplication for TeX Rendering.
-///
-/// This class handles two major optimizations:
-/// 1. **LRU Caching**: Stores recently rendered SVGs to avoid re-rendering.
-/// 2. **Request Deduplication**: Prevents multiple identical requests from hitting the rendering engine unnecessarily.
+/// Tracks active rendering requests and their listener counts for deduplication.
+class _SharedRenderingRequest {
+  final TexRenderingRequest request;
+  int refCount;
+
+  _SharedRenderingRequest(this.request, this.refCount);
+}
+
+/// In-memory LRU cache and in-flight request deduplicator for rendered TeX SVGs.
 class TexRenderingCache {
-  /// An LRU (Least Recently Used) cache for rendered SVGs.
-  ///
-  /// This prevents excessive memory usage by limiting the cache to [_maxCacheSize] items.
-  /// When the limit is reached, the least recently used item is evicted.
-  static const int _maxCacheSize = 1000;
+  /// Maximum number of rendered SVGs retained in memory.
+  static const int _maxCacheSize = 100;
+
+  /// LRU cache storing rendered SVG strings keyed by syntax type and formula.
   static final LinkedHashMap<String, String> _svgCache =
       LinkedHashMap<String, String>();
 
-  /// A map to track rendering requests that are currently in progress.
-  ///
-  /// This enables request deduplication: if multiple widgets request the same
-  /// formula, the rendering logic runs only once, and the result is shared.
-  static final Map<String, TexRenderingRequest> _inFlightRequests = {};
+  /// In-flight rendering requests tracked with reference counts.
+  static final Map<String, _SharedRenderingRequest> _inFlightRequests = {};
 
-  /// Retrieves a cached SVG if available.
-  ///
-  /// This synchronous check allows widgets to possibly render immediately in `initState`.
+  /// Returns a previously rendered SVG from cache if present.
   static String? getCachedSVG(String math, MathInputType type) {
     return _svgCache['${type.type}_$math'];
   }
 
-  /// Updates the cache with a new rendered SVG, maintaining the LRU property.
+  /// Stores a rendered SVG in the cache, evicting the oldest entry when exceeding [_maxCacheSize].
   static void updateCache(String key, String value) {
     if (_svgCache.length >= _maxCacheSize) {
-      _svgCache.remove(_svgCache.keys.first); // Evict oldest
+      _svgCache.remove(_svgCache.keys.first);
     }
     _svgCache[key] = value;
   }
 
-  /// Handles the rendering process with Caching and Deduplication.
+  /// Manages rendering by querying the cache, deduplicating in-flight tasks,
+  /// or creating a new request via [onMissing].
   ///
-  /// - [math]: The mathematical formula to render.
-  /// - [mathInputType]: The syntax type (TeX, MathML, etc.).
-  /// - [onMissing]: A callback to execute the actual rendering if the result is not in the cache.
-  ///
-  /// Returns a [TexRenderingRequest] which can be cancelled if no longer needed.
+  /// Returns a [TexRenderingRequest] handle with reference-counted cancellation.
   static TexRenderingRequest render({
     required String math,
     required MathInputType mathInputType,
@@ -52,37 +47,41 @@ class TexRenderingCache {
   }) {
     final cacheKey = '${mathInputType.type}_$math';
 
-    // Check Cache
-    if (_svgCache.containsKey(cacheKey)) {
+    final cachedResult = _svgCache[cacheKey];
+    if (cachedResult != null) {
       return TexRenderingRequest(
-        future: Future.value(_svgCache[cacheKey]!),
-        cancel: () {}, // No-op
+        future: Future.value(cachedResult),
+        cancel: () {},
       );
     }
 
-    // Check if already rendering (Deduplication)
-    if (_inFlightRequests.containsKey(cacheKey)) {
-      // NOTE: We don't want one widget cancelling the request to kill it for another widget.
-      // So detailed Reference Counting would be needed for true shared cancellation.
-      // For now, we return the existing future, but disable the cancel action for shared requests
-      // to prevents a disposed widget from cancelling a request needed by another widget.
+    final inFlight = _inFlightRequests[cacheKey];
+    if (inFlight != null) {
+      inFlight.refCount++;
+      bool isCancelled = false;
+
       return TexRenderingRequest(
-        future: _inFlightRequests[cacheKey]!.future,
-        cancel:
-            () {}, // Shared request cannot be cancelled by a single consumer
+        future: inFlight.request.future,
+        cancel: () {
+          if (isCancelled) return;
+          isCancelled = true;
+          inFlight.refCount--;
+          if (inFlight.refCount <= 0) {
+            inFlight.request.cancel();
+            _inFlightRequests.remove(cacheKey);
+          }
+        },
       );
     }
 
     final originalRequest = onMissing();
 
-    // Intercept the future to update cache
     final cachingFuture = originalRequest.future.then((result) {
       if (result.isNotEmpty && result != "null") {
         updateCache(cacheKey, result);
         return result;
-      } else {
-        throw "Render failed or returned empty/null";
       }
+      throw "Render failed or returned empty/null";
     }).whenComplete(() {
       _inFlightRequests.remove(cacheKey);
     });
@@ -92,8 +91,23 @@ class TexRenderingCache {
       cancel: originalRequest.cancel,
     );
 
-    _inFlightRequests[cacheKey] = wrappedRequest;
+    _inFlightRequests[cacheKey] = _SharedRenderingRequest(wrappedRequest, 1);
 
-    return wrappedRequest;
+    bool isCancelled = false;
+    return TexRenderingRequest(
+      future: cachingFuture,
+      cancel: () {
+        if (isCancelled) return;
+        isCancelled = true;
+        final sharedReq = _inFlightRequests[cacheKey];
+        if (sharedReq != null) {
+          sharedReq.refCount--;
+          if (sharedReq.refCount <= 0) {
+            sharedReq.request.cancel();
+            _inFlightRequests.remove(cacheKey);
+          }
+        }
+      },
+    );
   }
 }

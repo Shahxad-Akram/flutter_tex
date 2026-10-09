@@ -28,31 +28,26 @@ class TeXViewState extends State<TeXView>
   /// Indicates whether the internal WebView controller has been initialized.
   bool _isReady = false;
 
-  /// Cache of the last transmitted data string to prevent redundant JS calls.
+  /// Cached JSON representation of the last rendered payload to avoid redundant bridge calls.
   String _oldRawData = "";
 
   @override
   void initState() {
     super.initState();
 
-    // Initialize the rendering controller based on the concurrency mode.
     if (TeXRenderingServer.multiTeXView) {
       teXRenderingController = TeXRenderingController();
       teXRenderingController.initController();
-      // Wait for the specific view to be ready
       teXRenderingController.onPageFinishedCallback =
           (_) => _onControllerReady();
     } else {
-      // Use the shared singleton controller for better performance on simple views
       teXRenderingController = TeXRenderingServer.teXRenderingController;
       _onControllerReady();
     }
 
-    // Bind the JS tap event to the Flutter callback
     teXRenderingController.onTapCallback =
         (tapCallbackMessage) => widget.child.onTapCallback(tapCallbackMessage);
 
-    // Bind the JS render-complete event to update our widget height
     teXRenderingController.onTeXViewRenderedCallback = (h) {
       double height = double.parse(h.toString()) + widget.heightOffset;
       if (mounted) {
@@ -65,18 +60,17 @@ class TeXViewState extends State<TeXView>
   @override
   void didUpdateWidget(TeXView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // If the widget configuration (child/style) changes, re-render.
-    _renderTeXView();
+    if (widget.child != oldWidget.child || widget.style != oldWidget.style) {
+      _renderTeXView();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // Required for AutomaticKeepAliveClientMixin
+    super.build(context);
     return StreamBuilder<double>(
         stream: heightStreamController.stream,
         builder: (context, snap) {
-          // If we have a valid height, show the WebView.
-          // Otherwise, show the loading placeholder.
           if (snap.hasData && !snap.hasError) {
             return SizedBox(
               height: snap.data ?? initialHeight,
@@ -100,28 +94,19 @@ class TeXViewState extends State<TeXView>
     }
   }
 
-  /// Executes the rendering logic asynchronously.
+  /// Serializes and dispatches the TeXView payload to the WebView.
   ///
-  /// **Optimization Note**: usage of [Future.microtask] is critical here.
-  /// It prevents the rendering logic (which may trigger state updates)
-  /// from executing during the build phase of the widget tree, which would cause an error.
+  /// Defers execution to a microtask to avoid executing during the widget build phase.
   Future<void> _renderTeXView() async {
     if (!_isReady) return;
-
     await Future.microtask(() async {
-      // Guard: Make sure the widget is still in the tree before processing.
       if (!mounted) return;
 
-      // Calculate data in background isolate (via helper)
-      String currentRawData = await getRawDataAsync(widget);
-
-      // Guard again after the async gap
+      final currentRawData = await getRawDataAsync(widget);
       if (!mounted) return;
 
-      // Deduplication: Only send to JS if the content actually changed.
       if (currentRawData != _oldRawData) {
         _oldRawData = currentRawData;
-        // Invoke the JS function 'initTeXView' via the platform channel
         await teXRenderingController.webViewControllerPlus.runJavaScript(
             '$initTeXViewChannelLabel(window, $currentRawData, false, "");');
       }

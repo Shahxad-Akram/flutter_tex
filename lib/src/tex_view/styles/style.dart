@@ -118,7 +118,15 @@ class TeXViewStyle {
         'overflow: ${TeXViewOverflowHelper.getValue(overflow)};',
     ];
 
-    // Filter out null or empty strings and join them.
     return styleParts.where((s) => s != null && s.isNotEmpty).join(' ');
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is TeXViewStyle && other.initStyle() == initStyle();
+  }
+
+  @override
+  int get hashCode => initStyle().hashCode;
 }

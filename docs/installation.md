@@ -1,125 +1,182 @@
-# Installation
+# Installation & Setup
 
-## Adding Flutter Dependency
+## 1. Add the Dependency
 
-**Minmum flutter SDK requirement is 3.27.x**
+Add `flutter_tex` to your project using the Flutter CLI:
 
-**1:** Add flutter_tex latest  [![pub package](https://img.shields.io/pub/v/flutter_tex.svg)](https://pub.dev/packages/flutter_tex) version under dependencies to your package's pubspec.yaml file.
+```bash
+flutter pub add flutter_tex
+```
+
+Or manually add it to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
+  flutter:
+    sdk: flutter
   flutter_tex: ^{{ flutter_tex_version }}
-``` 
-
-**2:** You can install packages from the command line:
-
-```bash
-$ flutter packages get
 ```
 
-Alternatively, your editor might support flutter packages get. Check the docs for your editor to learn more.
+Then fetch packages:
 
+```bash
+flutter pub get
+```
 
-**3:** Now you need to put the following implementations in `Android`, `iOS`, `MacOS` and `Web` respectively.
+---
 
-## Android
-Make sure to add this line `android:usesCleartextTraffic="true"` in your `<project-directory>/android/app/src/main/AndroidManifest.xml` under `application` like this.
+## 2. Platform Configuration
+
+`flutter_tex` is **100% offline**, but on mobile and desktop platforms it uses a lightweight local server (`http://localhost:<port>`) to serve the bundled MathJax engine to an internal headless rendering worker. Modern operating systems require permissions to access `localhost` or load local HTTP traffic.
+
+Follow the setup for each platform you are targeting:
+
+### Android
+
+Open `<project-directory>/android/app/src/main/AndroidManifest.xml`:
+
+1. **Allow cleartext HTTP traffic** on the `<application>` tag (required by Android 9+ to connect to the internal `localhost` server):
 
 ```xml
 <application
-    ...
-    ...
+    android:label="Your App"
+    android:icon="@mipmap/ic_launcher"
     android:usesCleartextTraffic="true">
+    ...
 </application>
 ```
 
-It completely works offline, without internet connection, but these are required permissions to work properly:
-
+2. **Add internet permission and package queries** outside `<application>` (for localhost access and opening external links via `url_launcher`):
 
 ```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="sms" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tel" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="mailto" />
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService" />
+        </intent>
+    </queries>
+
+    <application ...>
+        ...
+    </application>
+</manifest>
 ```
-and intents in queries block: 
+
+---
+
+### iOS
+
+Open `<project-directory>/ios/Runner/Info.plist` and add the following keys inside `<dict>`:
 
 ```xml
-<queries>
-  ...
-  ...
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="https" />
-    </intent>
-
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="sms" />
-    </intent>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="tel" />
-    </intent>
-    <intent>
-        <action android:name="android.intent.action.VIEW" />
-        <data android:scheme="mailto" />
-    </intent>
-    <intent>
-        <action android:name="android.support.customtabs.action.CustomTabsService" />
-    </intent>
-</queries>
-```
-
-
-## iOS
-Add following lines in `<project-directory>/ios/Runner/Info.plist`
-
-```xml
+<!-- Allow connection to the internal localhost server -->
 <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key> <true/>
-  </dict>
-<key>io.flutter.embedded_views_preview</key> <true/> 
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
+
+<!-- URL schemes allowed for in-app link opening -->
 <key>LSApplicationQueriesSchemes</key>
 <array>
     <string>https</string>
     <string>http</string>
     <string>tel</string>
     <string>mailto</string>
-</array> 
+</array>
 ```
 
-## Web
-For Web support modify `<project-directory>/web/index.html` like this.
+---
+
+### Web
+
+For Flutter Web, MathJax scripts and styles must be loaded by the browser host page.
+
+Add the following tags inside the `<head>` block of `<project-directory>/web/index.html`:
 
 ```html
 <head>
-    ...
-    ...
+  ...
+  <!-- Optional custom styling/scripts from your app assets -->
+  <link rel="stylesheet" href="assets/assets/flutter_tex.css" type="text/css">
+  <script src="assets/assets/flutter_tex.js" type="text/javascript"></script>
+
+  <!-- Core Flutter TeX assets (provided by the package) -->
   <script src="assets/packages/flutter_tex/core/flutter_tex.js"></script>
   <script src="assets/packages/flutter_tex/core/mathjax_core.js"></script>
 </head>
 ```
 
-## MacOS
-By default, macOS apps running in a sandboxed environment (which is the standard for Flutter apps) are not allowed to make network requests. You need to explicitly grant your application the capability to access the internet. In your Flutter project, navigate to the `macos/Runner/` directory and add the following key-value pair to `DebugProfile.entitlements` and `Release.entitlements`.
+!!! note "Web Architecture"
+    On Web, `flutter_tex` communicates directly with MathJax in the browser's JavaScript context via `dart:js_interop`. There is no WebView overhead on web builds.
+
+---
+
+### macOS
+
+macOS Flutter apps run in an App Sandbox by default. To allow the app to communicate with the local rendering server, open both:
+
+- `macos/Runner/DebugProfile.entitlements`
+- `macos/Runner/Release.entitlements`
+
+And add the client network entitlement:
 
 ```xml
 <key>com.apple.security.network.client</key>
-  <true/>
+<true/>
 ```
 
+---
 
-## Initialization
-In your Dart code, you can use like:
+## 3. Server Initialization in Dart
 
-```dart
-import 'package:flutter_tex/flutter_tex.dart'; 
-```
-
-Make sure to setup `TeXRenderingServer` before rendering TeX:
+Before rendering formulas or widgets, start the rendering server in your `main()` entrypoint. This spins up the local MathJax worker on mobile/macOS or connects JS interop on Web.
 
 ```dart
-main() async {
+import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+
+void main() async {
+  // 1. Ensure Flutter bindings are ready
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 2. Start the rendering engine
   await TeXRenderingServer.start();
-  runApp(...);
+
+  // 3. Launch your app
+  runApp(const MyApp());
 }
 ```
+
+!!! tip "Is `TeXRenderingServer.start()` safe on Web?"
+    Yes! On Web, `TeXRenderingServer.start()` simply initializes JS interop listeners. Calling `await TeXRenderingServer.start();` works uniformly across Android, iOS, Web, and macOS without conditional platform checks.
+
+---
+
+## 4. Verification Checklist
+
+To confirm everything is configured correctly:
+
+- [x] `android:usesCleartextTraffic="true"` is present in AndroidManifest.xml.
+- [x] `NSAllowsArbitraryLoads` is set to `true` in iOS `Info.plist`.
+- [x] `<script>` tags for MathJax are added to `web/index.html` (if targeting Web).
+- [x] `WidgetsFlutterBinding.ensureInitialized()` and `await TeXRenderingServer.start()` run in `main()`.
+- [x] Test a simple formula with `Math2SVG(math: r"E = mc^2")`.
